@@ -99,8 +99,11 @@ public class BoardCreator : MonoBehaviour
 
             if (i == rooms.Length * .5f)
             {
-                Vector3 playerPos = new Vector3(rooms[i].xPos, rooms[i].yPos, 0);
-                Instantiate(player, playerPos, Quaternion.identity);
+                Vector3 playerPos = new Vector3(rooms[i].xPos + 1, 0, rooms[i].yPos + 1);
+                //.GetComponent<AttackingCharacter>().agent.enabled = false;
+                player.GetComponent<CharacterMovement>().target.position = new Vector3(playerPos.x, player.GetComponent<CharacterMovement>().target.position.y, playerPos.z);
+                //player.GetComponent<AttackingCharacter>().agent.enabled = true;
+                //Instantiate(player, playerPos, Quaternion.identity);
             }
         }
 

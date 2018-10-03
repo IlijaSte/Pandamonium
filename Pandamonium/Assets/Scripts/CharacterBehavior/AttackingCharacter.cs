@@ -12,7 +12,7 @@ public class AttackingCharacter : MonoBehaviour {
     public float maxHealth = 25;
 
     protected Transform object3D;                                               // odgovarajuci objekat karaktera u 3D prostoru
-    protected NavMeshAgent agent;
+    public NavMeshAgent agent;
 
     protected Transform target3D = null;                                        // 3D objekat koji igrac napada/prati
     protected Transform target = null;                                          // 2D objekat koji igrac napada/prati
@@ -38,13 +38,13 @@ public class AttackingCharacter : MonoBehaviour {
                                Quaternion.identity, world3D).transform;
 
         CM.target = object3D;
-
         health = maxHealth;
+
+        agent = object3D.GetComponent<NavMeshAgent>();
     }
 
     public virtual void Start()
     {
-        agent = object3D.GetComponent<NavMeshAgent>();
         ignoreMask = ~((1 << LayerMask.NameToLayer("Projectile")) | (1 << LayerMask.NameToLayer("Foreground")));
     }
 
