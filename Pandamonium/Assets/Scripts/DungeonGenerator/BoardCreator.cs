@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class BoardCreator : MonoBehaviour
 {
@@ -16,9 +17,9 @@ public class BoardCreator : MonoBehaviour
     public IntRange roomWidth = new IntRange(3, 10);         // The range of widths rooms can have.
     public IntRange roomHeight = new IntRange(3, 10);        // The range of heights rooms can have.
     public IntRange corridorLength = new IntRange(6, 10);    // The range of lengths corridors between rooms can have.
-    public GameObject[] floorTiles;                           // An array of floor tile prefabs.
-    public GameObject[] wallTiles;                            // An array of wall tile prefabs.
-    public GameObject[] outerWallTiles;                       // An array of outer wall tile prefabs.
+    public TileBase[] floorTiles;                           // An array of floor tile prefabs.
+    public TileBase[] wallTiles;                            // An array of wall tile prefabs.
+    public TileBase[] outerWallTiles;                       // An array of outer wall tile prefabs.
     public GameObject player;
 
     private TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
@@ -26,6 +27,8 @@ public class BoardCreator : MonoBehaviour
     private Corridor[] corridors;                             // All the corridors that connect the rooms.
     private GameObject boardHolder;                           // GameObject that acts as a container for all other tiles.
 
+    public Tilemap groundTilemap;
+    public Tilemap obstacleTilemap;
 
     private void Start()
     {
@@ -176,13 +179,13 @@ public class BoardCreator : MonoBehaviour
             for (int j = 0; j < tiles[i].Length; j++)
             {
                 // ... and instantiate a floor tile for it.
-                InstantiateFromArray(floorTiles, i, j);
+                InstantiateFromArray(floorTiles, groundTilemap, i, j);
 
                 // If the tile type is Wall...
                 if (tiles[i][j] == TileType.Wall)
                 {
                     // ... instantiate a wall over the top.
-                    InstantiateFromArray(wallTiles, i, j);
+                    InstantiateFromArray(wallTiles, obstacleTilemap, i, j);
                 }
             }
         }
@@ -216,7 +219,7 @@ public class BoardCreator : MonoBehaviour
         while (currentY <= endingY)
         {
             // ... instantiate an outer wall tile at the x coordinate and the current y coordinate.
-            InstantiateFromArray(outerWallTiles, xCoord, currentY);
+            InstantiateFromArray(outerWallTiles, obstacleTilemap, xCoord, currentY);
 
             currentY++;
         }
@@ -232,14 +235,14 @@ public class BoardCreator : MonoBehaviour
         while (currentX <= endingX)
         {
             // ... instantiate an outer wall tile at the y coordinate and the current x coordinate.
-            InstantiateFromArray(outerWallTiles, currentX, yCoord);
+            InstantiateFromArray(outerWallTiles, obstacleTilemap, currentX, yCoord);
 
             currentX++;
         }
     }
 
 
-    void InstantiateFromArray(GameObject[] prefabs, float xCoord, float yCoord)
+    void InstantiateFromArray(TileBase[] prefabs, Tilemap tilemap, float xCoord, float yCoord)
     {
         // Create a random index for the array.
         int randomIndex = Random.Range(0, prefabs.Length);
@@ -248,9 +251,10 @@ public class BoardCreator : MonoBehaviour
         Vector3 position = new Vector3(xCoord, yCoord, 0f);
 
         // Create an instance of the prefab from the random index of the array.
-        GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;
+        //GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;
+        tilemap.SetTile(tilemap.WorldToCell(position), prefabs[randomIndex]);
 
         // Set the tile's parent to the board holder.
-        tileInstance.transform.parent = boardHolder.transform;
+        //tileInstance.transform.parent = boardHolder.transform;
     }
 }
