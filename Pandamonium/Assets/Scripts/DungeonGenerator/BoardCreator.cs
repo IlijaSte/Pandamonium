@@ -30,7 +30,7 @@ public class BoardCreator : MonoBehaviour
     public Tilemap groundTilemap;
     public Tilemap obstacleTilemap;
 
-    private void Start()
+    private void Awake()
     {
         // Create the board holder.
         boardHolder = new GameObject("BoardHolder");
@@ -248,7 +248,7 @@ public class BoardCreator : MonoBehaviour
         int randomIndex = Random.Range(0, prefabs.Length);
 
         // The position to be instantiated at is based on the coordinates.
-        Vector3 position = new Vector3(xCoord, yCoord, 0f);
+        Vector3 position = new Vector3(xCoord, 0, yCoord);
 
         // Create an instance of the prefab from the random index of the array.
         //GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;

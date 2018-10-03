@@ -18,7 +18,7 @@ public class World3DGenerator : MonoBehaviour {
     public int scanRangeZ;
 
 	// Use this for initialization
-	void Awake () {
+	void Start () {
 
         // skenira u datom (x, z) range-u za tile-ove iz datog tilemap-a (zidovi za sad) i na odgovarajucem mestu u 3D prostoru pravi objekat po datom prefab-u
 

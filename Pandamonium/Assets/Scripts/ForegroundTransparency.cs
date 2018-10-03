@@ -23,7 +23,7 @@ public class ForegroundTransparency : MonoBehaviour {
     {
 
         if (tilemap == null)
-            tilemap = GameObject.Find("/Grid/ForegroundTilemap").GetComponent<Tilemap>();
+            tilemap = GameObject.Find("ForegroundTilemap").GetComponent<Tilemap>();
 
     }
 
