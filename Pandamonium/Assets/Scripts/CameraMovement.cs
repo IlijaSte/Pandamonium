@@ -27,9 +27,6 @@ public class CameraMovement : MonoBehaviour {
         maxVisibleX = stageUpperRight.x - viewportWidth / 2f;
         minVisibleZ = stageLowerLeft.z + viewportHeight / 2f;
         maxVisibleZ = stageUpperRight.z - viewportHeight / 2f;
-
-
-        print(minVisibleX + ", " + maxVisibleX);
     }
 	
 	// Update is called once per frame

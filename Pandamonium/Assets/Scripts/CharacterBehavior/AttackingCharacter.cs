@@ -62,7 +62,6 @@ public class AttackingCharacter : MonoBehaviour {
         {
 
             agent.isStopped = false;
-            print("Krenuo ka neprijatelju!");
 
             agent.stoppingDistance = 0f;        // !!!
 
@@ -96,7 +95,6 @@ public class AttackingCharacter : MonoBehaviour {
 
                         if (Physics.SphereCast(ray, 0.2f, out hit, Mathf.Infinity, ignoreMask) && (hit.collider.transform == target)) // ako mu je protivnik vidljiv (od zidova/prepreka)
                         {
-                            print("Stigao kod neprijatelja!");
                             agent.isStopped = true;
                             agent.velocity = Vector3.zero;
                             equippedWeapon.StartAttacking(target);              // krece da napada oruzjem
