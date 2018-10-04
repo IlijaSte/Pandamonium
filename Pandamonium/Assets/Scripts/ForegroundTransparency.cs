@@ -19,7 +19,7 @@ public class ForegroundTransparency : MonoBehaviour {
     private Transform lastObject;
     private Vector3Int lastTile;
 
-    private void Start()
+    private void Awake()
     {
 
         if (tilemap == null)

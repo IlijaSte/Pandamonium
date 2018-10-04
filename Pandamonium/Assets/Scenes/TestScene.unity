@@ -155,6 +155,37 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 44cf69e2e7d3dd74d80cbfe5f3ffa761, type: 2}
   m_IsPrefabParent: 0
+--- !u!84 &116607001
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SpriteLightKit RT
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 580
+  m_Height: 326
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1001 &190183564
 Prefab:
   m_ObjectHideFlags: 0
@@ -250,37 +281,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4711077910229924, guid: aa2660e62d0944a4491bd9512c409974,
     type: 2}
   m_PrefabInternal: {fileID: 1782242209}
---- !u!84 &237316423
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: SpriteLightKit RT
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 580
-  m_Height: 326
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &296605545
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,38 +376,7 @@ Transform:
   m_Father: {fileID: 1579933464}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &560382479
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: SpriteLightKit RT
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 580
-  m_Height: 326
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
---- !u!84 &622100711
+--- !u!84 &471143873
 RenderTexture:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -473,8 +442,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 119, y: -31}
-  m_SizeDelta: {x: 200, y: 25}
+  m_AnchoredPosition: {x: -8.5, y: 40}
+  m_SizeDelta: {x: -55, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &700523452
 MonoBehaviour:
@@ -724,7 +693,7 @@ Prefab:
         type: 2}
       propertyPath: spriteLightRT
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 116607001}
     - target: {fileID: 114885776626430670, guid: 39a9d9266e188524089c792b8b2c96a5,
         type: 2}
       propertyPath: player
@@ -734,7 +703,7 @@ Prefab:
         type: 2}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 2054682652}
+      objectReference: {fileID: 909505222}
     - target: {fileID: 20788170507510960, guid: 39a9d9266e188524089c792b8b2c96a5,
         type: 2}
       propertyPath: m_Depth
@@ -758,22 +727,22 @@ Prefab:
     - target: {fileID: 114885776626430670, guid: 39a9d9266e188524089c792b8b2c96a5,
         type: 2}
       propertyPath: stageLowerLeft.x
-      value: -11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114885776626430670, guid: 39a9d9266e188524089c792b8b2c96a5,
         type: 2}
       propertyPath: stageLowerLeft.z
-      value: -7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114885776626430670, guid: 39a9d9266e188524089c792b8b2c96a5,
         type: 2}
       propertyPath: stageUpperRight.x
-      value: 8
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 114885776626430670, guid: 39a9d9266e188524089c792b8b2c96a5,
         type: 2}
       propertyPath: stageUpperRight.z
-      value: 2
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 20788170507510960, guid: 39a9d9266e188524089c792b8b2c96a5,
         type: 2}
@@ -870,11 +839,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4711077910229924, guid: aa2660e62d0944a4491bd9512c409974, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1.8950399
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4711077910229924, guid: aa2660e62d0944a4491bd9512c409974, type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.89786
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1477832310055120, guid: aa2660e62d0944a4491bd9512c409974, type: 2}
       propertyPath: m_Layer
@@ -972,6 +941,37 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75c84e6b6e1cac542a790e6e97eb2d12, type: 2}
   m_IsPrefabParent: 0
+--- !u!84 &909505222
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SpriteLightKit RT
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 580
+  m_Height: 326
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!4 &961451587 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4195828224874824, guid: 44cf69e2e7d3dd74d80cbfe5f3ffa761,
@@ -1011,6 +1011,37 @@ Transform:
   m_Father: {fileID: 1579933464}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &1057330805
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SpriteLightKit RT
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 580
+  m_Height: 326
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1063126004
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,6 +1136,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!84 &1067149160
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SpriteLightKit RT
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 580
+  m_Height: 326
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1075300453
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,7 +1502,7 @@ Prefab:
         type: 2}
       propertyPath: spriteLightRT
       value: 
-      objectReference: {fileID: 622100711}
+      objectReference: {fileID: 1057330805}
     - target: {fileID: 114885776626430670, guid: 39a9d9266e188524089c792b8b2c96a5,
         type: 2}
       propertyPath: player
@@ -1450,7 +1512,7 @@ Prefab:
         type: 2}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 560382479}
+      objectReference: {fileID: 471143873}
     - target: {fileID: 20788170507510960, guid: 39a9d9266e188524089c792b8b2c96a5,
         type: 2}
       propertyPath: m_Depth
@@ -1610,17 +1672,17 @@ MonoBehaviour:
   columns: 25
   rows: 25
   numRooms:
-    m_Min: 15
-    m_Max: 20
+    m_Min: 3
+    m_Max: 5
   roomWidth:
     m_Min: 3
-    m_Max: 10
+    m_Max: 6
   roomHeight:
     m_Min: 3
-    m_Max: 10
+    m_Max: 6
   corridorLength:
-    m_Min: 6
-    m_Max: 10
+    m_Min: 4
+    m_Max: 6
   floorTiles:
   - {fileID: 11400000, guid: 7f1d0f707c568ce4692a59b89d45521e, type: 2}
   - {fileID: 11400000, guid: 47748692f79d78741bf93be7fe118015, type: 2}
@@ -1639,7 +1701,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1346937531}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9513929, y: 3.6881824, z: -5.217529}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1898,37 +1960,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!84 &1601265514
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: SpriteLightKit RT
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 580
-  m_Height: 326
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1001 &1782242209
 Prefab:
   m_ObjectHideFlags: 0
@@ -1979,12 +2010,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aa2660e62d0944a4491bd9512c409974, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &1950648846 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4711077910229924, guid: aa2660e62d0944a4491bd9512c409974,
-    type: 2}
-  m_PrefabInternal: {fileID: 750942917}
---- !u!84 &2054682652
+--- !u!84 &1838821300
 RenderTexture:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2015,6 +2041,11 @@ RenderTexture:
     m_WrapW: 1
   m_Dimension: 2
   m_VolumeDepth: 1
+--- !u!4 &1950648846 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4711077910229924, guid: aa2660e62d0944a4491bd9512c409974,
+    type: 2}
+  m_PrefabInternal: {fileID: 750942917}
 --- !u!1 &2057656667 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1668862187776128, guid: eddf54c30bb9bd244bad49fc987399cd,

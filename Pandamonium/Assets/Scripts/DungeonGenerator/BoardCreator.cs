@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Tilemaps;
 
 public class BoardCreator : MonoBehaviour
@@ -46,6 +47,15 @@ public class BoardCreator : MonoBehaviour
         InstantiateOuterWalls();
     }
 
+    public void Start()
+    {
+
+        Vector3 playerPos = new Vector3(rooms[rooms.Length / 2].xPos + 2, player.GetComponent<CharacterMovement>().target.position.y, rooms[rooms.Length / 2].yPos + 2);
+
+        //player.GetComponent<CharacterMovement>().target.GetComponent<NavMeshAgent>().updatePosition = false;
+        player.GetComponent<CharacterMovement>().target.position = playerPos;
+
+    }
 
     void SetupTilesArray()
     {
@@ -96,17 +106,7 @@ public class BoardCreator : MonoBehaviour
                 // Setup the corridor based on the room that was just created.
                 corridors[i].SetupCorridor(rooms[i], corridorLength, roomWidth, roomHeight, columns, rows, false);
             }
-
-            if (i == rooms.Length * .5f)
-            {
-                Vector3 playerPos = new Vector3(rooms[i].xPos + 1, 0, rooms[i].yPos + 1);
-                //.GetComponent<AttackingCharacter>().agent.enabled = false;
-                player.GetComponent<CharacterMovement>().target.position = new Vector3(playerPos.x, player.GetComponent<CharacterMovement>().target.position.y, playerPos.z);
-                //player.GetComponent<AttackingCharacter>().agent.enabled = true;
-                //Instantiate(player, playerPos, Quaternion.identity);
-            }
         }
-
     }
 
 
@@ -176,6 +176,8 @@ public class BoardCreator : MonoBehaviour
 
     void InstantiateTiles()
     {
+
+
         // Go through all the tiles in the jagged array...
         for (int i = 0; i < tiles.Length; i++)
         {

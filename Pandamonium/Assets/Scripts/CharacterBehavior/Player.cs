@@ -51,4 +51,9 @@ public class Player : AttackingCharacter {
 
         healthBar.fillAmount = health / maxHealth;
     }
+
+    public override void Die()
+    {
+        //base.Die();
+    }
 }
