@@ -199,6 +199,7 @@ MonoBehaviour:
     type: 2}
   equippedWeapon: {fileID: 114312385319588000}
   maxHealth: 25
+  agent: {fileID: 0}
   visionRadius: 10
 --- !u!114 &114312385319588000
 MonoBehaviour:
