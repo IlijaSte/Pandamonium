@@ -5,10 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - 3DGround
-  - 3DPlayer
   - 3DEnemy
   - Enemy
-  - 3DWorld
   - Projectile
   - 2DWorld
   - Foreground
@@ -21,8 +19,8 @@ TagManager:
   - UI
   - 
   - 
-  - Shadowcaster
-  - Lighting
+  - 
+  - 
   - Projectile
   - LightSources
   - LightObstacles
@@ -30,7 +28,7 @@ TagManager:
   - Foreground
   - Characters
   - RadialLighting
-  - 
+  - Obstacles
   - 
   - 
   - 

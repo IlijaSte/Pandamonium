@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Tilemaps;
+using Pathfinding;
 
 public class BoardCreator : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class BoardCreator : MonoBehaviour
 
     public GameObject enemyPrefab;
 
+    public World3DGenerator generator;
+
     private void Awake()
     {
         // Create the board holder.
@@ -51,15 +54,16 @@ public class BoardCreator : MonoBehaviour
         InstantiateTiles();
         InstantiateOuterWalls();
 
-        
+        generator.Generate();
     }
 
     void InstantiatePlayer()
     {
-        Vector3 playerPos = new Vector3(rooms[rooms.Length / 2].xPos + 2, player.GetComponent<CharacterMovement>().target.position.y, rooms[rooms.Length / 2].yPos + 2);
+        Vector3 playerPos = new Vector3(rooms[rooms.Length / 2].xPos + 1, player.transform.position.y, rooms[rooms.Length / 2].yPos + 1);
 
+        player.transform.position = playerPos;
         //player.GetComponent<CharacterMovement>().target.GetComponent<NavMeshAgent>().updatePosition = false;
-        player.GetComponent<CharacterMovement>().target.position = playerPos;
+        //player.GetComponent<CharacterMovement>().target.position = playerPos;
     }
 
     void InstantiateEnemies()
@@ -76,6 +80,7 @@ public class BoardCreator : MonoBehaviour
 
     public void Start()
     {
+        AstarPath.active.Scan();
         InstantiatePlayer();
 
         InstantiateEnemies();

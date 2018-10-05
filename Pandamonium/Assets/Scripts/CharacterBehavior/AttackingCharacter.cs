@@ -2,45 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Pathfinding;
 
 public class AttackingCharacter : MonoBehaviour {
-
-    public GameObject object3DPrefab;
 
     public Weapon equippedWeapon;                                               // opremljeno oruzje igraca
 
     public float maxHealth = 25;
 
-    protected Transform object3D;                                               // odgovarajuci objekat karaktera u 3D prostoru
-    public NavMeshAgent agent;
-
-    protected Transform target3D = null;                                        // 3D objekat koji igrac napada/prati
     protected Transform target = null;                                          // 2D objekat koji igrac napada/prati
 
-    protected enum PlayerState { IDLE, CHASING_ENEMY, ATTACKING, WALKING }    
-                                                                                    
+    protected enum PlayerState { IDLE, CHASING_ENEMY, ATTACKING, WALKING }                     
+    
     protected PlayerState playerState = PlayerState.IDLE;                       // trenutno stanje igraca
 
     protected float health;
 
     protected CharacterMovement CM;
-    protected Transform world3D;
 
     protected int ignoreMask;
 
+    protected AIPath path;
+
+    public enum CharacterType { PLAYER, ENEMY }
+    public CharacterType type;
+
     public virtual void Awake()
     {
-        world3D = GameObject.FindGameObjectWithTag("3DWorld").transform;
         CM = GetComponent<CharacterMovement>();
 
-        object3D = Instantiate(object3DPrefab,
-                               new Vector3(transform.position.x - CM.xOffset, world3D.position.y, transform.position.z - CM.zOffset),
-                               Quaternion.identity, world3D).transform;
-
-        CM.target = object3D;
         health = maxHealth;
-
-        agent = object3D.GetComponent<NavMeshAgent>();
+        path = GetComponent<AIPath>();
     }
 
     public virtual void Start()
@@ -50,24 +42,22 @@ public class AttackingCharacter : MonoBehaviour {
 
     public void StopAttacking()
     {
-        target3D = null;
+        target = null;
         playerState = PlayerState.IDLE;
         equippedWeapon.Stop();
     }
 
     public void Attack(Transform target)
     {
-        Transform temp = target.GetComponent<CharacterMovement>().target;
-        if (target3D == null || !target3D.Equals(temp))                     // ako je target razlicit od trenutnog
+        if (this.target == null || !this.target.Equals(target))                     // ako je target razlicit od trenutnog
         {
 
-            agent.isStopped = false;
+            //agent.stoppingDistance = 0f;        // !!!
 
-            agent.stoppingDistance = 0f;        // !!!
-
-            target3D = temp;
             this.target = target;
-            agent.SetDestination(target3D.position);
+            //agent.SetDestination(target3D.position);
+
+            CM.MoveToPosition(target.position);
 
             playerState = PlayerState.CHASING_ENEMY;
 
@@ -82,7 +72,7 @@ public class AttackingCharacter : MonoBehaviour {
             case PlayerState.CHASING_ENEMY:                                 // ako trenutno juri protivnika
                 {
 
-                    if (Vector3.Distance(agent.destination, agent.transform.position) <= (equippedWeapon.range == 0 ? 1.5f : equippedWeapon.range))  // ako mu je protivnik u weapon range-u
+                    if (Vector3.Distance(target.position, transform.position) <= (equippedWeapon.range == 0 ? 1.5f : equippedWeapon.range))  // ako mu je protivnik u weapon range-u
                     {
 
                         Vector3 startCast = transform.position;
@@ -93,19 +83,21 @@ public class AttackingCharacter : MonoBehaviour {
                         Debug.DrawRay(startCast, endCast - startCast);
                         RaycastHit hit;
 
-                        if (Physics.SphereCast(ray, 0.2f, out hit, Mathf.Infinity, ignoreMask) && (hit.collider.transform == target)) // ako mu je protivnik vidljiv (od zidova/prepreka)
+                        if (Physics.SphereCast(ray, 0.1f, out hit, Mathf.Infinity, ignoreMask) && (hit.collider.transform == target)) // ako mu je protivnik vidljiv (od zidova/prepreka)
                         {
-                            agent.isStopped = true;
-                            agent.velocity = Vector3.zero;
+                            print("Stigao kod neprijatelja!");
                             equippedWeapon.StartAttacking(target);              // krece da napada oruzjem
                             playerState = PlayerState.ATTACKING;
+
+                            CM.StopMoving();
                         }
                     }
                     else
                     {
-                        if (!agent.destination.Equals(target3D.position))       // ako se protivnik u medjuvremenu pomerio
+                        if (!path.destination.Equals(target.position))       // ako se protivnik u medjuvremenu pomerio
                         {
-                            agent.SetDestination(target3D.position);
+                            CM.MoveToPosition(target.position);
+
                         }
                     }
 
@@ -114,7 +106,7 @@ public class AttackingCharacter : MonoBehaviour {
             case PlayerState.ATTACKING:
                 {
 
-                    if (target == null || target3D == null)                                         // ako je protivnik mrtav
+                    if (target == null)                                         // ako je protivnik mrtav
                     {
                         StopAttacking();
 
@@ -122,7 +114,7 @@ public class AttackingCharacter : MonoBehaviour {
                     }
 
                     // ako mu je protivnik nestao iz weapon range-a
-                    if (Vector3.Distance(target3D.position, agent.transform.position) > (equippedWeapon.range == 0 ? 1.5f : equippedWeapon.range))
+                    if (Vector3.Distance(target.position, transform.position) > (equippedWeapon.range == 0 ? 1.5f : equippedWeapon.range))
                     {
                         Transform tempTarget = target;
                         StopAttacking();
@@ -140,7 +132,7 @@ public class AttackingCharacter : MonoBehaviour {
                     RaycastHit hit;
 
                     // ako vise ne vidi protivnika
-                    if (!(Physics.SphereCast(ray, 0.2f, out hit, Mathf.Infinity, ignoreMask) && (hit.collider.transform == target))) // ako mu je protivnik vidljiv (od zidova/prepreka)
+                    if (!(Physics.SphereCast(ray, 0.1f, out hit, Mathf.Infinity, ignoreMask) && (hit.collider.transform == target))) // ako mu je protivnik vidljiv (od zidova/prepreka)
                     {
                         Transform tempTarget = target;
                         StopAttacking();
@@ -164,7 +156,6 @@ public class AttackingCharacter : MonoBehaviour {
 
     public virtual void Die()
     {
-        Destroy(object3D.gameObject);
         Destroy(gameObject);
     }
 

@@ -1,21 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 // skripta za pracenje odgovarajuceg 'target' 3D objekta u 2D prostoru
 public class CharacterMovement : MonoBehaviour {
 
-    public Transform target;
+    private AIPath path;
 
-    public float xOffset;
-    public float zOffset;
+    private void Start()
+    {
+        path = GetComponent<AIPath>();
+    }
 
-	
-	// Update is called once per frame
-	void LateUpdate () {
+    public void MoveToPosition(Vector3 targetPosition) {
 
-        if(transform != null && target != null)
-            transform.localPosition = new Vector3(target.localPosition.x + xOffset, transform.localPosition.y, target.localPosition.z + zOffset);
+        path.destination = targetPosition; // !!!
+        path.isStopped = false;
+    }
+
+    public void StopMoving()
+    {
+        path.isStopped = true;
 
     }
 }

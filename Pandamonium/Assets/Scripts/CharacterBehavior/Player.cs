@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Pathfinding;
 
 // ponasanje igraca (kretanje, napad, ...)
 public class Player : AttackingCharacter {
@@ -10,6 +11,7 @@ public class Player : AttackingCharacter {
 
     public override void Start()
     {
+        type = CharacterType.PLAYER;
         base.Start();
     }
 
@@ -25,22 +27,26 @@ public class Player : AttackingCharacter {
             {
                 if (hit.collider.CompareTag("3DGround"))                    // ako je korisnik kliknuo na zemlju, igrac krece ka toj poziciji
                 {
-                    agent.isStopped = false;
-                    agent.stoppingDistance = 0;
-                    agent.SetDestination(hit.point);
+
+                    //agent.SetDestination(hit.point);
+                    CM.MoveToPosition(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+                    
                     playerState = PlayerState.WALKING;
 
-                    target3D = null;
+                    target = null;
                     
                     equippedWeapon.Stop();                                  // prestaje da napada oruzjem
                     
                 }else if (hit.collider.CompareTag("Enemy"))                 // ako je korisnik kliknuo na *novog* protivnika, krece ka njemu
                 {
+                    print("kliknuo na neprijatelja!");
                     base.Attack(hit.collider.transform);
 
                 }
             }
         }
+
+        print(playerState.ToString());
 
         base.Update();
     }

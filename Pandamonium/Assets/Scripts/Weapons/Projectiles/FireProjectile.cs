@@ -29,8 +29,8 @@ public class FireProjectile : MonoBehaviour
             return;
         }
 
-        transform.rotation = Quaternion.LookRotation(target.position - transform.position);
-        transform.rotation = Quaternion.Euler(90, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z + 90); // !!!
+        Quaternion rot = Quaternion.LookRotation(target.position - transform.position);
+        transform.rotation = Quaternion.Euler(90, rot.eulerAngles.y, 90);
 
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
     }
@@ -50,18 +50,23 @@ public class FireProjectile : MonoBehaviour
         if (LayerMask.LayerToName(other.gameObject.layer).Equals("Foreground"))
             return;
 
-        if (other.transform == target)                                      // ako je pogodio metu
+        AttackingCharacter character = other.GetComponent<AttackingCharacter>();
+
+        if (other.transform == target && character != null)                                      // ako je pogodio metu
         {
-            other.GetComponent<AttackingCharacter>().TakeDamage(weapon.GetComponent<Weapon>().damage, (other.transform.position - transform.position).normalized);
+            character.TakeDamage(weapon.GetComponent<Weapon>().damage, (other.transform.position - transform.position).normalized);
             shot = false;
             Destroy(gameObject);
+        }else if(character != null && character.type == weapon.parent.GetComponent<AttackingCharacter>().type)  // ako je pogodio karaktera istog tipa
+        {
+            return;
         }
         else if(other.gameObject.GetComponent<FireProjectile>() != null)    // ako je pogodio drugi projektil
         {
             return;
         }else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
     }

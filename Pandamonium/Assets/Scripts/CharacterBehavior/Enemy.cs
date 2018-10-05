@@ -18,6 +18,8 @@ public class Enemy : AttackingCharacter {
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         healthBar = transform.Find("EnemyCanvas").Find("HealthBarBG").Find("HealthBar").GetComponent<Image>();
+
+        type = CharacterType.ENEMY;
     }
 
     protected override void Update()
@@ -44,17 +46,6 @@ public class Enemy : AttackingCharacter {
                 base.Attack(player);
             }
         }
-
-        /*if (Physics.Raycast(ray,out hit, 100, ignoreMask) && hit.collider.CompareTag("Player")) // ako vidi igraca, krece da ga juri
-        {
-            GetComponent<SpriteRenderer>().enabled = true;      // !!!
-            healthBar.transform.parent.gameObject.SetActive(true);
-        }
-        else
-        {
-            GetComponent<SpriteRenderer>().enabled = false;     // !!!
-            healthBar.transform.parent.gameObject.SetActive(false);
-        }*/
 
         base.Update();
 
