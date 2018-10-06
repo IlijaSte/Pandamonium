@@ -29,8 +29,8 @@ public class FireProjectile : MonoBehaviour
             return;
         }
 
-        Quaternion rot = Quaternion.LookRotation(target.position - transform.position);
-        transform.rotation = Quaternion.Euler(90, rot.eulerAngles.y, 90);
+        Quaternion rot = Quaternion.LookRotation(Vector3.forward, target.position - transform.position);
+        transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
 
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
     }

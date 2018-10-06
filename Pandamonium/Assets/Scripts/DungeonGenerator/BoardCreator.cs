@@ -59,7 +59,7 @@ public class BoardCreator : MonoBehaviour
 
     void InstantiatePlayer()
     {
-        Vector3 playerPos = new Vector3(rooms[rooms.Length / 2].xPos + 1, player.transform.position.y, rooms[rooms.Length / 2].yPos + 1);
+        Vector3 playerPos = new Vector3(rooms[rooms.Length / 2].xPos + 1, rooms[rooms.Length / 2].yPos + 1, player.transform.position.z);
 
         player.transform.position = playerPos;
         //player.GetComponent<CharacterMovement>().target.GetComponent<NavMeshAgent>().updatePosition = false;
@@ -72,7 +72,7 @@ public class BoardCreator : MonoBehaviour
         for(int i = 0; i < definiteNumEnemies; i++)
         {
             int roomIndex = Random.Range(0, rooms.Length - 1);
-            Vector3 enemyPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth), player.transform.position.y, rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight));
+            Vector3 enemyPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth), rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight), player.transform.position.z);
 
             Instantiate(enemyPrefab, enemyPos, player.transform.rotation, GameObject.FindGameObjectWithTag("2DWorld").transform);
         }
@@ -282,7 +282,7 @@ public class BoardCreator : MonoBehaviour
         int randomIndex = Random.Range(0, prefabs.Length);
 
         // The position to be instantiated at is based on the coordinates.
-        Vector3 position = new Vector3(xCoord, 0, yCoord);
+        Vector3 position = new Vector3(xCoord, yCoord, 0);
 
         // Create an instance of the prefab from the random index of the array.
         //GameObject tileInstance = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;

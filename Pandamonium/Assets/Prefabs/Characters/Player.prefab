@@ -36,6 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4776640960544456}
   - component: {fileID: 114679024940451080}
+  - component: {fileID: 58872568930377156}
   m_Layer: 15
   m_Name: FireStaff
   m_TagString: Untagged
@@ -146,7 +147,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1371769644752892}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -157,7 +158,7 @@ Transform:
   - {fileID: 4598000305072266}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4598000305072266
 Transform:
   m_ObjectHideFlags: 1
@@ -166,7 +167,7 @@ Transform:
   m_GameObject: {fileID: 1399127699427452}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 1}
+  m_LocalScale: {x: 20, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 4469015658312258}
   m_RootOrder: 4
@@ -254,6 +255,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!58 &58872568930377156
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1245391527058222}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 7
 --- !u!65 &65858080778076566
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -359,7 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61930e16e81db5c43a4ecc22422a0953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Color: {r: 1, g: 1, b: 1, a: 0.5}
+  Color: {r: 1, g: 1, b: 1, a: 0.53333336}
   Sprite: {fileID: 21300000, guid: 0846a06dcf035814d9cee71f4ba273f9, type: 3}
   SortingOrder: 0
   Material: {fileID: 2100000, guid: 5d8645bc2e5501a4ebd138db5aa609bd, type: 2}

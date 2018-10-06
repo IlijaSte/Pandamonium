@@ -10,8 +10,8 @@ public class CameraMovement : MonoBehaviour {
 
     private float minVisibleX;
     private float maxVisibleX;
-    private float minVisibleZ;
-    private float maxVisibleZ;
+    private float minVisibleY;
+    private float maxVisibleY;
 
     public Transform player;
 
@@ -21,17 +21,17 @@ public class CameraMovement : MonoBehaviour {
         Vector3 UpperRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0));
 
         float viewportWidth = UpperRight.x - LowerLeft.x;
-        float viewportHeight = UpperRight.z - LowerLeft.z;
+        float viewportHeight = UpperRight.y - LowerLeft.y;
 
         minVisibleX = stageLowerLeft.x + viewportWidth / 2f;
         maxVisibleX = stageUpperRight.x - viewportWidth / 2f;
-        minVisibleZ = stageLowerLeft.z + viewportHeight / 2f;
-        maxVisibleZ = stageUpperRight.z - viewportHeight / 2f;
+        minVisibleY = stageLowerLeft.y + viewportHeight / 2f;
+        maxVisibleY = stageUpperRight.y - viewportHeight / 2f;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        transform.position = new Vector3(Mathf.Clamp(player.position.x, minVisibleX, maxVisibleX), transform.position.y, Mathf.Clamp(player.position.z, minVisibleZ, maxVisibleZ));
+        transform.position = new Vector3(Mathf.Clamp(player.position.x, minVisibleX, maxVisibleX), Mathf.Clamp(player.position.y, minVisibleY, maxVisibleY), transform.position.z);
 	}
 }

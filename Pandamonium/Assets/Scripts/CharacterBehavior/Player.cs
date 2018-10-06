@@ -29,7 +29,7 @@ public class Player : AttackingCharacter {
                 {
 
                     //agent.SetDestination(hit.point);
-                    CM.MoveToPosition(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+                    CM.MoveToPosition(new Vector3(hit.point.x, hit.point.y, transform.position.z));
                     
                     playerState = PlayerState.WALKING;
 
