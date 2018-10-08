@@ -18,6 +18,9 @@ public class BoardCreator : MonoBehaviour
     public IntRange roomWidth = new IntRange(3, 10);         // The range of widths rooms can have.
     public IntRange roomHeight = new IntRange(3, 10);        // The range of heights rooms can have.
     public IntRange corridorLength = new IntRange(6, 10);    // The range of lengths corridors between rooms can have.
+
+    public IntRange numEnemies = new IntRange(3, 6);
+
     public TileBase[] floorTiles;                           // An array of floor tile prefabs.
     public TileBase[] wallTiles;                            // An array of wall tile prefabs.
     public TileBase[] outerWallTiles;                       // An array of outer wall tile prefabs.
@@ -30,6 +33,8 @@ public class BoardCreator : MonoBehaviour
 
     public Tilemap groundTilemap;
     public Tilemap obstacleTilemap;
+
+    public GameObject enemyPrefab;
 
     private void Awake()
     {
@@ -45,16 +50,35 @@ public class BoardCreator : MonoBehaviour
 
         InstantiateTiles();
         InstantiateOuterWalls();
+
+        
     }
 
-    public void Start()
+    void InstantiatePlayer()
     {
-
         Vector3 playerPos = new Vector3(rooms[rooms.Length / 2].xPos + 2, player.GetComponent<CharacterMovement>().target.position.y, rooms[rooms.Length / 2].yPos + 2);
 
         //player.GetComponent<CharacterMovement>().target.GetComponent<NavMeshAgent>().updatePosition = false;
         player.GetComponent<CharacterMovement>().target.position = playerPos;
+    }
 
+    void InstantiateEnemies()
+    {
+        int definiteNumEnemies = numEnemies.Random;
+        for(int i = 0; i < definiteNumEnemies; i++)
+        {
+            int roomIndex = Random.Range(0, rooms.Length - 1);
+            Vector3 enemyPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth), player.transform.position.y, rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight));
+
+            Instantiate(enemyPrefab, enemyPos, player.transform.rotation, GameObject.FindGameObjectWithTag("2DWorld").transform);
+        }
+    }
+
+    public void Start()
+    {
+        InstantiatePlayer();
+
+        InstantiateEnemies();
     }
 
     void SetupTilesArray()
