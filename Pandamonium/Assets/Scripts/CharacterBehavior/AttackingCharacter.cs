@@ -21,6 +21,7 @@ public class AttackingCharacter : MonoBehaviour {
     protected CharacterMovement CM;
 
     protected int ignoreMask;
+    protected ContactFilter2D colFilter;
 
     protected AIPath path;
 
@@ -37,7 +38,9 @@ public class AttackingCharacter : MonoBehaviour {
 
     public virtual void Start()
     {
-        ignoreMask = ~((1 << LayerMask.NameToLayer("Projectile")) | (1 << LayerMask.NameToLayer("Foreground")));
+        //ignoreMask = ~((1 << LayerMask.NameToLayer("Projectile")) | (1 << LayerMask.NameToLayer("Foreground")));
+        ignoreMask = ~(1 << LayerMask.NameToLayer("Obstacles"));
+        colFilter.SetLayerMask(ignoreMask);
     }
 
     public void StopAttacking()
@@ -78,18 +81,29 @@ public class AttackingCharacter : MonoBehaviour {
                         Vector3 startCast = transform.position;
                         Vector3 endCast = target.position;
 
-                        Ray ray = new Ray(startCast, endCast - startCast);
-
                         Debug.DrawRay(startCast, endCast - startCast);
-                        RaycastHit hit;
 
-                        if (Physics.SphereCast(ray, 0.1f, out hit, Mathf.Infinity, ignoreMask) && (hit.collider.transform == target)) // ako mu je protivnik vidljiv (od zidova/prepreka)
+                        RaycastHit2D[] results = new RaycastHit2D[2];
+
+                        
+
+                        for (int i = 0; i < Physics2D.CircleCast(startCast, 0.01f, (endCast - startCast).normalized, colFilter, results, Mathf.Infinity); i++) // ako mu je protivnik vidljiv (od zidova/prepreka)
                         {
-                            print("Stigao kod neprijatelja!");
-                            equippedWeapon.StartAttacking(target);              // krece da napada oruzjem
-                            playerState = PlayerState.ATTACKING;
+                            AttackingCharacter attChar = results[i].transform.GetComponent<AttackingCharacter>();
+                            if (attChar && attChar.type == type)
+                                continue;
 
-                            CM.StopMoving();
+                            if (results[i].transform == target)
+                            {
+                                print("Stigao kod neprijatelja!");
+                                equippedWeapon.StartAttacking(target);              // krece da napada oruzjem
+                                playerState = PlayerState.ATTACKING;
+
+                                CM.StopMoving();
+                                
+                            }
+                            break;
+
                         }
                     }
                     else
@@ -126,18 +140,22 @@ public class AttackingCharacter : MonoBehaviour {
                     Vector3 startCast = transform.position;
                     Vector3 endCast = target.position;
 
-                    Ray ray = new Ray(startCast, endCast - startCast);
-
                     Debug.DrawRay(startCast, endCast - startCast);
-                    RaycastHit hit;
+                    RaycastHit2D[] results = new RaycastHit2D[2];
 
                     // ako vise ne vidi protivnika
-                    if (!(Physics.SphereCast(ray, 0.1f, out hit, Mathf.Infinity, ignoreMask) && (hit.collider.transform == target))) // ako mu je protivnik vidljiv (od zidova/prepreka)
-                    {
-                        Transform tempTarget = target;
-                        StopAttacking();
-                        Attack(tempTarget);
 
+                    for (int i = 0; i < Physics2D.CircleCast(startCast, 0.01f, (endCast - startCast).normalized, colFilter, results, Mathf.Infinity); i++) // ako mu je protivnik vidljiv (od zidova/prepreka)
+                    {
+                        AttackingCharacter attChar = results[i].transform.GetComponent<AttackingCharacter>();
+                        if (attChar && attChar.type == type)
+                            continue;
+                        if (results[i].transform != target)
+                        {
+                            Transform tempTarget = target;
+                            StopAttacking();
+                            Attack(tempTarget);
+                        }
                         break;
                     }
 

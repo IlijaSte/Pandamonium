@@ -15,38 +15,59 @@ public class Player : AttackingCharacter {
         base.Start();
     }
 
+    public void MoveToPosition(Vector3 pos)
+    {
+        CM.MoveToPosition(new Vector3(pos.x, pos.y, transform.position.z));
+
+        playerState = PlayerState.WALKING;
+
+        target = null;
+
+        equippedWeapon.Stop();
+    }
+
     // Update is called once per frame
     protected override void Update () {
 
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            
+            /*RaycastHit2D hit2D;
 
-            if(Physics.Raycast(ray, out hit, Mathf.Infinity, ignoreMask))
+            if (hit2D = Physics2D.Raycast(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y),
+                                          Vector2.zero, 0f))
             {
-                if (hit.collider.CompareTag("3DGround"))                    // ako je korisnik kliknuo na zemlju, igrac krece ka toj poziciji
-                {
 
-                    //agent.SetDestination(hit.point);
-                    CM.MoveToPosition(new Vector3(hit.point.x, hit.point.y, transform.position.z));
-                    
-                    playerState = PlayerState.WALKING;
-
-                    target = null;
-                    
-                    equippedWeapon.Stop();                                  // prestaje da napada oruzjem
-                    
-                }else if (hit.collider.CompareTag("Enemy"))                 // ako je korisnik kliknuo na *novog* protivnika, krece ka njemu
+                if (hit2D.transform.CompareTag("Enemy"))
                 {
                     print("kliknuo na neprijatelja!");
-                    base.Attack(hit.collider.transform);
-
+                    base.Attack(hit2D.collider.transform);
                 }
-            }
-        }
 
-        print(playerState.ToString());
+            }
+            else
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("3D")))               // oprezno za 2D!!!
+                {
+                    if (hit.collider.CompareTag("3DGround"))                    // ako je korisnik kliknuo na zemlju, igrac krece ka toj poziciji
+                    {
+
+                        //agent.SetDestination(hit.point);
+                        CM.MoveToPosition(new Vector3(hit.point.x, hit.point.y, transform.position.z));
+
+                        playerState = PlayerState.WALKING;
+
+                        target = null;
+
+                        equippedWeapon.Stop();                                  // prestaje da napada oruzjem
+
+                    }
+                }
+            }*/
+        }
 
         base.Update();
     }

@@ -69,11 +69,11 @@ public class ForegroundTransparency : MonoBehaviour {
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Foreground"))
         {
-            Vector3Int tile = tilemap.layoutGrid.WorldToCell(new Vector3(transform.position.x, tilemap.transform.position.y, transform.position.z));
+            Vector3Int tile = tilemap.layoutGrid.WorldToCell(new Vector3(transform.position.x, transform.position.y, tilemap.transform.position.z));
 
             if (tilemap.HasTile(tile))
             {
@@ -82,12 +82,12 @@ public class ForegroundTransparency : MonoBehaviour {
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Foreground"))
         {
 
-            Vector3Int tile = tilemap.layoutGrid.WorldToCell(new Vector3(transform.position.x, tilemap.transform.position.y, transform.position.z));
+            Vector3Int tile = tilemap.layoutGrid.WorldToCell(new Vector3(transform.position.x, transform.position.y, tilemap.transform.position.z));
 
             lastTile = tile;
             lastObject = other.transform;
@@ -109,11 +109,11 @@ public class ForegroundTransparency : MonoBehaviour {
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Foreground"))
         {
-            Vector3Int tile = tilemap.layoutGrid.WorldToCell(new Vector3(transform.position.x, tilemap.transform.position.y, transform.position.z));
+            Vector3Int tile = tilemap.layoutGrid.WorldToCell(new Vector3(transform.position.x, transform.position.y, tilemap.transform.position.z));
 
             if (tilemap.HasTile(tile))
             {
