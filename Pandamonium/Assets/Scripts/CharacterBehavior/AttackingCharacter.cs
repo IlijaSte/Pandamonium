@@ -62,7 +62,7 @@ public class AttackingCharacter : MonoBehaviour {
         {
 
             agent.isStopped = false;
-            print("Krenuo ka neprijatelju!");
+            //print("Krenuo ka neprijatelju!");
 
             agent.stoppingDistance = 0f;        // !!!
 
