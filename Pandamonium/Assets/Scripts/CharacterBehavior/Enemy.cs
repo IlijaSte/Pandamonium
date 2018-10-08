@@ -29,12 +29,10 @@ public class Enemy : AttackingCharacter {
 
         //print(Physics2D.CircleCast(startCast, 0.02f, (endCast - startCast).normalized, visionRadius, ignoreMask).collider.name);
         RaycastHit2D[] results = new RaycastHit2D[2];
-        print("Circle collided with:\n");
         // ako vise ne vidi protivnika           
 
         for (int i = 0; i < Physics2D.CircleCast(startCast, 0.01f, (endCast - startCast).normalized, colFilter, results, Mathf.Infinity); i++) // ako mu je protivnik vidljiv (od zidova/prepreka)
         {
-            //print(results[i].transform.name);
             AttackingCharacter attChar = results[i].transform.GetComponent<AttackingCharacter>();
             if (attChar && attChar.type == CharacterType.ENEMY)
                 continue;

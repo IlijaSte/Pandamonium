@@ -1,20 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using Pathfinding;
 
 public class PlayerAnimation : MonoBehaviour {
 
     
     private Animator animator;
-    private NavMeshAgent navMeshAgent;
+    private AIPath path;
     private float angle;
 
     // Use this for initialization
     void Start ()
     {
-        Player playerScript = GetComponent<Player>();
-        navMeshAgent = playerScript.agent;
+        path = transform.parent.GetComponent<AIPath>();
         animator = GetComponent<Animator>();
         angle = 0;
 
@@ -23,8 +22,8 @@ public class PlayerAnimation : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Vector3 vector3D = navMeshAgent.velocity;
-        Vector2 vector2D = new Vector2(vector3D.x, vector3D.z);
+        Vector3 vector3D = path.velocity;
+        Vector2 vector2D = new Vector2(vector3D.x, vector3D.y);
 
         //float angle = Vector3.Angle(vectorDirection, new Vector3(0 ,1,0));
 

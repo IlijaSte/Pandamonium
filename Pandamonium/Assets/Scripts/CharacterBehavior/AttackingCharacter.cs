@@ -95,7 +95,6 @@ public class AttackingCharacter : MonoBehaviour {
 
                             if (results[i].transform == target)
                             {
-                                print("Stigao kod neprijatelja!");
                                 equippedWeapon.StartAttacking(target);              // krece da napada oruzjem
                                 playerState = PlayerState.ATTACKING;
 
