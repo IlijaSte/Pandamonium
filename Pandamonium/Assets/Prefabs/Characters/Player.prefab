@@ -313,11 +313,6 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-<<<<<<< HEAD
-  m_Size: {x: 1, y: 0.75}
-  m_EdgeRadius: 0
---- !u!114 &114137552342071252
-=======
   m_Size: {x: 2.69915, y: 2.9087505, z: 0.20000005}
   m_Center: {x: 0.057741165, y: 0.08187187, z: 1.376455e-16}
 --- !u!95 &95570666983652328
@@ -350,7 +345,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114220199049705948
->>>>>>> 685b0588bdf09bfeef9d1cc7972b83e2b50f2c63
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -376,7 +370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
   version: 1
   drawGizmos: 0
   detailedGizmos: 0
@@ -407,15 +400,6 @@ MonoBehaviour:
   speed: 1
   range: 0
 --- !u!114 &114649143069366310
-=======
-  object3DPrefab: {fileID: 1416799649619620, guid: 3b0eb72d6f98d9b46bd518f7aa579613,
-    type: 2}
-  equippedWeapon: {fileID: 114923204869957488}
-  maxHealth: 100
-  agent: {fileID: 0}
-  healthBar: {fileID: 0}
---- !u!114 &114728657437612122
->>>>>>> 685b0588bdf09bfeef9d1cc7972b83e2b50f2c63
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
