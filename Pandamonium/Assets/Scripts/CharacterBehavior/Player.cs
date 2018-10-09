@@ -32,7 +32,8 @@ public class Player : AttackingCharacter {
         if (Input.GetMouseButtonDown(0))
         {
             
-            /*RaycastHit2D hit2D;
+            RaycastHit2D hit2D;
+            bool hitEnemy = false;
 
             if (hit2D = Physics2D.Raycast(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y),
                                           Vector2.zero, 0f))
@@ -41,12 +42,12 @@ public class Player : AttackingCharacter {
                 if (hit2D.transform.CompareTag("Enemy"))
                 {
                     print("kliknuo na neprijatelja!");
-                    base.Attack(hit2D.collider.transform);
+                    base.Attack(hit2D.transform);
+                    hitEnemy = true;
                 }
 
             }
-            else
-            {
+            if (!hitEnemy) { 
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
@@ -56,17 +57,11 @@ public class Player : AttackingCharacter {
                     {
 
                         //agent.SetDestination(hit.point);
-                        CM.MoveToPosition(new Vector3(hit.point.x, hit.point.y, transform.position.z));
-
-                        playerState = PlayerState.WALKING;
-
-                        target = null;
-
-                        equippedWeapon.Stop();                                  // prestaje da napada oruzjem
+                        MoveToPosition(hit.point);
 
                     }
                 }
-            }*/
+            }
         }
 
         base.Update();

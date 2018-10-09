@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4379524136755496}
   - component: {fileID: 114539780366988302}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4776640960544456}
   - component: {fileID: 114679024940451080}
   - component: {fileID: 58872568930377156}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: FireStaff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,6 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4956372938377148}
   - component: {fileID: 58530656047498152}
+  - component: {fileID: 50265769254543546}
   m_Layer: 14
   m_Name: ForegroundDetector
   m_TagString: Untagged
@@ -108,7 +109,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4266031792904282}
   - component: {fileID: 212959063860739418}
-  m_Layer: 15
+  - component: {fileID: 95708470939643792}
+  - component: {fileID: 114480539979097238}
+  m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,6 +243,26 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1399127699427452}
   m_Mesh: {fileID: 0}
+--- !u!50 &50265769254543546
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1655659997160518}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!50 &50571860554699696
 Rigidbody2D:
   serializedVersion: 4
@@ -315,6 +338,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.75}
   m_EdgeRadius: 0
+--- !u!95 &95708470939643792
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1694110978344132}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 721d4064fd681b841b12556f13389c5f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114137552342071252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -356,6 +397,17 @@ MonoBehaviour:
   traversableTags: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask: -1
+--- !u!114 &114480539979097238
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1694110978344132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a144e792cc1c8ef409f3f2213402286d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114539780366988302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -481,7 +533,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 2a8a1f2d3594e0941b875528b4de341b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7f1d965b218f2d04186bb130b9a2092e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

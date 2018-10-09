@@ -10,13 +10,20 @@ public class FireProjectile : MonoBehaviour
     float speed;
 
     private bool shot = false;
+    private Vector3 targetPos;
+
+    public bool homing = false;
 
     public void Shoot(Transform weapon, Transform target, float speed)
     {
         this.weapon = weapon;
         this.target = target;
+        targetPos = target.position;
         this.speed = speed;
         shot = true;
+
+        Quaternion rot = Quaternion.LookRotation(Vector3.forward, target.position - transform.position);
+        transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
     }
 
     private void Update()
@@ -29,10 +36,17 @@ public class FireProjectile : MonoBehaviour
             return;
         }
 
-        Quaternion rot = Quaternion.LookRotation(Vector3.forward, target.position - transform.position);
-        transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
+        if (homing)
+        {
+            Quaternion rot = Quaternion.LookRotation(Vector3.forward, target.position - transform.position);
+            transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
 
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D other)

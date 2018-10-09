@@ -24,41 +24,10 @@ public class Enemy : AttackingCharacter {
 
     protected override void Update()
     {
-        Vector3 startCast = transform.position;
-        Vector3 endCast = player.position;
-
-        //print(Physics2D.CircleCast(startCast, 0.02f, (endCast - startCast).normalized, visionRadius, ignoreMask).collider.name);
-        RaycastHit2D[] results = new RaycastHit2D[2];
-        // ako vise ne vidi protivnika           
-
-        for (int i = 0; i < Physics2D.CircleCast(startCast, 0.01f, (endCast - startCast).normalized, colFilter, results, Mathf.Infinity); i++) // ako mu je protivnik vidljiv (od zidova/prepreka)
-        {
-            AttackingCharacter attChar = results[i].transform.GetComponent<AttackingCharacter>();
-            if (attChar && attChar.type == CharacterType.ENEMY)
-                continue;
-
-            if(results[i].transform == player)
-            {
-                base.Attack(player);
-                spottedPlayer = true;
-                
-            }
-            else
-            {
-                if (spottedPlayer)
-                {
-                    base.StopAttacking();
-                    base.Attack(player);
-                }
-            }
-            break;
-        }
-        /*if ((hit = Physics2D.CircleCast(startCast, 0.02f, (endCast - startCast).normalized, visionRadius, ignoreMask)) && hit.collider.CompareTag("Player")) // ako vidi igraca, krece da ga juri
-        {
-
+        if (CanSee(player, visionRadius)) { 
             base.Attack(player);
             spottedPlayer = true;
-
+                
         }
         else
         {
@@ -67,7 +36,7 @@ public class Enemy : AttackingCharacter {
                 base.StopAttacking();
                 base.Attack(player);
             }
-        }*/
+        }
 
         base.Update();
 
@@ -78,11 +47,6 @@ public class Enemy : AttackingCharacter {
         base.TakeDamage(damage, dir);
         healthBar.fillAmount = health / maxHealth;
 
-    }
-
-    public void OnMouseDown()
-    {
-        player.GetComponent<Player>().Attack(transform);
     }
 
 }

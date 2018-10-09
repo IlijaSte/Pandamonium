@@ -39,7 +39,9 @@ public class AttackingCharacter : MonoBehaviour {
     public virtual void Start()
     {
         //ignoreMask = ~((1 << LayerMask.NameToLayer("Projectile")) | (1 << LayerMask.NameToLayer("Foreground")));
-        ignoreMask = ~(1 << LayerMask.NameToLayer("Obstacles"));
+        ignoreMask = (1 << LayerMask.NameToLayer("Obstacles")) | (1 << LayerMask.NameToLayer("Characters"));
+        //ignoreMask = 0;
+        colFilter.useLayerMask = true;
         colFilter.SetLayerMask(ignoreMask);
     }
 
@@ -55,10 +57,7 @@ public class AttackingCharacter : MonoBehaviour {
         if (this.target == null || !this.target.Equals(target))                     // ako je target razlicit od trenutnog
         {
 
-            //agent.stoppingDistance = 0f;        // !!!
-
             this.target = target;
-            //agent.SetDestination(target3D.position);
 
             CM.MoveToPosition(target.position);
 
@@ -68,6 +67,40 @@ public class AttackingCharacter : MonoBehaviour {
         }
     }
 
+    protected bool CanSee(Transform target, float range = Mathf.Infinity)
+    {
+
+        Vector3 startCast = transform.position;
+        Vector3 endCast = target.position;
+
+        Debug.DrawRay(startCast, endCast - startCast);
+
+        RaycastHit2D[] results = new RaycastHit2D[6];
+
+
+
+        for (int i = 0; i < Physics2D.CircleCast(startCast, 0.1f, (endCast - startCast).normalized, colFilter, results, range); i++) // ako mu je protivnik vidljiv (od zidova/prepreka)
+        {
+
+            AttackingCharacter attChar = results[i].transform.GetComponent<AttackingCharacter>();
+            if (attChar && attChar.type == type)
+                continue;
+
+            if(results[i].transform.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
+            {
+                return false;
+            }
+
+            if (results[i].transform == target)
+            {
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
     protected virtual void Update()
     {
         switch (playerState)
@@ -75,35 +108,14 @@ public class AttackingCharacter : MonoBehaviour {
             case PlayerState.CHASING_ENEMY:                                 // ako trenutno juri protivnika
                 {
 
-                    if (Vector3.Distance(target.position, transform.position) <= (equippedWeapon.range == 0 ? 1.5f : equippedWeapon.range))  // ako mu je protivnik u weapon range-u
-                    {
-
-                        Vector3 startCast = transform.position;
-                        Vector3 endCast = target.position;
-
-                        Debug.DrawRay(startCast, endCast - startCast);
-
-                        RaycastHit2D[] results = new RaycastHit2D[2];
+                    if (CanSee(target, (equippedWeapon.range == 0 ? 1.5f : equippedWeapon.range))) {
 
                         
+                        equippedWeapon.StartAttacking(target);              // krece da napada oruzjem
+                        playerState = PlayerState.ATTACKING;
 
-                        for (int i = 0; i < Physics2D.CircleCast(startCast, 0.01f, (endCast - startCast).normalized, colFilter, results, Mathf.Infinity); i++) // ako mu je protivnik vidljiv (od zidova/prepreka)
-                        {
-                            AttackingCharacter attChar = results[i].transform.GetComponent<AttackingCharacter>();
-                            if (attChar && attChar.type == type)
-                                continue;
-
-                            if (results[i].transform == target)
-                            {
-                                equippedWeapon.StartAttacking(target);              // krece da napada oruzjem
-                                playerState = PlayerState.ATTACKING;
-
-                                CM.StopMoving();
+                        CM.StopMoving();
                                 
-                            }
-                            break;
-
-                        }
                     }
                     else
                     {
@@ -127,35 +139,12 @@ public class AttackingCharacter : MonoBehaviour {
                     }
 
                     // ako mu je protivnik nestao iz weapon range-a
-                    if (Vector3.Distance(target.position, transform.position) > (equippedWeapon.range == 0 ? 1.5f : equippedWeapon.range))
-                    {
+                    
+                    if (!CanSee(target, (equippedWeapon.range == 0 ? 1.5f : equippedWeapon.range))) {
+
                         Transform tempTarget = target;
                         StopAttacking();
                         Attack(tempTarget);
-
-                        break;
-                    }
-
-                    Vector3 startCast = transform.position;
-                    Vector3 endCast = target.position;
-
-                    Debug.DrawRay(startCast, endCast - startCast);
-                    RaycastHit2D[] results = new RaycastHit2D[2];
-
-                    // ako vise ne vidi protivnika
-
-                    for (int i = 0; i < Physics2D.CircleCast(startCast, 0.01f, (endCast - startCast).normalized, colFilter, results, Mathf.Infinity); i++) // ako mu je protivnik vidljiv (od zidova/prepreka)
-                    {
-                        AttackingCharacter attChar = results[i].transform.GetComponent<AttackingCharacter>();
-                        if (attChar && attChar.type == type)
-                            continue;
-                        if (results[i].transform != target)
-                        {
-                            Transform tempTarget = target;
-                            StopAttacking();
-                            Attack(tempTarget);
-                        }
-                        break;
                     }
 
                     break;

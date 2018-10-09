@@ -78,9 +78,12 @@ public class BoardCreator : MonoBehaviour
         }
     }
 
-    public void Start()
+    IEnumerator Start()
     {
+
+        yield return new WaitForEndOfFrame();
         AstarPath.active.Scan();
+
         InstantiatePlayer();
 
         InstantiateEnemies();

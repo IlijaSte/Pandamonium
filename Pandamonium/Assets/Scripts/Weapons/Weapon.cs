@@ -11,7 +11,10 @@ public abstract class Weapon : MonoBehaviour {
     protected bool attacking = false;
     protected float timeToAttack = 1;     // brojac koji se smanjuje u zavisnosti od brzine oruzja, kada dodje do 0 ispali se projektil i vraca se brojac na 1
     protected Transform target;
-                                                                                                                                                //DZO JE SERONJA!!! 09.18.2018. Djole :)
+
+    protected ArrayList enemiesInRange = new ArrayList();                                                                                                                     //DZO JE SERONJA!!! 09.18.2018. Djole :)
+
+
     virtual public void StartAttacking(Transform target)
     {
         if (!attacking)
@@ -41,4 +44,37 @@ public abstract class Weapon : MonoBehaviour {
     }
 
     protected abstract void Attack();
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Enemy enemy = collision.GetComponent<Enemy>();
+
+        if (enemy)
+        {
+            enemiesInRange.Add(enemy);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+
+        Enemy enemy = collision.GetComponent<Enemy>();
+
+        if (enemy)
+        {
+            enemiesInRange.Remove(enemy);
+        }
+
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Enemy enemy = collision.GetComponent<Enemy>();
+
+        if (enemy && !enemiesInRange.Contains(enemy))
+        {
+            enemiesInRange.Add(enemy);
+        }
+    }
+
 }
