@@ -23,17 +23,6 @@ public class Player : AttackingCharacter {
         base.Start();
     }
 
-    public void MoveToPosition(Vector3 pos)
-    {
-        CM.MoveToPosition(new Vector3(pos.x, pos.y, transform.position.z));
-
-        playerState = PlayerState.WALKING;
-
-        target = null;
-
-        equippedWeapon.Stop();
-    }
-
     // Update is called once per frame
     protected override void Update () {
 
@@ -80,8 +69,7 @@ public class Player : AttackingCharacter {
                             oneClick = false;
                             // DASH
 
-                            playerState = PlayerState.DASHING;
-                            path.maxSpeed = dashSpeed;
+                            Dash(hit.point);
                         }
                     }
                 }

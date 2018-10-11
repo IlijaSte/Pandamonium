@@ -70,7 +70,7 @@ public class AttackingCharacter : MonoBehaviour {
     public void Attack(Transform target)
     {
 
-        if (this.target != null && this.target.Equals(target))                     // ako je target razlicit od trenutnog
+        if (this.target != null && target == this.target)                     // ako je target razlicit od trenutnog
             return;
 
         this.target = target;
@@ -113,6 +113,25 @@ public class AttackingCharacter : MonoBehaviour {
 
         return false;
 
+    }
+
+    public void MoveToPosition(Vector3 pos)
+    {
+        CM.MoveToPosition(new Vector3(pos.x, pos.y, transform.position.z));
+
+        playerState = PlayerState.WALKING;
+
+        target = null;
+
+        equippedWeapon.Stop();
+    }
+
+    protected void Dash(Vector3 to)
+    {
+        StopAttacking();
+        MoveToPosition(to);
+        playerState = PlayerState.DASHING;
+        path.maxSpeed = dashSpeed;
     }
 
     protected virtual void Update()
@@ -222,6 +241,17 @@ public class AttackingCharacter : MonoBehaviour {
     public virtual void Die()
     {
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        AttackingCharacter attChar;
+
+        if(playerState == PlayerState.DASHING && (attChar = collision.gameObject.GetComponent<AttackingCharacter>()).type != type)
+        {
+            attChar.TakeDamage(equippedWeapon.damage, Vector3.zero);
+        }
     }
 
 }
