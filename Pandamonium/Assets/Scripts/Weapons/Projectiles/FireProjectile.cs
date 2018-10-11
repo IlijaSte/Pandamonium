@@ -5,12 +5,14 @@ using UnityEngine;
 public class FireProjectile : MonoBehaviour
 {
 
-    Transform weapon;
-    Transform target;
-    float speed;
+    private Transform weapon;
+    private Transform target;
+    private float speed;
+
+    private float damage;
 
     private bool shot = false;
-    private Vector3 targetPos;
+    private Vector3 direction;
 
     public bool homing = false;
 
@@ -18,8 +20,9 @@ public class FireProjectile : MonoBehaviour
     {
         this.weapon = weapon;
         this.target = target;
-        targetPos = target.position;
+        direction = (target.position - transform.position).normalized;
         this.speed = speed;
+        this.damage = weapon.GetComponent<Weapon>().damage;
         shot = true;
 
         Quaternion rot = Quaternion.LookRotation(Vector3.forward, target.position - transform.position);
@@ -30,9 +33,9 @@ public class FireProjectile : MonoBehaviour
     {
         if (!shot) return;
 
-        if(target == null)      // ako je target unisten/ubijen u medjuvremenu
+        if(homing && (target == null || weapon == null))      // ako je target unisten/ubijen u medjuvremenu
         {
-            Destroy(gameObject);
+            homing = false;
             return;
         }
 
@@ -45,43 +48,36 @@ public class FireProjectile : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed * Time.deltaTime);
         }
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (weapon == null)
-        {                                                 // ako je pucac u toku leta njegovog projektila umro
-            Destroy(gameObject);
-            return;
-        }
-
-        if (other.gameObject == weapon.parent.gameObject)                   // ako je projektil pogodio pucaca
-            return;
-
-        if (LayerMask.LayerToName(other.gameObject.layer).Equals("Foreground"))
+        if (weapon != null && other.gameObject == weapon.parent.gameObject)                   // ako je projektil pogodio pucaca
             return;
 
         AttackingCharacter character = other.GetComponent<AttackingCharacter>();
 
         if (other.transform == target && character != null)                                      // ako je pogodio metu
         {
-            character.TakeDamage(weapon.GetComponent<Weapon>().damage, (other.transform.position - transform.position).normalized);
+            character.TakeDamage(damage, (other.transform.position - transform.position).normalized);
             shot = false;
             Destroy(gameObject);
-        }else if(character != null && character.type == weapon.parent.GetComponent<AttackingCharacter>().type)  // ako je pogodio karaktera istog tipa
+
+            return;
+        }
+
+        if (character != null && weapon != null && character.type == weapon.parent.GetComponent<AttackingCharacter>().type)  // ako je pogodio karaktera istog tipa
         {
             return;
         }
-        else if(other.gameObject.GetComponent<FireProjectile>() != null)    // ako je pogodio drugi projektil
+
+        /*if(other.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
         {
-            return;
-        }else
-        {
-            //Destroy(gameObject);
-        }
+            Destroy(gameObject);
+        }*/
 
     }
 }
