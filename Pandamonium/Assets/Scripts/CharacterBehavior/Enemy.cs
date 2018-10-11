@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Enemy : AttackingCharacter {
 
     private Transform player;
-    public float visionRadius;
+    
     private bool spottedPlayer = false;
 
     private Image healthBar;
@@ -24,6 +24,7 @@ public class Enemy : AttackingCharacter {
 
     protected override void Update()
     {
+        /*
         if (CanSee(player, visionRadius)) { 
             base.Attack(player);
             spottedPlayer = true;
@@ -36,7 +37,7 @@ public class Enemy : AttackingCharacter {
                 base.StopAttacking();
                 base.Attack(player);
             }
-        }
+        }*/
 
         base.Update();
 

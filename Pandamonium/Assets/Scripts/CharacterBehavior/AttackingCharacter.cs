@@ -10,9 +10,18 @@ public class AttackingCharacter : MonoBehaviour {
 
     public float maxHealth = 25;
 
+    public enum CharacterType { PLAYER, ENEMY }
+    public CharacterType type;
+
+    public float visionRadius;
+
+    public CharacterVision vision;
+
+    public float dashSpeed = 12;
+
     protected Transform target = null;                                          // 2D objekat koji igrac napada/prati
 
-    protected enum PlayerState { IDLE, CHASING_ENEMY, ATTACKING, WALKING }                     
+    protected enum PlayerState { IDLE, CHASING_ENEMY, ATTACKING, WALKING, DASHING }                     
     
     protected PlayerState playerState = PlayerState.IDLE;                       // trenutno stanje igraca
 
@@ -25,11 +34,11 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected AIPath path;
 
-    public enum CharacterType { PLAYER, ENEMY }
-    public CharacterType type;
+    protected float normalSpeed = 6;
 
     public virtual void Awake()
     {
+
         CM = GetComponent<CharacterMovement>();
 
         health = maxHealth;
@@ -38,15 +47,21 @@ public class AttackingCharacter : MonoBehaviour {
 
     public virtual void Start()
     {
-        //ignoreMask = ~((1 << LayerMask.NameToLayer("Projectile")) | (1 << LayerMask.NameToLayer("Foreground")));
+
         ignoreMask = (1 << LayerMask.NameToLayer("Obstacles")) | (1 << LayerMask.NameToLayer("Characters"));
-        //ignoreMask = 0;
+
         colFilter.useLayerMask = true;
         colFilter.SetLayerMask(ignoreMask);
+
+        if(vision == null)
+            vision = transform.Find("Vision").GetComponent<CharacterVision>();
+
+        normalSpeed = path.maxSpeed;
     }
 
     public void StopAttacking()
     {
+
         target = null;
         playerState = PlayerState.IDLE;
         equippedWeapon.Stop();
@@ -54,21 +69,22 @@ public class AttackingCharacter : MonoBehaviour {
 
     public void Attack(Transform target)
     {
-        if (this.target == null || !this.target.Equals(target))                     // ako je target razlicit od trenutnog
-        {
 
-            this.target = target;
+        if (this.target != null && this.target.Equals(target))                     // ako je target razlicit od trenutnog
+            return;
 
-            CM.MoveToPosition(target.position);
+        this.target = target;
+        CM.MoveToPosition(target.position);
 
-            playerState = PlayerState.CHASING_ENEMY;
-
-            equippedWeapon.Stop();
-        }
+        playerState = PlayerState.CHASING_ENEMY;
+        equippedWeapon.Stop();
     }
 
-    protected bool CanSee(Transform target, float range = Mathf.Infinity)
+    public bool CanSee(Transform target, float range = Mathf.Infinity)
     {
+
+        if (range == Mathf.Infinity && !equippedWeapon.IsInRange(target))
+            return false;
 
         Vector3 startCast = transform.position;
         Vector3 endCast = target.position;
@@ -76,8 +92,6 @@ public class AttackingCharacter : MonoBehaviour {
         Debug.DrawRay(startCast, endCast - startCast);
 
         RaycastHit2D[] results = new RaycastHit2D[6];
-
-
 
         for (int i = 0; i < Physics2D.CircleCast(startCast, 0.1f, (endCast - startCast).normalized, colFilter, results, range); i++) // ako mu je protivnik vidljiv (od zidova/prepreka)
         {
@@ -105,29 +119,34 @@ public class AttackingCharacter : MonoBehaviour {
     {
         switch (playerState)
         {
-            case PlayerState.CHASING_ENEMY:                                 // ako trenutno juri protivnika
+            case PlayerState.CHASING_ENEMY:                                     // ako trenutno juri protivnika
                 {
 
-                    if (CanSee(target, (equippedWeapon.range == 0 ? 1.5f : equippedWeapon.range))) {
+                    if (target == null)                                         // ako je protivnik mrtav
+                    {
+                        StopAttacking();
 
-                        
-                        equippedWeapon.StartAttacking(target);              // krece da napada oruzjem
+                        break;
+                    }
+
+                    if (CanSee(target)) {
+
+                        equippedWeapon.StartAttacking(target);                  // krece da napada oruzjem
                         playerState = PlayerState.ATTACKING;
 
-                        CM.StopMoving();
-                                
+                        CM.StopMoving();     
                     }
                     else
                     {
-                        if (!path.destination.Equals(target.position))       // ako se protivnik u medjuvremenu pomerio
+                        if (!path.destination.Equals(target.position))          // ako se protivnik u medjuvremenu pomerio
                         {
                             CM.MoveToPosition(target.position);
-
                         }
                     }
 
                     break;
                 }
+
             case PlayerState.ATTACKING:
                 {
 
@@ -138,13 +157,53 @@ public class AttackingCharacter : MonoBehaviour {
                         break;
                     }
 
-                    // ako mu je protivnik nestao iz weapon range-a
-                    
-                    if (!CanSee(target, (equippedWeapon.range == 0 ? 1.5f : equippedWeapon.range))) {
+                    if (!CanSee(target)) {                                      // ako mu je protivnik nestao iz weapon range-a
 
                         Transform tempTarget = target;
                         StopAttacking();
                         Attack(tempTarget);
+                    }
+
+                    break;
+                }
+
+            case PlayerState.WALKING:
+                {
+
+                    if (!path.pathPending && (path.reachedEndOfPath || !path.hasPath))      // ako je stigao do destinacije
+                    {
+
+                        playerState = PlayerState.IDLE;
+
+                    }
+
+                    break;
+                }
+
+            case PlayerState.DASHING:
+                {
+
+                    if (!path.pathPending && (path.reachedEndOfPath || !path.hasPath))      // ako je stigao do destinacije
+                    {
+
+                        playerState = PlayerState.IDLE;
+                        path.maxSpeed = normalSpeed;
+                    }
+
+                    break;
+                }
+
+            case PlayerState.IDLE:
+                {
+                    Player pl;
+                    if ((pl = GetComponent<Player>()) && pl.oneClick)       // da ne bi doslo do utrkivanja DASH-a i ATTACK-a
+                        break;
+
+                    Transform closest;
+
+                    if(closest = vision.GetClosest())
+                    {
+                        Attack(closest);
                     }
 
                     break;

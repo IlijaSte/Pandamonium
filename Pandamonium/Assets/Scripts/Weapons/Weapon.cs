@@ -31,7 +31,7 @@ public abstract class Weapon : MonoBehaviour {
 
     virtual public void Update()
     {
-        if (attacking)
+        if (attacking && target != null)
         {
             timeToAttack -= speed * Time.deltaTime;
 
@@ -45,35 +45,50 @@ public abstract class Weapon : MonoBehaviour {
 
     protected abstract void Attack();
 
+    public bool IsInRange(Transform character)
+    {
+        if (enemiesInRange.Contains(character))
+        {
+            if(character == null)
+            {
+                enemiesInRange.Remove(character);
+                return false;
+            }
+
+            return true;
+        }
+        return false;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Enemy enemy = collision.GetComponent<Enemy>();
+        AttackingCharacter enemy = collision.GetComponent<AttackingCharacter>();
 
         if (enemy)
         {
-            enemiesInRange.Add(enemy);
+            enemiesInRange.Add(collision.transform);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
 
-        Enemy enemy = collision.GetComponent<Enemy>();
+        AttackingCharacter enemy = collision.GetComponent<AttackingCharacter>();
 
         if (enemy)
         {
-            enemiesInRange.Remove(enemy);
+            enemiesInRange.Remove(collision.transform);
         }
 
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Enemy enemy = collision.GetComponent<Enemy>();
+        AttackingCharacter enemy = collision.GetComponent<AttackingCharacter>();
 
-        if (enemy && !enemiesInRange.Contains(enemy))
+        if (enemy && !enemiesInRange.Contains(collision.transform))
         {
-            enemiesInRange.Add(enemy);
+            enemiesInRange.Add(collision.transform);
         }
     }
 
