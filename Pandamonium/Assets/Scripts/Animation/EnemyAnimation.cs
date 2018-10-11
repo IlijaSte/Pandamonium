@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class PlayerAnimation : MonoBehaviour
-{
+public class EnemyAnimation : MonoBehaviour {
 
     
     private Animator animator;
@@ -24,47 +23,33 @@ public class PlayerAnimation : MonoBehaviour
     {
         
     }
-    void Update ()
-    {
+    void Update () {
 
         Vector3 vector3D = path.velocity;
         Vector2 vector2D = new Vector2(vector3D.x, vector3D.y);
 
         //float angle = Vector3.Angle(vectorDirection, new Vector3(0 ,1,0));
-        print(vector3D);
-        if (vector2D.Equals(Vector2.zero))
+        print(vector2D);
+       
+        if (vector2D.y < 0)
         {
-            //animator.SetLayerWeight(0, 0);
-            animator.SetLayerWeight(1, 0);
-            print("prvi:");
-            print(angle);
-        }
-        else 
-        {
-          // animator.SetLayerWeight(0, 1);
-           
-            // animator.SetFloat("Angle", angle);
-            animator.SetLayerWeight(1, 1);
-
-            if (vector2D.y < 0)
-            {
                 angle = 180 + 180 - Vector2.Angle(vector2D, new Vector2(1, 0));
-            }
+        }
 
-            else
+        else
                 angle = Vector2.Angle(vector2D, new Vector2(1, 0));
 
-            print("drugi:");
-            print(angle);
-            animator.SetFloat("Angle", angle);
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if ((angle > 0 && angle < 90) || (angle > 270 && angle < 360))
+        {
+
+            sr.flipY = true;
 
         }
+        else sr.flipY = false;
+ 
 
-        // print(angle);
-
-        // print(angle);
-
-
+     
 
     }
 }
