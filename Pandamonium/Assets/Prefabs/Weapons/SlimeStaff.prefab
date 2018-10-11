@@ -55,7 +55,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.38
+  m_Radius: 3
 --- !u!114 &114507534667611298
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,5 +70,5 @@ MonoBehaviour:
   damage: 5
   speed: 1
   range: 5
-  projectileSpeed: 5
+  projectileSpeed: 6
   firePrefab: {fileID: 1714793588657250, guid: 3661731ec6bccf5478d07ac6ec8ba79f, type: 2}

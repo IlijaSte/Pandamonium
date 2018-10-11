@@ -28,11 +28,13 @@ public class PlayerAnimation : MonoBehaviour
     {
 
         Vector3 vector3D = path.velocity;
+     
         Vector2 vector2D = new Vector2(vector3D.x, vector3D.y);
 
         //float angle = Vector3.Angle(vectorDirection, new Vector3(0 ,1,0));
         print(vector3D);
-        if (vector2D.Equals(Vector2.zero))
+      
+        if (Mathf.Approximately(vector2D.x,Vector2.zero.x) && Mathf.Approximately(vector2D.y, Vector2.zero.y))
         {
             //animator.SetLayerWeight(0, 0);
             animator.SetLayerWeight(1, 0);
