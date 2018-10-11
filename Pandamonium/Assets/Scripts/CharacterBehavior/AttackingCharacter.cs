@@ -36,6 +36,8 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected float normalSpeed = 6;
 
+    protected float maxDashRange = 3;
+
     public virtual void Awake()
     {
 
@@ -129,7 +131,15 @@ public class AttackingCharacter : MonoBehaviour {
     protected void Dash(Vector3 to)
     {
         StopAttacking();
+
         MoveToPosition(to);
+
+        if (path.remainingDistance > maxDashRange)
+        {
+            
+            MoveToPosition(transform.position + (to - transform.position).normalized * maxDashRange);
+        }
+
         playerState = PlayerState.DASHING;
         path.maxSpeed = dashSpeed;
     }

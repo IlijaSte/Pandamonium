@@ -67,8 +67,8 @@ public class Player : AttackingCharacter {
                         {
                             
                             oneClick = false;
-                            // DASH
 
+                            // DASH
                             Dash(hit.point);
                         }
                     }

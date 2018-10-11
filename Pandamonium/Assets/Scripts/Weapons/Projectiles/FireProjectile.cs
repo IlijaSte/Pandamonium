@@ -74,10 +74,10 @@ public class FireProjectile : MonoBehaviour
             return;
         }
 
-        /*if(other.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
+        if(other.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
         {
             Destroy(gameObject);
-        }*/
+        }
 
     }
 }
