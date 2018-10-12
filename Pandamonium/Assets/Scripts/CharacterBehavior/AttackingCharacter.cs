@@ -121,9 +121,8 @@ public class AttackingCharacter : MonoBehaviour {
 
     public void MoveToPosition(Vector3 pos)
     {
-        CM.MoveToPosition(new Vector3(pos.x, pos.y, transform.position.z));
-
         playerState = PlayerState.WALKING;
+        CM.MoveToPosition(new Vector3(pos.x, pos.y, transform.position.z));
 
         target = null;
 
@@ -134,26 +133,38 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected IEnumerator Dash(Vector3 to)
     {
+        if (playerState == PlayerState.DASHING)
+            yield return null;
+
         StopAttacking();
 
         stopDashingAt = 0;
+
         MoveToPosition(to);
 
-        yield return new WaitForSeconds(path.repathRate);
-        yield return seeker.GetCurrentPath().WaitForPath();
+        while (path.pathPending)
+            yield return new WaitForEndOfFrame();
+
+        if (playerState != PlayerState.WALKING)        // ako je u medjuvremenu stigao do destinacije
+            yield return null;
+
+        playerState = PlayerState.DASHING;
 
         if (path.remainingDistance > maxDashRange)
         {
             stopDashingAt = path.remainingDistance - maxDashRange;
-            //MoveToPosition(transform.position + (to - transform.position).normalized * maxDashRange);   // !!!
         }
 
-        playerState = PlayerState.DASHING;
         path.maxSpeed = dashSpeed;
+        yield return null;
     }
 
     protected virtual void Update()
     {
+
+        if (type == CharacterType.PLAYER)
+            print(playerState.ToString());
+
         switch (playerState)
         {
             case PlayerState.CHASING_ENEMY:                                     // ako trenutno juri protivnika
@@ -220,10 +231,15 @@ public class AttackingCharacter : MonoBehaviour {
             case PlayerState.DASHING:
                 {
 
-                    if ((stopDashingAt == 0 && !path.pathPending && (path.reachedEndOfPath || !path.hasPath)) || (stopDashingAt > 0 && path.remainingDistance < stopDashingAt))      // ako je stigao do destinacije
+                    if (stopDashingAt == 0 && path.reachedEndOfPath)      // ako je stigao do destinacije
                     {
 
                         playerState = PlayerState.IDLE;
+                        path.maxSpeed = normalSpeed;
+
+                    }else if (stopDashingAt > 0 && path.remainingDistance < stopDashingAt)
+                    {
+                        playerState = PlayerState.WALKING;
                         path.maxSpeed = normalSpeed;
                     }
 
@@ -264,14 +280,11 @@ public class AttackingCharacter : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        AttackingCharacter attChar;
+        AttackingCharacter attChar = collision.gameObject.GetComponent<AttackingCharacter>();
 
-        if(playerState == PlayerState.DASHING && (attChar = collision.gameObject.GetComponent<AttackingCharacter>()).type != type)
+        if(playerState == PlayerState.DASHING && attChar && attChar.type != type)
         {
             attChar.TakeDamage(equippedWeapon.damage, Vector3.zero);
-        }else if(collision.gameObject.layer == LayerMask.NameToLayer("Hazardous"))
-        {
-
         }
     }
 

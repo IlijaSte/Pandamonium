@@ -18,6 +18,8 @@ public class BoardCreator : MonoBehaviour
     public IntRange numRooms = new IntRange(15, 20);         // The range of the number of rooms there can be.
     public IntRange roomWidth = new IntRange(3, 10);         // The range of widths rooms can have.
     public IntRange roomHeight = new IntRange(3, 10);        // The range of heights rooms can have.
+    public IntRange bossRoomWidth = new IntRange(10, 15);
+    public IntRange bossRoomHeight = new IntRange(10, 15);
     public IntRange corridorLength = new IntRange(6, 10);    // The range of lengths corridors between rooms can have.
 
     public IntRange numEnemies = new IntRange(3, 6);
@@ -29,6 +31,7 @@ public class BoardCreator : MonoBehaviour
 
     private TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
     private Room[] rooms;                                     // All the rooms that are created for this board.
+    private Room bossRoom;
     private Corridor[] corridors;                             // All the corridors that connect the rooms.
     private GameObject boardHolder;                           // GameObject that acts as a container for all other tiles.
 
@@ -36,6 +39,7 @@ public class BoardCreator : MonoBehaviour
     public Tilemap obstacleTilemap;
 
     public GameObject enemyPrefab;
+    public GameObject bossPrefab;
 
     public World3DGenerator generator;
 
@@ -75,6 +79,14 @@ public class BoardCreator : MonoBehaviour
         }
     }
 
+    void InstantiateBoss()
+    {
+        int roomIndex = rooms.Length - 1;
+        Vector3 bossPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth), rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight), player.transform.position.z);
+
+        Instantiate(bossPrefab, bossPos, player.transform.rotation, GameObject.FindGameObjectWithTag("2DWorld").transform);
+    }
+
     IEnumerator Start()
     {
 
@@ -84,6 +96,8 @@ public class BoardCreator : MonoBehaviour
         InstantiatePlayer();
 
         InstantiateEnemies();
+
+        InstantiateBoss();
     }
 
     void SetupTilesArray()
@@ -120,6 +134,14 @@ public class BoardCreator : MonoBehaviour
 
         for (int i = 1; i < rooms.Length; i++)
         {
+
+            if(i == rooms.Length - 1)
+            {
+                rooms[i] = bossRoom = new Room();
+                bossRoom.SetupRoom(bossRoomWidth, bossRoomHeight, columns, rows, corridors[i - 1]);
+                break;
+            }
+
             // Create a room.
             rooms[i] = new Room();
 
@@ -136,6 +158,8 @@ public class BoardCreator : MonoBehaviour
                 corridors[i].SetupCorridor(rooms[i], corridorLength, roomWidth, roomHeight, columns, rows, false);
             }
         }
+
+
     }
 
 

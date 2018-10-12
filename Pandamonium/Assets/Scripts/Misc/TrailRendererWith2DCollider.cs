@@ -113,17 +113,22 @@ public class TrailRendererWith2DCollider : MonoBehaviour
                 SetMesh();
             }
 
-            if(Trail.numOfTrails > 0)
+            DamagePlayer();
+
+        }
+    }
+
+    private void DamagePlayer()
+    {
+        if (Trail.numOfTrails > 0)
+        {
+            Trail.timeToDamage -= Time.deltaTime * damageSpeed;
+
+            if (Trail.timeToDamage <= 0)
             {
-                Trail.timeToDamage -= Time.deltaTime * damageSpeed;
-
-                if (Trail.timeToDamage <= 0)
-                {
-                    Trail.player.TakeDamage(damage, Vector3.zero);
-                    Trail.timeToDamage = 1;
-                }
+                Trail.player.TakeDamage(damage, Vector3.zero);
+                Trail.timeToDamage = 1;
             }
-
         }
     }
 

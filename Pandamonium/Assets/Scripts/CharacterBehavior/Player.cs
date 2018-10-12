@@ -14,7 +14,7 @@ public class Player : AttackingCharacter {
 
     private float doubleClickTimer = 0;
     private float doubleClickDelay = 0.5f;
-    private float maxClickDistance = 1f;
+    private float maxClickDistance = 2f;
     private Vector3 firstClickPos;
 
     public override void Start()

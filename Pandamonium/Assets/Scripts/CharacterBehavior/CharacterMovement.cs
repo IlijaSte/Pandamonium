@@ -18,6 +18,7 @@ public class CharacterMovement : MonoBehaviour {
         path.isStopped = false;
         
         path.destination = targetPosition; // !!!
+        path.SearchPath();
     }
 
     public void StopMoving()
