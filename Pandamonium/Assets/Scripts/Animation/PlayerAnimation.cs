@@ -32,14 +32,11 @@ public class PlayerAnimation : MonoBehaviour
         Vector2 vector2D = new Vector2(vector3D.x, vector3D.y);
 
         //float angle = Vector3.Angle(vectorDirection, new Vector3(0 ,1,0));
-        print(vector3D);
       
         if (Mathf.Approximately(vector2D.x,Vector2.zero.x) && Mathf.Approximately(vector2D.y, Vector2.zero.y))
         {
             //animator.SetLayerWeight(0, 0);
             animator.SetLayerWeight(1, 0);
-            print("prvi:");
-            print(angle);
         }
         else 
         {
@@ -56,8 +53,6 @@ public class PlayerAnimation : MonoBehaviour
             else
                 angle = Vector2.Angle(vector2D, new Vector2(1, 0));
 
-            print("drugi:");
-            print(angle);
             animator.SetFloat("Angle", angle);
 
         }

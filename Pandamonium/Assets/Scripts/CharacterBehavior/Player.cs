@@ -14,7 +14,7 @@ public class Player : AttackingCharacter {
 
     private float doubleClickTimer = 0;
     private float doubleClickDelay = 0.5f;
-    private float maxClickDistance = 0.5f;
+    private float maxClickDistance = 1f;
     private Vector3 firstClickPos;
 
     public override void Start()
@@ -69,7 +69,7 @@ public class Player : AttackingCharacter {
                             oneClick = false;
 
                             // DASH
-                            Dash(hit.point);
+                            StartCoroutine(Dash(hit.point));
                         }
                     }
                 }

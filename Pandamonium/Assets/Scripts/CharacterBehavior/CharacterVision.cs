@@ -5,11 +5,12 @@ using UnityEngine;
 public class CharacterVision : MonoBehaviour {
 
     private ArrayList enemiesInRange = new ArrayList();
-    private AttackingCharacter character;
+    public AttackingCharacter character;
 
     private void Start()
     {
-        character = transform.parent.GetComponent<AttackingCharacter>();
+        if(character == null)
+            character = transform.parent.parent.GetComponent<AttackingCharacter>();
     }
 
     public Transform GetClosest()

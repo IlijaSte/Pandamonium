@@ -6,7 +6,6 @@ public abstract class Weapon : MonoBehaviour {
 
     public float damage;
     public float speed;
-    public float range;
 
     protected bool attacking = false;
     protected float timeToAttack = 1;     // brojac koji se smanjuje u zavisnosti od brzine oruzja, kada dodje do 0 ispali se projektil i vraca se brojac na 1

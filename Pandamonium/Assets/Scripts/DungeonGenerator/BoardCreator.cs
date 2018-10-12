@@ -59,11 +59,8 @@ public class BoardCreator : MonoBehaviour
 
     void InstantiatePlayer()
     {
-        Vector3 playerPos = new Vector3(rooms[rooms.Length / 2].xPos + 1, rooms[rooms.Length / 2].yPos + 1, player.transform.position.z);
-
+        Vector3 playerPos = new Vector3(rooms[0].xPos + 1, rooms[0].yPos + 1, player.transform.position.z);
         player.transform.position = playerPos;
-        //player.GetComponent<CharacterMovement>().target.GetComponent<NavMeshAgent>().updatePosition = false;
-        //player.GetComponent<CharacterMovement>().target.position = playerPos;
     }
 
     void InstantiateEnemies()
