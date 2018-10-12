@@ -13,8 +13,6 @@ public class AttackingCharacter : MonoBehaviour {
     public enum CharacterType { PLAYER, ENEMY }
     public CharacterType type;
 
-    public float visionRadius;
-
     public CharacterVision vision;
 
     public float dashSpeed = 12;
@@ -219,10 +217,8 @@ public class AttackingCharacter : MonoBehaviour {
                 {
 
                     if (!path.pathPending && (path.reachedEndOfPath || !path.hasPath))      // ako je stigao do destinacije
-                    {
-
+                    { 
                         playerState = PlayerState.IDLE;
-
                     }
 
                     break;
@@ -231,7 +227,7 @@ public class AttackingCharacter : MonoBehaviour {
             case PlayerState.DASHING:
                 {
 
-                    if (stopDashingAt == 0 && path.reachedEndOfPath)      // ako je stigao do destinacije
+                    if ((stopDashingAt == 0 && path.reachedEndOfPath) || (Mathf.Approximately(path.velocity.x, 0) && Mathf.Approximately(path.velocity.y, 0)))      // ako je stigao do destinacije
                     {
 
                         playerState = PlayerState.IDLE;

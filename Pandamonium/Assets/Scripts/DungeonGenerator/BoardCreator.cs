@@ -82,7 +82,7 @@ public class BoardCreator : MonoBehaviour
     void InstantiateBoss()
     {
         int roomIndex = rooms.Length - 1;
-        Vector3 bossPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth), rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight), player.transform.position.z);
+        Vector3 bossPos = new Vector3(rooms[roomIndex].xPos + rooms[roomIndex].roomWidth / 2, rooms[roomIndex].yPos + 2 * rooms[roomIndex].roomHeight / 3, player.transform.position.z);
 
         Instantiate(bossPrefab, bossPos, player.transform.rotation, GameObject.FindGameObjectWithTag("2DWorld").transform);
     }
