@@ -5,7 +5,7 @@ using UnityEngine.UI;
 // osnovno ponasanje neprijatelja (vision, kretanje, napad)
 public class Enemy : AttackingCharacter {
 
-    private Transform player;
+    protected Transform player;
     
     private bool spottedPlayer = false;
 

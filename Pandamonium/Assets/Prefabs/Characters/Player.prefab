@@ -232,7 +232,7 @@ Transform:
   m_GameObject: {fileID: 1399127699427452}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 1}
+  m_LocalScale: {x: 50, y: 50, z: 1}
   m_Children: []
   m_Father: {fileID: 4469015658312258}
   m_RootOrder: 3
@@ -417,7 +417,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.19}
+  m_Offset: {x: 0, y: 0.58018756}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -428,7 +428,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.75}
+  m_Size: {x: 1, y: 1.3284612}
   m_EdgeRadius: 0
 --- !u!95 &95708470939643792
 Animator:
@@ -462,9 +462,8 @@ MonoBehaviour:
   equippedWeapon: {fileID: 114679024940451080}
   maxHealth: 100
   type: 0
-  visionRadius: 5
   vision: {fileID: 114774126793390590}
-  dashSpeed: 12
+  dashSpeed: 16
   healthBar: {fileID: 0}
   oneClick: 0
 --- !u!114 &114251660100248234
@@ -517,7 +516,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   speed: 1
-  range: 0
 --- !u!114 &114649143069366310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -542,7 +540,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   speed: 2
-  range: 5
   projectileSpeed: 5
   firePrefab: {fileID: 1714793588657250, guid: 66803ba921559a94598a106ff2efb6db, type: 2}
 --- !u!114 &114774126793390590
@@ -586,7 +583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 2
-  repathRate: 0.1
+  repathRate: 1
   canSearch: 1
   canMove: 1
   maxSpeed: 6

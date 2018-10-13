@@ -500,7 +500,6 @@ MonoBehaviour:
   equippedWeapon: {fileID: 114032032825087448}
   maxHealth: 25
   type: 1
-  visionRadius: 10
   vision: {fileID: 114214034657156396}
   dashSpeed: 12
 --- !u!114 &114121749672228834
@@ -636,11 +635,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trailMaterial: {fileID: 2100000, guid: 913c0fcf65f27064689aefcf2953e55d, type: 2}
-  lifeTime: 10
+  lifeTime: 15
   changeTime: 0.5
   widthStart: 0.2
   widthEnd: 0.75
-  vertexDistanceMin: 0.1
+  vertexDistanceMin: 0.5
   renderDirection: {x: 0, y: 0, z: -1}
   colliderIsTrigger: 1
   colliderEnabled: 1

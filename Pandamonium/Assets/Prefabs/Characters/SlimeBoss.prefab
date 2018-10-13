@@ -120,6 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4752374077479302}
   - component: {fileID: 114395185152457084}
+  - component: {fileID: 58033930907810830}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -170,7 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4693524041302680}
   - component: {fileID: 114121924634983892}
-  - component: {fileID: 114486423374715390}
+  - component: {fileID: 114020503871049822}
   - component: {fileID: 114295290870350862}
   - component: {fileID: 114718712080257254}
   - component: {fileID: 61725077377612850}
@@ -351,6 +352,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &58033930907810830
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1522119192533506}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.3
 --- !u!58 &58361438570844842
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -439,6 +455,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114020503871049822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1944221328380284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 807ccd33965a51d4c86ad655f9ff34bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equippedWeapon: {fileID: 114395185152457084}
+  maxHealth: 100
+  type: 1
+  vision: {fileID: 114184462561219684}
+  dashSpeed: 12
+  enemySpawnInterval: 5
+  spawnRadius: 8
+  enemyPrefab: {fileID: 1628753790980070, guid: 75c84e6b6e1cac542a790e6e97eb2d12,
+    type: 2}
 --- !u!114 &114042523543190344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -489,11 +525,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trailMaterial: {fileID: 2100000, guid: 913c0fcf65f27064689aefcf2953e55d, type: 2}
-  lifeTime: 10
+  lifeTime: 15
   changeTime: 0.5
   widthStart: 1
   widthEnd: 2
-  vertexDistanceMin: 0.1
+  vertexDistanceMin: 1.5
   renderDirection: {x: 0, y: 0, z: -1}
   colliderIsTrigger: 1
   colliderEnabled: 1
@@ -588,23 +624,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114486423374715390
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1944221328380284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 603e05272490c284aa81bb8ae5a45ac0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  equippedWeapon: {fileID: 114042523543190344}
-  maxHealth: 100
-  type: 1
-  visionRadius: 10
-  vision: {fileID: 114184462561219684}
-  dashSpeed: 12
 --- !u!114 &114578568339393790
 MonoBehaviour:
   m_ObjectHideFlags: 1
