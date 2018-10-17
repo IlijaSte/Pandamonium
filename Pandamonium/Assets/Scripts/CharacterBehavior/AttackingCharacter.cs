@@ -160,8 +160,8 @@ public class AttackingCharacter : MonoBehaviour {
     protected virtual void Update()
     {
 
-        if (type == CharacterType.PLAYER)
-            print(playerState.ToString());
+       // if (type == CharacterType.PLAYER)
+         //   print(playerState.ToString());
 
         switch (playerState)
         {

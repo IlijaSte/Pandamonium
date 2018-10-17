@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class EnemyAnimation : MonoBehaviour {
+public class ProjectileAnimation : MonoBehaviour {
 
     
     private Animator animator;
-    private AIPath path;
+    private Vector3 vector3;
     private float angle;
 
     // Use this for initialization
     void Start ()
     {
-        path = transform.parent.GetComponent<AIPath>();
         
+        FireProjectile fireProjectile = GetComponent<FireProjectile>();
+        vector3 = fireProjectile.direction;
+
         animator = GetComponent<Animator>();
    
     }
@@ -26,8 +28,8 @@ public class EnemyAnimation : MonoBehaviour {
     }
     void Update () {
 
-        Vector3 vector3D = path.velocity;
-        Vector2 vector2D = new Vector2(vector3D.x, vector3D.y);
+ 
+        Vector2 vector2D = new Vector2(vector3.x, vector3.y);
 
         //float angle = Vector3.Angle(vectorDirection, new Vector3(0 ,1,0));
         print(vector2D);
@@ -39,10 +41,10 @@ public class EnemyAnimation : MonoBehaviour {
         {
            
             print(angle);
-            sr.flipX = true;
+            sr.flipY = true;
 
         }
-        else sr.flipX = false;
+        else sr.flipY = false;
  
 
      

@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 114431088807961082}
   - component: {fileID: 61588621453622568}
   - component: {fileID: 50296891537417334}
+  - component: {fileID: 114491304606819148}
+  - component: {fileID: 95323817011743432}
   m_Layer: 10
   m_Name: Slimeball
   m_TagString: Untagged
@@ -38,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 1714793588657250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.31, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -79,7 +81,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.75928575, y: 0.67285717}
+    oldSize: {x: 2.0056605, y: 1.7773585}
     newSize: {x: 2.0056605, y: 1.7773585}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -88,6 +90,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.4}
   m_EdgeRadius: 0
+--- !u!95 &95323817011743432
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1714793588657250}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d45e57f1857bfc4e84f7049ba9f5c9d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114431088807961082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,7 +119,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d40deb09e970c94998721abc643ec0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: {x: 0, y: 0, z: 0}
   homing: 0
+--- !u!114 &114491304606819148
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1714793588657250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb2509230ca73e4f9373aa472295ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212324974572592418
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -135,7 +167,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 029a7ea6f7466be4da71cb16239d5520, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a19a2e2db46e6641a12e8fecc6e0eb5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
