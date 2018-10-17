@@ -23,7 +23,7 @@ public class CharacterVision : MonoBehaviour {
         {
             if (tr == null) continue;           // !!!
 
-            if(character.CanSee(tr, GetComponent<CircleCollider2D>().radius / 2))
+            if(character.CanSee(tr, GetComponent<CircleCollider2D>().radius))
             {
                 float tempDistance;
                 if((tempDistance = Vector3.Distance(tr.position, transform.position)) < minDistance)

@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 4555995027009710}
   - component: {fileID: 212933398877342650}
   - component: {fileID: 95701175880768276}
+  - component: {fileID: 114963434698511256}
   m_Layer: 0
   m_Name: EnemySprite
   m_TagString: Untagged
@@ -156,13 +157,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4446852320589226}
   - component: {fileID: 114827865454664310}
-  - component: {fileID: 114093967024719696}
   - component: {fileID: 114733104367778590}
   - component: {fileID: 114079399296506460}
   - component: {fileID: 61133381025590982}
   - component: {fileID: 50176549523694390}
+  - component: {fileID: 114298731515323964}
   m_Layer: 15
-  m_Name: Enemy
+  m_Name: Slime
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -532,32 +533,11 @@ MonoBehaviour:
   rotationSpeed: 0
   slowdownDistance: 0
   pickNextWaypointDist: 1
-  endReachedDistance: 0
+  endReachedDistance: 0.05
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 0
   whenCloseToDestination: 0
   constrainInsideGraph: 1
---- !u!114 &114093967024719696
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1628753790980070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 603e05272490c284aa81bb8ae5a45ac0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 114121749672228834}
-  - {fileID: 114032032825087448}
-  equippedWeaponIndex: 0
-  maxHealth: 25
-  type: 1
-  vision: {fileID: 114214034657156396}
-  dashSpeed: 12
-  healthBar: {fileID: 114791163046767886}
-  nextAttackBar: {fileID: 114631011764471838}
 --- !u!114 &114121749672228834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -584,6 +564,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
+--- !u!114 &114298731515323964
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1628753790980070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0017982b729cb7045a7761d773122e83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 114121749672228834}
+  equippedWeaponIndex: 0
+  maxHealth: 25
+  type: 1
+  vision: {fileID: 114214034657156396}
+  dashSpeed: 8
+  healthBar: {fileID: 114791163046767886}
+  nextAttackBar: {fileID: 114631011764471838}
 --- !u!114 &114542684223825712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -719,7 +719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.6156863}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -767,6 +767,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac617076e84713743b96e978e9d8bdc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114963434698511256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1548557022160412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7633c0a6106636479a7f853a15c14c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114987825729212746
@@ -896,7 +907,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 4.5}
-  m_SizeDelta: {x: 70, y: 6}
+  m_SizeDelta: {x: 70, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224205037855160922
 RectTransform:
@@ -932,7 +943,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 70, y: 6}
+  m_SizeDelta: {x: 70, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224439984083567830
 RectTransform:

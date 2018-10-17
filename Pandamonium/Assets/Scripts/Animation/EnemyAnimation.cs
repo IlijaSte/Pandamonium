@@ -30,7 +30,7 @@ public class EnemyAnimation : MonoBehaviour {
         Vector2 vector2D = new Vector2(vector3D.x, vector3D.y);
 
         //float angle = Vector3.Angle(vectorDirection, new Vector3(0 ,1,0));
-        print(vector2D);
+        //print(vector2D);
 
         angle = Vector2.Angle(vector2D, new Vector2(1, 0));
 
@@ -38,7 +38,7 @@ public class EnemyAnimation : MonoBehaviour {
         if ((angle > 0 && angle < 90))
         {
            
-            print(angle);
+            //print(angle);
             sr.flipX = true;
 
         }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
@@ -19,18 +20,6 @@ public class Enemy : AttackingCharacter {
         healthBar = transform.Find("EnemyCanvas").Find("HealthBarBG").Find("HealthBar").GetComponent<Image>();
 
         type = CharacterType.ENEMY;
-    }
-
-    protected override void Update()
-    {
-        if(!dashed && playerState == PlayerState.CHASING_ENEMY && CanSee(player, maxDashRange))
-        {
-            dashed = true;
-            StartCoroutine(Dash(player.position + (transform.position - player.position).normalized * 1.5f ));
-        }
-
-        base.Update();
-
     }
 
     public override void TakeDamage(float damage, Vector3 dir)

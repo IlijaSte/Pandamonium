@@ -58,7 +58,12 @@ public class BoardCreator : MonoBehaviour
         InstantiateTiles();
         InstantiateOuterWalls();
 
-        generator.Generate();
+        GameObject.FindGameObjectWithTag("3DGround").transform.localScale = new Vector3(columns / 10, 1, rows / 10);
+        GameObject.FindGameObjectWithTag("3DGround").transform.position = new Vector3(columns / 2, rows / 2, 2);
+        Camera.main.GetComponent<CameraMovement>().SetBounds(new Vector2(0, 0), new Vector2(columns, rows));
+
+        generator.Generate(columns, rows);
+
     }
 
     void InstantiatePlayer()
@@ -89,6 +94,9 @@ public class BoardCreator : MonoBehaviour
 
     IEnumerator Start()
     {
+
+        AstarPath.active.data.gridGraph.SetDimensions(columns, rows, 1);
+        AstarPath.active.data.gridGraph.center = new Vector3(columns / 2, rows / 2, 0);
 
         yield return new WaitForEndOfFrame();
         AstarPath.active.Scan();

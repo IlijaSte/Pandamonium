@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour {
 
-    [SerializeField]
     public Vector3 stageLowerLeft;
     public Vector3 stageUpperRight;
+
+    public Transform player;
 
     private float minVisibleX;
     private float maxVisibleX;
     private float minVisibleY;
     private float maxVisibleY;
 
-    public Transform player;
+    private Vector2 lowerLeft;
+    private Vector2 upperRight;
+    float viewportWidth;
+    float viewportHeight;
 
-	// Use this for initialization
-	void Start () {
-        Vector3 LowerLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0));
-        Vector3 UpperRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0));
+    // Use this for initialization
+    void Start () {
+        lowerLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0));
+        upperRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0));
 
-        float viewportWidth = UpperRight.x - LowerLeft.x;
-        float viewportHeight = UpperRight.y - LowerLeft.y;
+        viewportWidth = upperRight.x - lowerLeft.x;
+        viewportHeight = upperRight.y - lowerLeft.y;
 
         minVisibleX = stageLowerLeft.x + viewportWidth / 2f;
         maxVisibleX = stageUpperRight.x - viewportWidth / 2f;
@@ -29,6 +33,17 @@ public class CameraMovement : MonoBehaviour {
         maxVisibleY = stageUpperRight.y - viewportHeight / 2f;
     }
 	
+    public void SetBounds(Vector2 lowerLeft, Vector2 upperRight)
+    {
+        this.stageLowerLeft = lowerLeft;
+        this.stageUpperRight = upperRight;
+
+        minVisibleX = stageLowerLeft.x + viewportWidth / 2f;
+        maxVisibleX = stageUpperRight.x - viewportWidth / 2f;
+        minVisibleY = stageLowerLeft.y + viewportHeight / 2f;
+        maxVisibleY = stageUpperRight.y - viewportHeight / 2f;
+    }
+
 	// Update is called once per frame
 	void Update () {
 

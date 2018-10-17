@@ -43,6 +43,9 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected float maxDashRange = 4;
 
+    protected Transform dashingAt = null;
+    protected float maxRaycastDistance = 50;
+
     public virtual void Awake()
     {
 
@@ -102,6 +105,8 @@ public class AttackingCharacter : MonoBehaviour {
 
         if (range == Mathf.Infinity && !weapons[equippedWeaponIndex].IsInRange(target))
             return false;
+
+        range = maxRaycastDistance;
 
         Vector3 startCast = transform.position;
         Vector3 endCast = target.position;
@@ -172,31 +177,10 @@ public class AttackingCharacter : MonoBehaviour {
         yield return null;
     }
 
-    protected IEnumerator Dash(Transform to)
+    protected IEnumerator Dash(Transform at)
     {
-        if (playerState == PlayerState.DASHING)
-            yield return null;
-
-        StopAttacking();
-
-        stopDashingAt = 0;
-
-        MoveToPosition(to.position);
-
-        while (path.pathPending)
-            yield return new WaitForEndOfFrame();
-
-        if (playerState != PlayerState.WALKING)        // ako je u medjuvremenu stigao do destinacije
-            yield return null;
-
-        playerState = PlayerState.DASHING;
-
-        if (path.remainingDistance > maxDashRange)
-        {
-            stopDashingAt = path.remainingDistance - maxDashRange;
-        }
-
-        path.maxSpeed = dashSpeed;
+        yield return StartCoroutine(Dash(at.position + (transform.position - at.position).normalized * 1.5f));
+        dashingAt = at;
         yield return null;
     }
 
@@ -273,15 +257,38 @@ public class AttackingCharacter : MonoBehaviour {
                     if ((stopDashingAt == 0 && path.reachedEndOfPath) || (Mathf.Approximately(path.velocity.x, 0) && Mathf.Approximately(path.velocity.y, 0)))      // ako je stigao do destinacije
                     {
 
-                        playerState = PlayerState.IDLE;
                         path.maxSpeed = normalSpeed;
 
-                    }else if (stopDashingAt > 0 && path.remainingDistance < stopDashingAt)
-                    {
-                        playerState = PlayerState.WALKING;
-                        path.maxSpeed = normalSpeed;
+                        if (dashingAt)
+                        {
+                            if(weapons[equippedWeaponIndex].IsInRange(dashingAt))
+                                dashingAt.GetComponent<AttackingCharacter>().TakeDamage(weapons[equippedWeaponIndex].damage, Vector3.zero);
+                            Attack(dashingAt);
+                            dashingAt = null;
+                        }
+                        else
+                        {
+                            playerState = PlayerState.IDLE;
+                        }
+
                     }
+                    else if (stopDashingAt > 0 && path.remainingDistance < stopDashingAt)
+                    {
 
+                        
+                        path.maxSpeed = normalSpeed;
+
+                        if (dashingAt)
+                        {
+                            Attack(dashingAt);
+                            dashingAt = null;
+
+                        }
+                        else
+                        {
+                            playerState = PlayerState.WALKING;
+                        }
+                    }
                     break;
                 }
 

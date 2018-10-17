@@ -8,7 +8,7 @@ public class SlimeBoss : Enemy {
     public float spawnRadius = 8;
     public GameObject enemyPrefab;
 
-    private float currInterval = 5;
+    private float currInterval;
     private float visionRadius;
 
     public override void Start()
