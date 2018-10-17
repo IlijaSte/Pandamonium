@@ -172,6 +172,34 @@ public class AttackingCharacter : MonoBehaviour {
         yield return null;
     }
 
+    protected IEnumerator Dash(Transform to)
+    {
+        if (playerState == PlayerState.DASHING)
+            yield return null;
+
+        StopAttacking();
+
+        stopDashingAt = 0;
+
+        MoveToPosition(to);
+
+        while (path.pathPending)
+            yield return new WaitForEndOfFrame();
+
+        if (playerState != PlayerState.WALKING)        // ako je u medjuvremenu stigao do destinacije
+            yield return null;
+
+        playerState = PlayerState.DASHING;
+
+        if (path.remainingDistance > maxDashRange)
+        {
+            stopDashingAt = path.remainingDistance - maxDashRange;
+        }
+
+        path.maxSpeed = dashSpeed;
+        yield return null;
+    }
+
     protected virtual void Update()
     {
 
