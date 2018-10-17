@@ -181,7 +181,7 @@ public class AttackingCharacter : MonoBehaviour {
 
         stopDashingAt = 0;
 
-        MoveToPosition(to);
+        MoveToPosition(to.position);
 
         while (path.pathPending)
             yield return new WaitForEndOfFrame();
