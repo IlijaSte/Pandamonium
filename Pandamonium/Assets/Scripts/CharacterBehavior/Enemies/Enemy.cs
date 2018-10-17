@@ -8,8 +8,7 @@ public class Enemy : AttackingCharacter {
     protected Transform player;
     
     private bool spottedPlayer = false;
-
-    private Image healthBar;
+    protected bool dashed = false;
 
     public override void Start()
     {
@@ -24,20 +23,11 @@ public class Enemy : AttackingCharacter {
 
     protected override void Update()
     {
-        /*
-        if (CanSee(player, visionRadius)) { 
-            base.Attack(player);
-            spottedPlayer = true;
-                
-        }
-        else
+        if(!dashed && playerState == PlayerState.CHASING_ENEMY && CanSee(player, maxDashRange))
         {
-            if (spottedPlayer)
-            {
-                base.StopAttacking();
-                base.Attack(player);
-            }
-        }*/
+            dashed = true;
+            StartCoroutine(Dash(player.position + (transform.position - player.position).normalized * 1.5f ));
+        }
 
         base.Update();
 

@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.UI;
 using Pathfinding;
 
 public class AttackingCharacter : MonoBehaviour {
 
-    public Weapon equippedWeapon;                                               // opremljeno oruzje igraca
+    public Weapon[] weapons;
+    public int equippedWeaponIndex;                                               // opremljeno oruzje igraca
 
     public float maxHealth = 25;
 
@@ -16,6 +17,11 @@ public class AttackingCharacter : MonoBehaviour {
     public CharacterVision vision;
 
     public float dashSpeed = 12;
+
+    public Image healthBar;
+    public Image nextAttackBar;
+
+    protected GameObject nextAttackBG;
 
     protected Transform target = null;                                          // 2D objekat koji igrac napada/prati
 
@@ -59,6 +65,8 @@ public class AttackingCharacter : MonoBehaviour {
             vision = transform.Find("Vision").GetComponent<CharacterVision>();
 
         normalSpeed = path.maxSpeed;
+
+        nextAttackBG = nextAttackBar.transform.parent.gameObject;
     }
 
     public void StopAttacking()
@@ -66,7 +74,7 @@ public class AttackingCharacter : MonoBehaviour {
 
         target = null;
         playerState = PlayerState.IDLE;
-        equippedWeapon.Stop();
+        weapons[equippedWeaponIndex].Stop();
     }
 
     public void Attack(Transform target)
@@ -79,13 +87,20 @@ public class AttackingCharacter : MonoBehaviour {
         CM.MoveToPosition(target.position);
 
         playerState = PlayerState.CHASING_ENEMY;
-        equippedWeapon.Stop();
+        weapons[equippedWeaponIndex].Stop();
+    }
+
+    public void ChangeWeapon()
+    {
+        weapons[equippedWeaponIndex].gameObject.SetActive(false);
+        equippedWeaponIndex = (equippedWeaponIndex + 1) % weapons.Length;
+        weapons[equippedWeaponIndex].gameObject.SetActive(true);
     }
 
     public bool CanSee(Transform target, float range = Mathf.Infinity)
     {
 
-        if (range == Mathf.Infinity && !equippedWeapon.IsInRange(target))
+        if (range == Mathf.Infinity && !weapons[equippedWeaponIndex].IsInRange(target))
             return false;
 
         Vector3 startCast = transform.position;
@@ -124,7 +139,7 @@ public class AttackingCharacter : MonoBehaviour {
 
         target = null;
 
-        equippedWeapon.Stop();
+        weapons[equippedWeaponIndex].Stop();
     }
 
     private float stopDashingAt;
@@ -177,7 +192,7 @@ public class AttackingCharacter : MonoBehaviour {
 
                     if (CanSee(target)) {
 
-                        equippedWeapon.StartAttacking(target);                  // krece da napada oruzjem
+                        weapons[equippedWeaponIndex].StartAttacking(target);                  // krece da napada oruzjem
                         playerState = PlayerState.ATTACKING;
 
                         CM.StopMoving();     
@@ -258,6 +273,17 @@ public class AttackingCharacter : MonoBehaviour {
                     break;
                 }
         }
+
+        nextAttackBar.fillAmount = 1 - weapons[equippedWeaponIndex].timeToAttack;
+
+        if (weapons[equippedWeaponIndex].timeToAttack == 1)
+        {
+            nextAttackBG.SetActive(false);
+        }
+        else
+        {
+            nextAttackBG.SetActive(true);
+        }
     }
 
     public virtual void TakeDamage(float damage, Vector3 dir)
@@ -280,7 +306,7 @@ public class AttackingCharacter : MonoBehaviour {
 
         if(playerState == PlayerState.DASHING && attChar && attChar.type != type)
         {
-            attChar.TakeDamage(equippedWeapon.damage, Vector3.zero);
+            attChar.TakeDamage(weapons[equippedWeaponIndex].damage, Vector3.zero);
         }
     }
 

@@ -7,8 +7,6 @@ using Pathfinding;
 // ponasanje igraca (kretanje, napad, ...)
 public class Player : AttackingCharacter {
 
-    public Image healthBar;
-
     [HideInInspector]
     public bool oneClick = false;
 
@@ -17,16 +15,25 @@ public class Player : AttackingCharacter {
     private float maxClickDistance = 2f;
     private Vector3 firstClickPos;
 
+    private bool clicked = false;
+
     public override void Start()
     {
         type = CharacterType.PLAYER;
+
+        foreach(Weapon weapon in weapons)
+        {
+            if (weapon != weapons[equippedWeaponIndex])
+                weapon.gameObject.SetActive(false);
+        }
+
         base.Start();
     }
 
     // Update is called once per frame
     protected override void Update () {
 
-        if (playerState != PlayerState.DASHING && Input.GetMouseButtonDown(0))
+        if (playerState != PlayerState.DASHING && Input.GetMouseButton(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
         {
             
             RaycastHit2D hit2D;
@@ -56,14 +63,14 @@ public class Player : AttackingCharacter {
                     if (hit.collider.CompareTag("3DGround"))                    // ako je korisnik kliknuo na zemlju, igrac krece ka toj poziciji
                     {
 
-                        if (!oneClick)
+                        if ((!clicked && !oneClick) || clicked)
                         {
                             oneClick = true;
                             doubleClickTimer = Time.time;
                             firstClickPos = hit.point;
                             MoveToPosition(hit.point);
                         }
-                        else if(Vector3.Distance(hit.point, firstClickPos) <= maxClickDistance)
+                        else if(!clicked && oneClick && Vector3.Distance(hit.point, firstClickPos) <= maxClickDistance)
                         {
                             
                             oneClick = false;
@@ -78,6 +85,14 @@ public class Player : AttackingCharacter {
             {
                 oneClick = false;
             }
+
+            clicked = true;
+
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            clicked = false;
         }
 
         if(Time.time - doubleClickTimer > doubleClickDelay)
