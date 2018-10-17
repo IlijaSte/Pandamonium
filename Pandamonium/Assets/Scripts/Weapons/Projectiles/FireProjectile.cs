@@ -12,7 +12,7 @@ public class FireProjectile : MonoBehaviour
     private float damage;
 
     private bool shot = false;
-    private Vector3 direction;
+    public Vector3 direction;
 
     public bool homing = false;
 
@@ -80,4 +80,5 @@ public class FireProjectile : MonoBehaviour
         }
 
     }
+    
 }
