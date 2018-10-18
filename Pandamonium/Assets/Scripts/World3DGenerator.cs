@@ -12,10 +12,7 @@ public class World3DGenerator : MonoBehaviour {
     public Transform walls;
     public GameObject wallColliderPrefab;
 
-    public int scanRangeX;
-    public int scanRangeY;
-
-    public void Generate()
+    public void Generate(int scanRangeX, int scanRangeY)
     {
         for (int i = -scanRangeX; i <= scanRangeX; i++)
         {
@@ -25,7 +22,7 @@ public class World3DGenerator : MonoBehaviour {
 
                 if (obstacleTilemap.GetTile(new Vector3Int(i, j, 0)))
                 {
-                    Instantiate(wallColliderPrefab, new Vector3(i + 0.5f, j + 0.5f, walls.position.z), wallColliderPrefab.transform.rotation, walls);
+                    //Instantiate(wallColliderPrefab, new Vector3(i + 0.5f, j + 0.5f, walls.position.z), wallColliderPrefab.transform.rotation, walls);
                 }
 
                 Tilemap foregroundTilemap;
