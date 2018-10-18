@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 224865180809954970}
   - component: {fileID: 61445074996459182}
   - component: {fileID: 114900167988916730}
-  - component: {fileID: 114308803769212806}
   m_Layer: 5
   m_Name: TutorialCollider
   m_TagString: Untagged
@@ -54,18 +53,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114308803769212806
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1783774089178334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 762dfb05dc67252419bb210451f1118c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialButtons: {fileID: 0}
 --- !u!114 &114900167988916730
 MonoBehaviour:
   m_ObjectHideFlags: 1

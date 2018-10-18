@@ -81,7 +81,7 @@ public class BoardCreator : MonoBehaviour
 
     void InstantiateTutorialEnemies()
     {
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < rooms.Length; i++)
         {
             for(int j = 0; j < i; j ++)
             {

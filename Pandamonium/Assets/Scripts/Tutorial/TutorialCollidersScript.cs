@@ -18,12 +18,28 @@ public class TutorialCollidersScript : MonoBehaviour {
     {
         if( collision.transform.parent == GameObject.FindGameObjectWithTag("Player").transform)
         {
-
+            print("usao");
             GameManager gameManager = GameManager.I;
 
             //  gameManager.PauseForTutorial(colliderID);
 
             TutorialManager tutorialManager = GameObject.FindObjectOfType<TutorialManager>();
+            tutorialManager.PauseForTutorial(colliderID);
+
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.transform.parent == GameObject.FindGameObjectWithTag("Player").transform)
+        {
+            print("izasao");
+            GameManager gameManager = GameManager.I;
+
+            //  gameManager.PauseForTutorial(colliderID);
+
+            TutorialManager tutorialManager = GameObject.FindObjectOfType<TutorialManager>();
+            tutorialManager.CloseTutorial(colliderID);
 
         }
     }
