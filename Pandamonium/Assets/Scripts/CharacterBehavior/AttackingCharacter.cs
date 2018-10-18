@@ -16,6 +16,7 @@ public class AttackingCharacter : MonoBehaviour {
 
     public CharacterVision vision;
 
+    public float dashCooldown = 6;
     public float dashSpeed = 12;
 
     public Image healthBar;
@@ -43,6 +44,8 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected float maxDashRange = 4;
 
+    //protected bool dashed = false;
+    protected float timeToDash;
     protected Transform dashingAt = null;
     protected float maxRaycastDistance = 50;
 
@@ -70,6 +73,8 @@ public class AttackingCharacter : MonoBehaviour {
         normalSpeed = path.maxSpeed;
 
         nextAttackBG = nextAttackBar.transform.parent.gameObject;
+
+        timeToDash = dashCooldown;
     }
 
     public void StopAttacking()
@@ -151,20 +156,18 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected IEnumerator Dash(Vector3 to)
     {
-        if (playerState == PlayerState.DASHING)
-            yield return null;
+        if (playerState == PlayerState.DASHING || timeToDash < dashCooldown)
+            yield break;
 
         StopAttacking();
-
         stopDashingAt = 0;
-
         MoveToPosition(to);
 
         while (path.pathPending)
             yield return new WaitForEndOfFrame();
 
         if (playerState != PlayerState.WALKING)        // ako je u medjuvremenu stigao do destinacije
-            yield return null;
+            yield break;
 
         playerState = PlayerState.DASHING;
 
@@ -174,6 +177,8 @@ public class AttackingCharacter : MonoBehaviour {
         }
 
         path.maxSpeed = dashSpeed;
+
+        timeToDash = 0;
         yield return null;
     }
 
@@ -187,8 +192,10 @@ public class AttackingCharacter : MonoBehaviour {
     protected virtual void Update()
     {
 
-       // if (type == CharacterType.PLAYER)
-         //   print(playerState.ToString());
+        if(timeToDash < dashCooldown)
+        {
+            timeToDash += Time.deltaTime;
+        }
 
         switch (playerState)
         {

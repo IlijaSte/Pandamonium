@@ -71,7 +71,7 @@ public class SlimeBoss : Enemy {
 
         Vector2 spawnPos = GetValidSpawnPoint();
 
-        Instantiate(enemyPrefab, spawnPos, enemyPrefab.transform.rotation, GameObject.FindGameObjectWithTag("2DWorld").transform);
+        Instantiate(enemyPrefab, spawnPos, enemyPrefab.transform.rotation, null);
 
     }
 }

@@ -41,7 +41,7 @@ public class BoardCreator : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject bossPrefab;
 
-    public World3DGenerator generator;
+    public ColliderGenerator generator;
 
     private void Awake()
     {
@@ -58,8 +58,8 @@ public class BoardCreator : MonoBehaviour
         InstantiateTiles();
         InstantiateOuterWalls();
 
-        GameObject.FindGameObjectWithTag("3DGround").transform.localScale = new Vector3(columns / 10, 1, rows / 10);
-        GameObject.FindGameObjectWithTag("3DGround").transform.position = new Vector3(columns / 2, rows / 2, 2);
+        GameObject.FindGameObjectWithTag("Ground").transform.localScale = new Vector3(columns, rows, 1);
+        GameObject.FindGameObjectWithTag("Ground").transform.position = new Vector3(columns / 2, rows / 2, 2);
         Camera.main.GetComponent<CameraMovement>().SetBounds(new Vector2(0, 0), new Vector2(columns, rows));
 
         generator.Generate(columns, rows);
@@ -80,7 +80,7 @@ public class BoardCreator : MonoBehaviour
             int roomIndex = Random.Range(0, rooms.Length - 1);
             Vector3 enemyPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth), rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight), player.transform.position.z);
 
-            Instantiate(enemyPrefab, enemyPos, player.transform.rotation, GameObject.FindGameObjectWithTag("2DWorld").transform);
+            Instantiate(enemyPrefab, enemyPos, player.transform.rotation, null);
         }
     }
 
@@ -89,7 +89,7 @@ public class BoardCreator : MonoBehaviour
         int roomIndex = rooms.Length - 1;
         Vector3 bossPos = new Vector3(rooms[roomIndex].xPos + rooms[roomIndex].roomWidth / 2, rooms[roomIndex].yPos + 2 * rooms[roomIndex].roomHeight / 3, player.transform.position.z);
 
-        Instantiate(bossPrefab, bossPos, player.transform.rotation, GameObject.FindGameObjectWithTag("2DWorld").transform);
+        Instantiate(bossPrefab, bossPos, player.transform.rotation, null);
     }
 
     IEnumerator Start()

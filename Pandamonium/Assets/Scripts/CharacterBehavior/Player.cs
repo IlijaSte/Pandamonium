@@ -37,53 +37,56 @@ public class Player : AttackingCharacter {
         {
             
             RaycastHit2D hit2D;
-            bool hitSmth = false;
 
             if (hit2D = Physics2D.Raycast(new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y),
-                                          Vector2.zero, 0f, ignoreMask))
+                                          Vector2.zero, 0f, ignoreMask | (1 << LayerMask.NameToLayer("Ground"))))
             {
 
                 if (hit2D.transform.CompareTag("Enemy"))                // ako je kliknuo na neprijatelja
                 {
-                    base.Attack(hit2D.transform);
-                    hitSmth = true;
+                    if ((!clicked && !oneClick) || clicked)
+                    {
+                        oneClick = true;
 
-                }else if(hit2D.transform.gameObject.layer == LayerMask.NameToLayer("Obstacles"))    // ako je kliknuo na prepreke
-                {
-                    hitSmth = true;
-                }
+                        doubleClickTimer = Time.time;
+                        firstClickPos = hit2D.point;
 
-            }
-            if (!hitSmth) { 
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("3D")))               // oprezno za 2D!!!
-                {
-                    if (hit.collider.CompareTag("3DGround"))                    // ako je korisnik kliknuo na zemlju, igrac krece ka toj poziciji
+                        base.Attack(hit2D.transform);
+                    }
+                    else if (!clicked && oneClick && Vector3.Distance(hit2D.point, firstClickPos) <= maxClickDistance)
                     {
 
-                        if ((!clicked && !oneClick) || clicked)
-                        {
-                            oneClick = true;
-                            doubleClickTimer = Time.time;
-                            firstClickPos = hit.point;
-                            MoveToPosition(hit.point);
-                        }
-                        else if(!clicked && oneClick && Vector3.Distance(hit.point, firstClickPos) <= maxClickDistance)
-                        {
-                            
-                            oneClick = false;
+                        oneClick = false;
 
-                            // DASH
-                            StartCoroutine(Dash(hit.point));
-                        }
+                        StartCoroutine(Dash(hit2D.transform));
                     }
                 }
-            }
-            else
-            {
-                oneClick = false;
+                else if (hit2D.transform.gameObject.layer == LayerMask.NameToLayer("Obstacles"))    // ako je kliknuo na prepreke
+                {
+                    oneClick = false;
+
+                }
+                else if (hit2D.transform.CompareTag("Ground"))
+                {
+                    if ((!clicked && !oneClick) || clicked)
+                    {
+                        oneClick = true;
+
+                        doubleClickTimer = Time.time;
+                        firstClickPos = hit2D.point;
+
+                        MoveToPosition(hit2D.point);
+                    }
+                    else if (!clicked && oneClick && Vector3.Distance(hit2D.point, firstClickPos) <= maxClickDistance)
+                    {
+
+                        oneClick = false;
+
+                        // DASH
+                        StartCoroutine(Dash(hit2D.point));
+                    }
+                }
+
             }
 
             clicked = true;
