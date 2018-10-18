@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 44618679}
   - component: {fileID: 44618678}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextCharSelect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,8 +145,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5, y: 141}
-  m_SizeDelta: {x: 634.9, y: 108.9}
+  m_AnchoredPosition: {x: 169, y: 120}
+  m_SizeDelta: {x: 871.3, y: 108.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &44618678
 MonoBehaviour:
@@ -168,8 +168,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 3caf0d856f573a6429b56da56ca24219, type: 3}
-    m_FontSize: 73
+    m_Font: {fileID: 12800000, guid: d4eeeed366f8e9042bca9d2e48ec9399, type: 3}
+    m_FontSize: 54
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -180,7 +180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Character Selection:'
+  m_Text: Character Selection
 --- !u!222 &44618679
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -352,8 +352,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 3caf0d856f573a6429b56da56ca24219, type: 3}
-    m_FontSize: 39
+    m_Font: {fileID: 12800000, guid: d4eeeed366f8e9042bca9d2e48ec9399, type: 3}
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -641,8 +641,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 17, y: -167}
-  m_SizeDelta: {x: 372, y: 66.1}
+  m_AnchoredPosition: {x: 17.1, y: -164}
+  m_SizeDelta: {x: 327.8, y: 66.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1181681199
 MonoBehaviour:
@@ -1146,8 +1146,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 3caf0d856f573a6429b56da56ca24219, type: 3}
-    m_FontSize: 54
+    m_Font: {fileID: 12800000, guid: d4eeeed366f8e9042bca9d2e48ec9399, type: 3}
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10

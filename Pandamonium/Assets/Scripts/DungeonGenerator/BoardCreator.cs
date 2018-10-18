@@ -1,8 +1,9 @@
 ﻿using System.Collections;
-using UnityEngine;
+
 using UnityEngine.AI;
 using UnityEngine.Tilemaps;
 using Pathfinding;
+using UnityEngine;
 
 public class BoardCreator : MonoBehaviour
 {
@@ -43,6 +44,10 @@ public class BoardCreator : MonoBehaviour
 
     public World3DGenerator generator;
 
+    public bool isTutorial;
+    public GameObject tutorialParentCollider;
+    public GameObject tutorialCollider;
+
     private void Awake()
     {
         // Create the board holder.
@@ -61,12 +66,29 @@ public class BoardCreator : MonoBehaviour
         generator.Generate();
     }
 
+   
+
     void InstantiatePlayer()
     {
         Vector3 playerPos = new Vector3(rooms[0].xPos + 1, rooms[0].yPos + 1, player.transform.position.z);
         player.transform.position = playerPos;
     }
 
+    void InstantiateTutorialEnemies()
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            for(int j = 0; j < i; j ++)
+            {
+                int randomIntX = Random.Range(2, rooms[i].roomWidth);
+                int randomIntY = Random.Range(2, rooms[i].roomHeight);
+                Vector3 enemyPos = new Vector3(rooms[i].xPos + randomIntX, rooms[i].yPos + randomIntY, player.transform.position.z);
+                Instantiate(enemyPrefab, enemyPos, player.transform.rotation, GameObject.FindGameObjectWithTag("2DWorld").transform);
+            }
+            
+        }
+  
+    }
     void InstantiateEnemies()
     {
         int definiteNumEnemies = numEnemies.Random;
@@ -95,9 +117,13 @@ public class BoardCreator : MonoBehaviour
 
         InstantiatePlayer();
 
-        InstantiateEnemies();
-
-        InstantiateBoss();
+        if (isTutorial)
+            InstantiateTutorialEnemies();
+        else
+        {
+            InstantiateEnemies();
+            InstantiateBoss();
+        }
     }
 
     void SetupTilesArray()
@@ -112,7 +138,6 @@ public class BoardCreator : MonoBehaviour
             tiles[i] = new TileType[rows];
         }
     }
-
 
     void CreateRoomsAndCorridors()
     {
@@ -135,7 +160,7 @@ public class BoardCreator : MonoBehaviour
         for (int i = 1; i < rooms.Length; i++)
         {
 
-            if(i == rooms.Length - 1)
+            if(i == rooms.Length - 1 && !isTutorial)
             {
                 rooms[i] = bossRoom = new Room();
                 bossRoom.SetupRoom(bossRoomWidth, bossRoomHeight, columns, rows, corridors[i - 1]);
@@ -222,7 +247,18 @@ public class BoardCreator : MonoBehaviour
 
                 // Set the tile at these coordinates to Floor.
                 tiles[xCoord][yCoord] = TileType.Floor;
+
+                if (isTutorial && j == currentCorridor.corridorLength - 2)
+                {
+
+                    GameObject newCollider = Instantiate(tutorialCollider, new Vector3(xCoord + 0.5f, yCoord + 0.5f, 0), Quaternion.identity, tutorialParentCollider.transform);
+                    newCollider.GetComponent<TutorialCollidersScript>().colliderID = i;
+                }
+                   
+         
             }
+
+            
         }
     }
 
@@ -244,6 +280,7 @@ public class BoardCreator : MonoBehaviour
                 {
                     // ... instantiate a wall over the top.
                     InstantiateFromArray(wallTiles, obstacleTilemap, i, j);
+                    
                 }
             }
         }
