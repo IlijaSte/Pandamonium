@@ -11,7 +11,7 @@ public class FireStaff : RangedWeapon
     protected override void Attack()
     {
         // kreiranje projektila na mestu nosioca
-        GameObject projectile = Instantiate(firePrefab, GameObject.FindGameObjectWithTag("2DWorld").transform, false);
+        GameObject projectile = Instantiate(firePrefab);
         projectile.transform.position = transform.position;
 
         // ispaljivanje projektila
