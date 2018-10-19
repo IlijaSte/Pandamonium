@@ -16,7 +16,7 @@ public class TutorialCollidersScript : MonoBehaviour {
 	}
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if( collision.transform.parent == GameObject.FindGameObjectWithTag("Player").transform)
+        if( collision.transform.CompareTag("Player"))
         {
             print("usao");
             GameManager gameManager = GameManager.I;
@@ -31,7 +31,7 @@ public class TutorialCollidersScript : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.transform.parent == GameObject.FindGameObjectWithTag("Player").transform)
+        if (collision.transform.CompareTag("Player"))
         {
             print("izasao");
             GameManager gameManager = GameManager.I;
