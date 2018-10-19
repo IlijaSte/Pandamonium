@@ -49,6 +49,10 @@ public class AttackingCharacter : MonoBehaviour {
     protected Transform dashingAt = null;
     protected float maxRaycastDistance = 50;
 
+    protected Vector2 approxPosition;
+
+    protected GraphUpdateScene groundFreer;
+
     public virtual void Awake()
     {
 
@@ -75,6 +79,12 @@ public class AttackingCharacter : MonoBehaviour {
         nextAttackBG = nextAttackBar.transform.parent.gameObject;
 
         timeToDash = dashCooldown;
+
+        //GetComponent<GraphUpdateScene>().Apply();
+
+        approxPosition = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
+
+        groundFreer = GameObject.Find("AIFreeGround").GetComponent<GraphUpdateScene>();
     }
 
     public void StopAttacking()
@@ -189,12 +199,35 @@ public class AttackingCharacter : MonoBehaviour {
         yield return null;
     }
 
+    protected void UpdateSpaceAround(bool allocateNew = true)
+    {
+        groundFreer.transform.position = approxPosition + new Vector2(0, GetComponent<BoxCollider2D>().size.y / 2);
+        groundFreer.GetComponent<BoxCollider2D>().size = GetComponent<BoxCollider2D>().size;
+        AstarPath.active.AddWorkItem(() => groundFreer.Apply());
+
+        if(allocateNew)
+            AstarPath.active.AddWorkItem(() => GetComponent<GraphUpdateScene>().Apply());
+
+        AstarPath.active.QueueGraphUpdates();
+    }
+
     protected virtual void Update()
     {
-
-        if(timeToDash < dashCooldown)
+        
+        if (timeToDash < dashCooldown)
         {
             timeToDash += Time.deltaTime;
+        }
+
+        Vector2 newApproxPosition = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
+
+        if (!newApproxPosition.Equals(approxPosition))
+        {
+
+            //AstarPath.active.UpdateGraphs(groundFreer.GetComponent<BoxCollider2D>().bounds);
+            //UpdateSpaceAround();
+            approxPosition = newApproxPosition;
+
         }
 
         switch (playerState)
@@ -338,6 +371,7 @@ public class AttackingCharacter : MonoBehaviour {
 
     public virtual void Die()
     {
+        UpdateSpaceAround(false);
         Destroy(gameObject);
     }
 
