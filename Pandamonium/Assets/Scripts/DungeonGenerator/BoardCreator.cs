@@ -248,14 +248,20 @@ public class BoardCreator : MonoBehaviour
                             if (j - 1 >= 0 && (tiles[j - 1][i] == TileType.WallAngle || tiles[j - 1][i] == TileType.WallAngleBottomLeft))
                                 tiles[j][i] = TileType.WallAngleLinkLeft;
 
-                            else
+                            else if (GetHeight(j - 1, i) < 3)
                                 tiles[j][i] = TileType.WallAngleLeft;
+                            else tiles[j][i] = TileType.WallTop;
                         }
                         else if (tiles[j][i - 1] == TileType.WallAngleBottomRight || tiles[j][i - 1] == TileType.WallAngleRight)
                         {
                             tiles[j][i] = TileType.WallAngleRight;
                         }
 
+                    }
+                    else
+                    {
+                        tiles[j][i] = TileType.Wall2;
+                        continue;
                     }
 
                     if(i + 1 < rows)
@@ -316,6 +322,12 @@ public class BoardCreator : MonoBehaviour
                             }
                         }
                     }
+
+                    if(j - 1 >= 0 && j + 1 < columns && GetHeight(j, i) > 3 && GetHeight(j - 1, i) < 3 && GetHeight(j + 1, i) < 3)
+                    {
+                        tiles[j][i] = TileType.WallAngleVerticalDouble;
+                    }
+
                 }
             }
         }
