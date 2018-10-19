@@ -4,12 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - 3DGround
-  - 3DEnemy
   - Enemy
   - Projectile
-  - 2DWorld
   - Foreground
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -20,7 +18,7 @@ TagManager:
   - 
   - 
   - Hazardous
-  - 
+  - Ground
   - Projectile
   - LightSources
   - LightObstacles

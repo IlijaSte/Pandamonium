@@ -2,11 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    private static GameManager instance;
+    public static GameManager I
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<GameManager>();
+            }
+            return instance;
+        }
+    }
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -19,13 +32,15 @@ public class GameManager : MonoBehaviour {
     {
         SceneManager.LoadScene("CharacterSelection");
     }
-
+    
     public void loadTestScene()
     {
-        SceneManager.LoadScene("TestScene");
+        SceneManager.LoadScene("Tutorial");
     }
     public void loadMainMenuScene()
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+    
 }

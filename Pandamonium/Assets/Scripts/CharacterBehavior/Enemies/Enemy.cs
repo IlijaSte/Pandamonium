@@ -7,9 +7,6 @@ using UnityEngine.UI;
 public class Enemy : AttackingCharacter {
 
     protected Transform player;
-    
-    private bool spottedPlayer = false;
-    protected bool dashed = false;
 
     public override void Start()
     {

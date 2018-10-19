@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 428c58ce9bf292d48b719f0350ac2093
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - obstacleTilemap: {instanceID: 0}
+  - foregroundPrefab: {fileID: 1749055739721804, guid: b9d34d11915a81a4e92667f266546bdc,
+      type: 2}
+  - walls: {instanceID: 0}
+  - wallColliderPrefab: {fileID: 1543162050479270, guid: a62d3515a984fd746b1bfa3002476dac,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

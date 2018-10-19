@@ -16,6 +16,7 @@ public class AttackingCharacter : MonoBehaviour {
 
     public CharacterVision vision;
 
+    public float dashCooldown = 6;
     public float dashSpeed = 12;
 
     public Image healthBar;
@@ -43,8 +44,14 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected float maxDashRange = 4;
 
+    //protected bool dashed = false;
+    protected float timeToDash;
     protected Transform dashingAt = null;
     protected float maxRaycastDistance = 50;
+
+    protected Vector2 approxPosition;
+
+    protected GraphUpdateScene groundFreer;
 
     public virtual void Awake()
     {
@@ -70,6 +77,14 @@ public class AttackingCharacter : MonoBehaviour {
         normalSpeed = path.maxSpeed;
 
         nextAttackBG = nextAttackBar.transform.parent.gameObject;
+
+        timeToDash = dashCooldown;
+
+        //GetComponent<GraphUpdateScene>().Apply();
+
+        approxPosition = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
+
+        groundFreer = GameObject.Find("AIFreeGround").GetComponent<GraphUpdateScene>();
     }
 
     public void StopAttacking()
@@ -151,20 +166,18 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected IEnumerator Dash(Vector3 to)
     {
-        if (playerState == PlayerState.DASHING)
-            yield return null;
+        if (playerState == PlayerState.DASHING || timeToDash < dashCooldown)
+            yield break;
 
         StopAttacking();
-
         stopDashingAt = 0;
-
         MoveToPosition(to);
 
         while (path.pathPending)
             yield return new WaitForEndOfFrame();
 
         if (playerState != PlayerState.WALKING)        // ako je u medjuvremenu stigao do destinacije
-            yield return null;
+            yield break;
 
         playerState = PlayerState.DASHING;
 
@@ -174,6 +187,8 @@ public class AttackingCharacter : MonoBehaviour {
         }
 
         path.maxSpeed = dashSpeed;
+
+        timeToDash = 0;
         yield return null;
     }
 
@@ -184,11 +199,36 @@ public class AttackingCharacter : MonoBehaviour {
         yield return null;
     }
 
+    protected void UpdateSpaceAround(bool allocateNew = true)
+    {
+        groundFreer.transform.position = approxPosition + new Vector2(0, GetComponent<BoxCollider2D>().size.y / 2);
+        groundFreer.GetComponent<BoxCollider2D>().size = GetComponent<BoxCollider2D>().size;
+        AstarPath.active.AddWorkItem(() => groundFreer.Apply());
+
+        if(allocateNew)
+            AstarPath.active.AddWorkItem(() => GetComponent<GraphUpdateScene>().Apply());
+
+        AstarPath.active.QueueGraphUpdates();
+    }
+
     protected virtual void Update()
     {
+        
+        if (timeToDash < dashCooldown)
+        {
+            timeToDash += Time.deltaTime;
+        }
 
-       // if (type == CharacterType.PLAYER)
-         //   print(playerState.ToString());
+        Vector2 newApproxPosition = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
+
+        if (!newApproxPosition.Equals(approxPosition))
+        {
+
+            //AstarPath.active.UpdateGraphs(groundFreer.GetComponent<BoxCollider2D>().bounds);
+            //UpdateSpaceAround();
+            approxPosition = newApproxPosition;
+
+        }
 
         switch (playerState)
         {
@@ -331,6 +371,7 @@ public class AttackingCharacter : MonoBehaviour {
 
     public virtual void Die()
     {
+        UpdateSpaceAround(false);
         Destroy(gameObject);
     }
 

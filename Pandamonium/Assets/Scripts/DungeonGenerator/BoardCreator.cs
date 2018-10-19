@@ -1,8 +1,9 @@
 ﻿using System.Collections;
-using UnityEngine;
+
 using UnityEngine.AI;
 using UnityEngine.Tilemaps;
 using Pathfinding;
+using UnityEngine;
 
 public class BoardCreator : MonoBehaviour
 {
@@ -41,7 +42,11 @@ public class BoardCreator : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject bossPrefab;
 
-    public World3DGenerator generator;
+    public ColliderGenerator generator;
+
+    public bool isTutorial;
+    public GameObject tutorialParentCollider;
+    public GameObject tutorialCollider;
 
     private void Awake()
     {
@@ -58,13 +63,15 @@ public class BoardCreator : MonoBehaviour
         InstantiateTiles();
         InstantiateOuterWalls();
 
-        GameObject.FindGameObjectWithTag("3DGround").transform.localScale = new Vector3(columns / 10, 1, rows / 10);
-        GameObject.FindGameObjectWithTag("3DGround").transform.position = new Vector3(columns / 2, rows / 2, 2);
+        GameObject.FindGameObjectWithTag("Ground").transform.localScale = new Vector3(columns, rows, 1);
+        GameObject.FindGameObjectWithTag("Ground").transform.position = new Vector3(columns / 2, rows / 2, 2);
         Camera.main.GetComponent<CameraMovement>().SetBounds(new Vector2(0, 0), new Vector2(columns, rows));
 
         generator.Generate(columns, rows);
 
     }
+
+   
 
     void InstantiatePlayer()
     {
@@ -72,6 +79,21 @@ public class BoardCreator : MonoBehaviour
         player.transform.position = playerPos;
     }
 
+    void InstantiateTutorialEnemies()
+    {
+        for(int i = 0; i < rooms.Length; i++)
+        {
+            for(int j = 0; j < i; j ++)
+            {
+                int randomIntX = Random.Range(2, rooms[i].roomWidth);
+                int randomIntY = Random.Range(2, rooms[i].roomHeight);
+                Vector3 enemyPos = new Vector3(rooms[i].xPos + randomIntX, rooms[i].yPos + randomIntY, player.transform.position.z);
+                Instantiate(enemyPrefab, enemyPos, player.transform.rotation, GameObject.FindGameObjectWithTag("2DWorld").transform);
+            }
+            
+        }
+  
+    }
     void InstantiateEnemies()
     {
         int definiteNumEnemies = numEnemies.Random;
@@ -80,7 +102,7 @@ public class BoardCreator : MonoBehaviour
             int roomIndex = Random.Range(0, rooms.Length - 1);
             Vector3 enemyPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth), rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight), player.transform.position.z);
 
-            Instantiate(enemyPrefab, enemyPos, player.transform.rotation, GameObject.FindGameObjectWithTag("2DWorld").transform);
+            Instantiate(enemyPrefab, enemyPos, player.transform.rotation, null);
         }
     }
 
@@ -89,13 +111,14 @@ public class BoardCreator : MonoBehaviour
         int roomIndex = rooms.Length - 1;
         Vector3 bossPos = new Vector3(rooms[roomIndex].xPos + rooms[roomIndex].roomWidth / 2, rooms[roomIndex].yPos + 2 * rooms[roomIndex].roomHeight / 3, player.transform.position.z);
 
-        Instantiate(bossPrefab, bossPos, player.transform.rotation, GameObject.FindGameObjectWithTag("2DWorld").transform);
+        Instantiate(bossPrefab, bossPos, player.transform.rotation, null);
     }
 
     IEnumerator Start()
     {
 
-        AstarPath.active.data.gridGraph.SetDimensions(columns, rows, 1);
+        int nodeSizeFactor = (int)(1 / AstarPath.active.data.gridGraph.nodeSize);
+        AstarPath.active.data.gridGraph.SetDimensions(nodeSizeFactor * columns, nodeSizeFactor * rows, AstarPath.active.data.gridGraph.nodeSize);
         AstarPath.active.data.gridGraph.center = new Vector3(columns / 2, rows / 2, 0);
 
         yield return new WaitForEndOfFrame();
@@ -103,9 +126,13 @@ public class BoardCreator : MonoBehaviour
 
         InstantiatePlayer();
 
-        InstantiateEnemies();
-
-        InstantiateBoss();
+        if (isTutorial)
+            InstantiateTutorialEnemies();
+        else
+        {
+            InstantiateEnemies();
+            InstantiateBoss();
+        }
     }
 
     void SetupTilesArray()
@@ -120,7 +147,6 @@ public class BoardCreator : MonoBehaviour
             tiles[i] = new TileType[rows];
         }
     }
-
 
     void CreateRoomsAndCorridors()
     {
@@ -143,7 +169,7 @@ public class BoardCreator : MonoBehaviour
         for (int i = 1; i < rooms.Length; i++)
         {
 
-            if(i == rooms.Length - 1)
+            if(i == rooms.Length - 1 && !isTutorial)
             {
                 rooms[i] = bossRoom = new Room();
                 bossRoom.SetupRoom(bossRoomWidth, bossRoomHeight, columns, rows, corridors[i - 1]);
@@ -230,7 +256,18 @@ public class BoardCreator : MonoBehaviour
 
                 // Set the tile at these coordinates to Floor.
                 tiles[xCoord][yCoord] = TileType.Floor;
+
+                if (isTutorial && j == currentCorridor.corridorLength - 2)
+                {
+
+                    GameObject newCollider = Instantiate(tutorialCollider, new Vector3(xCoord + 0.5f, yCoord + 0.5f, 0), Quaternion.identity, tutorialParentCollider.transform);
+                    newCollider.GetComponent<TutorialCollidersScript>().colliderID = i;
+                }
+                   
+         
             }
+
+            
         }
     }
 
@@ -252,6 +289,7 @@ public class BoardCreator : MonoBehaviour
                 {
                     // ... instantiate a wall over the top.
                     InstantiateFromArray(wallTiles, obstacleTilemap, i, j);
+                    
                 }
             }
         }
