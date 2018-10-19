@@ -16,14 +16,24 @@ public class TutorialManager : MonoBehaviour {
 	}
     public void PauseForTutorial(int colliderID)
     {
-        switch (colliderID)
-        {
-            case 0:
-                Time.timeScale = 0f;
-                break;
-            case 1:
-                break;
-        }
+        
+        Time.timeScale = 1f;
+        CanvasGroup canvasGroup = tutorialButtons.transform.GetChild(colliderID).GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 1;
+        canvasGroup.interactable = true;
+    }
+
+    public void CloseTutorial(int colliderID)
+    {
+        Time.timeScale = 0f;
+        CanvasGroup canvasGroup = tutorialButtons.transform.GetChild(colliderID).GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0;
+        canvasGroup.interactable = false;
+    }
+
+    public void CloseFirstTutorial()
+    {
+        CloseTutorial(0);
     }
     
 }
