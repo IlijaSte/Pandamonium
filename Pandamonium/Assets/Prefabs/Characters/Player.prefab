@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 114137552342071252}
   - component: {fileID: 50571860554699696}
   - component: {fileID: 61653577459399180}
+  - component: {fileID: 114912669408553062}
   m_Layer: 15
   m_Name: Player
   m_TagString: Player
@@ -543,7 +544,7 @@ MonoBehaviour:
   - {fileID: 114539780366988302}
   - {fileID: 114679024940451080}
   equippedWeaponIndex: 0
-  maxHealth: 100
+  maxHealth: 200
   type: 0
   vision: {fileID: 114774126793390590}
   dashCooldown: 1
@@ -574,9 +575,10 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 4294967295
     useGraphRaycasting: 0
-  traversableTags: -1
+  traversableTags: -5
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  graphMask: -1
+  graphMask:
+    value: -1
 --- !u!114 &114480539979097238
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -695,6 +697,35 @@ MonoBehaviour:
   Material: {fileID: 2100000, guid: 5d8645bc2e5501a4ebd138db5aa609bd, type: 2}
   LightOrigin: {x: 0, y: 0, z: 1}
   Shape: 0
+--- !u!114 &114912669408553062
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1371769644752892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efee954c69f0d421086729bb8df1137f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  uniqueID: 3124088533528204666
+  points: []
+  convex: 1
+  minBoundsHeight: 1
+  penaltyDelta: 0
+  modifyWalkability: 0
+  setWalkability: 1
+  applyOnStart: 1
+  applyOnScan: 1
+  updatePhysics: 0
+  resetPenaltyOnPhysics: 1
+  updateErosion: 1
+  modifyTag: 1
+  setTag: 1
+  legacyMode: 0
+  serializedVersion: 1
+  legacyUseWorldSpace: 0
 --- !u!114 &114916057105450400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -734,6 +765,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 2
+  radius: 0.5
+  height: 0.01
   repathRate: 1
   canSearch: 1
   canMove: 1
@@ -742,8 +775,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  centerOffset: 1
-  rotationIn2D: 1
+  centerOffsetCompatibility: NaN
+  orientation: 1
+  enableRotation: 0
   targetCompatibility: {fileID: 0}
   maxAcceleration: 1000
   rotationSpeed: 0
@@ -840,7 +874,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &224338131333656262
 RectTransform:

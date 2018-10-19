@@ -117,7 +117,8 @@ public class BoardCreator : MonoBehaviour
     IEnumerator Start()
     {
 
-        AstarPath.active.data.gridGraph.SetDimensions(columns, rows, 1);
+        int nodeSizeFactor = (int)(1 / AstarPath.active.data.gridGraph.nodeSize);
+        AstarPath.active.data.gridGraph.SetDimensions(nodeSizeFactor * columns, nodeSizeFactor * rows, AstarPath.active.data.gridGraph.nodeSize);
         AstarPath.active.data.gridGraph.center = new Vector3(columns / 2, rows / 2, 0);
 
         yield return new WaitForEndOfFrame();

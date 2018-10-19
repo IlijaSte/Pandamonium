@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 114718712080257254}
   - component: {fileID: 61725077377612850}
   - component: {fileID: 50579603644457754}
+  - component: {fileID: 114073461064305134}
   m_Layer: 15
   m_Name: SlimeBoss
   m_TagString: Enemy
@@ -464,10 +465,39 @@ MonoBehaviour:
   dashSpeed: 12
   healthBar: {fileID: 114277197262475798}
   nextAttackBar: {fileID: 114231558236676070}
-  enemySpawnInterval: 5
+  enemySpawnInterval: 10
   spawnRadius: 5
   enemyPrefab: {fileID: 1628753790980070, guid: 75c84e6b6e1cac542a790e6e97eb2d12,
     type: 2}
+--- !u!114 &114073461064305134
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1944221328380284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efee954c69f0d421086729bb8df1137f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  uniqueID: 5648358568895913853
+  points: []
+  convex: 1
+  minBoundsHeight: 1
+  penaltyDelta: 0
+  modifyWalkability: 0
+  setWalkability: 1
+  applyOnStart: 0
+  applyOnScan: 0
+  updatePhysics: 0
+  resetPenaltyOnPhysics: 1
+  updateErosion: 1
+  modifyTag: 1
+  setTag: 2
+  legacyMode: 0
+  serializedVersion: 0
+  legacyUseWorldSpace: 0
 --- !u!114 &114103317487478274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -667,9 +697,10 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 4294967295
     useGraphRaycasting: 0
-  traversableTags: -1
+  traversableTags: -3
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  graphMask: -1
+  graphMask:
+    value: -1
 --- !u!114 &114395185152457084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -681,8 +712,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ff13f6b518d824aa56ebfaf6cde287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
-  speed: 1
+  damage: 10
+  speed: 0.5
   timeToAttack: 1
 --- !u!114 &114705409338819484
 MonoBehaviour:
@@ -712,6 +743,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 2
+  radius: 0.5
+  height: 2
   repathRate: 0.5
   canSearch: 1
   canMove: 1
@@ -720,8 +753,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  centerOffset: 1
-  rotationIn2D: 1
+  centerOffsetCompatibility: NaN
+  orientation: 1
+  enableRotation: 0
   targetCompatibility: {fileID: 0}
   maxAcceleration: 1000
   rotationSpeed: 0
