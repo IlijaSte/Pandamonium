@@ -33,7 +33,8 @@ public class Player : AttackingCharacter {
     // Update is called once per frame
     protected override void Update () {
 
-        if (playerState != PlayerState.DASHING && Input.GetMouseButton(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        GameObject selectedObject = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        if (playerState != PlayerState.DASHING && Input.GetMouseButton(0) && (selectedObject == null || (selectedObject && selectedObject.transform.parent.CompareTag("NonBlockableUI"))))
         {
             
             RaycastHit2D hit2D;

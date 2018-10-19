@@ -6,7 +6,10 @@ using System;
 
 public class GameManager : MonoBehaviour {
 
+
     private static GameManager instance;
+    public static string nextScene;
+
     public static GameManager I
     {
         get
@@ -20,7 +23,10 @@ public class GameManager : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-		
+		if(SceneManager.GetActiveScene().name == "LoadingScene")
+        {
+            SceneManager.LoadScene(nextScene);
+        }
 	}
 	
 	// Update is called once per frame
@@ -35,12 +41,31 @@ public class GameManager : MonoBehaviour {
     
     public void loadTestScene()
     {
-        SceneManager.LoadScene("Tutorial");
+        nextScene = "TestScene";
+        SceneManager.LoadScene("LoadingScene");
     }
     public void loadMainMenuScene()
     {
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void LoadTutorialScene()
+    {
+
+        SceneManager.LoadScene("LoadingScene");
+        nextScene = "TutorialScene";
+       // StartCoroutine(LoadTutorialAsyncScene());
+
+
+    }
+
+    IEnumerator LoadTutorialAsyncScene()
+    { 
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("TutorialScene");
     
+        while (!asyncLoad.isDone)
+        {
+         yield return null;
+        }
+    }
 }

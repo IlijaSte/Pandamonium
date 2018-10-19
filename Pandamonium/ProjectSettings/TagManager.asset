@@ -8,6 +8,8 @@ TagManager:
   - Projectile
   - Foreground
   - Ground
+  - 2DWorld
+  - NonBlockableUI
   layers:
   - Default
   - TransparentFX

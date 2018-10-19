@@ -39,6 +39,7 @@ public class BoardCreator : MonoBehaviour
     public Tilemap groundTilemap;
     public Tilemap obstacleTilemap;
 
+    public Transform enemyParent;
     public GameObject enemyPrefab;
     public GameObject bossPrefab;
 
@@ -88,7 +89,7 @@ public class BoardCreator : MonoBehaviour
                 int randomIntX = Random.Range(2, rooms[i].roomWidth);
                 int randomIntY = Random.Range(2, rooms[i].roomHeight);
                 Vector3 enemyPos = new Vector3(rooms[i].xPos + randomIntX, rooms[i].yPos + randomIntY, player.transform.position.z);
-                Instantiate(enemyPrefab, enemyPos, player.transform.rotation, GameObject.FindGameObjectWithTag("2DWorld").transform);
+                Instantiate(enemyPrefab, enemyPos, player.transform.rotation, enemyParent);
             }
             
         }
@@ -102,7 +103,7 @@ public class BoardCreator : MonoBehaviour
             int roomIndex = Random.Range(0, rooms.Length - 1);
             Vector3 enemyPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth), rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight), player.transform.position.z);
 
-            Instantiate(enemyPrefab, enemyPos, player.transform.rotation, null);
+            Instantiate(enemyPrefab, enemyPos, player.transform.rotation, enemyParent);
         }
     }
 
@@ -216,8 +217,17 @@ public class BoardCreator : MonoBehaviour
 
                     // The coordinates in the jagged array are based on the room's position and it's width and height.
                     tiles[xCoord][yCoord] = TileType.Floor;
+
+                    if (i == rooms.Length - 1 && j == (currentRoom.roomWidth / 2) && k == (currentRoom.roomHeight/2))
+                    {
+                        GameObject newCollider = Instantiate(tutorialCollider, new Vector3(xCoord + 0.5f, yCoord + 0.5f, 0), Quaternion.identity, tutorialParentCollider.transform);
+                        newCollider.GetComponent<TutorialCollidersScript>().colliderID = -1;
+                    }
+
+                   
                 }
             }
+
         }
     }
 
