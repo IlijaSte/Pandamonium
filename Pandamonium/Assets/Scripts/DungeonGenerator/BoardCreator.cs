@@ -416,7 +416,7 @@ public class BoardCreator : MonoBehaviour
                     // The coordinates in the jagged array are based on the room's position and it's width and height.
                     tiles[xCoord][yCoord] = TileType.Floor;
 
-                    if (i == rooms.Length - 1 && j == (currentRoom.roomWidth / 2) && k == (currentRoom.roomHeight/2))
+                    if (isTutorial && i == rooms.Length - 1 && j == (currentRoom.roomWidth / 2) && k == (currentRoom.roomHeight/2))
                     {
                         GameObject newCollider = Instantiate(tutorialCollider, new Vector3(xCoord + 0.5f, yCoord + 0.5f, 0), Quaternion.identity, tutorialParentCollider.transform);
                         newCollider.GetComponent<TutorialCollidersScript>().colliderID = -1;
