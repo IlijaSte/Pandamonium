@@ -81,13 +81,38 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bd5727515cb87844fbcd315b28b5c77b, type: 2}
   - {fileID: 11400000, guid: 5d43dc97a9ea4b54aaaf4b68a4e4e14a, type: 2}
   - {fileID: 11400000, guid: 3ee3eb4dadd2e854eb1468c4dfb31e77, type: 2}
-  wallTiles:
-  - {fileID: 11400000, guid: 90b204fe77880d7478dcf9da06c64185, type: 2}
+  wallLevel1: {fileID: 11400000, guid: fd3ef005069a2844fad783747b5adb00, type: 2}
+  wallLevel2: {fileID: 11400000, guid: 8d7f702af12962a42b802449d10d5ddf, type: 2}
+  wallAngle: {fileID: 11400000, guid: c7e416994470a8e4683a2c5ebd3bbda6, type: 2}
+  wallTop: {fileID: 11400000, guid: fcd546b739d3e3543bcb13b344a43e5b, type: 2}
+  wallAngleBottomLeft: {fileID: 11400000, guid: 1afd9301a9ea1a046a8f82c032fa20f3,
+    type: 2}
+  wallAngleBottomRight: {fileID: 11400000, guid: 6fb70fd99d8f0fd4f8ba18fc07676122,
+    type: 2}
+  wallAngleLeft: {fileID: 11400000, guid: 27be76ae1c87cfa4ca20f3a32a8614e9, type: 2}
+  wallAngleRight: {fileID: 11400000, guid: b22aaa1bc500d5246b35500c44176a07, type: 2}
+  wallAngleTop: {fileID: 11400000, guid: 2cb02762ae513ef4ba9102fc9ec4d825, type: 2}
+  wallAngleLinkLeft: {fileID: 11400000, guid: f9fe276a93d1a2b46ad56b488a87fffc, type: 2}
+  wallAngleLinkRight: {fileID: 11400000, guid: 0b1f1530f42d2cf4bbc458a78e10a6b1, type: 2}
+  wallAngleTopLeft: {fileID: 11400000, guid: eb6192700c291274c8eb54a36c6687b3, type: 2}
+  wallAngleTopRight: {fileID: 11400000, guid: f7ca770af1fc4c646bce6c9bfde4eb69, type: 2}
+  wallAngleTopDouble: {fileID: 11400000, guid: 0b0890b168eb90a4db23ac00d6730189, type: 2}
+  wallAngleBottomDouble: {fileID: 11400000, guid: e10e894c24a31b944aa56ec9c916366e,
+    type: 2}
+  wallAngleLeftDouble: {fileID: 11400000, guid: 7e6d2aedf9d65a84e99e81558c961b85,
+    type: 2}
+  wallAngleRightDouble: {fileID: 11400000, guid: 55a593d7833bcca4da5b30577de657f9,
+    type: 2}
+  wallAngleHorizontalDouble: {fileID: 11400000, guid: aa8c109a44eaadf4cbf77e1af713ce22,
+    type: 2}
+  wallAngleVerticalDouble: {fileID: 11400000, guid: 49706779443fb5745885719712954426,
+    type: 2}
   outerWallTiles:
   - {fileID: 11400000, guid: f868e4e420f99f54491cee66989d9081, type: 2}
   player: {fileID: 0}
   groundTilemap: {fileID: 0}
   obstacleTilemap: {fileID: 0}
+  enemyParent: {fileID: 0}
   enemyPrefab: {fileID: 1628753790980070, guid: 75c84e6b6e1cac542a790e6e97eb2d12,
     type: 2}
   bossPrefab: {fileID: 1944221328380284, guid: 38561c1c58ef2b44892924f3b7f08068, type: 2}
