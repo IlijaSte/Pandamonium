@@ -68,9 +68,14 @@ public class BoardCreator : MonoBehaviour
 
     public ColliderGenerator generator;
 
+    
     public bool isTutorial;
     public GameObject tutorialParentCollider;
     public GameObject tutorialCollider;
+    private static Vector2 tutorialFinishPosition;
+
+    public float xCoord { get; private set; }
+    public float yCoord { get; private set; }
 
     private void Awake()
     {
@@ -416,12 +421,12 @@ public class BoardCreator : MonoBehaviour
                     // The coordinates in the jagged array are based on the room's position and it's width and height.
                     tiles[xCoord][yCoord] = TileType.Floor;
 
-                    if (isTutorial && i == rooms.Length - 1 && j == (currentRoom.roomWidth / 2) && k == (currentRoom.roomHeight/2))
+                    if (isTutorial && i == rooms.Length - 1 && j == (currentRoom.roomWidth / 2) && k == (currentRoom.roomHeight / 2))
                     {
-                        GameObject newCollider = Instantiate(tutorialCollider, new Vector3(xCoord + 0.5f, yCoord + 0.5f, 0), Quaternion.identity, tutorialParentCollider.transform);
-                        newCollider.GetComponent<TutorialCollidersScript>().colliderID = -1;
+                        float finishX = xCoord + 0.5f;
+                        float finishY = yCoord + 0.5f;
+                        tutorialFinishPosition = new Vector2(finishX, finishY);
                     }
-
                    
                 }
             }
@@ -651,5 +656,13 @@ public class BoardCreator : MonoBehaviour
 
         // Set the tile's parent to the board holder.
         //tileInstance.transform.parent = boardHolder.transform;
+    }
+
+    public void InstantiateFinishCollider()
+    {
+
+        GameObject newCollider = Instantiate(tutorialCollider, new Vector3(tutorialFinishPosition.x, tutorialFinishPosition.y, 0), Quaternion.identity, tutorialParentCollider.transform);
+        newCollider.GetComponent<TutorialCollidersScript>().colliderID = -1;
+   
     }
 }
