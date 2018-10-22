@@ -668,6 +668,7 @@ MonoBehaviour:
   dashSpeed: 8
   healthBar: {fileID: 114791163046767886}
   nextAttackBar: {fileID: 114631011764471838}
+  maxDashRange: 2
 --- !u!114 &114434116677215052
 MonoBehaviour:
   m_ObjectHideFlags: 1
