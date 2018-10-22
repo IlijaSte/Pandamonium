@@ -10,10 +10,7 @@ public class BoardCreator : MonoBehaviour
     // The type of tile that will be laid in a specific position.
     public enum TileType
     {
-        Wall, Floor, Wall2, WallAngle, WallAngleBottomRight, WallAngleBottomLeft,
-        WallTop, WallAngleLeft, WallAngleRight, WallAngleTop, WallAngleLinkLeft, WallAngleLinkRight,
-        WallAngleTopRight, WallAngleTopLeft, WallAngleTopDouble, WallAngleBottomDouble,
-        WallAngleLeftDouble, WallAngleRightDouble, WallAngleHorizontalDouble, WallAngleVerticalDouble
+        Wall, Floor, Wall2, WallTop, 
     }
 
 
@@ -32,23 +29,8 @@ public class BoardCreator : MonoBehaviour
 
     public TileBase wallLevel1;                            // An array of wall tile prefabs.
     public TileBase wallLevel2;
-    public TileBase wallAngle;
+
     public TileBase wallTop;
-    public TileBase wallAngleBottomLeft;
-    public TileBase wallAngleBottomRight;
-    public TileBase wallAngleLeft;
-    public TileBase wallAngleRight;
-    public TileBase wallAngleTop;
-    public TileBase wallAngleLinkLeft;
-    public TileBase wallAngleLinkRight;
-    public TileBase wallAngleTopLeft;
-    public TileBase wallAngleTopRight;
-    public TileBase wallAngleTopDouble;
-    public TileBase wallAngleBottomDouble;
-    public TileBase wallAngleLeftDouble;
-    public TileBase wallAngleRightDouble;
-    public TileBase wallAngleHorizontalDouble;
-    public TileBase wallAngleVerticalDouble;
 
     public TileBase[] outerWallTiles;                       // An array of outer wall tile prefabs.
     public GameObject player;
@@ -189,151 +171,25 @@ public class BoardCreator : MonoBehaviour
             for(int j = 0; j < columns; j++)
             {
 
+
                 if(tiles[j][i] == TileType.Wall)
                 {
-                    if(i - 1 >= 0)
+                    int height;
+                    if((height = GetHeight(j, i)) >= 3)
                     {
-                        if(tiles[j][i - 1] == TileType.Floor)
-                        {
+                        tiles[j][i] = TileType.WallTop;
 
-                            if(j - 1 >= 0 && tiles[j - 1][i] == TileType.WallAngle)
-                            {
-                                tiles[j - 1][i] = TileType.WallAngleBottomRight;
-                            }
-
-                        }
-                        if (tiles[j][i - 1] == TileType.Wall)
-                        {
-
-                            tiles[j][i] = TileType.Wall2;
-
-                            if(j - 1 >= 0 && tiles[j - 1][i] == TileType.WallAngle)
-                            {
-                                tiles[j - 1][i] = TileType.WallAngleBottomRight;
-                            }
-
-                        }
-                        else if (tiles[j][i - 1] == TileType.Wall2)
-                        {
-
-                            if (j + 1 < columns && tiles[j + 1][i] == TileType.Floor)
-                            {
-                                tiles[j][i] = TileType.WallAngleBottomRight;
-
-                                if (j - 1 >= 0 && tiles[j - 1][i] == TileType.WallAngleRight)
-                                {
-                                    tiles[j - 1][i] = TileType.WallAngleLinkRight;
-                                }
-
-                            }
-                            else if(j - 1 >= 0 && (tiles[j - 1][i] == TileType.Floor || tiles[j - 1][i] == TileType.Wall || tiles[j - 1][i] == TileType.Wall2))
-                            {
-                                tiles[j][i] = TileType.WallAngleBottomLeft;
-                            }
-                            else
-                            {
-                                tiles[j][i] = TileType.WallAngle;
-                            }
-
-                            if (j - 1 >= 0 && tiles[j - 1][i] == TileType.WallAngleRight)
-                            {
-                                tiles[j - 1][i] = TileType.WallAngleLinkRight;
-                            }
-                        }
-                        else if (tiles[j][i - 1] == TileType.WallTop || tiles[j][i - 1] == TileType.WallAngle ||
-                                 tiles[j][i - 1] == TileType.WallAngleLinkLeft || tiles[j][i - 1] == TileType.WallAngleLinkRight)
-                        {
-                            tiles[j][i] = TileType.WallTop;
-
-                        }else if(tiles[j][i - 1] == TileType.Floor && i + 1 < rows && tiles[j][i + 1] == TileType.Floor)
-                        {
-                            tiles[j][i] = TileType.Wall2;
-
-                        }else if(tiles[j][i - 1] == TileType.WallAngleBottomLeft || tiles[j][i - 1] == TileType.WallAngleLeft)
-                        {
-                            if (j - 1 >= 0 && (tiles[j - 1][i] == TileType.WallAngle || tiles[j - 1][i] == TileType.WallAngleBottomLeft))
-                                tiles[j][i] = TileType.WallAngleLinkLeft;
-
-                            else if (GetHeight(j - 1, i) < 3)
-                                tiles[j][i] = TileType.WallAngleLeft;
-                            else tiles[j][i] = TileType.WallTop;
-                        }
-                        else if (tiles[j][i - 1] == TileType.WallAngleBottomRight || tiles[j][i - 1] == TileType.WallAngleRight)
-                        {
-                            tiles[j][i] = TileType.WallAngleRight;
-                        }
-
+                    }else if(height == 2)
+                    {
+                        tiles[j][i] = TileType.Wall2;
                     }
                     else
                     {
-                        tiles[j][i] = TileType.Wall2;
-                        continue;
-                    }
-
-                    if(i + 1 < rows)
-                    {
-
-                        if(tiles[j][i + 1] == TileType.Floor && i - 1 >= 0 && tiles[j][i - 1] != TileType.Floor && tiles[j][i - 1] != TileType.Wall)
+                        if(i + 1 < rows && tiles[j][i + 1] == TileType.Floor)
                         {
-
-                            if (tiles[j][i] == TileType.WallAngle)
-                            {
-                                tiles[j][i] = TileType.WallAngleHorizontalDouble;
-                            }
-                            else if(tiles[j][i] == TileType.WallTop || tiles[j][i] == TileType.WallAngleLeft)
-                            {
-                                tiles[j][i] = TileType.WallAngleTop;
-                            }
-
-                            if (j + 1 < columns && GetHeight(j + 1, i) < 3)
-                            {
-                                if (tiles[j][i] == TileType.WallAngleBottomRight)
-                                {
-                                    tiles[j][i] = TileType.WallAngleRightDouble;
-                                }
-                                else
-                                {
-                                    tiles[j][i] = TileType.WallAngleTopRight;
-
-                                    int k = i - 1;
-                                    while (k >= 0 && tiles[j][k] == TileType.WallTop && GetHeight(j + 1, k) < 3)
-                                    {
-                                        tiles[j][k] = TileType.WallAngleRight;
-                                        k--;
-                                    }
-                                }
-                            }
-
-                            if(j - 1 >= 0 && GetHeight(j - 1, i) < 3)
-                            {
-                                if (tiles[j][i] == TileType.WallAngleTopRight)
-                                {
-                                    tiles[j][i] = TileType.WallAngleTopDouble;
-                                }
-                                else if(tiles[j][i] == TileType.WallAngleBottomLeft)
-                                {
-                                    tiles[j][i] = TileType.WallAngleLeftDouble;
-                                }else
-                                {
-                                    tiles[j][i] = TileType.WallAngleTopLeft;
-
-                                    int k = i - 1;
-                                    while(k >= 0 && tiles[j][k] == TileType.WallTop && GetHeight(j - 1, k) < 3)
-                                    {
-                                        tiles[j][k] = TileType.WallAngleLeft;
-                                        k--;
-                                    }
-
-                                }
-                            }
+                            tiles[j][i] = TileType.Wall2;
                         }
                     }
-
-                    if(j - 1 >= 0 && j + 1 < columns && GetHeight(j, i) > 3 && GetHeight(j - 1, i) < 3 && GetHeight(j + 1, i) < 3)
-                    {
-                        tiles[j][i] = TileType.WallAngleVerticalDouble;
-                    }
-
                 }
             }
         }
@@ -507,73 +363,10 @@ public class BoardCreator : MonoBehaviour
                         InstantiateTile(wallLevel2, obstacleTilemap, i, j);
                         break;
 
-                    case TileType.WallAngle:
-                        InstantiateTile(wallAngle, obstacleTilemap, i, j);
-                        break;
-
                     case TileType.WallTop:
                         InstantiateTile(wallTop, obstacleTilemap, i, j);
                         break;
 
-                    case TileType.WallAngleBottomRight:
-                        InstantiateTile(wallAngleBottomRight, obstacleTilemap, i, j);
-                        break;
-
-                    case TileType.WallAngleBottomLeft:
-                        InstantiateTile(wallAngleBottomLeft, obstacleTilemap, i, j);
-                        break;
-
-                    case TileType.WallAngleLeft:
-                        InstantiateTile(wallAngleLeft, obstacleTilemap, i, j);
-                        break;
-
-                    case TileType.WallAngleRight:
-                        InstantiateTile(wallAngleRight, obstacleTilemap, i, j);
-                        break;
-
-                    case TileType.WallAngleLinkLeft:
-                        InstantiateTile(wallAngleLinkLeft, obstacleTilemap, i, j);
-                        break;
-
-                    case TileType.WallAngleLinkRight:
-                        InstantiateTile(wallAngleLinkRight, obstacleTilemap, i, j);
-                        break;
-
-                    case TileType.WallAngleLeftDouble:
-                        InstantiateTile(wallAngleLeftDouble, obstacleTilemap, i, j);
-                        break;
-
-                    case TileType.WallAngleRightDouble:
-                        InstantiateTile(wallAngleRightDouble, obstacleTilemap, i, j);
-                        break;
-
-                    case TileType.WallAngleTopDouble:
-                        InstantiateTile(wallAngleTopDouble, obstacleTilemap, i, j);
-                        break;
-
-                    case TileType.WallAngleBottomDouble:
-                        InstantiateTile(wallAngleBottomDouble, obstacleTilemap, i, j);
-                        break;
-
-                    case TileType.WallAngleHorizontalDouble:
-                        InstantiateTile(wallAngleHorizontalDouble, obstacleTilemap, i, j);
-                        break;
-
-                    case TileType.WallAngleVerticalDouble:
-                        InstantiateTile(wallAngleVerticalDouble, obstacleTilemap, i, j);
-                        break;
-
-                    case TileType.WallAngleTopLeft:
-                        InstantiateTile(wallAngleTopLeft, obstacleTilemap, i, j);
-                        break;
-
-                    case TileType.WallAngleTopRight:
-                        InstantiateTile(wallAngleTopRight, obstacleTilemap, i, j);
-                        break;
-
-                    case TileType.WallAngleTop:
-                        InstantiateTile(wallAngleTop, obstacleTilemap, i, j);
-                        break;
                 }
                     // ... instantiate a wall over the top.
                     
@@ -581,6 +374,8 @@ public class BoardCreator : MonoBehaviour
                 //}else if(tiles[i][j] == TileT)
             }
         }
+
+        obstacleTilemap.RefreshAllTiles();
     }
 
 

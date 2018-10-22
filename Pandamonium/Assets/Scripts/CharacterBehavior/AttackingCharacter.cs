@@ -42,7 +42,7 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected float normalSpeed = 6;
 
-    protected float maxDashRange = 4;
+    public float maxDashRange = 4;
 
     //protected bool dashed = false;
     protected float timeToDash;

@@ -13,11 +13,6 @@ public class TutorialManager : MonoBehaviour {
             tutorialButtons.transform.GetChild(i).gameObject.SetActive(false);
     }
 
-
-    // Update is called once per frame
-    void Update() {
-
-    }
     public void PauseForTutorial(int colliderID)
     {
         if (colliderID != -1)
