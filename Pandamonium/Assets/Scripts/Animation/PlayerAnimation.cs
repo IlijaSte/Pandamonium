@@ -27,7 +27,7 @@ public class PlayerAnimation : MonoBehaviour
     void Update ()
     {
 
-        Vector3 vector3D = path.velocity;
+        Vector3 vector3D = path.desiredVelocity;
         Vector2 vector2D = new Vector2(vector3D.x, vector3D.y);
 
         //float angle = Vector3.Angle(vectorDirection, new Vector3(0 ,1,0));
