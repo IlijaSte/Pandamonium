@@ -22,7 +22,7 @@ public class ColliderGenerator : MonoBehaviour {
 
                 if (obstacleTilemap.GetTile(new Vector3Int(i, j, 0)))
                 {
-                    Instantiate(wallColliderPrefab, new Vector3(i + 0.5f, j + 0.5f, walls.position.z), wallColliderPrefab.transform.rotation, walls);
+                    //Instantiate(wallColliderPrefab, new Vector3(i + 0.5f, j + 0.5f, walls.position.z), wallColliderPrefab.transform.rotation, walls);
                 }
 
                 Tilemap foregroundTilemap;

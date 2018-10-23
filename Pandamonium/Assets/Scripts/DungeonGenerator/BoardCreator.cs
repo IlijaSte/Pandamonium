@@ -10,7 +10,7 @@ public class BoardCreator : MonoBehaviour
     // The type of tile that will be laid in a specific position.
     public enum TileType
     {
-        Wall, Floor, Wall2, WallTop, 
+        Wall, Floor, Wall2, WallTop, Acid, 
     }
 
 
@@ -33,6 +33,9 @@ public class BoardCreator : MonoBehaviour
     public TileBase wallTop;
 
     public TileBase[] outerWallTiles;                       // An array of outer wall tile prefabs.
+
+    public TileBase acid;
+
     public GameObject player;
 
     private TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
@@ -112,7 +115,7 @@ public class BoardCreator : MonoBehaviour
         int definiteNumEnemies = numEnemies.Random;
         for(int i = 0; i < definiteNumEnemies; i++)
         {
-            int roomIndex = Random.Range(0, rooms.Length - 1);
+            int roomIndex = Random.Range(1, rooms.Length - 1);
             Vector3 enemyPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth), rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight), player.transform.position.z);
 
             Instantiate(enemyPrefab, enemyPos, player.transform.rotation, enemyParent);
@@ -208,6 +211,29 @@ public class BoardCreator : MonoBehaviour
         }
     }
 
+    public void CreateAcid(Room room)
+    {
+        if (room.roomWidth > 5 && room.roomHeight > 5)
+        {
+            int acidWidth = new IntRange(2, room.roomWidth - 1).Random;
+            int acidHeight = new IntRange(2, room.roomHeight - 1).Random;
+
+            int acidX = new IntRange(room.xPos + 1, room.xPos + room.roomWidth - 1 - acidWidth).Random;
+            int acidY = new IntRange(room.yPos + 1, room.yPos + room.roomHeight - 1 - acidHeight).Random;
+
+            for (int i = 0; i < acidHeight; i++)
+            {
+                for (int j = 0; j < acidWidth; j++)
+                {
+                    //if(i == acidHeight - 1)
+                    //    tiles[acid]
+                    tiles[acidX + j][acidY + i] = TileType.Acid;
+                }
+            }
+
+        }
+    }
+
     void CreateRoomsAndCorridors()
     {
         // Create the rooms array with a random size.
@@ -242,6 +268,8 @@ public class BoardCreator : MonoBehaviour
             // Setup the room based on the previous corridor.
             rooms[i].SetupRoom(roomWidth, roomHeight, columns, rows, corridors[i - 1]);
 
+            //CreateAcid(rooms[i]);
+
             // If we haven't reached the end of the corridors array...
             if (i < corridors.Length)
             {
@@ -275,7 +303,8 @@ public class BoardCreator : MonoBehaviour
                     int yCoord = currentRoom.yPos + k;
 
                     // The coordinates in the jagged array are based on the room's position and it's width and height.
-                    tiles[xCoord][yCoord] = TileType.Floor;
+                    if(tiles[xCoord][yCoord] != TileType.Acid)
+                        tiles[xCoord][yCoord] = TileType.Floor;
 
                     if (isTutorial && i == rooms.Length - 1 && j == (currentRoom.roomWidth / 2) && k == (currentRoom.roomHeight / 2))
                     {
@@ -351,7 +380,8 @@ public class BoardCreator : MonoBehaviour
             for (int j = 0; j < tiles[i].Length; j++)
             {
                 // ... and instantiate a floor tile for it.
-                InstantiateFromArray(floorTiles, groundTilemap, i, j);
+                if(tiles[i][j] != TileType.Acid)
+                    InstantiateFromArray(floorTiles, groundTilemap, i, j);
 
                 switch (tiles[i][j])
                 {
@@ -365,6 +395,10 @@ public class BoardCreator : MonoBehaviour
 
                     case TileType.WallTop:
                         InstantiateTile(wallTop, obstacleTilemap, i, j);
+                        break;
+
+                    case TileType.Acid:
+                        InstantiateTile(acid, obstacleTilemap, i, j);
                         break;
 
                 }
