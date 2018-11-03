@@ -6,6 +6,9 @@ using Pathfinding;
 // skripta za pracenje odgovarajuceg 'target' 3D objekta u 2D prostoru
 public class CharacterMovement : MonoBehaviour {
 
+    [HideInInspector]
+    public Vector2 destination;
+
     private AIPath path;
 
     private void Start()
@@ -24,6 +27,5 @@ public class CharacterMovement : MonoBehaviour {
     public void StopMoving()
     {
         path.isStopped = true;
-
     }
 }
