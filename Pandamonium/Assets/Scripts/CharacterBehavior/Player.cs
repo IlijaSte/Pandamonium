@@ -18,6 +18,7 @@ public class Player : AttackingCharacter {
     private bool clicked = false;
 
     public GameObject tapIndicatorPrefab;
+    public GameObject attackIndicatorPrefab;
     private GameObject tapIndicator = null;
 
     public override void Start()
@@ -33,12 +34,19 @@ public class Player : AttackingCharacter {
         base.Start();
     }
 
-    protected IEnumerator ShowIndicator()
+    protected IEnumerator ShowIndicator(GameObject prefab, Transform parent = null)
     {
+
+        if (tapIndicator != null)
+        {
+            Destroy(tapIndicator);
+        }
+
+        tapIndicator = Instantiate(prefab, path.destination, Quaternion.identity, parent);
+        tapIndicator.transform.localScale = Vector3.zero;
 
         while (tapIndicator != null && Vector3.Distance(tapIndicator.transform.localScale, Vector3.one) > 0.2f)
         {
-
             tapIndicator.transform.localScale = Vector3.Lerp(tapIndicator.transform.localScale, Vector3.one, Time.deltaTime * 2);
             yield return new WaitForEndOfFrame();
         }
@@ -49,18 +57,13 @@ public class Player : AttackingCharacter {
     {
         base.MoveToPosition(pos);
 
-        if (tapIndicator != null)
-        {
-            tapIndicator.transform.position = path.destination;
-        }
-        else
-        {
-            tapIndicator = Instantiate(tapIndicatorPrefab, path.destination, Quaternion.identity);
-        }
+        StartCoroutine(ShowIndicator(tapIndicatorPrefab));
+    }
 
-        tapIndicator.transform.localScale = Vector3.zero;
-
-        StartCoroutine(ShowIndicator());
+    public override void Attack(Transform target)
+    {
+        base.Attack(target);
+        StartCoroutine(ShowIndicator(attackIndicatorPrefab, target));
     }
 
     // Update is called once per frame
@@ -85,7 +88,7 @@ public class Player : AttackingCharacter {
                         doubleClickTimer = Time.time;
                         firstClickPos = hit2D.point;
 
-                        base.Attack(hit2D.transform);
+                        Attack(hit2D.transform);
                     }
                     else if (!clicked && oneClick && Vector3.Distance(hit2D.point, firstClickPos) <= maxClickDistance)
                     {
@@ -98,9 +101,9 @@ public class Player : AttackingCharacter {
                 else if (hit2D.transform.gameObject.layer == LayerMask.NameToLayer("Obstacles"))    // ako je kliknuo na prepreke
                 {
                     oneClick = false;
-
                 }
-                else if (hit2D.transform.CompareTag("Ground"))
+                //else if (hit2D.transform.CompareTag("Ground"))
+                else if (hit2D.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
                 {
 
                     if ((!clicked && !oneClick) || clicked)

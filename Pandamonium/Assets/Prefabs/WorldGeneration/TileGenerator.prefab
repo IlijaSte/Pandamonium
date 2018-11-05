@@ -55,13 +55,13 @@ MonoBehaviour:
   columns: 50
   rows: 50
   numRooms:
-    m_Min: 6
-    m_Max: 9
+    m_Min: 16
+    m_Max: 16
   roomWidth:
-    m_Min: 6
+    m_Min: 7
     m_Max: 10
   roomHeight:
-    m_Min: 6
+    m_Min: 7
     m_Max: 10
   bossRoomWidth:
     m_Min: 14
@@ -70,8 +70,10 @@ MonoBehaviour:
     m_Min: 14
     m_Max: 20
   corridorLength:
-    m_Min: 4
-    m_Max: 6
+    m_Min: 2
+    m_Max: 4
+  fragmentWidth: -1
+  fragmentHeight: -1
   numEnemies:
     m_Min: 3
     m_Max: 6
@@ -86,17 +88,20 @@ MonoBehaviour:
   wallTop: {fileID: 11400000, guid: b28b928dff2a98f4d8b8c64582e76624, type: 2}
   outerWallTiles:
   - {fileID: 11400000, guid: f868e4e420f99f54491cee66989d9081, type: 2}
+  acid: {fileID: 11400000, guid: 67efc53f4270ce441a95c220a79972b1, type: 2}
   player: {fileID: 0}
   groundTilemap: {fileID: 0}
   obstacleTilemap: {fileID: 0}
   enemyParent: {fileID: 0}
-  enemyPrefab: {fileID: 1628753790980070, guid: 75c84e6b6e1cac542a790e6e97eb2d12,
-    type: 2}
+  enemyPrefabs:
+  - {fileID: 1628753790980070, guid: 75c84e6b6e1cac542a790e6e97eb2d12, type: 2}
   bossPrefab: {fileID: 1944221328380284, guid: 38561c1c58ef2b44892924f3b7f08068, type: 2}
   generator: {fileID: 114753057818360466}
   isTutorial: 0
   tutorialParentCollider: {fileID: 0}
   tutorialCollider: {fileID: 0}
+  widthInFragments: 0
+  heightInFragments: 0
 --- !u!114 &114753057818360466
 MonoBehaviour:
   m_ObjectHideFlags: 1

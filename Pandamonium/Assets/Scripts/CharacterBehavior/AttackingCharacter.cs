@@ -94,7 +94,7 @@ public class AttackingCharacter : MonoBehaviour {
         weapons[equippedWeaponIndex].Stop();
     }
 
-    public void Attack(Transform target)
+    public virtual void Attack(Transform target)
     {
 
         if (this.target != null && target == this.target)                     // ako je target razlicit od trenutnog
@@ -383,12 +383,12 @@ public class AttackingCharacter : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        AttackingCharacter attChar = collision.gameObject.GetComponent<AttackingCharacter>();
+        /*AttackingCharacter attChar = collision.gameObject.GetComponent<AttackingCharacter>();
 
         if(playerState == PlayerState.DASHING && attChar && attChar.type != type)
         {
             attChar.TakeDamage(weapons[equippedWeaponIndex].damage, Vector3.zero);
-        }
+        }*/
     }
 
     protected bool IsMoving()
