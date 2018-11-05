@@ -151,7 +151,7 @@ public class AttackingCharacter : MonoBehaviour {
 
     }
 
-    public void MoveToPosition(Vector3 pos)
+    public virtual void MoveToPosition(Vector3 pos)
     {
         playerState = PlayerState.WALKING;
         CM.MoveToPosition(new Vector3(pos.x, pos.y, transform.position.z));
@@ -389,6 +389,13 @@ public class AttackingCharacter : MonoBehaviour {
         {
             attChar.TakeDamage(weapons[equippedWeaponIndex].damage, Vector3.zero);
         }
+    }
+
+    protected bool IsMoving()
+    {
+
+        return !(Mathf.Approximately(path.velocity.x, 0) && Mathf.Approximately(path.velocity.y, 0));
+
     }
 
 }

@@ -17,6 +17,9 @@ public class Player : AttackingCharacter {
 
     private bool clicked = false;
 
+    public GameObject tapIndicatorPrefab;
+    private GameObject tapIndicator = null;
+
     public override void Start()
     {
         type = CharacterType.PLAYER;
@@ -28,6 +31,36 @@ public class Player : AttackingCharacter {
         }
 
         base.Start();
+    }
+
+    protected IEnumerator ShowIndicator()
+    {
+
+        while (tapIndicator != null && Vector3.Distance(tapIndicator.transform.localScale, Vector3.one) > 0.2f)
+        {
+
+            tapIndicator.transform.localScale = Vector3.Lerp(tapIndicator.transform.localScale, Vector3.one, Time.deltaTime * 2);
+            yield return new WaitForEndOfFrame();
+        }
+
+    }
+
+    public override void MoveToPosition(Vector3 pos)
+    {
+        base.MoveToPosition(pos);
+
+        if (tapIndicator != null)
+        {
+            tapIndicator.transform.position = path.destination;
+        }
+        else
+        {
+            tapIndicator = Instantiate(tapIndicatorPrefab, path.destination, Quaternion.identity);
+        }
+
+        tapIndicator.transform.localScale = Vector3.zero;
+
+        StartCoroutine(ShowIndicator());
     }
 
     // Update is called once per frame
@@ -69,6 +102,7 @@ public class Player : AttackingCharacter {
                 }
                 else if (hit2D.transform.CompareTag("Ground"))
                 {
+
                     if ((!clicked && !oneClick) || clicked)
                     {
                         oneClick = true;
@@ -102,6 +136,14 @@ public class Player : AttackingCharacter {
         if(Time.time - doubleClickTimer > doubleClickDelay)
         {
             oneClick = false;
+        }
+
+        //if (!IsMoving())
+        if(playerState == PlayerState.IDLE)
+        {
+            Destroy(tapIndicator);
+            tapIndicator = null;
+
         }
 
         base.Update();

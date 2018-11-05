@@ -27,7 +27,7 @@ public class Room
         // Set the x and y coordinates so the room is roughly in the middle of the board.
         System.Random random = new System.Random();
 
-        xPos = 0;
+        xPos = 1;
         yPos = random.Next(0, rows - roomHeight / 2);
 
         (fragment = Fragment.GetFragmentAt(context, 0, random.Next(0, rows - roomHeight / 2))).SetRoom(this);
@@ -62,7 +62,14 @@ public class Room
 
                 // The x coordinate can be random but the left-most possibility is no further than the width
                 // and the right-most possibility is that the end of the corridor is at the position of the room.
-                xPos = UnityEngine.Random.Range(Mathf.Clamp(corridor.EndPositionX - roomWidth, fragment.xPos + 1, corridor.EndPositionX - roomWidth + 1), fragment.xPos + fragment.GetWidth() - 1 - roomWidth);
+                
+                xPos = UnityEngine.Random.Range(Mathf.Clamp(corridor.EndPositionX - roomWidth, fragment.xPos + 1, corridor.EndPositionX - roomWidth), Mathf.Clamp(fragment.xPos + fragment.GetWidth() - roomWidth - 1, fragment.xPos + 1, fragment.xPos + fragment.GetWidth() - roomWidth - 1));
+
+                do
+                {
+                    roomWidth = widthRange.Random;
+                    xPos = UnityEngine.Random.Range(fragment.xPos, fragment.xPos + fragment.GetWidth() - roomWidth);
+                } while (xPos > corridor.EndPositionX || xPos + roomWidth - 1 < corridor.EndPositionX);
 
                 // This must be clamped to ensure that the room doesn't go off the board.
                 //xPos = Mathf.Clamp(xPos, 0, columns - roomWidth);
@@ -73,7 +80,13 @@ public class Room
 
                 xPos = corridor.EndPositionX;
 
-                yPos = UnityEngine.Random.Range(Mathf.Clamp(corridor.EndPositionY - roomHeight, fragment.yPos + 1, corridor.EndPositionY - roomHeight + 1), corridor.EndPositionY - (corridor.EndPositionY + roomHeight - (fragment.yPos + fragment.GetHeight())));
+                yPos = UnityEngine.Random.Range(Mathf.Clamp(corridor.EndPositionY - roomHeight, fragment.yPos + 1, corridor.EndPositionY - roomHeight + 1), Mathf.Clamp(fragment.yPos + fragment.GetHeight() - roomHeight - 1, fragment.yPos + 1, fragment.yPos + fragment.GetHeight() - roomHeight - 1));
+
+                do
+                {
+                    roomHeight = heightRange.Random;
+                    yPos = UnityEngine.Random.Range(fragment.yPos, fragment.yPos + fragment.GetHeight() - roomHeight);
+                } while (yPos > corridor.EndPositionY || yPos + roomHeight - 1 < corridor.EndPositionY);
 
                 //yPos = Mathf.Clamp(yPos, 0, rows - roomHeight);
                 break;
@@ -85,7 +98,13 @@ public class Room
 
                 yPos = corridor.EndPositionY - roomHeight; // + 1 ?
 
-                xPos = UnityEngine.Random.Range(Mathf.Clamp(corridor.EndPositionX - roomWidth, fragment.xPos + 1, corridor.EndPositionX - roomWidth + 1), fragment.xPos + fragment.GetWidth() - 1 - roomWidth);
+                xPos = UnityEngine.Random.Range(Mathf.Clamp(corridor.EndPositionX - roomWidth, fragment.xPos + 1, corridor.EndPositionX - roomWidth), Mathf.Clamp(fragment.xPos + fragment.GetWidth() - roomWidth - 1, fragment.xPos + 1, fragment.xPos + fragment.GetWidth() - roomWidth - 1));
+
+                do
+                {
+                    roomWidth = widthRange.Random;
+                    xPos = UnityEngine.Random.Range(fragment.xPos, fragment.xPos + fragment.GetWidth() - roomWidth);
+                } while (xPos > corridor.EndPositionX || xPos + roomWidth - 1 < corridor.EndPositionX);
 
                 //xPos = Mathf.Clamp(xPos, 0, columns - roomWidth);
                 break;
@@ -96,7 +115,13 @@ public class Room
 
                 xPos = corridor.EndPositionX - roomWidth;
 
-                yPos = UnityEngine.Random.Range(Mathf.Clamp(corridor.EndPositionY - roomHeight, fragment.yPos + 1, corridor.EndPositionY - roomHeight + 1), corridor.EndPositionY - (corridor.EndPositionY + roomHeight - (fragment.yPos + fragment.GetHeight())));
+                yPos = UnityEngine.Random.Range(Mathf.Clamp(corridor.EndPositionY - roomHeight, fragment.yPos + 1, corridor.EndPositionY - roomHeight + 1), Mathf.Clamp(fragment.yPos + fragment.GetHeight() - roomHeight - 1, fragment.yPos + 1, fragment.yPos + fragment.GetHeight() - roomHeight - 1));
+
+                do
+                {
+                    roomHeight = heightRange.Random;
+                    yPos = UnityEngine.Random.Range(fragment.yPos, fragment.yPos + fragment.GetHeight() - roomHeight);
+                } while (yPos > corridor.EndPositionY || yPos + roomHeight - 1 < corridor.EndPositionY);
 
                 break;
         }
