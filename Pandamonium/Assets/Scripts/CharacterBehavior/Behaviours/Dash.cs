@@ -26,7 +26,7 @@ public class Dash: MonoBehaviour
         }
     }
 
-    IEnumerator Dash(Vector3 to)
+    /*IEnumerator Dash(Vector3 to)
     {
         if (playerState == PlayerState.DASHING || timeToDash < dashCooldown)
             yield break;
@@ -58,5 +58,5 @@ public class Dash: MonoBehaviour
         yield return StartCoroutine(Dash(at.position + (transform.position - at.position).normalized * 1.5f));
         dashingAt = at;
         yield return null;
-    }
+    }*/
 }

@@ -13,7 +13,7 @@ public class Enemy : AttackingCharacter {
     public override void Start()
     {
         numEnemies ++;
-        // ovde napraviti 3d objekat i dodeliti ga target-u CharacterMovement-a
+
         base.Start();
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
