@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour {
     {
 
         SceneManager.LoadScene("LoadingScene");
-        nextScene = "TutorialScene";
+        nextScene = "TutorialScene2";
        // StartCoroutine(LoadTutorialAsyncScene());
 
 
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator LoadTutorialAsyncScene()
     { 
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("TutorialScene");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("TutorialScene2");
     
         while (!asyncLoad.isDone)
         {

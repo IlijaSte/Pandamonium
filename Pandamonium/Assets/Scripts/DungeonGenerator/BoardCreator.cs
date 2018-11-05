@@ -48,7 +48,7 @@ public class BoardCreator : MonoBehaviour
     public Tilemap obstacleTilemap;
 
     public Transform enemyParent;
-    public GameObject enemyPrefab;
+    public GameObject[] enemyPrefabs;
     public GameObject bossPrefab;
 
     public ColliderGenerator generator;
@@ -104,7 +104,7 @@ public class BoardCreator : MonoBehaviour
                 int randomIntX = Random.Range(2, rooms[i].roomWidth);
                 int randomIntY = Random.Range(2, rooms[i].roomHeight);
                 Vector3 enemyPos = new Vector3(rooms[i].xPos + randomIntX, rooms[i].yPos + randomIntY, player.transform.position.z);
-                Instantiate(enemyPrefab, enemyPos, player.transform.rotation, enemyParent);
+                Instantiate(enemyPrefabs[0], enemyPos, player.transform.rotation, enemyParent);
             }
             
         }
@@ -116,9 +116,9 @@ public class BoardCreator : MonoBehaviour
         for(int i = 0; i < definiteNumEnemies; i++)
         {
             int roomIndex = Random.Range(1, rooms.Length - 1);
-            Vector3 enemyPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth), rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight), player.transform.position.z);
+            Vector3 enemyPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth - 1), rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight - 1), player.transform.position.z);
 
-            Instantiate(enemyPrefab, enemyPos, player.transform.rotation, enemyParent);
+            Instantiate(enemyPrefabs[Mathf.RoundToInt(Random.value)], enemyPos, player.transform.rotation, enemyParent);
         }
     }
 
