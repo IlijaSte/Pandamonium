@@ -45,7 +45,7 @@ public class Player : AttackingCharacter {
         tapIndicator = Instantiate(prefab, path.destination, Quaternion.identity, parent);
         tapIndicator.transform.localScale = Vector3.zero;
 
-        while (tapIndicator != null && Vector3.Distance(tapIndicator.transform.localScale, Vector3.one) > 0.2f)
+        while (tapIndicator != null && Vector3.Distance(tapIndicator.transform.localScale, Vector3.one) > 0.02f)
         {
             tapIndicator.transform.localScale = Vector3.Lerp(tapIndicator.transform.localScale, Vector3.one, Time.deltaTime * 2);
             yield return new WaitForEndOfFrame();

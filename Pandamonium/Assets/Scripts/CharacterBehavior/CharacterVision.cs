@@ -23,6 +23,10 @@ public class CharacterVision : MonoBehaviour {
         {
             if (tr == null) continue;           // !!!
 
+            BoxCollider2D collider = tr.GetComponent<BoxCollider2D>();
+
+            if (collider == null || (collider != null && !collider.enabled)) continue;
+
             if(character.CanSee(tr, GetComponent<CircleCollider2D>().radius))
             {
                 float tempDistance;
@@ -42,7 +46,7 @@ public class CharacterVision : MonoBehaviour {
     {
         AttackingCharacter enemy = collision.GetComponent<AttackingCharacter>();
 
-        if (enemy)
+        if (enemy && enemy.type != character.type)
         {
             enemiesInRange.Add(collision.transform);
         }
@@ -53,7 +57,7 @@ public class CharacterVision : MonoBehaviour {
 
         AttackingCharacter enemy = collision.GetComponent<AttackingCharacter>();
 
-        if (enemy)
+        if (enemy && enemy.type != character.type)
         {
             enemiesInRange.Remove(collision.transform);
         }
@@ -64,7 +68,7 @@ public class CharacterVision : MonoBehaviour {
     {
         AttackingCharacter enemy = collision.GetComponent<AttackingCharacter>();
 
-        if (enemy && !enemiesInRange.Contains(collision.transform))
+        if (enemy && enemy.type != character.type && !enemiesInRange.Contains(collision.transform))
         {
             enemiesInRange.Add(collision.transform);
         }

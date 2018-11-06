@@ -84,6 +84,13 @@ public class AttackingCharacter : MonoBehaviour {
         approxPosition = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
         boundsCenter = GetComponent<BoxCollider2D>().bounds.center;
 
+        GraphUpdateObject guo = new GraphUpdateObject(GetComponent<BoxCollider2D>().bounds)
+        {
+            updatePhysics = true,
+            modifyTag = true,
+            setTag = (int)type + 1
+        };
+        AstarPath.active.UpdateGraphs(guo);
     }
 
     public void StopAttacking()
@@ -268,8 +275,8 @@ public class AttackingCharacter : MonoBehaviour {
 
             case PlayerState.ATTACKING:
                 {
-
-                    if (target == null)                                         // ako je protivnik mrtav
+                    Worm worm;
+                    if (target == null || ((worm = target.GetComponent<Worm>()) != null && worm.state == Worm.WormState.BURIED))                                         // ako je protivnik mrtav
                     {
                         StopAttacking();
 

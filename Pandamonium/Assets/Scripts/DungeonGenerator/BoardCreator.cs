@@ -41,7 +41,8 @@ public class BoardCreator : MonoBehaviour
 
     public GameObject player;
 
-    private TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
+    [HideInInspector]
+    public TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
     [HideInInspector]
     public Room[] rooms;                                     // All the rooms that are created for this board.
     private Room bossRoom;
@@ -73,6 +74,8 @@ public class BoardCreator : MonoBehaviour
     [HideInInspector]
     public int heightInFragments;
 
+    public static BoardCreator I = null;
+
     private void InitializeFragments()
     {
 
@@ -99,8 +102,23 @@ public class BoardCreator : MonoBehaviour
         }
     }
 
+
+
     private void Awake()
     {
+
+        //Check if instance already exists
+        if (I == null)
+
+            //if not, set instance to this
+            I = this;
+
+        //If instance already exists and it's not this:
+        else if (I != this)
+
+            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+            Destroy(gameObject);
+
         // Create the board holder.
         boardHolder = new GameObject("BoardHolder");
 
@@ -157,7 +175,7 @@ public class BoardCreator : MonoBehaviour
             int roomIndex = Random.Range(1, rooms.Length - 1);
             Vector3 enemyPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth - 1), rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight - 1), player.transform.position.z);
 
-            Instantiate(enemyPrefabs[Mathf.RoundToInt(Random.Range(0, enemyPrefabs.Length - 1))], enemyPos, player.transform.rotation, enemyParent);
+            Instantiate(enemyPrefabs[Mathf.RoundToInt(Random.Range(0, enemyPrefabs.Length))], enemyPos, player.transform.rotation, enemyParent);
         }
     }
 

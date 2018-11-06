@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Worm : Enemy {
 
-    private static int NUM_STATES = 5;
+    private static int NUM_STATES = 4;
 
     private float timeToStateChange = 1;
 
@@ -12,9 +12,10 @@ public class Worm : Enemy {
 
     public GameObject projectilePrefab;
 
-    private enum WormState{ BURIED, EMERGING, ATTACKING, BURYING };
+    public enum WormState{ BURIED, EMERGING, ATTACKING, BURYING };
 
-    private WormState state = WormState.BURIED;
+    [HideInInspector]
+    public WormState state = WormState.BURIED;
 
     private bool spottedPlayer = false;
 
@@ -26,45 +27,60 @@ public class Worm : Enemy {
 
         animator = GetComponentInChildren<Animator>();
 
+        Vector3Int tilePos = BoardCreator.I.groundTilemap.WorldToCell(transform.position);
+
+        transform.position = tilePos + new Vector3(0.5f, 0.5f);
     }
 
     private void FireProjectiles()
     {
 
         for (int i = 0; i < 3; i++) {
-            Instantiate(projectilePrefab, (Vector2)player.position + Random.insideUnitCircle, Quaternion.identity);
+            AcidProjectile projectile = Instantiate(projectilePrefab, (Vector2)transform.position + new Vector2(0, 1.5f), Quaternion.identity).GetComponent<AcidProjectile>();
+            Vector2 shootPos = (Vector2)player.position + Random.insideUnitCircle;
+            projectile.Shoot(shootPos);
         }
 
     }
 
-    private Vector2 FindEmergePosition()
+    private Vector3 FindEmergePosition()
     {
 
         bool hitSmth = false;
         Vector2 emergePos;
+        Vector3Int tilePos;
         do
         {
             emergePos = new Vector2(player.position.x, player.position.y) + Random.insideUnitCircle * vision.GetComponent<CircleCollider2D>().radius;
 
-            RaycastHit2D hit2D;
-            hitSmth = false;
+            tilePos = BoardCreator.I.obstacleTilemap.WorldToCell(emergePos);
 
-            if (hit2D = Physics2D.Raycast(emergePos, Vector2.zero, 0f, ignoreMask))
+            if (tilePos.x < BoardCreator.I.columns && tilePos.y < BoardCreator.I.rows &&
+                tilePos.x >= 0 && tilePos.y >= 0 && BoardCreator.I.tiles[tilePos.x][tilePos.y] == BoardCreator.TileType.Floor)
             {
+                RaycastHit2D hit2D;
+                hitSmth = false;
 
-                if (hit2D.transform.CompareTag("Enemy"))
+                if (hit2D = Physics2D.Raycast(new Vector2(tilePos.x, tilePos.y), Vector2.zero, 0f, ignoreMask))
                 {
-                    hitSmth = true;
 
-                }
-                else if (hit2D.transform.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
-                {
-                    hitSmth = true;
+                    if (hit2D.transform.CompareTag("Enemy"))
+                    {
+                        hitSmth = true;
+
+                    }
+
                 }
             }
+            else
+            {
+                hitSmth = true;
+            }
+
+            
         } while (hitSmth);
 
-        return emergePos;
+        return tilePos + new Vector3(0.5f, 0.5f);
 
     }
 
@@ -104,9 +120,8 @@ public class Worm : Enemy {
 
                     // play emerging animation
                     GetComponent<BoxCollider2D>().enabled = true;
-                    animator.GetComponent<SpriteRenderer>().enabled = true;
+                    //animator.GetComponent<SpriteRenderer>().enabled = true;
                     GetComponentInChildren<Canvas>().enabled = true;
-                    transform.position = FindEmergePosition();
 
                     break;
 
@@ -128,7 +143,8 @@ public class Worm : Enemy {
                     // disable colliders...
                     GetComponent<BoxCollider2D>().enabled = false;
                     GetComponentInChildren<Canvas>().enabled = false;
-                    animator.GetComponent<SpriteRenderer>().enabled = false;
+                    transform.position = FindEmergePosition();
+                    //animator.GetComponent<SpriteRenderer>().enabled = false;
                     break;
 
             }
