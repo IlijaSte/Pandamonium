@@ -9,6 +9,8 @@ public class AcidProjectile : MonoBehaviour {
 
     public float speed = 50;
 
+    private Rigidbody2D rb;
+
     private Vector2 GetInitVelocity()
     {
         float g = -Physics2D.gravity.y;
@@ -49,13 +51,16 @@ public class AcidProjectile : MonoBehaviour {
     public void Shoot(Vector2 target)
     {
         this.target = target;
-        GetComponent<Rigidbody2D>().AddForce(GetInitVelocity(), ForceMode2D.Impulse);
+
+        rb = GetComponent<Rigidbody2D>();
+
+        rb.AddForce(GetInitVelocity(), ForceMode2D.Impulse);
         
     }
 
     public void Update()
     {
-        if(Mathf.Abs(target.y - transform.position.y) < 0.05f && Mathf.Abs(target.x - transform.position.x) < 0.05f)
+        if(rb.velocity.y < 0 && transform.position.y <= target.y)
         {
             Destroy(gameObject);
         }
