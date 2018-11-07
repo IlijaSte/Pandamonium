@@ -73,4 +73,9 @@ public class CharacterVision : MonoBehaviour {
             enemiesInRange.Add(collision.transform);
         }
     }
+
+    public bool IsInRange(Transform ac)
+    {
+        return enemiesInRange.Contains(ac);
+    }
 }

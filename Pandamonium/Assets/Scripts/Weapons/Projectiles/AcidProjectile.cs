@@ -10,7 +10,10 @@ public class AcidProjectile : MonoBehaviour {
     public float speed = 50;
 
     private Rigidbody2D rb;
+    private CircleCollider2D collider;
     private Worm worm;
+    private Transform indicator;
+    private Animator animator;
 
     private Vector2 GetInitVelocity()
     {
@@ -49,21 +52,40 @@ public class AcidProjectile : MonoBehaviour {
         return velocity;
     }
 
-    public void Shoot(Worm worm, Vector2 target)
+    public void Shoot(Worm worm, Vector2 target, Transform indicator)
     {
         this.target = target;
         this.worm = worm;
+        this.indicator = indicator;
 
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        collider = GetComponent<CircleCollider2D>();
+        collider.enabled = false;
 
         rb.AddForce(GetInitVelocity(), ForceMode2D.Impulse);
         
+        if(target.x - transform.position.x < 0)
+        {
+            animator.SetBool("Mirror", true);
+           
+        }
     }
 
     public void Update()
     {
+        if(Vector2.Distance(target, transform.position) < 0.5)
+        {
+            collider.enabled = true;
+        }
+        else
+        {
+            collider.enabled = false;
+        }
+
         if(rb.velocity.y < 0 && transform.position.y <= target.y)
         {
+            Destroy(indicator.gameObject);
             Destroy(gameObject);
         }
     }
@@ -77,6 +99,7 @@ public class AcidProjectile : MonoBehaviour {
         {
             player.TakeDamage(damage, Vector3.zero);
             player.TakeDamageOverTime(worm.transform, damage, 1, 3);
+            Destroy(indicator.gameObject);
             Destroy(gameObject);
         }
     }

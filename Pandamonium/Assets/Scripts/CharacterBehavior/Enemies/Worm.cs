@@ -11,6 +11,7 @@ public class Worm : Enemy {
     public float speed = 1;
 
     public GameObject projectilePrefab;
+    public GameObject indicatorPrefab;
 
     public enum WormState{ BURIED, EMERGING, ATTACKING, BURYING };
 
@@ -22,6 +23,8 @@ public class Worm : Enemy {
     private Animator animator;
 
     private Room room;
+
+    private Vector2 targetPos;
 
     public override void Start()
     {
@@ -41,8 +44,11 @@ public class Worm : Enemy {
 
         for (int i = 0; i < 3; i++) {
             AcidProjectile projectile = Instantiate(projectilePrefab, (Vector2)transform.position + new Vector2(0, 1.5f), Quaternion.identity).GetComponent<AcidProjectile>();
-            Vector2 shootPos = (Vector2)player.position + Random.insideUnitCircle;
-            projectile.Shoot(this, shootPos);
+            Vector2 shootPos = (Vector2)targetPos + Random.insideUnitCircle;
+
+            Transform indicator = Instantiate(indicatorPrefab, shootPos, Quaternion.identity).transform;
+
+            projectile.Shoot(this, shootPos, indicator);
         }
 
     }
@@ -90,14 +96,42 @@ public class Worm : Enemy {
 
     }
 
+    private void Emerge()
+    {
+
+        if (room != Room.GetRoomAtPos(player.transform.position))
+        {
+            spottedPlayer = false;
+        }
+        else
+        {
+
+            // play emerging animation
+            GetComponent<BoxCollider2D>().enabled = true;
+            //animator.GetComponent<SpriteRenderer>().enabled = true;
+            GetComponentInChildren<Canvas>().enabled = true;
+        }
+
+    }
+
+    private void Submerge()
+    {
+
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponentInChildren<Canvas>().enabled = false;
+
+    }
+
     protected override void Update()
     {
 
         if(!spottedPlayer){
 
-            if (CanSee(player, vision.GetComponent<CircleCollider2D>().radius))
+            if (CanSee(player, vision.GetComponent<CircleCollider2D>().radius) &&
+                (room == Room.GetRoomAtPos(player.transform.position)))
             {
                 spottedPlayer = true;
+                //state = WormState.BURIED;
             }
             else return;
 
@@ -124,44 +158,46 @@ public class Worm : Enemy {
 
                 case WormState.BURIED:
 
-                    if (room != Room.GetRoomAtPos(player.transform.position))
-                    {
-                        spottedPlayer = false;
-                        return;
-                    }
+                    Emerge();
 
-                    // play emerging animation
-                    GetComponent<BoxCollider2D>().enabled = true;
-                    //animator.GetComponent<SpriteRenderer>().enabled = true;
-                    GetComponentInChildren<Canvas>().enabled = true;
+                    if (!spottedPlayer)
+                        return;
 
                     break;
 
                 case WormState.EMERGING:
 
-                    // play attacking animation
                     nextAttackBG.SetActive(true);
+                    targetPos = player.position;
                     break;
 
                 case WormState.ATTACKING:
 
-                    // play bury animation
                     FireProjectiles();
                     nextAttackBG.SetActive(false);
                     break;
 
                 case WormState.BURYING:
 
-                    // disable colliders...
-                    GetComponent<BoxCollider2D>().enabled = false;
-                    GetComponentInChildren<Canvas>().enabled = false;
+                    Submerge();
                     transform.position = FindEmergePosition();
-                    //animator.GetComponent<SpriteRenderer>().enabled = false;
                     break;
 
             }
 
-            state = (WormState)(((int)state + 1) % NUM_STATES);
+            if (state != WormState.BURYING && room != Room.GetRoomAtPos(player.transform.position))
+            {
+                //spottedPlayer = false;
+                state = WormState.BURYING;
+                nextAttackBG.SetActive(false);
+                //nextAttackBG.SetActive(false);
+                //Submerge();
+            }
+            else
+            {
+                state = (WormState)(((int)state + 1) % NUM_STATES);
+            }
+
             animator.SetInteger("State", (int)state);
         }
 

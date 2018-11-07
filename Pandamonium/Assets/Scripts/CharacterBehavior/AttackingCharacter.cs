@@ -414,6 +414,16 @@ public class AttackingCharacter : MonoBehaviour {
 
     public virtual void Die()
     {
+
+        Bounds oldBounds = new Bounds(boundsCenter, GetComponent<BoxCollider2D>().bounds.size);
+        GraphUpdateObject guo = new GraphUpdateObject(oldBounds)
+        {
+            updatePhysics = true,
+            modifyTag = true,
+            setTag = 0
+        };
+        AstarPath.active.UpdateGraphs(guo);
+
         Destroy(gameObject);
     }
 

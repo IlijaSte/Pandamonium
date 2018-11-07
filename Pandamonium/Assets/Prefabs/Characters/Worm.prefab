@@ -307,7 +307,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1994364961457230}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -537,6 +537,8 @@ MonoBehaviour:
   maxDashRange: 4
   speed: 0.75
   projectilePrefab: {fileID: 1620057767749030, guid: b422b44fe3c6fc94aaed2421f58befda,
+    type: 2}
+  indicatorPrefab: {fileID: 1605630707581996, guid: 62994842edcb1ac418ef99abe1f827cb,
     type: 2}
   state: 0
 --- !u!212 &212602623631793378

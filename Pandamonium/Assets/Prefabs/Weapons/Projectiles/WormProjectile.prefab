@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114312762798533572}
   - component: {fileID: 50796921857774904}
   - component: {fileID: 58684727964506916}
+  - component: {fileID: 111948310828815408}
   m_Layer: 0
   m_Name: WormProjectile
   m_TagString: Untagged
@@ -97,6 +98,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!111 &111948310828815408
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620057767749030}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: a2fb03a219af77c44bb351765a40c825, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a2fb03a219af77c44bb351765a40c825, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &114312762798533572
 MonoBehaviour:
   m_ObjectHideFlags: 1

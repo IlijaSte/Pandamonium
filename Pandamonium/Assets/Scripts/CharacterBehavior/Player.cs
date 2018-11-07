@@ -39,10 +39,13 @@ public class Player : AttackingCharacter {
 
         if (tapIndicator != null)
         {
+
             Destroy(tapIndicator);
         }
 
-        tapIndicator = Instantiate(prefab, path.destination, Quaternion.identity, parent);
+        Vector2 instantiatePos = (parent == null ? path.destination : parent.position);
+
+        tapIndicator = Instantiate(prefab, instantiatePos, Quaternion.identity, parent);
         tapIndicator.transform.localScale = Vector3.zero;
 
         while (tapIndicator != null && Vector3.Distance(tapIndicator.transform.localScale, Vector3.one) > 0.02f)
@@ -51,6 +54,7 @@ public class Player : AttackingCharacter {
             yield return new WaitForEndOfFrame();
         }
 
+        yield break;
     }
 
     public override void MoveToPosition(Vector3 pos)
@@ -68,6 +72,9 @@ public class Player : AttackingCharacter {
 
     // Update is called once per frame
     protected override void Update () {
+
+
+        base.Update();
 
         GameObject selectedObject = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         if (playerState != PlayerState.DASHING && Input.GetMouseButton(0) && (selectedObject == null || (selectedObject && selectedObject.transform.parent.CompareTag("NonBlockableUI"))))
@@ -95,7 +102,7 @@ public class Player : AttackingCharacter {
 
                         oneClick = false;
 
-                        StartCoroutine(Dash(hit2D.transform));
+                        //StartCoroutine(Dash(hit2D.transform));
                     }
                 }
                 else if (hit2D.transform.gameObject.layer == LayerMask.NameToLayer("Obstacles"))    // ako je kliknuo na prepreke
@@ -149,7 +156,6 @@ public class Player : AttackingCharacter {
 
         }
 
-        base.Update();
     }
 
     public override void TakeDamage(float damage, Vector3 dir)
