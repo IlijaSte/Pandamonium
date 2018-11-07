@@ -30,7 +30,7 @@ public class Room
         xPos = 1;
         yPos = random.Next(0, rows - roomHeight / 2);
 
-        (fragment = Fragment.GetFragmentAt(context, 0, random.Next(0, rows - roomHeight / 2))).SetRoom(this);
+        (fragment = Fragment.GetFragmentAt(context, new Vector2Int(0, random.Next(0, rows - roomHeight / 2)))).SetRoom(this);
 
         yPos = random.Next(fragment.yPos, fragment.yPos + 3);
     }
@@ -112,6 +112,20 @@ public class Room
 
                 break;
         }
+    }
+
+    public static Room GetRoomAtPos(Vector2 pos)
+    {
+
+        return (Fragment.GetFragmentAt(BoardCreator.I, new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y)))).room;
+
+    }
+
+    public Vector2Int GetRandomPos()
+    {
+
+        return new Vector2Int(UnityEngine.Random.Range(xPos, xPos + roomWidth - 1), UnityEngine.Random.Range(yPos, yPos + roomHeight - 1));
+
     }
 
 }

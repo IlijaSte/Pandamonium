@@ -13,7 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 21300004, guid: 76fa9e5394b3c4e48a1bfc55c8150854, type: 3}
   m_DefaultColliderType: 1
-  m_NeighborType: 0
   m_TilingRules:
   - m_Neighbors: 0100000001000000010000000100000001000000010000000100000001000000
     m_Sprites:

@@ -21,6 +21,8 @@ public class Worm : Enemy {
 
     private Animator animator;
 
+    private Room room;
+
     public override void Start()
     {
         base.Start();
@@ -30,6 +32,8 @@ public class Worm : Enemy {
         Vector3Int tilePos = BoardCreator.I.groundTilemap.WorldToCell(transform.position);
 
         transform.position = tilePos + new Vector3(0.5f, 0.5f);
+
+        room = Room.GetRoomAtPos(transform.position);
     }
 
     private void FireProjectiles()
@@ -38,7 +42,7 @@ public class Worm : Enemy {
         for (int i = 0; i < 3; i++) {
             AcidProjectile projectile = Instantiate(projectilePrefab, (Vector2)transform.position + new Vector2(0, 1.5f), Quaternion.identity).GetComponent<AcidProjectile>();
             Vector2 shootPos = (Vector2)player.position + Random.insideUnitCircle;
-            projectile.Shoot(shootPos);
+            projectile.Shoot(this, shootPos);
         }
 
     }
@@ -51,7 +55,9 @@ public class Worm : Enemy {
         Vector3Int tilePos;
         do
         {
-            emergePos = new Vector2(player.position.x, player.position.y) + Random.insideUnitCircle * vision.GetComponent<CircleCollider2D>().radius;
+            //emergePos = new Vector2(player.position.x, player.position.y) + Random.insideUnitCircle * vision.GetComponent<CircleCollider2D>().radius;
+
+            emergePos = room.GetRandomPos();
 
             tilePos = BoardCreator.I.obstacleTilemap.WorldToCell(emergePos);
 
@@ -117,6 +123,12 @@ public class Worm : Enemy {
             {
 
                 case WormState.BURIED:
+
+                    if (room != Room.GetRoomAtPos(player.transform.position))
+                    {
+                        spottedPlayer = false;
+                        return;
+                    }
 
                     // play emerging animation
                     GetComponent<BoxCollider2D>().enabled = true;

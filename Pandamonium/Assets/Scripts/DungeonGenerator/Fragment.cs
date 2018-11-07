@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fragment {
 
-    Room room;
+    public Room room;
 
     private BoardCreator context;
 
@@ -41,13 +41,13 @@ public class Fragment {
         this.room = room;
     }
 
-    public static Fragment GetFragmentAt(BoardCreator bc, int x, int y)
+    public static Fragment GetFragmentAt(BoardCreator bc, Vector2Int pos)
     {
 
-        if (y < 0 || x < 0 || y >= bc.fragmentHeight * bc.heightInFragments || x >= bc.fragmentWidth * bc.widthInFragments)
+        if (pos.y < 0 || pos.x < 0 || pos.y >= bc.fragmentHeight * bc.heightInFragments || pos.x >= bc.fragmentWidth * bc.widthInFragments)
             return null; ;
 
-        return bc.fragments[y / bc.fragmentHeight][x / bc.fragmentWidth];
+        return bc.fragments[pos.y / bc.fragmentHeight][pos.x / bc.fragmentWidth];
     }
 
     public Fragment GetNeighbor(Direction direction)

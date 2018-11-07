@@ -10,6 +10,7 @@ public class AcidProjectile : MonoBehaviour {
     public float speed = 50;
 
     private Rigidbody2D rb;
+    private Worm worm;
 
     private Vector2 GetInitVelocity()
     {
@@ -48,9 +49,10 @@ public class AcidProjectile : MonoBehaviour {
         return velocity;
     }
 
-    public void Shoot(Vector2 target)
+    public void Shoot(Worm worm, Vector2 target)
     {
         this.target = target;
+        this.worm = worm;
 
         rb = GetComponent<Rigidbody2D>();
 
@@ -73,7 +75,8 @@ public class AcidProjectile : MonoBehaviour {
 
         if (player != null)
         {
-            player.TakeDamage(damage, Vector2.zero);
+            player.TakeDamage(damage, Vector3.zero);
+            player.TakeDamageOverTime(worm.transform, damage, 1, 3);
             Destroy(gameObject);
         }
     }

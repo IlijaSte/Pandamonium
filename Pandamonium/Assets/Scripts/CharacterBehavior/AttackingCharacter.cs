@@ -52,6 +52,8 @@ public class AttackingCharacter : MonoBehaviour {
     protected Vector2 approxPosition;
     private Vector2 boundsCenter;
 
+    private ArrayList dotSources = new ArrayList();
+
     public virtual void Awake()
     {
 
@@ -380,6 +382,34 @@ public class AttackingCharacter : MonoBehaviour {
         {
             Die();
         }
+    }
+
+    protected virtual IEnumerator DoT(Transform source, float damage, float interval, int times)
+    {
+
+        while(times-- > 0)
+        {
+            yield return new WaitForSeconds(interval);
+            TakeDamage(damage, Vector3.zero);
+           
+        }
+
+        if (dotSources.Contains(source))
+        {
+            dotSources.Remove(source);
+        }
+    }
+
+    // interval - interval na koji ce igrac primati damage (u sekundama); timeInIntervals - trajanje DoT-a u intervalima
+    public virtual void TakeDamageOverTime(Transform source, float damage, float interval, int times)
+    {
+        if (!dotSources.Contains(source))
+        {
+            dotSources.Add(source);
+            StartCoroutine(DoT(source, damage, interval, times));
+        }
+
+        
     }
 
     public virtual void Die()
