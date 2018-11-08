@@ -17,6 +17,10 @@ public class Player : AttackingCharacter {
 
     private bool clicked = false;
 
+    public GameObject tapIndicatorPrefab;
+    public GameObject attackIndicatorPrefab;
+    private GameObject tapIndicator = null;
+
     public override void Start()
     {
         type = CharacterType.PLAYER;
@@ -30,8 +34,47 @@ public class Player : AttackingCharacter {
         base.Start();
     }
 
+    protected IEnumerator ShowIndicator(GameObject prefab, Transform parent = null)
+    {
+
+        if (tapIndicator != null)
+        {
+
+            Destroy(tapIndicator);
+        }
+
+        Vector2 instantiatePos = (parent == null ? path.destination : parent.position);
+
+        tapIndicator = Instantiate(prefab, instantiatePos, Quaternion.identity, parent);
+        tapIndicator.transform.localScale = Vector3.zero;
+
+        while (tapIndicator != null && Vector3.Distance(tapIndicator.transform.localScale, Vector3.one) > 0.02f)
+        {
+            tapIndicator.transform.localScale = Vector3.Lerp(tapIndicator.transform.localScale, Vector3.one, Time.deltaTime * 2);
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield break;
+    }
+
+    public override void MoveToPosition(Vector3 pos)
+    {
+        base.MoveToPosition(pos);
+
+        StartCoroutine(ShowIndicator(tapIndicatorPrefab));
+    }
+
+    public override void Attack(Transform target)
+    {
+        base.Attack(target);
+        StartCoroutine(ShowIndicator(attackIndicatorPrefab, target));
+    }
+
     // Update is called once per frame
     protected override void Update () {
+
+
+        base.Update();
 
         GameObject selectedObject = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         if (playerState != PlayerState.DASHING && Input.GetMouseButton(0) && (selectedObject == null || (selectedObject && selectedObject.transform.parent.CompareTag("NonBlockableUI"))))
@@ -52,23 +95,24 @@ public class Player : AttackingCharacter {
                         doubleClickTimer = Time.time;
                         firstClickPos = hit2D.point;
 
-                        base.Attack(hit2D.transform);
+                        Attack(hit2D.transform);
                     }
                     else if (!clicked && oneClick && Vector3.Distance(hit2D.point, firstClickPos) <= maxClickDistance)
                     {
 
                         oneClick = false;
 
-                        StartCoroutine(Dash(hit2D.transform));
+                        //StartCoroutine(Dash(hit2D.transform));
                     }
                 }
                 else if (hit2D.transform.gameObject.layer == LayerMask.NameToLayer("Obstacles"))    // ako je kliknuo na prepreke
                 {
                     oneClick = false;
-
                 }
-                else if (hit2D.transform.CompareTag("Ground"))
+                //else if (hit2D.transform.CompareTag("Ground"))
+                else if (hit2D.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
                 {
+
                     if ((!clicked && !oneClick) || clicked)
                     {
                         oneClick = true;
@@ -104,7 +148,14 @@ public class Player : AttackingCharacter {
             oneClick = false;
         }
 
-        base.Update();
+        //if (!IsMoving())
+        if(playerState == PlayerState.IDLE)
+        {
+            Destroy(tapIndicator);
+            tapIndicator = null;
+
+        }
+
     }
 
     public override void TakeDamage(float damage, Vector3 dir)

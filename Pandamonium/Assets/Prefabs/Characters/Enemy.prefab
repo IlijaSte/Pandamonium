@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4579678950358708}
-  - component: {fileID: 96051739794802998}
+  - component: {fileID: 96728589699361420}
   m_Layer: 8
   m_Name: Trail
   m_TagString: Untagged
@@ -161,7 +161,6 @@ GameObject:
   - component: {fileID: 61133381025590982}
   - component: {fileID: 50176549523694390}
   - component: {fileID: 114298731515323964}
-  - component: {fileID: 114434116677215052}
   m_Layer: 15
   m_Name: Enemy
   m_TagString: Enemy
@@ -254,8 +253,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1628753790980070}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 1, z: 0}
   m_LocalScale: {x: 0.5, y: 0.50000024, z: 1}
   m_Children:
   - {fileID: 224439984083567830}
@@ -340,9 +339,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1105495626807108}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4446852320589226}
   m_RootOrder: 5
@@ -470,7 +469,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!96 &96051739794802998
+--- !u!96 &96728589699361420
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 1
@@ -480,7 +479,7 @@ TrailRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -505,8 +504,8 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Time: 5
+  m_SortingOrder: 3
+  m_Time: 45
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1
@@ -514,23 +513,14 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.009389877
-        value: 0
+        time: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -560,15 +550,15 @@ TrailRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 0
+      m_Mode: 1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
     textureMode: 0
-    generateLightingData: 1
-  m_MinVertexDistance: 0.5
+    generateLightingData: 0
+  m_MinVertexDistance: 0.1
   m_Autodestruct: 0
 --- !u!114 &114032032825087448
 MonoBehaviour:
@@ -603,7 +593,7 @@ MonoBehaviour:
   repathRate: 0.5
   canSearch: 1
   canMove: 1
-  maxSpeed: 2
+  maxSpeed: 0.5
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -646,7 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79d0180b41341143b6b230c263bebfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
+  character: {fileID: 114298731515323964}
 --- !u!114 &114298731515323964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -668,36 +658,8 @@ MonoBehaviour:
   dashSpeed: 8
   healthBar: {fileID: 114791163046767886}
   nextAttackBar: {fileID: 114631011764471838}
+  normalSpeed: 6
   maxDashRange: 2
---- !u!114 &114434116677215052
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1628753790980070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efee954c69f0d421086729bb8df1137f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  uniqueID: 5648358568895913853
-  points: []
-  convex: 1
-  minBoundsHeight: 1
-  penaltyDelta: 0
-  modifyWalkability: 0
-  setWalkability: 1
-  applyOnStart: 0
-  applyOnScan: 0
-  updatePhysics: 0
-  resetPenaltyOnPhysics: 1
-  updateErosion: 1
-  modifyTag: 1
-  setTag: 2
-  legacyMode: 0
-  serializedVersion: 0
-  legacyUseWorldSpace: 0
 --- !u!114 &114542684223825712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -765,7 +727,7 @@ MonoBehaviour:
       m_Bits: 4294967295
     useGraphRaycasting: 0
   traversableTags: -3
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  tagPenalties: 0000000000000000e80300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
 --- !u!114 &114741733779199492
@@ -860,6 +822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac617076e84713743b96e978e9d8bdc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destination: {x: 0, y: 0}
 --- !u!114 &114963434698511256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -926,7 +889,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 3a19a2e2db46e6641a12e8fecc6e0eb5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

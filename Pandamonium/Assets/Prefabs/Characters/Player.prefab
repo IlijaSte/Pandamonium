@@ -111,7 +111,6 @@ GameObject:
   - component: {fileID: 114137552342071252}
   - component: {fileID: 50571860554699696}
   - component: {fileID: 61653577459399180}
-  - component: {fileID: 114912669408553062}
   m_Layer: 15
   m_Name: Player
   m_TagString: Player
@@ -551,7 +550,13 @@ MonoBehaviour:
   dashSpeed: 16
   healthBar: {fileID: 0}
   nextAttackBar: {fileID: 114916057105450400}
+  normalSpeed: 6
+  maxDashRange: 4
   oneClick: 0
+  tapIndicatorPrefab: {fileID: 1677782040419512, guid: a496918d631092a489d9a0cf9ac9ab7f,
+    type: 2}
+  attackIndicatorPrefab: {fileID: 1677782040419512, guid: d354f95f8310c1f418e1347aa9aa7874,
+    type: 2}
 --- !u!114 &114251660100248234
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -575,8 +580,8 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 4294967295
     useGraphRaycasting: 0
-  traversableTags: -5
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  traversableTags: -1
+  tagPenalties: 0000000000000000c80000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
 --- !u!114 &114480539979097238
@@ -631,6 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac617076e84713743b96e978e9d8bdc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destination: {x: 0, y: 0}
 --- !u!114 &114679024940451080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -697,35 +703,6 @@ MonoBehaviour:
   Material: {fileID: 2100000, guid: 5d8645bc2e5501a4ebd138db5aa609bd, type: 2}
   LightOrigin: {x: 0, y: 0, z: 1}
   Shape: 0
---- !u!114 &114912669408553062
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1371769644752892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efee954c69f0d421086729bb8df1137f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  uniqueID: 3124088533528204666
-  points: []
-  convex: 1
-  minBoundsHeight: 1
-  penaltyDelta: 0
-  modifyWalkability: 0
-  setWalkability: 1
-  applyOnStart: 1
-  applyOnScan: 1
-  updatePhysics: 0
-  resetPenaltyOnPhysics: 1
-  updateErosion: 1
-  modifyTag: 1
-  setTag: 1
-  legacyMode: 0
-  serializedVersion: 1
-  legacyUseWorldSpace: 0
 --- !u!114 &114916057105450400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -833,7 +810,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 7f1d965b218f2d04186bb130b9a2092e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

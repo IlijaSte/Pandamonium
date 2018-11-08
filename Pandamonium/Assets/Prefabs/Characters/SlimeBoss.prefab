@@ -210,7 +210,6 @@ GameObject:
   - component: {fileID: 114718712080257254}
   - component: {fileID: 61725077377612850}
   - component: {fileID: 50579603644457754}
-  - component: {fileID: 114073461064305134}
   m_Layer: 15
   m_Name: SlimeBoss
   m_TagString: Enemy
@@ -465,39 +464,12 @@ MonoBehaviour:
   dashSpeed: 12
   healthBar: {fileID: 114277197262475798}
   nextAttackBar: {fileID: 114231558236676070}
+  normalSpeed: 6
+  maxDashRange: 4
   enemySpawnInterval: 10
   spawnRadius: 5
   enemyPrefab: {fileID: 1628753790980070, guid: 75c84e6b6e1cac542a790e6e97eb2d12,
     type: 2}
---- !u!114 &114073461064305134
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1944221328380284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efee954c69f0d421086729bb8df1137f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  uniqueID: 5648358568895913853
-  points: []
-  convex: 1
-  minBoundsHeight: 1
-  penaltyDelta: 0
-  modifyWalkability: 0
-  setWalkability: 1
-  applyOnStart: 0
-  applyOnScan: 0
-  updatePhysics: 0
-  resetPenaltyOnPhysics: 1
-  updateErosion: 1
-  modifyTag: 1
-  setTag: 2
-  legacyMode: 0
-  serializedVersion: 0
-  legacyUseWorldSpace: 0
 --- !u!114 &114103317487478274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -536,6 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac617076e84713743b96e978e9d8bdc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destination: {x: 0, y: 0}
 --- !u!114 &114184462561219684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -602,7 +575,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1104490012968742}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337d2d2a989170f4faa5600993d17918, type: 3}
   m_Name: 
@@ -800,7 +773,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 3a19a2e2db46e6641a12e8fecc6e0eb5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

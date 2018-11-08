@@ -13,6 +13,10 @@ public class Corridor
     public int corridorLength;            // How many units long the corridor is.
     public Direction direction;   // Which direction the corridor is heading from it's room.
 
+    public BoardCreator context;
+
+    public Fragment from;
+    public Fragment to;
 
     // Get the end position of the corridor based on it's start position and which direction it's heading.
     public int EndPositionX
@@ -40,69 +44,97 @@ public class Corridor
         }
     }
 
-
-    public void SetupCorridor(Room room, IntRange length, IntRange roomWidth, IntRange roomHeight, int columns, int rows, bool firstCorridor)
+    public Corridor(BoardCreator context, Fragment from = null)
     {
-        // Set a random direction (a random index from 0 to 3, cast to Direction).
-        direction = (Direction)Random.Range(0, 4);
+        this.context = context;
+        this.from = from;
+    }
 
-        // Find the direction opposite to the one entering the room this corridor is leaving from.
-        // Cast the previous corridor's direction to an int between 0 and 3 and add 2 (a number between 2 and 5).
-        // Find the remainder when dividing by 4 (if 2 then 2, if 3 then 3, if 4 then 0, if 5 then 1).
-        // Cast this number back to a direction.
-        // Overall effect is if the direction was South then that is 2, becomes 4, remainder is 0, which is north.
+    public bool SetupCorridor(Room room, IntRange length, IntRange roomWidth, IntRange roomHeight, int columns, int rows, bool firstCorridor = false, Direction firstDirection = Direction.East)
+    {
+
         Direction oppositeDirection = (Direction)(((int)room.enteringCorridor + 2) % 4);
 
-        // If this is noth the first corridor and the randomly selected direction is opposite to the previous corridor's direction...
-        if (!firstCorridor && direction == oppositeDirection)
-        {
-            // Rotate the direction 90 degrees clockwise (North becomes East, East becomes South, etc).
-            // This is a more broken down version of the opposite direction operation above but instead of adding 2 we're adding 1.
-            // This means instead of rotating 180 (the opposite direction) we're rotating 90.
-            int directionInt = (int)direction;
-            directionInt++;
-            directionInt = directionInt % 4;
-            direction = (Direction)directionInt;
+        bool validDirection;
 
+        if (firstCorridor)
+        {
+            direction = firstDirection;
+        }
+        else
+        {
+            direction = (Direction)Random.Range(0, 4);
         }
 
-        // Set a random length.
-        corridorLength = length.Random;
+        int i = 0;
 
-        // Create a cap for how long the length can be (this will be changed based on the direction and position).
-        int maxLength = length.m_Max;
-
-        switch (direction)
+        do
         {
-            // If the choosen direction is North (up)...
-            case Direction.North:
-                // ... the starting position in the x axis can be random but within the width of the room.
-                startXPos = Random.Range(room.xPos, room.xPos + room.roomWidth - 1);
+            validDirection = true;
+            
+            if (!firstCorridor && direction == oppositeDirection)
+            {
 
-                // The starting position in the y axis must be the top of the room.
-                startYPos = room.yPos + room.roomHeight;
+                direction = (Direction)(((int)direction + 1) % 4);
 
-                // The maximum length the corridor can be is the height of the board (rows) but from the top of the room (y pos + height).
-                maxLength = rows - startYPos - roomHeight.m_Min;
-                break;
-            case Direction.East:
-                startXPos = room.xPos + room.roomWidth;
-                startYPos = Random.Range(room.yPos, room.yPos + room.roomHeight - 1);
-                maxLength = columns - startXPos - roomWidth.m_Min;
-                break;
-            case Direction.South:
-                startXPos = Random.Range(room.xPos, room.xPos + room.roomWidth);
-                startYPos = room.yPos;
-                maxLength = startYPos - roomHeight.m_Min;
-                break;
-            case Direction.West:
-                startXPos = room.xPos;
-                startYPos = Random.Range(room.yPos, room.yPos + room.roomHeight);
-                maxLength = startXPos - roomWidth.m_Min;
-                break;
+            }
+
+            to = from.GetNeighbor(direction);
+
+            if (from != null && (to == null || to.IsOccupied()))
+            {
+                i++;
+                validDirection = false;
+                direction = (Direction)(((int)direction + 1) % 4);
+                continue;
+            }
+
+            corridorLength = length.Random;
+
+            switch (direction)
+            {
+
+                case Direction.North:
+
+                    startXPos = Random.Range(room.xPos, room.xPos + room.roomWidth - 1);
+
+                    startYPos = room.yPos + room.roomHeight;
+
+                    corridorLength = (to.yPos - startYPos >= corridorLength ? to.yPos - startYPos + length.Random : corridorLength);
+
+                    break;
+                case Direction.East:
+                    startXPos = room.xPos + room.roomWidth;
+                    startYPos = Random.Range(room.yPos, room.yPos + room.roomHeight - 1);
+
+                    corridorLength = (to.xPos - startXPos >= corridorLength ? to.xPos - startXPos + length.Random : corridorLength);
+
+                    break;
+                case Direction.South:
+                    startXPos = Random.Range(room.xPos + 1, room.xPos + room.roomWidth - 1);
+                    startYPos = room.yPos - 1;
+
+                    corridorLength = (startYPos - (to.yPos + to.GetHeight()) >= corridorLength ? startYPos - (to.yPos + to.GetHeight()) + length.Random : corridorLength);
+
+                    break;
+                case Direction.West:
+                    startXPos = room.xPos - 1;
+                    startYPos = Random.Range(room.yPos + 1, room.yPos + room.roomHeight - 1);
+
+                    corridorLength = (startXPos - (to.xPos + to.GetWidth()) >= corridorLength ? startXPos - (to.xPos + to.GetWidth()) + length.Random : corridorLength);
+
+                    break;
+            }
+
+        } while (!validDirection && i < 4);
+
+        if(i == 4 && !validDirection)
+        {
+            return false;
         }
 
-        // We clamp the length of the corridor to make sure it doesn't go off the board.
-        corridorLength = Mathf.Clamp(corridorLength, 1, maxLength);
+        
+
+        return true;
     }
 }

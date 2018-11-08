@@ -23,6 +23,9 @@ public class BoardCreator : MonoBehaviour
     public IntRange bossRoomHeight = new IntRange(10, 15);
     public IntRange corridorLength = new IntRange(6, 10);    // The range of lengths corridors between rooms can have.
 
+    public int fragmentWidth = -1;
+    public int fragmentHeight = -1;
+
     public IntRange numEnemies = new IntRange(3, 6);
 
     public TileBase[] floorTiles;                           // An array of floor tile prefabs.
@@ -38,8 +41,10 @@ public class BoardCreator : MonoBehaviour
 
     public GameObject player;
 
-    private TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
-    private Room[] rooms;                                     // All the rooms that are created for this board.
+    [HideInInspector]
+    public TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
+    [HideInInspector]
+    public Room[] rooms;                                     // All the rooms that are created for this board.
     private Room bossRoom;
     private Corridor[] corridors;                             // All the corridors that connect the rooms.
     private GameObject boardHolder;                           // GameObject that acts as a container for all other tiles.
@@ -48,7 +53,7 @@ public class BoardCreator : MonoBehaviour
     public Tilemap obstacleTilemap;
 
     public Transform enemyParent;
-    public GameObject enemyPrefab;
+    public GameObject[] enemyPrefabs;
     public GameObject bossPrefab;
 
     public ColliderGenerator generator;
@@ -62,10 +67,62 @@ public class BoardCreator : MonoBehaviour
     public float xCoord { get; private set; }
     public float yCoord { get; private set; }
 
+    [HideInInspector]
+    public Fragment[][] fragments;
+    [HideInInspector]
+    public int widthInFragments;
+    [HideInInspector]
+    public int heightInFragments;
+
+    public static BoardCreator I = null;
+
+    private void InitializeFragments()
+    {
+
+        if (fragmentWidth == -1 || fragmentHeight == -1)
+        {
+            fragmentWidth = roomWidth.m_Max + 2;
+            fragmentHeight = roomHeight.m_Max + 2;
+        }
+
+        widthInFragments = columns / fragmentWidth;
+        heightInFragments = rows / fragmentHeight;
+
+        fragments = new Fragment[heightInFragments][];
+
+        for (int i = 0; i < heightInFragments; i++)
+        {
+
+            fragments[i] = new Fragment[widthInFragments];
+
+            for (int j = 0; j < widthInFragments; j++)
+            {
+                fragments[i][j] = new Fragment(this, j * fragmentWidth, i * fragmentHeight);
+            }
+        }
+    }
+
+
+
     private void Awake()
     {
+
+        //Check if instance already exists
+        if (I == null)
+
+            //if not, set instance to this
+            I = this;
+
+        //If instance already exists and it's not this:
+        else if (I != this)
+
+            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+            Destroy(gameObject);
+
         // Create the board holder.
         boardHolder = new GameObject("BoardHolder");
+
+        InitializeFragments();
 
         SetupTilesArray();
 
@@ -104,7 +161,7 @@ public class BoardCreator : MonoBehaviour
                 int randomIntX = Random.Range(2, rooms[i].roomWidth);
                 int randomIntY = Random.Range(2, rooms[i].roomHeight);
                 Vector3 enemyPos = new Vector3(rooms[i].xPos + randomIntX, rooms[i].yPos + randomIntY, player.transform.position.z);
-                Instantiate(enemyPrefab, enemyPos, player.transform.rotation, enemyParent);
+                Instantiate(enemyPrefabs[0], enemyPos, player.transform.rotation, enemyParent);
             }
             
         }
@@ -116,9 +173,9 @@ public class BoardCreator : MonoBehaviour
         for(int i = 0; i < definiteNumEnemies; i++)
         {
             int roomIndex = Random.Range(1, rooms.Length - 1);
-            Vector3 enemyPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth), rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight), player.transform.position.z);
+            Vector3 enemyPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth - 1), rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight - 1), player.transform.position.z);
 
-            Instantiate(enemyPrefab, enemyPos, player.transform.rotation, enemyParent);
+            Instantiate(enemyPrefabs[Mathf.RoundToInt(Random.Range(0, enemyPrefabs.Length))], enemyPos, player.transform.rotation, enemyParent);
         }
     }
 
@@ -242,45 +299,75 @@ public class BoardCreator : MonoBehaviour
         // There should be one less corridor than there is rooms.
         corridors = new Corridor[rooms.Length - 1];
 
-        // Create the first room and corridor.
-        rooms[0] = new Room();
-        corridors[0] = new Corridor();
+        bool validLayout;
 
-        // Setup the first room, there is no previous corridor so we do not use one.
-        rooms[0].SetupRoom(roomWidth, roomHeight, columns, rows);
-
-        // Setup the first corridor using the first room.
-        corridors[0].SetupCorridor(rooms[0], corridorLength, roomWidth, roomHeight, columns, rows, true);
-
-        for (int i = 1; i < rooms.Length; i++)
+        do
         {
+            validLayout = true;
+            // Create the first room and corridor.
+            rooms[0] = new Room(this);
 
-            if(i == rooms.Length - 1 && !isTutorial)
+            // Setup the first room, there is no previous corridor so we do not use one.
+            rooms[0].SetupRoom(roomWidth, roomHeight, columns, rows);
+
+            corridors[0] = new Corridor(this, rooms[0].fragment);
+
+            
+
+            // Setup the first corridor using the first room.
+            corridors[0].SetupCorridor(rooms[0], corridorLength, roomWidth, roomHeight, columns, rows, true);
+
+            for (int i = 1; i < rooms.Length; i++)
             {
-                rooms[i] = bossRoom = new Room();
-                bossRoom.SetupRoom(bossRoomWidth, bossRoomHeight, columns, rows, corridors[i - 1]);
-                break;
+
+                /*if (i == rooms.Length - 1 && !isTutorial)
+                {
+                    rooms[i] = bossRoom = new Room(this);
+                    bossRoom.SetupRoom(bossRoomWidth, bossRoomHeight, columns, rows, corridors[i - 1]);
+                    break;
+                }*/
+
+                // Create a room.
+                rooms[i] = new Room(this);
+
+                // Setup the room based on the previous corridor.
+                rooms[i].SetupRoom(roomWidth, roomHeight, columns, rows, corridors[i - 1]);
+
+                //CreateAcid(rooms[i]);
+
+                // If we haven't reached the end of the corridors array...
+                if (i < corridors.Length)
+                {
+                    // ... create a corridor.
+                    corridors[i] = new Corridor(this, rooms[i].fragment);
+
+                    IntRange width = roomWidth;//(i == corridors.Length - 1 ? bossRoomWidth : roomWidth);
+                    IntRange height = roomHeight;// (i == corridors.Length - 1 ? bossRoomHeight : roomHeight);
+
+                    if (!corridors[i].SetupCorridor(rooms[i], corridorLength, width, height, columns, rows))
+                    {
+                        print("PROBLEM!");
+                        validLayout = false;
+
+                        for(int j = 0; j < rooms.Length; j++)
+                        {
+                            if(rooms[j] != null)
+                                rooms[j].fragment.SetRoom(null);
+
+                            rooms[j] = null;
+
+                            if(j < corridors.Length)
+                            {
+                                corridors[j] = null;
+                            }
+                        }
+
+                        break;
+                    }
+
+                }
             }
-
-            // Create a room.
-            rooms[i] = new Room();
-
-            // Setup the room based on the previous corridor.
-            rooms[i].SetupRoom(roomWidth, roomHeight, columns, rows, corridors[i - 1]);
-
-            //CreateAcid(rooms[i]);
-
-            // If we haven't reached the end of the corridors array...
-            if (i < corridors.Length)
-            {
-                // ... create a corridor.
-                corridors[i] = new Corridor();
-
-                // Setup the corridor based on the room that was just created.
-                corridors[i].SetupCorridor(rooms[i], corridorLength, roomWidth, roomHeight, columns, rows, false);
-            }
-        }
-
+        } while (!validLayout);
 
     }
 
@@ -494,4 +581,22 @@ public class BoardCreator : MonoBehaviour
         newCollider.GetComponent<TutorialCollidersScript>().colliderID = -1;
    
     }
+
+    public void Update()
+    {
+        for(int i = 0; i < heightInFragments; i++)
+        {
+            for(int j = 0; j < widthInFragments; j++)
+            {
+
+                Debug.DrawLine(new Vector3(fragments[i][j].xPos, fragments[i][j].yPos), new Vector3(fragments[i][j].xPos + fragmentWidth, fragments[i][j].yPos));
+                Debug.DrawLine(new Vector3(fragments[i][j].xPos, fragments[i][j].yPos), new Vector3(fragments[i][j].xPos, fragments[i][j].yPos + fragmentHeight));
+                Debug.DrawLine(new Vector3(fragments[i][j].xPos, fragments[i][j].yPos + fragmentHeight), new Vector3(fragments[i][j].xPos + fragmentWidth, fragments[i][j].yPos + fragmentHeight));
+                Debug.DrawLine(new Vector3(fragments[i][j].xPos + fragmentWidth, fragments[i][j].yPos), new Vector3(fragments[i][j].xPos + fragmentWidth, fragments[i][j].yPos + fragmentHeight));
+
+
+            }
+        }
+    }
+
 }

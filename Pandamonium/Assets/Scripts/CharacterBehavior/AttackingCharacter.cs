@@ -38,9 +38,9 @@ public class AttackingCharacter : MonoBehaviour {
     protected ContactFilter2D colFilter;
 
     protected AIPath path;
-    protected Seeker seeker;
 
-    protected float normalSpeed = 6;
+    [HideInInspector]
+    public float normalSpeed = 6;
 
     public float maxDashRange = 4;
 
@@ -50,8 +50,9 @@ public class AttackingCharacter : MonoBehaviour {
     protected float maxRaycastDistance = 50;
 
     protected Vector2 approxPosition;
+    private Vector2 boundsCenter;
 
-    protected GraphUpdateScene groundFreer;
+    private ArrayList dotSources = new ArrayList();
 
     public virtual void Awake()
     {
@@ -60,7 +61,6 @@ public class AttackingCharacter : MonoBehaviour {
 
         health = maxHealth;
         path = GetComponent<AIPath>();
-        seeker = GetComponent<Seeker>();
     }
 
     public virtual void Start()
@@ -74,7 +74,8 @@ public class AttackingCharacter : MonoBehaviour {
         if(vision == null)
             vision = transform.Find("Vision").GetComponent<CharacterVision>();
 
-        normalSpeed = path.maxSpeed;
+        if(path)
+            normalSpeed = path.maxSpeed;
 
         nextAttackBG = nextAttackBar.transform.parent.gameObject;
 
@@ -83,8 +84,15 @@ public class AttackingCharacter : MonoBehaviour {
         //GetComponent<GraphUpdateScene>().Apply();
 
         approxPosition = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
+        boundsCenter = GetComponent<BoxCollider2D>().bounds.center;
 
-        groundFreer = GameObject.Find("AIFreeGround").GetComponent<GraphUpdateScene>();
+        GraphUpdateObject guo = new GraphUpdateObject(GetComponent<BoxCollider2D>().bounds)
+        {
+            updatePhysics = true,
+            modifyTag = true,
+            setTag = (int)type + 1
+        };
+        AstarPath.active.UpdateGraphs(guo);
     }
 
     public void StopAttacking()
@@ -95,7 +103,7 @@ public class AttackingCharacter : MonoBehaviour {
         weapons[equippedWeaponIndex].Stop();
     }
 
-    public void Attack(Transform target)
+    public virtual void Attack(Transform target)
     {
 
         if (this.target != null && target == this.target)                     // ako je target razlicit od trenutnog
@@ -121,7 +129,7 @@ public class AttackingCharacter : MonoBehaviour {
         if (range == Mathf.Infinity && !weapons[equippedWeaponIndex].IsInRange(target))
             return false;
 
-        range = maxRaycastDistance;
+        //range = maxRaycastDistance;
 
         Vector3 startCast = transform.position;
         Vector3 endCast = target.position;
@@ -152,7 +160,7 @@ public class AttackingCharacter : MonoBehaviour {
 
     }
 
-    public void MoveToPosition(Vector3 pos)
+    public virtual void MoveToPosition(Vector3 pos)
     {
         playerState = PlayerState.WALKING;
         CM.MoveToPosition(new Vector3(pos.x, pos.y, transform.position.z));
@@ -176,8 +184,8 @@ public class AttackingCharacter : MonoBehaviour {
         while (path.pathPending)
             yield return new WaitForEndOfFrame();
 
-        if (playerState != PlayerState.WALKING)        // ako je u medjuvremenu stigao do destinacije
-            yield break;
+        if (playerState != PlayerState.WALKING)
+            yield return null;
 
         playerState = PlayerState.DASHING;
 
@@ -199,18 +207,6 @@ public class AttackingCharacter : MonoBehaviour {
         yield return null;
     }
 
-    protected void UpdateSpaceAround(bool allocateNew = true)
-    {
-        groundFreer.transform.position = approxPosition + new Vector2(0, GetComponent<BoxCollider2D>().size.y / 2);
-        groundFreer.GetComponent<BoxCollider2D>().size = GetComponent<BoxCollider2D>().size;
-        AstarPath.active.AddWorkItem(() => groundFreer.Apply());
-
-        if(allocateNew)
-            AstarPath.active.AddWorkItem(() => GetComponent<GraphUpdateScene>().Apply());
-
-        AstarPath.active.QueueGraphUpdates();
-    }
-
     protected virtual void Update()
     {
         
@@ -224,9 +220,28 @@ public class AttackingCharacter : MonoBehaviour {
         if (!newApproxPosition.Equals(approxPosition))
         {
 
-            //AstarPath.active.UpdateGraphs(groundFreer.GetComponent<BoxCollider2D>().bounds);
+            Bounds oldBounds = new Bounds(boundsCenter, GetComponent<BoxCollider2D>().bounds.size);
+            GraphUpdateObject guo = new GraphUpdateObject(oldBounds)
+            {
+                updatePhysics = true,
+                modifyTag = true,
+                setTag = 0
+            };
+            AstarPath.active.UpdateGraphs(guo);
+
+            guo = new GraphUpdateObject(GetComponent<BoxCollider2D>().bounds)
+            {
+                updatePhysics = true,
+                modifyTag = true,
+                setTag = (int)type + 1
+            };
+            AstarPath.active.UpdateGraphs(guo);
             //UpdateSpaceAround();
+
+            
+
             approxPosition = newApproxPosition;
+            boundsCenter = GetComponent<BoxCollider2D>().bounds.center;
 
         }
 
@@ -251,7 +266,7 @@ public class AttackingCharacter : MonoBehaviour {
                     }
                     else
                     {
-                        if (!path.destination.Equals(target.position))          // ako se protivnik u medjuvremenu pomerio
+                        if (!CM.destination.Equals(target.position))          // ako se protivnik u medjuvremenu pomerio
                         {
                             CM.MoveToPosition(target.position);
                         }
@@ -262,8 +277,8 @@ public class AttackingCharacter : MonoBehaviour {
 
             case PlayerState.ATTACKING:
                 {
-
-                    if (target == null)                                         // ako je protivnik mrtav
+                    Worm worm;
+                    if (target == null || ((worm = target.GetComponent<Worm>()) != null && worm.state == Worm.WormState.BURIED))                                         // ako je protivnik mrtav
                     {
                         StopAttacking();
 
@@ -369,21 +384,65 @@ public class AttackingCharacter : MonoBehaviour {
         }
     }
 
+    protected virtual IEnumerator DoT(Transform source, float damage, float interval, int times)
+    {
+
+        while(times-- > 0)
+        {
+            yield return new WaitForSeconds(interval);
+            TakeDamage(damage, Vector3.zero);
+           
+        }
+
+        if (dotSources.Contains(source))
+        {
+            dotSources.Remove(source);
+        }
+    }
+
+    // interval - interval na koji ce igrac primati damage (u sekundama); timeInIntervals - trajanje DoT-a u intervalima
+    public virtual void TakeDamageOverTime(Transform source, float damage, float interval, int times)
+    {
+        if (!dotSources.Contains(source))
+        {
+            dotSources.Add(source);
+            StartCoroutine(DoT(source, damage, interval, times));
+        }
+
+        
+    }
+
     public virtual void Die()
     {
-        UpdateSpaceAround(false);
+
+        Bounds oldBounds = new Bounds(boundsCenter, GetComponent<BoxCollider2D>().bounds.size);
+        GraphUpdateObject guo = new GraphUpdateObject(oldBounds)
+        {
+            updatePhysics = true,
+            modifyTag = true,
+            setTag = 0
+        };
+        AstarPath.active.UpdateGraphs(guo);
+
         Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        AttackingCharacter attChar = collision.gameObject.GetComponent<AttackingCharacter>();
+        /*AttackingCharacter attChar = collision.gameObject.GetComponent<AttackingCharacter>();
 
         if(playerState == PlayerState.DASHING && attChar && attChar.type != type)
         {
             attChar.TakeDamage(weapons[equippedWeaponIndex].damage, Vector3.zero);
-        }
+        }*/
+    }
+
+    protected bool IsMoving()
+    {
+
+        return !(Mathf.Approximately(path.velocity.x, 0) && Mathf.Approximately(path.velocity.y, 0));
+
     }
 
 }
