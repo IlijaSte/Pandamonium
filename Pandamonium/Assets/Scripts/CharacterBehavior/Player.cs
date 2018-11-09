@@ -77,7 +77,7 @@ public class Player : AttackingCharacter {
         base.Update();
 
         GameObject selectedObject = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-        if (playerState != PlayerState.DASHING && Input.GetMouseButton(0) && (selectedObject == null || (selectedObject && selectedObject.transform.parent.CompareTag("NonBlockableUI"))))
+        if (playerState != PlayerState.DASHING && Input.GetMouseButton(0) && (selectedObject == null || (selectedObject != null && selectedObject.transform.parent.CompareTag("NonBlockableUI"))))
         {
             
             RaycastHit2D hit2D;
@@ -167,6 +167,7 @@ public class Player : AttackingCharacter {
 
     public override void Die()
     {
+       // MenuManager.I.ShowMenu(MenuManager.I.deathMenu);
         //base.Die();
     }
 }

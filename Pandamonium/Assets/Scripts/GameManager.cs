@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -25,7 +26,8 @@ public class GameManager : MonoBehaviour {
     void Start () {
 		if(SceneManager.GetActiveScene().name == "LoadingScene")
         {
-            SceneManager.LoadScene(nextScene);
+            //SceneManager.LoadScene(nextScene);
+            StartCoroutine(LoadAsyncScene(nextScene));
         }
 	}
 	
@@ -59,13 +61,27 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    IEnumerator LoadTutorialAsyncScene()
+    public void LoadScene(String scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
+
+    public void LoadSceneLong(String scene)
+    {
+        nextScene = scene;
+        SceneManager.LoadScene("LoadingScene");
+    }
+
+    IEnumerator LoadAsyncScene(String scene)
     { 
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("TutorialScene");
-    
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
+        Slider slider = FindObjectOfType<Slider>();
+
         while (!asyncLoad.isDone)
         {
-         yield return null;
+            float progress = Mathf.Clamp01(asyncLoad.progress / .9f);
+            slider.value = progress;
+            yield return null;
         }
     }
 }

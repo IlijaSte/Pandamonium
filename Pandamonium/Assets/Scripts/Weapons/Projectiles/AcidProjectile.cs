@@ -10,7 +10,7 @@ public class AcidProjectile : MonoBehaviour {
     public float speed = 50;
 
     private Rigidbody2D rb;
-    private CircleCollider2D collider;
+    private new CircleCollider2D collider;
     private Worm worm;
     private Transform indicator;
     private Animator animator;
@@ -67,8 +67,9 @@ public class AcidProjectile : MonoBehaviour {
         
         if(target.x - transform.position.x < 0)
         {
-            animator.SetBool("Mirror", true);
-           
+
+            //animator.SetBool("Mirror", true);
+            GetComponent<SpriteRenderer>().flipX = true;
         }
     }
 
@@ -98,7 +99,9 @@ public class AcidProjectile : MonoBehaviour {
         if (player != null)
         {
             player.TakeDamage(damage, Vector3.zero);
-            player.TakeDamageOverTime(worm.transform, damage, 1, 3);
+            if (worm != null)
+                player.TakeDamageOverTime(damage, 1, 3, worm.transform);
+            else player.TakeDamageOverTime(damage, 1, 3);
             Destroy(indicator.gameObject);
             Destroy(gameObject);
         }

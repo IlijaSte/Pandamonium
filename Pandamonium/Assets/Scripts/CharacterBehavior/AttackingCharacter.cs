@@ -401,7 +401,7 @@ public class AttackingCharacter : MonoBehaviour {
     }
 
     // interval - interval na koji ce igrac primati damage (u sekundama); timeInIntervals - trajanje DoT-a u intervalima
-    public virtual void TakeDamageOverTime(Transform source, float damage, float interval, int times)
+    public virtual void TakeDamageOverTime(float damage, float interval, int times, Transform source = null)
     {
         if (!dotSources.Contains(source))
         {

@@ -124,7 +124,7 @@ public class Room
     public Vector2Int GetRandomPos()
     {
 
-        return new Vector2Int(UnityEngine.Random.Range(xPos, xPos + roomWidth - 1), UnityEngine.Random.Range(yPos, yPos + roomHeight - 1));
+        return new Vector2Int(UnityEngine.Random.Range(xPos + 1, xPos + roomWidth - 1), UnityEngine.Random.Range(yPos + 1, yPos + roomHeight - 1));
 
     }
 
