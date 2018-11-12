@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 114079399296506460}
   - component: {fileID: 61133381025590982}
   - component: {fileID: 50176549523694390}
-  - component: {fileID: 114298731515323964}
+  - component: {fileID: 114068334897614330}
   m_Layer: 15
   m_Name: Frogocite
   m_TagString: Enemy
@@ -585,6 +585,30 @@ MonoBehaviour:
   timeToAttack: 1
   projectileSpeed: 2
   firePrefab: {fileID: 1714793588657250, guid: 3661731ec6bccf5478d07ac6ec8ba79f, type: 2}
+--- !u!114 &114068334897614330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1628753790980070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7013d3ddb95fca04dafd9d690cb43e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons: []
+  equippedWeaponIndex: 0
+  maxHealth: 25
+  type: 0
+  vision: {fileID: 0}
+  dashCooldown: 6
+  dashSpeed: 12
+  healthBar: {fileID: 0}
+  nextAttackBar: {fileID: 0}
+  normalSpeed: 6
+  maxDashRange: 4
+  jumpSpeed: 0
+  jumpHeight: {x: 0, y: 10}
 --- !u!114 &114079399296506460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -646,29 +670,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
---- !u!114 &114298731515323964
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1628753790980070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0017982b729cb7045a7761d773122e83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 114121749672228834}
-  equippedWeaponIndex: 0
-  maxHealth: 25
-  type: 1
-  vision: {fileID: 114214034657156396}
-  dashCooldown: 6
-  dashSpeed: 8
-  healthBar: {fileID: 114791163046767886}
-  nextAttackBar: {fileID: 114631011764471838}
-  normalSpeed: 6
-  maxDashRange: 2
 --- !u!114 &114542684223825712
 MonoBehaviour:
   m_ObjectHideFlags: 1
