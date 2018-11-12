@@ -155,7 +155,6 @@ public class Worm : Enemy {
                     }
 
                     Emerge();
-
                     break;
 
                 case WormState.EMERGING:
@@ -174,6 +173,9 @@ public class Worm : Enemy {
 
                     Submerge();
                     transform.position = FindEmergePosition();
+
+                    UpdateGraph();
+
                     break;
 
             }

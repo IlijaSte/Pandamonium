@@ -173,7 +173,10 @@ public class BoardCreator : MonoBehaviour
         for(int i = 0; i < definiteNumEnemies; i++)
         {
             int roomIndex = Random.Range(1, rooms.Length - 1);
-            Vector3 enemyPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth - 1), rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight - 1), player.transform.position.z);
+
+            Vector3 enemyPos = rooms[roomIndex].GetRandomPos() + new Vector2(0.5f, 0.5f);
+            
+            //Vector3 enemyPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth - 1), rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight - 1), player.transform.position.z);
 
             Instantiate(enemyPrefabs[Mathf.RoundToInt(Random.Range(0, enemyPrefabs.Length))], enemyPos, player.transform.rotation, enemyParent);
         }
