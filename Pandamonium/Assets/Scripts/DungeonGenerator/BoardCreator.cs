@@ -148,10 +148,10 @@ public class BoardCreator : MonoBehaviour
 
     void InstantiatePlayer()
     {
-        Vector3 playerPos = new Vector3(rooms[0].xPos + 1, rooms[0].yPos + 1, player.transform.position.z);
+        Vector2 playerPos = rooms[0].GetRandomPos();// new Vector3(rooms[0].xPos + 1, rooms[0].yPos + 1, player.transform.position.z);
         player.transform.position = playerPos;
     }
-
+    
     void InstantiateTutorialEnemies()
     {
         for(int i = 0; i < rooms.Length; i++)

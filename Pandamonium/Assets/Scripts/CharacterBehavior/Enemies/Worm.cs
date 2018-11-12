@@ -99,18 +99,8 @@ public class Worm : Enemy {
     private void Emerge()
     {
 
-        if (room != Room.GetRoomAtPos(player.transform.position))
-        {
-            spottedPlayer = false;
-        }
-        else
-        {
-
-            // play emerging animation
-            GetComponent<BoxCollider2D>().enabled = true;
-            //animator.GetComponent<SpriteRenderer>().enabled = true;
-            GetComponentInChildren<Canvas>().enabled = true;
-        }
+        GetComponent<BoxCollider2D>().enabled = true;
+        GetComponentInChildren<Canvas>().enabled = true;
 
     }
 
@@ -158,10 +148,13 @@ public class Worm : Enemy {
 
                 case WormState.BURIED:
 
-                    Emerge();
-
-                    if (!spottedPlayer)
+                    if (room != Room.GetRoomAtPos(player.transform.position))
+                    {
+                        spottedPlayer = false;
                         return;
+                    }
+
+                    Emerge();
 
                     break;
 
@@ -187,11 +180,8 @@ public class Worm : Enemy {
 
             if (state != WormState.BURYING && room != Room.GetRoomAtPos(player.transform.position))
             {
-                //spottedPlayer = false;
                 state = WormState.BURYING;
                 nextAttackBG.SetActive(false);
-                //nextAttackBG.SetActive(false);
-                //Submerge();
             }
             else
             {
