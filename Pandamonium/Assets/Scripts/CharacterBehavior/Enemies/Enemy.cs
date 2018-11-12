@@ -24,6 +24,28 @@ public class Enemy : AttackingCharacter {
         boardCreator = FindObjectOfType<BoardCreator>();
     }
 
+    protected override void Update()
+    {
+
+        base.Update();
+
+        switch (playerState)
+        {
+            case PlayerState.IDLE:
+                {
+
+                    Transform closest;
+
+                    if (closest = vision.GetClosest())
+                    {
+                        Attack(closest);
+                    }
+
+                    break;
+                }
+        }
+    }
+
     public override void TakeDamage(float damage, Vector3 dir)
     {
         base.TakeDamage(damage, dir);

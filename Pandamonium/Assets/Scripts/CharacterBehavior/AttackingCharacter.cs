@@ -252,6 +252,7 @@ public class AttackingCharacter : MonoBehaviour {
 
                     if (target == null)                                         // ako je protivnik mrtav
                     {
+                        
                         StopAttacking();
 
                         break;
@@ -344,22 +345,6 @@ public class AttackingCharacter : MonoBehaviour {
                             playerState = PlayerState.WALKING;
                         }
                     }
-                    break;
-                }
-
-            case PlayerState.IDLE:
-                {
-                    Player pl;
-                    if ((pl = GetComponent<Player>()) && pl.oneClick)       // da ne bi doslo do utrkivanja DASH-a i ATTACK-a
-                        break;
-
-                    Transform closest;
-
-                    if(closest = vision.GetClosest())
-                    {
-                        Attack(closest);
-                    }
-
                     break;
                 }
         }
