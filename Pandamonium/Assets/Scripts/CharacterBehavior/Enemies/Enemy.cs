@@ -7,7 +7,10 @@ using UnityEngine.UI;
 public class Enemy : AttackingCharacter {
 
     protected Transform player;
+
     public static int numEnemies = 0;
+    public static bool areAllEnemiesDead = false;
+
     private BoardCreator boardCreator;
 
     protected Vector2 startPos;
@@ -90,6 +93,8 @@ public class Enemy : AttackingCharacter {
     public override void Die()
     {
         numEnemies--;
+        if (numEnemies == 0)
+            areAllEnemiesDead = true;
         base.Die();
     }
 

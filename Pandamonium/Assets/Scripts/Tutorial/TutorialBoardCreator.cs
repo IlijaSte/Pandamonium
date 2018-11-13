@@ -10,11 +10,10 @@ public class TutorialBoardCreator : BoardCreator {
     private static Vector2 tutorialFinishPosition;
    // public GameObject enemyParent;
 
-    public void Update()
+    public override void Update()
     {
         base.Update();
-        //if (Enemy.numEnemies == 0)
-        if (enemyParent.transform.childCount == 0)
+        if (Enemy.areAllEnemiesDead)
             InstantiateFinishCollider();
     }
 
@@ -89,8 +88,8 @@ public class TutorialBoardCreator : BoardCreator {
     private void InstantiateFinishCollider()
     {
        Room room = rooms[rooms.Length - 1];
-        tutorialFinishPosition.x = (room.xPos + room.roomWidth) / 2;// + 0.5f;
-        tutorialFinishPosition.y = (room.yPos + room.roomHeight) / 2;// + 0.5f;
+        tutorialFinishPosition.x = room.xPos + room.roomWidth / 2 + 0.5f;
+        tutorialFinishPosition.y = room.yPos + room.roomHeight / 2 + 0.5f;
 
        GameObject newCollider = Instantiate(tutorialCollider, new Vector3(tutorialFinishPosition.x, tutorialFinishPosition.y, 0), Quaternion.identity, tutorialParentCollider.transform);
        newCollider.GetComponent<TutorialCollidersScript>().colliderID = -1;

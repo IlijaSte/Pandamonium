@@ -674,7 +674,7 @@ public class BoardCreator : MonoBehaviour
 
    
 
-    public void Update()
+    public virtual void Update()
     {
         for(int i = 0; i < heightInFragments; i++)
         {
