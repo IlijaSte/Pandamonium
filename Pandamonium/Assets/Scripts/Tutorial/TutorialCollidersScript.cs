@@ -12,7 +12,7 @@ public class TutorialCollidersScript : MonoBehaviour {
         
         if ( collision.transform.CompareTag("Player"))
         {
-            print("player");
+           // print("player");
             GameManager gameManager = GameManager.I;
 
             //  gameManager.PauseForTutorial(colliderID);
@@ -27,7 +27,7 @@ public class TutorialCollidersScript : MonoBehaviour {
     {
         if (collision.transform.CompareTag("Player"))
         {
-            print("izasao");
+            //print("izasao");
             GameManager gameManager = GameManager.I;
 
             //  gameManager.PauseForTutorial(colliderID);

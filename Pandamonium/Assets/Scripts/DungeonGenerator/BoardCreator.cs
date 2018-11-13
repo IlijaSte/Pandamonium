@@ -47,7 +47,7 @@ public class BoardCreator : MonoBehaviour
     [HideInInspector]
     public Room[] rooms;                                     // All the rooms that are created for this board.
     private Room bossRoom;
-    private Corridor[] corridors;                             // All the corridors that connect the rooms.
+    protected Corridor[] corridors;                             // All the corridors that connect the rooms.
     private GameObject boardHolder;                           // GameObject that acts as a container for all other tiles.
 
     public Tilemap groundTilemap;
@@ -58,12 +58,6 @@ public class BoardCreator : MonoBehaviour
     public GameObject bossPrefab;
 
     public ColliderGenerator generator;
-
-    
-    public bool isTutorial;
-    public GameObject tutorialParentCollider;
-    public GameObject tutorialCollider;
-    private static Vector2 tutorialFinishPosition;
 
     public float xCoord { get; private set; }
     public float yCoord { get; private set; }
@@ -145,28 +139,14 @@ public class BoardCreator : MonoBehaviour
 
     }
 
-    void InstantiatePlayer()
+    protected void InstantiatePlayer()
     {
         Vector2 playerPos = rooms[0].GetRandomPos();
         player.transform.position = playerPos;
     }
     
-    void InstantiateTutorialEnemies()
-    {
-        for(int i = 0; i < rooms.Length; i++)
-        {
-            for(int j = 0; j < i; j ++)
-            {
-                int randomIntX = Random.Range(2, rooms[i].roomWidth);
-                int randomIntY = Random.Range(2, rooms[i].roomHeight);
-                Vector3 enemyPos = new Vector3(rooms[i].xPos + randomIntX, rooms[i].yPos + randomIntY, player.transform.position.z);
-                Instantiate(enemyPrefabs[0], enemyPos, player.transform.rotation, enemyParent);
-            }
-            
-        }
   
-    }
-    void InstantiateEnemies()
+    protected void InstantiateEnemies()
     {
         int definiteNumEnemies = numEnemies.Random;
         for(int i = 0; i < definiteNumEnemies; i++)
@@ -178,7 +158,7 @@ public class BoardCreator : MonoBehaviour
         }
     }
 
-    void InstantiateBoss()
+    protected void InstantiateBoss()
     {
         int roomIndex = rooms.Length - 1;
         Vector3 bossPos = new Vector3(rooms[roomIndex].xPos + rooms[roomIndex].roomWidth / 2, rooms[roomIndex].yPos + 2 * rooms[roomIndex].roomHeight / 3, player.transform.position.z);
@@ -186,7 +166,9 @@ public class BoardCreator : MonoBehaviour
         Instantiate(bossPrefab, bossPos, player.transform.rotation, null);
     }
 
-    IEnumerator Start()
+
+
+    protected virtual IEnumerator Start()
     {
 
         int nodeSizeFactor = (int)(1 / AstarPath.active.data.gridGraph.nodeSize);
@@ -197,14 +179,9 @@ public class BoardCreator : MonoBehaviour
         AstarPath.active.Scan();
 
         InstantiatePlayer();
-
-        if (isTutorial)
-            InstantiateTutorialEnemies();
-        else
-        {
-            InstantiateEnemies();
-            InstantiateBoss();
-        }
+        InstantiateEnemies();
+        InstantiateBoss();
+        
     }
 
     private int GetHeight(int x, int y)
@@ -466,14 +443,7 @@ public class BoardCreator : MonoBehaviour
 
                     // The coordinates in the jagged array are based on the room's position and it's width and height.
                     if(tiles[xCoord][yCoord] != TileType.Acid)
-                        tiles[xCoord][yCoord] = TileType.Floor;
-
-                    if (isTutorial && i == rooms.Length - 1 && j == (currentRoom.roomWidth / 2) && k == (currentRoom.roomHeight / 2))
-                    {
-                        float finishX = xCoord + 0.5f;
-                        float finishY = yCoord + 0.5f;
-                        tutorialFinishPosition = new Vector2(finishX, finishY);
-                    }
+                        tiles[xCoord][yCoord] = TileType.Floor;  
                    
                 }
             }
@@ -541,15 +511,6 @@ public class BoardCreator : MonoBehaviour
 
                 // Set the tile at these coordinates to Floor.
                 tiles[xCoord][yCoord] = TileType.Floor;
-
-                if (isTutorial && j == currentCorridor.corridorLength - 2)
-                {
-
-                    GameObject newCollider = Instantiate(tutorialCollider, new Vector3(xCoord + 0.5f, yCoord + 0.5f, 0), Quaternion.identity, tutorialParentCollider.transform);
-                    newCollider.GetComponent<TutorialCollidersScript>().colliderID = i;
-                }
-
-
             }
 
 
@@ -711,13 +672,7 @@ public class BoardCreator : MonoBehaviour
         //tileInstance.transform.parent = boardHolder.transform;
     }
 
-    public void InstantiateFinishCollider()
-    {
-
-        GameObject newCollider = Instantiate(tutorialCollider, new Vector3(tutorialFinishPosition.x, tutorialFinishPosition.y, 0), Quaternion.identity, tutorialParentCollider.transform);
-        newCollider.GetComponent<TutorialCollidersScript>().colliderID = -1;
    
-    }
 
     public void Update()
     {

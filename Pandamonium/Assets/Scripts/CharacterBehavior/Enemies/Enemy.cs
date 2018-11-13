@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Enemy : AttackingCharacter {
 
     protected Transform player;
-    private static int numEnemies = 0;
+    public static int numEnemies = 0;
     private BoardCreator boardCreator;
 
     protected Vector2 startPos;
@@ -91,8 +91,6 @@ public class Enemy : AttackingCharacter {
     {
         numEnemies--;
         base.Die();
-        if (boardCreator.isTutorial && numEnemies == 0)
-            boardCreator.InstantiateFinishCollider();
     }
 
 }
