@@ -10,6 +10,10 @@ public class Enemy : AttackingCharacter {
     private static int numEnemies = 0;
     private BoardCreator boardCreator;
 
+    protected Vector2 startPos;
+
+    protected Room room;
+
     public override void Start()
     {
         numEnemies ++;
@@ -21,7 +25,9 @@ public class Enemy : AttackingCharacter {
 
         type = CharacterType.ENEMY;
 
-        boardCreator = FindObjectOfType<BoardCreator>();
+        boardCreator = BoardCreator.I;
+        room = Room.GetRoomAtPos(transform.position);
+        startPos = transform.position;
     }
 
     protected override void Update()
@@ -29,16 +35,44 @@ public class Enemy : AttackingCharacter {
 
         base.Update();
 
+        UpdateGraph();
+
         switch (playerState)
         {
+
+            case PlayerState.ATTACKING:
+
+            case PlayerState.CHASING_ENEMY:
+
+                if(Room.GetRoomAtPos(target.position) != room)
+                {
+                    MoveToPosition(startPos);
+                }
+
+                break;
+
             case PlayerState.IDLE:
                 {
-
                     Transform closest;
 
-                    if (closest = vision.GetClosest())
+                    if ((closest = vision.GetClosest()) != null && Room.GetRoomAtPos(closest.position) == room)
                     {
                         Attack(closest);
+                    }
+
+                    break;
+                }
+
+            case PlayerState.WALKING:
+                {
+                    if (((Vector2)path.destination).Equals(startPos))      // ako se vraca na mesto
+                    {
+                        Transform closest;
+
+                        if ((closest = vision.GetClosest()) != null && Room.GetRoomAtPos(closest.position) == room)
+                        {
+                            Attack(closest);
+                        }
                     }
 
                     break;

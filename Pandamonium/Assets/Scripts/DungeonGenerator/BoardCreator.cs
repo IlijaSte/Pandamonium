@@ -16,7 +16,8 @@ public class BoardCreator : MonoBehaviour
 
     public int columns = 100;                                 // The number of columns on the board (how wide it will be).
     public int rows = 100;                                    // The number of rows on the board (how tall it will be).
-    public IntRange numRooms = new IntRange(15, 20);         // The range of the number of rooms there can be.
+    public IntRange numRooms = new IntRange(15, 20);         // The range of the number of rooms there can be.\
+    public IntRange numBonusRooms = new IntRange(5, 8);
     public IntRange roomWidth = new IntRange(3, 10);         // The range of widths rooms can have.
     public IntRange roomHeight = new IntRange(3, 10);        // The range of heights rooms can have.
     public IntRange bossRoomWidth = new IntRange(10, 15);
@@ -76,6 +77,11 @@ public class BoardCreator : MonoBehaviour
 
     public static BoardCreator I = null;
 
+    [HideInInspector]
+    public Room[] bonusRooms;
+    [HideInInspector]
+    public Corridor[] bonusCorridors;
+
     private void InitializeFragments()
     {
 
@@ -107,16 +113,11 @@ public class BoardCreator : MonoBehaviour
     private void Awake()
     {
 
-        //Check if instance already exists
+        // Singleton pattern
         if (I == null)
-
-            //if not, set instance to this
             I = this;
 
-        //If instance already exists and it's not this:
         else if (I != this)
-
-            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
             Destroy(gameObject);
 
         // Create the board holder.
@@ -144,11 +145,9 @@ public class BoardCreator : MonoBehaviour
 
     }
 
-   
-
     void InstantiatePlayer()
     {
-        Vector2 playerPos = rooms[0].GetRandomPos();// new Vector3(rooms[0].xPos + 1, rooms[0].yPos + 1, player.transform.position.z);
+        Vector2 playerPos = rooms[0].GetRandomPos();
         player.transform.position = playerPos;
     }
     
@@ -175,9 +174,6 @@ public class BoardCreator : MonoBehaviour
             int roomIndex = Random.Range(1, rooms.Length - 1);
 
             Vector3 enemyPos = rooms[roomIndex].GetRandomPos() + new Vector2(0.5f, 0.5f);
-            
-            //Vector3 enemyPos = new Vector3(rooms[roomIndex].xPos + Random.Range(2, rooms[roomIndex].roomWidth - 1), rooms[roomIndex].yPos + Random.Range(2, rooms[roomIndex].roomHeight - 1), player.transform.position.z);
-
             Instantiate(enemyPrefabs[Mathf.RoundToInt(Random.Range(0, enemyPrefabs.Length))], enemyPos, player.transform.rotation, enemyParent);
         }
     }
@@ -294,6 +290,70 @@ public class BoardCreator : MonoBehaviour
         }
     }
 
+    bool CreateBonusRooms()
+    {
+
+        int currBonus = 0;
+
+        for(int i = 1; i < rooms.Length; i++)
+        {
+
+            int numBonus = new IntRange(0, Mathf.Clamp(bonusRooms.Length - currBonus, 0, 3)).Random;
+            while (numBonus > 0)
+            {
+                bonusCorridors[currBonus] = new Corridor(this, rooms[i].fragment);
+
+                IntRange width = roomWidth;//(i == corridors.Length - 1 ? bossRoomWidth : roomWidth);
+                IntRange height = roomHeight;// (i == corridors.Length - 1 ? bossRoomHeight : roomHeight);
+
+                if (!bonusCorridors[currBonus].SetupCorridor(rooms[i], corridorLength, width, height, columns, rows))
+                {
+
+                    return false;
+                }
+
+                // Create a room.
+                bonusRooms[currBonus] = new Room(this);
+
+                // Setup the room based on the previous corridor.
+                bonusRooms[currBonus].SetupRoom(roomWidth, roomHeight, columns, rows, bonusCorridors[currBonus], true);
+
+                numBonus--;
+                currBonus++;
+            }
+
+        }
+
+        return true;
+
+    }
+
+    void ReinitializeArrays()
+    {
+        for (int j = 0; j < rooms.Length; j++)
+        {
+            if (rooms[j] != null)
+                rooms[j].fragment.SetRoom(null);
+
+            rooms[j] = null;
+
+            if (j < corridors.Length)
+            {
+                corridors[j] = null;
+            }
+        }
+
+        for (int j = 0; j < bonusRooms.Length; j++)
+        {
+            if (bonusRooms[j] != null)
+                bonusRooms[j].fragment.SetRoom(null);
+
+            bonusRooms[j] = null;
+
+            bonusCorridors[j] = null;
+        }
+    }
+
     void CreateRoomsAndCorridors()
     {
         // Create the rooms array with a random size.
@@ -301,6 +361,10 @@ public class BoardCreator : MonoBehaviour
 
         // There should be one less corridor than there is rooms.
         corridors = new Corridor[rooms.Length - 1];
+
+        bonusRooms = new Room[numBonusRooms.Random];
+
+        bonusCorridors = new Corridor[bonusRooms.Length];
 
         bool validLayout;
 
@@ -352,23 +416,31 @@ public class BoardCreator : MonoBehaviour
                         print("PROBLEM!");
                         validLayout = false;
 
-                        for(int j = 0; j < rooms.Length; j++)
-                        {
-                            if(rooms[j] != null)
-                                rooms[j].fragment.SetRoom(null);
-
-                            rooms[j] = null;
-
-                            if(j < corridors.Length)
-                            {
-                                corridors[j] = null;
-                            }
-                        }
+                        ReinitializeArrays();
 
                         break;
                     }
 
                 }
+
+            }
+
+            if (validLayout)
+            {
+                /*if (currBonus < bonusRooms.Length - 1)
+                {
+                    print("BONUS PROBLEM!");
+                    ReinitializeArrays();
+                    validLayout = false;
+                }*/
+
+                if (!CreateBonusRooms())
+                {
+                    print("BONUS PROBLEM!");
+                    ReinitializeArrays();
+                    validLayout = false;
+                }
+
             }
         } while (!validLayout);
 
@@ -406,6 +478,31 @@ public class BoardCreator : MonoBehaviour
                 }
             }
 
+        }
+
+        // Go through all the rooms...
+        for (int i = 0; i < bonusRooms.Length; i++)
+        {
+            Room currentRoom = bonusRooms[i];
+
+            if (currentRoom == null)
+                continue;
+
+            // ... and for each room go through it's width.
+            for (int j = 0; j < currentRoom.roomWidth; j++)
+            {
+                int xCoord = currentRoom.xPos + j;
+
+                // For each horizontal tile, go up vertically through the room's height.
+                for (int k = 0; k < currentRoom.roomHeight; k++)
+                {
+                    int yCoord = currentRoom.yPos + k;
+
+                    // The coordinates in the jagged array are based on the room's position and it's width and height.
+                    if (tiles[xCoord][yCoord] != TileType.Acid)
+                        tiles[xCoord][yCoord] = TileType.Floor;
+                }
+            }
         }
     }
 
@@ -451,14 +548,51 @@ public class BoardCreator : MonoBehaviour
                     GameObject newCollider = Instantiate(tutorialCollider, new Vector3(xCoord + 0.5f, yCoord + 0.5f, 0), Quaternion.identity, tutorialParentCollider.transform);
                     newCollider.GetComponent<TutorialCollidersScript>().colliderID = i;
                 }
-                   
-         
+
+
             }
 
-            
+
+        }
+
+        // Go through every corridor...
+        for (int i = 0; i < bonusCorridors.Length; i++)
+        {
+            Corridor currentCorridor = bonusCorridors[i];
+
+            if (currentCorridor == null)
+                continue;
+
+            // and go through it's length.
+            for (int j = 0; j < currentCorridor.corridorLength; j++)
+            {
+                // Start the coordinates at the start of the corridor.
+                int xCoord = currentCorridor.startXPos;
+                int yCoord = currentCorridor.startYPos;
+
+                // Depending on the direction, add or subtract from the appropriate
+                // coordinate based on how far through the length the loop is.
+                switch (currentCorridor.direction)
+                {
+                    case Direction.North:
+                        yCoord += j;
+                        break;
+                    case Direction.East:
+                        xCoord += j;
+                        break;
+                    case Direction.South:
+                        yCoord -= j;
+                        break;
+                    case Direction.West:
+                        xCoord -= j;
+                        break;
+                }
+
+                // Set the tile at these coordinates to Floor.
+                tiles[xCoord][yCoord] = TileType.Floor;
+            }
         }
     }
-
 
     void InstantiateTiles()
     {

@@ -22,7 +22,7 @@ public class Worm : Enemy {
 
     private Animator animator;
 
-    private Room room;
+    
 
     private Vector2 targetPos;
 
@@ -35,14 +35,13 @@ public class Worm : Enemy {
         Vector3Int tilePos = BoardCreator.I.groundTilemap.WorldToCell(transform.position);
 
         transform.position = tilePos + new Vector3(0.5f, 0.5f);
-
-        room = Room.GetRoomAtPos(transform.position);
     }
 
     private void FireProjectiles()
     {
 
         for (int i = 0; i < 3; i++) {
+
             AcidProjectile projectile = Instantiate(projectilePrefab, (Vector2)transform.position + new Vector2(0, 1.5f), Quaternion.identity).GetComponent<AcidProjectile>();
             Vector2 shootPos = (Vector2)targetPos + Random.insideUnitCircle;
 
@@ -61,8 +60,6 @@ public class Worm : Enemy {
         Vector3Int tilePos;
         do
         {
-            //emergePos = new Vector2(player.position.x, player.position.y) + Random.insideUnitCircle * vision.GetComponent<CircleCollider2D>().radius;
-
             emergePos = room.GetRandomPos();
 
             tilePos = BoardCreator.I.obstacleTilemap.WorldToCell(emergePos);
@@ -73,13 +70,12 @@ public class Worm : Enemy {
                 RaycastHit2D hit2D;
                 hitSmth = false;
 
-                if (hit2D = Physics2D.Raycast(new Vector2(tilePos.x, tilePos.y), Vector2.zero, 0f, ignoreMask))
+                if (hit2D = Physics2D.Raycast(new Vector2(tilePos.x + 0.5f, tilePos.y + 0.5f), Vector2.zero, 0f, ignoreMask))
                 {
 
                     if (hit2D.transform.CompareTag("Enemy"))
                     {
                         hitSmth = true;
-
                     }
 
                 }
@@ -121,7 +117,6 @@ public class Worm : Enemy {
                 (room == Room.GetRoomAtPos(player.transform.position)))
             {
                 spottedPlayer = true;
-                //state = WormState.BURIED;
             }
             else return;
 
@@ -138,7 +133,7 @@ public class Worm : Enemy {
 
         timeToStateChange -= Time.deltaTime * speed;
 
-        if (timeToStateChange <= 0)                 // if state is changing
+        if (timeToStateChange <= 0)                 // if state needs to change
         {
 
             timeToStateChange = 1;
@@ -155,18 +150,21 @@ public class Worm : Enemy {
                     }
 
                     Emerge();
+
                     break;
 
                 case WormState.EMERGING:
 
                     nextAttackBG.SetActive(true);
                     targetPos = player.position;
+
                     break;
 
                 case WormState.ATTACKING:
 
                     FireProjectiles();
                     nextAttackBG.SetActive(false);
+
                     break;
 
                 case WormState.BURYING:
