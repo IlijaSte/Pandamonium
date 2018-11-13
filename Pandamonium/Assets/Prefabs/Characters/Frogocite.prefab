@@ -613,7 +613,7 @@ MonoBehaviour:
   indicatorPrefab: {fileID: 1677782040419512, guid: d354f95f8310c1f418e1347aa9aa7874,
     type: 2}
   isJumping: 0
-  jumpCooldown: 0
+  jumpCooldown: 3
 --- !u!114 &114079399296506460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -631,7 +631,7 @@ MonoBehaviour:
   repathRate: 0.5
   canSearch: 1
   canMove: 1
-  maxSpeed: 1.4
+  maxSpeed: 1.6
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
