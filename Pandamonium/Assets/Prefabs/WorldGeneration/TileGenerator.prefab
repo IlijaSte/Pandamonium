@@ -19,8 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4062196363180986}
-  - component: {fileID: 114178306120748468}
-  - component: {fileID: 114753057818360466}
+  - component: {fileID: 114685449088157152}
   m_Layer: 0
   m_Name: TileGenerator
   m_TagString: Untagged
@@ -41,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114178306120748468
+--- !u!114 &114685449088157152
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -49,77 +48,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1918960136030354}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40ea62981aeecd14ea42212692a8e1e5, type: 3}
+  m_Script: {fileID: 11500000, guid: f288b11a4078a5040b0f6657b4b4e36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 50
-  rows: 50
-  numRooms:
-    m_Min: 6
-    m_Max: 8
-  numBonusRooms:
-    m_Min: 4
-    m_Max: 7
-  roomWidth:
-    m_Min: 7
-    m_Max: 10
-  roomHeight:
-    m_Min: 7
-    m_Max: 10
-  bossRoomWidth:
-    m_Min: 14
-    m_Max: 20
-  bossRoomHeight:
-    m_Min: 14
-    m_Max: 20
-  corridorLength:
-    m_Min: 2
-    m_Max: 4
-  fragmentWidth: -1
-  fragmentHeight: -1
+  roomPrefabs:
+  - {fileID: 1003505850141366, guid: d5e0bf7b42c7ead47b8c059dad9c042b, type: 2}
+  corridorPrefab: {fileID: 11400000, guid: bd5727515cb87844fbcd315b28b5c77b, type: 2}
+  acidTilemap: {fileID: 0}
+  acidPrefab: {fileID: 11400000, guid: 67efc53f4270ce441a95c220a79972b1, type: 2}
+  roomWidth: 16
+  roomHeight: 16
+  ground: {fileID: 0}
   numEnemies:
-    m_Min: 10
-    m_Max: 15
-  floorTiles:
-  - {fileID: 11400000, guid: 66ed337b8552bd84a80c03b7444d59ae, type: 2}
-  - {fileID: 11400000, guid: f484b5b9275151745a9b493a89e60df4, type: 2}
-  - {fileID: 11400000, guid: bd5727515cb87844fbcd315b28b5c77b, type: 2}
-  - {fileID: 11400000, guid: 5d43dc97a9ea4b54aaaf4b68a4e4e14a, type: 2}
-  - {fileID: 11400000, guid: 3ee3eb4dadd2e854eb1468c4dfb31e77, type: 2}
-  wallLevel1: {fileID: 11400000, guid: fd3ef005069a2844fad783747b5adb00, type: 2}
-  wallLevel2: {fileID: 11400000, guid: 8d7f702af12962a42b802449d10d5ddf, type: 2}
-  wallTop: {fileID: 11400000, guid: b28b928dff2a98f4d8b8c64582e76624, type: 2}
-  outerWallTiles:
-  - {fileID: 11400000, guid: f868e4e420f99f54491cee66989d9081, type: 2}
-  acid: {fileID: 11400000, guid: 67efc53f4270ce441a95c220a79972b1, type: 2}
-  player: {fileID: 0}
-  groundTilemap: {fileID: 0}
-  obstacleTilemap: {fileID: 0}
-  enemyParent: {fileID: 0}
+    m_Min: 20
+    m_Max: 25
   enemyPrefabs:
   - {fileID: 1628753790980070, guid: 75c84e6b6e1cac542a790e6e97eb2d12, type: 2}
   - {fileID: 1994364961457230, guid: d6fddc9afdfce6d40a9c8f40754187dc, type: 2}
-  bossPrefab: {fileID: 1944221328380284, guid: 38561c1c58ef2b44892924f3b7f08068, type: 2}
-  generator: {fileID: 114753057818360466}
-  isTutorial: 0
-  tutorialParentCollider: {fileID: 0}
-  tutorialCollider: {fileID: 0}
-  widthInFragments: 0
-  heightInFragments: 0
---- !u!114 &114753057818360466
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1918960136030354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 428c58ce9bf292d48b719f0350ac2093, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleTilemap: {fileID: 0}
-  foregroundPrefab: {fileID: 1749055739721804, guid: b9d34d11915a81a4e92667f266546bdc,
-    type: 2}
-  walls: {fileID: 0}
-  wallColliderPrefab: {fileID: 1543162050479270, guid: a62d3515a984fd746b1bfa3002476dac,
-    type: 2}

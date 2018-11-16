@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialBoardCreator : BoardCreator {
+/*public class TutorialBoardCreator : BoardCreator {
 
     public bool isTutorial;
     public GameObject tutorialParentCollider;
@@ -103,6 +103,6 @@ public class TutorialBoardCreator : BoardCreator {
             tutorialFinishPosition = new Vector2(finishX, finishY);
          }
         */
-    }
+    /*}
 
-}
+}*/

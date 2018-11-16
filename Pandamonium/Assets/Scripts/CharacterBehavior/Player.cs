@@ -123,6 +123,8 @@ public class Player : AttackingCharacter {
                                           Vector2.zero, 0f, ignoreMask | (1 << LayerMask.NameToLayer("Ground")));
             foreach(RaycastHit2D hit in hit2D)
             {
+                if (hit.transform.CompareTag("Player")) continue;
+
                 if(hit.transform.GetComponent<TapDetector>() != null || hit.transform.CompareTag("Enemy"))
                 //if (hit2D.transform.CompareTag("Enemy"))                // ako je kliknuo na neprijatelja
                 {

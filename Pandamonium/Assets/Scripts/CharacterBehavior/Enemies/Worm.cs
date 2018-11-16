@@ -32,7 +32,7 @@ public class Worm : Enemy {
 
         animator = GetComponentInChildren<Animator>();
 
-        Vector3Int tilePos = BoardCreator.I.groundTilemap.WorldToCell(transform.position);
+        Vector3Int tilePos = new Vector3Int(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y), 0);
 
         transform.position = tilePos + new Vector3(0.5f, 0.5f);
     }
@@ -62,28 +62,28 @@ public class Worm : Enemy {
         {
             emergePos = room.GetRandomPos();
 
-            tilePos = BoardCreator.I.obstacleTilemap.WorldToCell(emergePos);
+            tilePos = new Vector3Int(Mathf.FloorToInt(emergePos.x), Mathf.FloorToInt(emergePos.y), 0);
 
-            if (tilePos.x < BoardCreator.I.columns && tilePos.y < BoardCreator.I.rows &&
+            /*if (tilePos.x < BoardCreator.I.columns && tilePos.y < BoardCreator.I.rows &&
                 tilePos.x >= 0 && tilePos.y >= 0 && BoardCreator.I.tiles[tilePos.x][tilePos.y] == BoardCreator.TileType.Floor)
+            {*/
+            RaycastHit2D hit2D;
+            hitSmth = false;
+
+            if (hit2D = Physics2D.Raycast(new Vector2(tilePos.x + 0.5f, tilePos.y + 0.5f), Vector2.zero, 0f, ignoreMask))
             {
-                RaycastHit2D hit2D;
-                hitSmth = false;
 
-                if (hit2D = Physics2D.Raycast(new Vector2(tilePos.x + 0.5f, tilePos.y + 0.5f), Vector2.zero, 0f, ignoreMask))
+                if (hit2D.transform.CompareTag("Enemy"))
                 {
-
-                    if (hit2D.transform.CompareTag("Enemy"))
-                    {
-                        hitSmth = true;
-                    }
-
+                    hitSmth = true;
                 }
+
             }
+            /*}
             else
             {
                 hitSmth = true;
-            }
+            }*/
 
             
         } while (hitSmth);
@@ -114,7 +114,7 @@ public class Worm : Enemy {
         if(!spottedPlayer){
 
             if (CanSee(player, vision.GetComponent<CircleCollider2D>().radius) &&
-                (room == Room.GetRoomAtPos(player.transform.position)))
+                (room == LevelGeneration.I.GetRoomAtPos(player.transform.position)))
             {
                 spottedPlayer = true;
             }
@@ -143,7 +143,7 @@ public class Worm : Enemy {
 
                 case WormState.BURIED:
 
-                    if (room != Room.GetRoomAtPos(player.transform.position))
+                    if (room != LevelGeneration.I.GetRoomAtPos(player.transform.position))
                     {
                         spottedPlayer = false;
                         return;
@@ -178,7 +178,7 @@ public class Worm : Enemy {
 
             }
 
-            if (state != WormState.BURYING && room != Room.GetRoomAtPos(player.transform.position))
+            if (state != WormState.BURYING && room != LevelGeneration.I.GetRoomAtPos(player.transform.position))
             {
                 state = WormState.BURYING;
                 nextAttackBG.SetActive(false);

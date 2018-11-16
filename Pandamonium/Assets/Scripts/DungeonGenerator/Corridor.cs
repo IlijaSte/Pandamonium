@@ -6,7 +6,7 @@ public enum Direction
     North, East, South, West,
 }
 
-public class Corridor
+/*public class Corridor
 {
     public int startXPos;         // The x coordinate for the start of the corridor.
     public int startYPos;         // The y coordinate for the start of the corridor.
@@ -137,4 +137,4 @@ public class Corridor
 
         return true;
     }
-}
+}*/
