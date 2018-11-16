@@ -211,14 +211,12 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected void UpdateGraph()
     {
-        //Vector2 newApproxPosition = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
 
         Vector2 newApproxPosition = BoardCreator.I.groundTilemap.WorldToCell(transform.position) + new Vector3(0.5f, 0.5f);
 
         if (!newApproxPosition.Equals(approxPosition))
         {
 
-            //Bounds oldBounds = new Bounds(boundsCenter, GetComponent<BoxCollider2D>().bounds.size);
             GraphUpdateObject guo = new GraphUpdateObject(currBounds)
             {
                 updatePhysics = true,
@@ -248,8 +246,6 @@ public class AttackingCharacter : MonoBehaviour {
         {
             timeToDash += Time.deltaTime;
         }
-
-        UpdateGraph();
 
         switch (playerState)
         {

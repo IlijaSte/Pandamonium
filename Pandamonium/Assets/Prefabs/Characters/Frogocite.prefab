@@ -390,7 +390,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -596,19 +596,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7013d3ddb95fca04dafd9d690cb43e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons: []
+  weapons:
+  - {fileID: 114121749672228834}
   equippedWeaponIndex: 0
   maxHealth: 25
-  type: 0
-  vision: {fileID: 0}
+  type: 1
+  vision: {fileID: 114214034657156396}
   dashCooldown: 6
   dashSpeed: 12
-  healthBar: {fileID: 0}
-  nextAttackBar: {fileID: 0}
+  healthBar: {fileID: 114791163046767886}
+  nextAttackBar: {fileID: 114631011764471838}
   normalSpeed: 6
   maxDashRange: 4
   jumpSpeed: 0
-  jumpHeight: {x: 0, y: 10}
+  maxJumpRange: 4
+  indicatorPrefab: {fileID: 1677782040419512, guid: d354f95f8310c1f418e1347aa9aa7874,
+    type: 2}
+  isJumping: 0
+  jumpCooldown: 3
 --- !u!114 &114079399296506460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -626,7 +631,7 @@ MonoBehaviour:
   repathRate: 0.5
   canSearch: 1
   canMove: 1
-  maxSpeed: 2
+  maxSpeed: 1.6
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -669,7 +674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79d0180b41341143b6b230c263bebfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
+  character: {fileID: 114068334897614330}
 --- !u!114 &114542684223825712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -897,9 +902,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -2025459693
+  m_SortingLayer: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 17d5937b71840044bb2730bfd86dab4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

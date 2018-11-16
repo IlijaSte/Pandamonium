@@ -55,8 +55,11 @@ MonoBehaviour:
   columns: 50
   rows: 50
   numRooms:
-    m_Min: 16
-    m_Max: 16
+    m_Min: 6
+    m_Max: 8
+  numBonusRooms:
+    m_Min: 4
+    m_Max: 7
   roomWidth:
     m_Min: 7
     m_Max: 10
@@ -75,8 +78,8 @@ MonoBehaviour:
   fragmentWidth: -1
   fragmentHeight: -1
   numEnemies:
-    m_Min: 3
-    m_Max: 6
+    m_Min: 10
+    m_Max: 15
   floorTiles:
   - {fileID: 11400000, guid: 66ed337b8552bd84a80c03b7444d59ae, type: 2}
   - {fileID: 11400000, guid: f484b5b9275151745a9b493a89e60df4, type: 2}
@@ -95,6 +98,7 @@ MonoBehaviour:
   enemyParent: {fileID: 0}
   enemyPrefabs:
   - {fileID: 1628753790980070, guid: 75c84e6b6e1cac542a790e6e97eb2d12, type: 2}
+  - {fileID: 1994364961457230, guid: d6fddc9afdfce6d40a9c8f40754187dc, type: 2}
   bossPrefab: {fileID: 1944221328380284, guid: 38561c1c58ef2b44892924f3b7f08068, type: 2}
   generator: {fileID: 114753057818360466}
   isTutorial: 0

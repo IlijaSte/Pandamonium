@@ -67,8 +67,6 @@ public class AcidProjectile : MonoBehaviour {
         
         if(target.x - transform.position.x < 0)
         {
-
-            //animator.SetBool("Mirror", true);
             GetComponent<SpriteRenderer>().flipX = true;
         }
     }
@@ -99,9 +97,12 @@ public class AcidProjectile : MonoBehaviour {
         if (player != null)
         {
             player.TakeDamage(damage, Vector3.zero);
+
             if (worm != null)
                 player.TakeDamageOverTime(damage, 1, 3, worm.transform);
+
             else player.TakeDamageOverTime(damage, 1, 3);
+
             Destroy(indicator.gameObject);
             Destroy(gameObject);
         }

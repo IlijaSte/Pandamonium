@@ -37,10 +37,11 @@ public class Room
 
 
     // This is an overload of the SetupRoom function and has a corridor parameter that represents the corridor entering the room.
-    public void SetupRoom(IntRange widthRange, IntRange heightRange, int columns, int rows, Corridor corridor)
+    public void SetupRoom(IntRange widthRange, IntRange heightRange, int columns, int rows, Corridor corridor, bool bonus = false)
     {
-        // Set the entering corridor direction.
-        enteringCorridor = corridor.direction;
+        if(!bonus)
+            // Set the entering corridor direction.
+            enteringCorridor = corridor.direction;
 
         // Set random values for width and height.
         roomWidth = widthRange.Random;
