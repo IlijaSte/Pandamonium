@@ -11,8 +11,6 @@ public class Enemy : AttackingCharacter {
     public static int numEnemies = 0;
     public static bool areAllEnemiesDead = false;
 
-    private BoardCreator boardCreator;
-
     protected Vector2 startPos;
 
     protected Room room;
@@ -28,8 +26,7 @@ public class Enemy : AttackingCharacter {
 
         type = CharacterType.ENEMY;
 
-        boardCreator = BoardCreator.I;
-        room = Room.GetRoomAtPos(transform.position);
+        room = LevelGeneration.I.GetRoomAtPos(transform.position);
         startPos = transform.position;
     }
 
@@ -47,7 +44,7 @@ public class Enemy : AttackingCharacter {
 
             case PlayerState.CHASING_ENEMY:
 
-                if(Room.GetRoomAtPos(target.position) != room)
+                if(LevelGeneration.I.GetRoomAtPos(target.position) != room)
                 {
                     MoveToPosition(startPos);
                 }
@@ -58,7 +55,7 @@ public class Enemy : AttackingCharacter {
                 {
                     Transform closest;
 
-                    if ((closest = vision.GetClosest()) != null && Room.GetRoomAtPos(closest.position) == room)
+                    if ((closest = vision.GetClosest()) != null && LevelGeneration.I.GetRoomAtPos(closest.position) == room)
                     {
                         Attack(closest);
                     }
@@ -72,7 +69,7 @@ public class Enemy : AttackingCharacter {
                     {
                         Transform closest;
 
-                        if ((closest = vision.GetClosest()) != null && Room.GetRoomAtPos(closest.position) == room)
+                        if ((closest = vision.GetClosest()) != null && LevelGeneration.I.GetRoomAtPos(closest.position) == room)
                         {
                             Attack(closest);
                         }

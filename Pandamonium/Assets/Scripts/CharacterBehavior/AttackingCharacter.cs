@@ -83,7 +83,7 @@ public class AttackingCharacter : MonoBehaviour {
 
         //GetComponent<GraphUpdateScene>().Apply();
 
-        approxPosition = BoardCreator.I.groundTilemap.WorldToCell(transform.position) + new Vector3(0.5f, 0.5f);
+        approxPosition = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y)) + new Vector2(0.5f, 0.5f);
         //approxPosition = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
         currBounds = new Bounds(approxPosition, Vector3.one);
         //boundsCenter = GetComponent<BoxCollider2D>().bounds.center;
@@ -212,7 +212,7 @@ public class AttackingCharacter : MonoBehaviour {
     protected void UpdateGraph()
     {
 
-        Vector2 newApproxPosition = BoardCreator.I.groundTilemap.WorldToCell(transform.position) + new Vector3(0.5f, 0.5f);
+        Vector2 newApproxPosition = approxPosition = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y)) + new Vector2(0.5f, 0.5f);
 
         if (!newApproxPosition.Equals(approxPosition))
         {

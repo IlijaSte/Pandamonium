@@ -6,28 +6,18 @@ public class Fragment {
 
     public Room room;
 
-    private BoardCreator context;
-
     public int xPos;
     public int yPos;
 
-    public Fragment(BoardCreator context)
+    public Fragment(int xPos, int yPos)
     {
-        this.context = context;
-    }
-
-    public Fragment(BoardCreator context, int xPos, int yPos)
-    {
-        this.context = context;
-
         this.xPos = xPos;
         this.yPos = yPos;
 
     }
 
-    public Fragment(BoardCreator context, int xPos, int yPos, Room room)
+    public Fragment(int xPos, int yPos, Room room)
     {
-        this.context = context;
 
         this.xPos = xPos;
         this.yPos = yPos;
@@ -41,7 +31,7 @@ public class Fragment {
         this.room = room;
     }
 
-    public static Fragment GetFragmentAt(BoardCreator bc, Vector2Int pos)
+    /*public static Fragment GetFragmentAt(Vector2Int pos)
     {
 
         if (pos.y < 0 || pos.x < 0 || pos.y >= bc.fragmentHeight * bc.heightInFragments || pos.x >= bc.fragmentWidth * bc.widthInFragments)
@@ -92,7 +82,7 @@ public class Fragment {
     public int GetHeight()
     {
         return context.fragmentHeight;
-    }
+    }*/
 
     public bool IsOccupied()
     {
