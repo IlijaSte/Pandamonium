@@ -69,7 +69,7 @@ public class LevelGeneration : MonoBehaviour {
 
 	}
 
-    public IEnumerator Start()
+    protected virtual IEnumerator Start()
     {
         yield return new WaitForSeconds(0.1f);
 
@@ -112,7 +112,7 @@ public class LevelGeneration : MonoBehaviour {
         return rooms[gridSizeX + Mathf.RoundToInt(pos.x / roomWidth), gridSizeY + Mathf.RoundToInt(pos.y / roomHeight)];
     }
 
-    void InstantiateEnemies()
+    protected virtual void InstantiateEnemies()
     {
 
         int definiteNumEnemies = numEnemies.Random;
@@ -134,7 +134,7 @@ public class LevelGeneration : MonoBehaviour {
 
     }
 
-	void CreateRooms(){
+	protected virtual void CreateRooms(){
 		//setup
 		rooms = new Room[gridSizeX * 2,gridSizeY * 2];
         rooms[gridSizeX, gridSizeY] = new Room(Vector2.zero, 1);
