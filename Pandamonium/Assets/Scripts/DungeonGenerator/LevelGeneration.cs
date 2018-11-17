@@ -61,8 +61,7 @@ public class LevelGeneration : MonoBehaviour {
         FillAcid();     // fills room with acid (or other obstacle type in the future)
 		SetRoomDoors(); //assigns the doors where rooms would connect
 		DrawMap(); //instantiates objects to make up a map
-        
-        
+
 	}
 
     public IEnumerator Start()

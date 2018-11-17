@@ -53,11 +53,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomPrefabs:
   - {fileID: 1003505850141366, guid: d5e0bf7b42c7ead47b8c059dad9c042b, type: 2}
-  corridorPrefab: {fileID: 11400000, guid: bd5727515cb87844fbcd315b28b5c77b, type: 2}
+  corridorPrefab: {fileID: 11400000, guid: c13e41d562a578c42830b7745183d1b3, type: 2}
   acidTilemap: {fileID: 0}
   acidPrefab: {fileID: 11400000, guid: 67efc53f4270ce441a95c220a79972b1, type: 2}
-  roomWidth: 16
-  roomHeight: 16
+  roomWidth: 14
+  roomHeight: 14
   ground: {fileID: 0}
   numEnemies:
     m_Min: 20

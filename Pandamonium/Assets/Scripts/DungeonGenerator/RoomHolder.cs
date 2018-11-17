@@ -8,8 +8,6 @@ public class RoomHolder : MonoBehaviour {
     public Tilemap groundTilemap;
     public Tilemap corridorTilemap;
     public Tilemap obstacleTilemap;
-    public int width;
-    public int height;
 
     public Transform topEdge;
     public Transform bottomEdge;
@@ -22,14 +20,31 @@ public class RoomHolder : MonoBehaviour {
     {
         acidTilemap = LevelGeneration.I.acidTilemap;
 
-        for (int i = Mathf.FloorToInt(transform.position.x - width / 2); i <= transform.position.x + width / 2; i++)
+        for (int i = Mathf.FloorToInt(transform.position.x - LevelGeneration.I.roomWidth / 2); i <= transform.position.x + LevelGeneration.I.roomWidth / 2; i++)
         {
-            for (int j = Mathf.FloorToInt(transform.position.y - height / 2); j <= transform.position.y + height / 2; j++)
+            for (int j = Mathf.FloorToInt(transform.position.y - LevelGeneration.I.roomHeight / 2); j <= transform.position.y + LevelGeneration.I.roomHeight / 2; j++)
             {
                 Vector3Int tilePos = new Vector3Int(i, j, 0);
 
-                if (groundTilemap.HasTile(groundTilemap.WorldToCell(tilePos)))
-                    acidTilemap.SetTile(tilePos, null);
+                Vector3Int groundTilePos = groundTilemap.WorldToCell(tilePos);
+
+                if (groundTilemap.HasTile(groundTilePos))
+                {
+                    if(Room.IsTileWalkable(groundTilemap, groundTilePos))
+                    /*if(groundTilemap.HasTile(groundTilePos + new Vector3Int(1, 0, 0)) &&
+                        groundTilemap.HasTile(groundTilePos + new Vector3Int(-1, 0, 0)) &&
+                        groundTilemap.HasTile(groundTilePos + new Vector3Int(0, 1, 0)) &&
+                        groundTilemap.HasTile(groundTilePos + new Vector3Int(0, -1, 0)) &&
+
+                        groundTilemap.HasTile(groundTilePos + new Vector3Int(-1, -1, 0)) &&
+                        groundTilemap.HasTile(groundTilePos + new Vector3Int(-1, 1, 0)) &&
+                        groundTilemap.HasTile(groundTilePos + new Vector3Int(1, -1, 0)) &&
+                        groundTilemap.HasTile(groundTilePos + new Vector3Int(1, 1, 0)))*/
+                    {
+                        acidTilemap.SetTile(tilePos, null);
+                    }
+                    
+                }
             }
 
         }
@@ -40,11 +55,25 @@ public class RoomHolder : MonoBehaviour {
     private void DrawCorridor(Vector2 start, Vector2 direction)
     {
 
-        while (Mathf.Abs(start.x - transform.position.x) <= width / 2 &&
-                Mathf.Abs(start.y - transform.position.y) <= height / 2)
+        while (Mathf.Abs(start.x - transform.position.x) <= LevelGeneration.I.roomWidth / 2 + 1 &&
+                Mathf.Abs(start.y - transform.position.y) <= LevelGeneration.I.roomHeight / 2 + 1)
         {
             Vector3Int tilePos = corridorTilemap.WorldToCell(start);
-            corridorTilemap.SetTile(tilePos, LevelGeneration.I.corridorPrefab);
+            //Vector3Int corridorPos = LevelGeneration.I.corridorTilemap.WorldToCell(start);
+
+            groundTilemap.SetTile(tilePos, LevelGeneration.I.corridorPrefab);
+
+            if(direction.Equals(Vector2.left) || direction.Equals(Vector2.right))      // corridor left / right
+            {
+                groundTilemap.SetTile(tilePos + new Vector3Int(0, 1, 0), LevelGeneration.I.corridorPrefab);
+                groundTilemap.SetTile(tilePos + new Vector3Int(0, -1, 0), LevelGeneration.I.corridorPrefab);
+            }
+            else
+            {
+                groundTilemap.SetTile(tilePos + new Vector3Int(1, 0, 0), LevelGeneration.I.corridorPrefab);
+                groundTilemap.SetTile(tilePos + new Vector3Int(-1, 0, 0), LevelGeneration.I.corridorPrefab);
+            }
+
             obstacleTilemap.SetTile(tilePos, null);
 
             acidTilemap.SetTile(acidTilemap.WorldToCell(start), null);

@@ -31,6 +31,23 @@ public class Room {
         //DrawCorridors();
     }
 
+    public static bool IsTileWalkable(Tilemap tilemap, Vector3Int tilePos)
+    {
+        if (tilemap.HasTile(tilePos) &&
+            tilemap.HasTile(tilePos + new Vector3Int(1, 0, 0)) &&
+            tilemap.HasTile(tilePos + new Vector3Int(-1, 0, 0)) &&
+            tilemap.HasTile(tilePos + new Vector3Int(0, 1, 0)) &&
+            tilemap.HasTile(tilePos + new Vector3Int(0, -1, 0)) &&
+
+            tilemap.HasTile(tilePos + new Vector3Int(-1, -1, 0)) &&
+            tilemap.HasTile(tilePos + new Vector3Int(-1, 1, 0)) &&
+            tilemap.HasTile(tilePos + new Vector3Int(1, -1, 0)) &&
+            tilemap.HasTile(tilePos + new Vector3Int(1, 1, 0)))
+            return true;
+
+        return false;
+    }
+
     public Vector2 GetRandomPos()
     {
 
@@ -41,7 +58,7 @@ public class Room {
 
             pos = new Vector2(Random.Range(roomHolder.leftEdge.position.x, roomHolder.rightEdge.position.x), Random.Range(roomHolder.bottomEdge.position.y, roomHolder.topEdge.position.y));
 
-        } while (!groundTilemap.HasTile(groundTilemap.WorldToCell(pos)));
+        } while (!IsTileWalkable(groundTilemap, groundTilemap.WorldToCell(pos)));
 
         return (Vector3)pos;
     }
