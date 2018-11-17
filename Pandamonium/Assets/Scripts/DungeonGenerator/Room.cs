@@ -19,7 +19,7 @@ public class Room {
 		type = _type;
 	}
 
-    public void Init(GameObject prefab, Transform parent)
+    public void Init(GameObject prefab, Transform parent, int layerOrder)
     {
         this.instance = Object.Instantiate(prefab, new Vector2(gridPos.x * LevelGeneration.I.roomWidth, gridPos.y * LevelGeneration.I.roomHeight), Quaternion.identity, parent).transform;
         roomHolder = instance.GetComponent<RoomHolder>();

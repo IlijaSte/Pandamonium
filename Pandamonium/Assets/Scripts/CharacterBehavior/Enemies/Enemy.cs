@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Pathfinding;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -28,6 +29,17 @@ public class Enemy : AttackingCharacter {
 
         room = LevelGeneration.I.GetRoomAtPos(transform.position);
         startPos = transform.position;
+
+        approxPosition = new Vector2(Mathf.Floor(transform.position.x), Mathf.Floor(transform.position.y)) + new Vector2(0.5f, 0.5f);
+        currBounds = new Bounds(approxPosition, Vector3.one);
+
+        GraphUpdateObject guo = new GraphUpdateObject(currBounds)
+        {
+            updatePhysics = true,
+            modifyTag = true,
+            setTag = (int)type + 1
+        };
+        AstarPath.active.UpdateGraphs(guo);
     }
 
     protected override void Update()
@@ -92,6 +104,15 @@ public class Enemy : AttackingCharacter {
         numEnemies--;
         if (numEnemies == 0)
             areAllEnemiesDead = true;
+
+        GraphUpdateObject guo = new GraphUpdateObject(currBounds)
+        {
+            updatePhysics = true,
+            modifyTag = true,
+            setTag = 0
+        };
+        AstarPath.active.UpdateGraphs(guo);
+
         base.Die();
     }
 

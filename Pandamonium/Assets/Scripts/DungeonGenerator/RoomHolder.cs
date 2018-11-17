@@ -31,15 +31,6 @@ public class RoomHolder : MonoBehaviour {
                 if (groundTilemap.HasTile(groundTilePos))
                 {
                     if(Room.IsTileWalkable(groundTilemap, groundTilePos))
-                    /*if(groundTilemap.HasTile(groundTilePos + new Vector3Int(1, 0, 0)) &&
-                        groundTilemap.HasTile(groundTilePos + new Vector3Int(-1, 0, 0)) &&
-                        groundTilemap.HasTile(groundTilePos + new Vector3Int(0, 1, 0)) &&
-                        groundTilemap.HasTile(groundTilePos + new Vector3Int(0, -1, 0)) &&
-
-                        groundTilemap.HasTile(groundTilePos + new Vector3Int(-1, -1, 0)) &&
-                        groundTilemap.HasTile(groundTilePos + new Vector3Int(-1, 1, 0)) &&
-                        groundTilemap.HasTile(groundTilePos + new Vector3Int(1, -1, 0)) &&
-                        groundTilemap.HasTile(groundTilePos + new Vector3Int(1, 1, 0)))*/
                     {
                         acidTilemap.SetTile(tilePos, null);
                     }
@@ -55,23 +46,23 @@ public class RoomHolder : MonoBehaviour {
     private void DrawCorridor(Vector2 start, Vector2 direction)
     {
 
-        while (Mathf.Abs(start.x - transform.position.x) <= LevelGeneration.I.roomWidth / 2 + 1 &&
-                Mathf.Abs(start.y - transform.position.y) <= LevelGeneration.I.roomHeight / 2 + 1)
+        while (Mathf.Abs(start.x - transform.position.x) <= LevelGeneration.I.roomWidth / 2 &&
+                Mathf.Abs(start.y - transform.position.y) <= LevelGeneration.I.roomHeight / 2)
         {
-            Vector3Int tilePos = corridorTilemap.WorldToCell(start);
-            //Vector3Int corridorPos = LevelGeneration.I.corridorTilemap.WorldToCell(start);
+            Vector3Int tilePos = groundTilemap.WorldToCell(start);
 
-            groundTilemap.SetTile(tilePos, LevelGeneration.I.corridorPrefab);
+            groundTilemap.SetTile(tilePos, LevelGeneration.I.groundPrefab);
 
             if(direction.Equals(Vector2.left) || direction.Equals(Vector2.right))      // corridor left / right
             {
-                groundTilemap.SetTile(tilePos + new Vector3Int(0, 1, 0), LevelGeneration.I.corridorPrefab);
-                groundTilemap.SetTile(tilePos + new Vector3Int(0, -1, 0), LevelGeneration.I.corridorPrefab);
+                groundTilemap.SetTile(tilePos + new Vector3Int(0, 1, 0), LevelGeneration.I.groundPrefab);
+                groundTilemap.SetTile(tilePos + new Vector3Int(0, -1, 0), LevelGeneration.I.groundPrefab);
+
             }
             else
             {
-                groundTilemap.SetTile(tilePos + new Vector3Int(1, 0, 0), LevelGeneration.I.corridorPrefab);
-                groundTilemap.SetTile(tilePos + new Vector3Int(-1, 0, 0), LevelGeneration.I.corridorPrefab);
+                groundTilemap.SetTile(tilePos + new Vector3Int(1, 0, 0), LevelGeneration.I.groundPrefab);
+                groundTilemap.SetTile(tilePos + new Vector3Int(-1, 0, 0), LevelGeneration.I.groundPrefab);
             }
 
             obstacleTilemap.SetTile(tilePos, null);
@@ -79,6 +70,25 @@ public class RoomHolder : MonoBehaviour {
             acidTilemap.SetTile(acidTilemap.WorldToCell(start), null);
 
             start += direction;
+        }
+
+        start -= direction;
+
+        Vector3Int corridorPos = LevelGeneration.I.corridorTilemap.WorldToCell(start);
+
+        if (direction.Equals(Vector2.up) || direction.Equals(Vector2.down))
+        {
+            LevelGeneration.I.corridorTilemap.SetTile(corridorPos, LevelGeneration.I.corridorPrefab);
+            LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(1, 0, 0), LevelGeneration.I.corridorPrefab);
+            LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(-1, 0, 0), LevelGeneration.I.corridorPrefab);
+
+        }
+        else
+        {
+            LevelGeneration.I.corridorTilemap.SetTile(corridorPos, LevelGeneration.I.corridorPrefab);
+            LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(0, 1, 0), LevelGeneration.I.corridorPrefab);
+            LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(0, -1, 0), LevelGeneration.I.corridorPrefab);
+
         }
 
     }

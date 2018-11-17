@@ -53,7 +53,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomPrefabs:
   - {fileID: 1003505850141366, guid: d5e0bf7b42c7ead47b8c059dad9c042b, type: 2}
-  corridorPrefab: {fileID: 11400000, guid: c13e41d562a578c42830b7745183d1b3, type: 2}
+  corridorPrefab: {fileID: 11400000, guid: 3cd6a6afda712c747ae400a48e2d7d36, type: 2}
+  groundPrefab: {fileID: 11400000, guid: c13e41d562a578c42830b7745183d1b3, type: 2}
+  corridorTilemap: {fileID: 0}
   acidTilemap: {fileID: 0}
   acidPrefab: {fileID: 11400000, guid: 67efc53f4270ce441a95c220a79972b1, type: 2}
   roomWidth: 14

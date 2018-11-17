@@ -13,6 +13,9 @@ public class LevelGeneration : MonoBehaviour {
     public GameObject[] roomPrefabs;
     public TileBase corridorPrefab;
 
+    public TileBase groundPrefab;
+    public Tilemap corridorTilemap;
+
     public Tilemap acidTilemap; 
     public TileBase acidPrefab;
 
@@ -29,6 +32,8 @@ public class LevelGeneration : MonoBehaviour {
 
     private static LevelGeneration instance;
     private Transform enemyParent;
+
+    private int nextLayerOrder = 0;
 
     public static LevelGeneration I
     {
@@ -121,6 +126,8 @@ public class LevelGeneration : MonoBehaviour {
                 room = rooms[gridSizeX + Mathf.RoundToInt(roomPos.x), gridSizeY + Mathf.RoundToInt(roomPos.y)];
             } while (room == LevelGeneration.I.GetRoomAtPos(Player.I.transform.position));
             Vector2 spawnPos = room.GetRandomPos();
+
+            spawnPos = new Vector2(Mathf.Floor(spawnPos.x) + 0.5f, Mathf.Floor(spawnPos.y) + 0.5f);
 
             Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnPos, Quaternion.identity, enemyParent);
         }
@@ -254,7 +261,7 @@ public class LevelGeneration : MonoBehaviour {
 			mapper.right = room.doorRight;
 			mapper.left = room.doorLeft;*/
 
-            room.Init(GetRandomPrefab(), roomParent);
+            room.Init(GetRandomPrefab(), roomParent, nextLayerOrder++);
             //Tilemap corridorTilemap = room.corridorTilemap;
             //room.LowerCorridors();
 		}

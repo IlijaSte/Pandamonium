@@ -73,7 +73,7 @@ public class Worm : Enemy {
             if (hit2D = Physics2D.Raycast(new Vector2(tilePos.x + 0.5f, tilePos.y + 0.5f), Vector2.zero, 0f, ignoreMask))
             {
 
-                if (hit2D.transform.CompareTag("Enemy"))
+                if (hit2D.collider.gameObject.layer == LayerMask.NameToLayer("Characters"))
                 {
                     hitSmth = true;
                 }

@@ -21,8 +21,10 @@ public class Player : AttackingCharacter {
     public GameObject attackIndicatorPrefab;
     private GameObject tapIndicator = null;
 
-    private static Player instance;
+    private bool isDead = false;
 
+    private static Player instance;
+    
     public static Player I
     {
         get
@@ -196,14 +198,18 @@ public class Player : AttackingCharacter {
 
     public override void TakeDamage(float damage, Vector3 dir)
     {
-        base.TakeDamage(damage, dir);
+        if (!isDead)
+        {
+            base.TakeDamage(damage, dir);
 
-        healthBar.fillAmount = health / maxHealth;
+            healthBar.fillAmount = health / maxHealth;
+        }
     }
 
     public override void Die()
     {
-       // MenuManager.I.ShowMenu(MenuManager.I.deathMenu);
+        MenuManager.I.ShowMenu(MenuManager.I.deathMenu);
+        isDead = true;
         //base.Die();
     }
 }

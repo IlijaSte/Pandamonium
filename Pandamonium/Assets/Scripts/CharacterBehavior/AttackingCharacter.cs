@@ -50,7 +50,7 @@ public class AttackingCharacter : MonoBehaviour {
     protected float maxRaycastDistance = 50;
 
     protected Vector2 approxPosition;
-    private Bounds currBounds;
+    protected Bounds currBounds;
 
     private ArrayList dotSources = new ArrayList();
 
@@ -81,20 +81,6 @@ public class AttackingCharacter : MonoBehaviour {
 
         timeToDash = dashCooldown;
 
-        //GetComponent<GraphUpdateScene>().Apply();
-
-        approxPosition = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y)) + new Vector2(0.5f, 0.5f);
-        //approxPosition = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
-        currBounds = new Bounds(approxPosition, Vector3.one);
-        //boundsCenter = GetComponent<BoxCollider2D>().bounds.center;
-
-        GraphUpdateObject guo = new GraphUpdateObject(currBounds)
-        {
-            updatePhysics = true,
-            modifyTag = true,
-            setTag = (int)type + 1
-        };
-        AstarPath.active.UpdateGraphs(guo);
     }
 
     public void StopAttacking()
@@ -212,7 +198,7 @@ public class AttackingCharacter : MonoBehaviour {
     protected void UpdateGraph()
     {
 
-        Vector2 newApproxPosition = approxPosition = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y)) + new Vector2(0.5f, 0.5f);
+        Vector2 newApproxPosition = new Vector2(Mathf.Floor(transform.position.x), Mathf.Floor(transform.position.y)) + new Vector2(0.5f, 0.5f);
 
         if (!newApproxPosition.Equals(approxPosition))
         {
@@ -401,14 +387,6 @@ public class AttackingCharacter : MonoBehaviour {
 
     public virtual void Die()
     {
-
-        GraphUpdateObject guo = new GraphUpdateObject(currBounds)
-        {
-            updatePhysics = true,
-            modifyTag = true,
-            setTag = 0
-        };
-        AstarPath.active.UpdateGraphs(guo);
 
         Destroy(gameObject);
     }
