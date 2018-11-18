@@ -19,6 +19,8 @@ namespace LevelManagment
 
         private DataManager _dataManager;
 
+        private Toggle joystickToggle;
+
         protected override void Awake()
         {
             base.Awake();
@@ -28,6 +30,11 @@ namespace LevelManagment
         private void Start()
         {
             LoadData();
+
+            joystickToggle = transform.Find("Body/OptionGroup/JoystickCheck").GetComponent<Toggle>();
+            joystickToggle.onValueChanged.AddListener(GameManager.I.SetJoystick);
+            joystickToggle.isOn = GameManager.joystick;
+
         }
 
         public override void OnBackPressed()

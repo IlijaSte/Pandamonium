@@ -23,18 +23,12 @@ public class Player : AttackingCharacter {
 
     private bool isDead = false;
 
-    private static Player instance;
-    
-    public static Player I
+    public override void Awake()
     {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<Player>();
-            }
-            return instance;
-        }
+        base.Awake();
+
+        if (GameManager.joystick)
+            gameObject.SetActive(false);
     }
 
     public override void Start()
@@ -48,6 +42,8 @@ public class Player : AttackingCharacter {
         }
 
         base.Start();
+
+        GameManager.I.playerInstance = this;
     }
 
     protected IEnumerator ShowIndicator(GameObject prefab, Transform parent = null)

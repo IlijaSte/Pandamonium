@@ -5,7 +5,7 @@ using UnityEngine;
 public class MeleeWeapon : Weapon
 {
 
-    override protected void Attack()
+    override public void Attack(Transform target)
     {
         target.GetComponent<AttackingCharacter>().TakeDamage(damage, target.position - transform.position);
     }

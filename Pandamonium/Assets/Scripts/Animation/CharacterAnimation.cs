@@ -11,18 +11,21 @@ public class CharacterAnimation : AnimationMama {
     {
         path = transform.parent.GetComponent<AIPath>();
         animator = GetComponent<Animator>();
-        vector2Before = path.desiredVelocity;
+      //  vector2Before = path.desiredVelocity;
     }
 
 
     protected override void updateVector2()
     {
-        vector2Before = vector2;
-        Vector3 vector3D = path.desiredVelocity;
-        vector2 = vector3D;
+        //  vector2Before = vector2;
+        if (path)
+        {
+            Vector3 vector3D = path.desiredVelocity;
+            vector2 = vector3D;
+        }
     }
 
-    protected void animation360()
+    protected virtual void animation360()
     {
         updateVector2();
 
