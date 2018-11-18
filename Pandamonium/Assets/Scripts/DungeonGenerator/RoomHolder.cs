@@ -78,16 +78,24 @@ public class RoomHolder : MonoBehaviour {
 
         if (direction.Equals(Vector2.up) || direction.Equals(Vector2.down))
         {
-            LevelGeneration.I.corridorTilemap.SetTile(corridorPos, LevelGeneration.I.corridorPrefab);
-            LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(1, 0, 0), LevelGeneration.I.corridorPrefab);
-            LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(-1, 0, 0), LevelGeneration.I.corridorPrefab);
+            if (!LevelGeneration.I.corridorTilemap.HasTile(corridorPos + new Vector3Int(0, 1, 0)) &&
+                !LevelGeneration.I.corridorTilemap.HasTile(corridorPos + new Vector3Int(0, -1, 0)))
+            {
+                LevelGeneration.I.corridorTilemap.SetTile(corridorPos, LevelGeneration.I.corridorPrefab);
+                LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(1, 0, 0), LevelGeneration.I.corridorPrefab);
+                LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(-1, 0, 0), LevelGeneration.I.corridorPrefab);
+            }
 
         }
         else
         {
-            LevelGeneration.I.corridorTilemap.SetTile(corridorPos, LevelGeneration.I.corridorPrefab);
-            LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(0, 1, 0), LevelGeneration.I.corridorPrefab);
-            LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(0, -1, 0), LevelGeneration.I.corridorPrefab);
+            if (!LevelGeneration.I.corridorTilemap.HasTile(corridorPos + new Vector3Int(1, 0, 0)) &&
+                !LevelGeneration.I.corridorTilemap.HasTile(corridorPos + new Vector3Int(-1, 0, 0)))
+            {
+                LevelGeneration.I.corridorTilemap.SetTile(corridorPos, LevelGeneration.I.corridorPrefab);
+                LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(0, 1, 0), LevelGeneration.I.corridorPrefab);
+                LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(0, -1, 0), LevelGeneration.I.corridorPrefab);
+            }
 
         }
 

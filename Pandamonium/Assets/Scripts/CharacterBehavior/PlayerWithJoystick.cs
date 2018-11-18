@@ -92,16 +92,25 @@ public class PlayerWithJoystick : AttackingCharacter {
     }
 
     public void Attack()
+
     {
-        
 
-        Transform facingEnemy;
+        // promeniti pod hitno!!!
 
-        if (facingEnemy = GetFacingEnemy())
+        if (weapons[equippedWeaponIndex] is RangedWeapon)
         {
-            weapons[equippedWeaponIndex].Attack(facingEnemy);
+            weapons[equippedWeaponIndex].AttackInDirection(facingDirection);
         }
+        else
+        {
 
+            Transform facingEnemy;
+
+            if (facingEnemy = GetFacingEnemy())
+            {
+                weapons[equippedWeaponIndex].Attack(facingEnemy);
+            }
+        }
         //weapons[equippedWeaponIndex].Att
     }
 

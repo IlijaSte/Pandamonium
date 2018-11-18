@@ -60,6 +60,11 @@ public abstract class Weapon : MonoBehaviour {
         timeToAttack = 1;
     }
 
+    public virtual void AttackInDirection(Vector2 direction)
+    {
+        timeToAttack = 1;
+    }
+
     public bool IsInRange(Transform character)
     {
         if (enemiesInRange.Contains(character))

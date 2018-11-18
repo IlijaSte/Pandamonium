@@ -51,4 +51,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191a3998705aa6049809f47b12800b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathMenu: {fileID: 1542429003141812, guid: 176cb17ccd4155e458862b0c026e6875, type: 2}
+  deathMenu: {fileID: 1855370371046284, guid: 1b1e86775836ce64d8bf293366862809, type: 2}

@@ -29,6 +29,24 @@ public class FireProjectile : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
     }
 
+    public void Shoot(Transform weapon, Vector2 direction, float speed)
+    {
+        this.weapon = weapon;
+        this.direction = direction;
+        this.speed = speed;
+
+        this.target = null;
+        this.damage = weapon.GetComponent<Weapon>().damage;
+
+        homing = false;
+
+        shot = true;
+
+        Quaternion rot = Quaternion.LookRotation(Vector3.forward, direction);
+        transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
+
+    }
+
     private void Update()
     {
         if (!shot) return;
@@ -60,9 +78,17 @@ public class FireProjectile : MonoBehaviour
 
         AttackingCharacter character = other.GetComponent<AttackingCharacter>();
 
-        if (other.transform == target && character != null)                                      // ako je pogodio metu
+        if (target != null && other.transform == target && character != null)                                      // ako je pogodio metu
         {
             character.TakeDamage(damage, (other.transform.position - transform.position).normalized);
+            shot = false;
+            Destroy(gameObject);
+
+            return;
+        }else if (other.CompareTag("Enemy"))
+        {
+            print("hit enemy!");
+            (character as Enemy).TakeDamage(damage, (other.transform.position - transform.position).normalized);
             shot = false;
             Destroy(gameObject);
 
