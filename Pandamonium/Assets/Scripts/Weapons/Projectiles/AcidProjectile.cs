@@ -92,9 +92,9 @@ public class AcidProjectile : MonoBehaviour {
     public void OnTriggerEnter2D(Collider2D collision)
     {
 
-        Player player = collision.GetComponent<Player>();
+        AttackingCharacter player = collision.GetComponent<AttackingCharacter>();
 
-        if (player != null)
+        if (collision.transform == GameManager.I.playerInstance.transform)
         {
             player.TakeDamage(damage, Vector3.zero);
 

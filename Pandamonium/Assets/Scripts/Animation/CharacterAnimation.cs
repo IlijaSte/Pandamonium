@@ -23,6 +23,7 @@ public class CharacterAnimation : AnimationMama {
             Vector3 vector3D = path.desiredVelocity;
             vector2 = vector3D;
         }
+
     }
 
     protected virtual void animation360()

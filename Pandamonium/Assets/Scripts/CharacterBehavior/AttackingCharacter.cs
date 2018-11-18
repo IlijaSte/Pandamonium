@@ -58,8 +58,6 @@ public class AttackingCharacter : MonoBehaviour {
     {
 
         CM = GetComponent<CharacterMovement>();
-
-        health = maxHealth;
         path = GetComponent<AIPath>();
     }
 
@@ -76,6 +74,8 @@ public class AttackingCharacter : MonoBehaviour {
 
         if(path)
             normalSpeed = path.maxSpeed;
+
+        health = maxHealth;
 
         nextAttackBG = nextAttackBar.transform.parent.gameObject;
 

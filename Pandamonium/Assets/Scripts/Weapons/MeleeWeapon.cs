@@ -7,6 +7,11 @@ public class MeleeWeapon : Weapon
 
     override public void Attack(Transform target)
     {
-        target.GetComponent<AttackingCharacter>().TakeDamage(damage, target.position - transform.position);
+        if (timeToAttack <= 0)
+        {
+            target.GetComponent<AttackingCharacter>().TakeDamage(damage, target.position - transform.position);
+
+            base.Attack(target);
+        }
     }
 }

@@ -49,10 +49,16 @@ public abstract class Weapon : MonoBehaviour {
                 Attack(target);
                 timeToAttack = 1;
             }
+        }else if(GameManager.joystick && timeToAttack > 0)
+        {
+            timeToAttack -= speed * Time.deltaTime;
         }
     }
 
-    public abstract void Attack(Transform target);
+    public virtual void Attack(Transform target)
+    {
+        timeToAttack = 1;
+    }
 
     public bool IsInRange(Transform character)
     {

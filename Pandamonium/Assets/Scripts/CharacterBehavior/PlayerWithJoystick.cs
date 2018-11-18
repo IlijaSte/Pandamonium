@@ -6,7 +6,11 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public JoystickController controller;
     protected Rigidbody2D rb;
+
+    [HideInInspector]
     public Vector2 facingDirection;
+
+    private bool isDead = false;
 
     public override void Awake()
     {
@@ -15,18 +19,30 @@ public class PlayerWithJoystick : AttackingCharacter {
             controller.transform.parent.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
+        else{
+            GameManager.I.playerInstance = this;
+        }
     }
 
     public override void Start()
     {
         base.Start();
         rb = GetComponent<Rigidbody2D>();
-        GameManager.I.playerInstance = this;
+        facingDirection = Vector2.zero;
     }
 
     protected override void Update()
     {
-        //base.Update();
+        nextAttackBar.fillAmount = 1 - weapons[equippedWeaponIndex].timeToAttack;
+
+        if (weapons[equippedWeaponIndex].timeToAttack <= 0)
+        {
+            nextAttackBG.SetActive(false);
+        }
+        else
+        {
+            nextAttackBG.SetActive(true);
+        }
     }
 
     protected void FixedUpdate()
@@ -35,6 +51,7 @@ public class PlayerWithJoystick : AttackingCharacter {
         {
             if(rb.velocity.magnitude < normalSpeed)
             {
+                facingDirection = controller.InputDirection.normalized;
                 rb.AddForce(controller.InputDirection * normalSpeed * 20, ForceMode2D.Force);
             }
             // rb.velocity = controller.InputDirection * normalSpeed;
@@ -76,7 +93,7 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public void Attack()
     {
-        facingDirection = controller.InputDirection.normalized;
+        
 
         Transform facingEnemy;
 
@@ -86,5 +103,22 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
 
         //weapons[equippedWeaponIndex].Att
+    }
+
+    public override void TakeDamage(float damage, Vector3 dir)
+    {
+        if (!isDead)
+        {
+            base.TakeDamage(damage, dir);
+
+            healthBar.fillAmount = health / maxHealth;
+        }
+    }
+
+    public override void Die()
+    {
+        MenuManager.I.ShowMenu(MenuManager.I.deathMenu);
+        isDead = true;
+        //base.Die();
     }
 }

@@ -29,6 +29,7 @@ public class Player : AttackingCharacter {
 
         if (GameManager.joystick)
             gameObject.SetActive(false);
+        else GameManager.I.playerInstance = this;
     }
 
     public override void Start()
@@ -43,7 +44,6 @@ public class Player : AttackingCharacter {
 
         base.Start();
 
-        GameManager.I.playerInstance = this;
     }
 
     protected IEnumerator ShowIndicator(GameObject prefab, Transform parent = null)
