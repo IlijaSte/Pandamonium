@@ -8,7 +8,7 @@ public class FireStaff : RangedWeapon
 
     public GameObject firePrefab;   // prefab projektila (vatre)
 
-    protected override void Attack()
+    public override void Attack(Transform target)
     {
         // kreiranje projektila na mestu nosioca
         GameObject projectile = Instantiate(firePrefab);

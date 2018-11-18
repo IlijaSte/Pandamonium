@@ -7,6 +7,9 @@ public abstract class Weapon : MonoBehaviour {
     public float damage;
     public float speed;
 
+    [HideInInspector]
+    public float range;
+
     protected bool attacking = false;
     [HideInInspector]
     public float timeToAttack = 1;     // brojac koji se smanjuje u zavisnosti od brzine oruzja, kada dodje do 0 ispali se projektil i vraca se brojac na 1
@@ -30,6 +33,11 @@ public abstract class Weapon : MonoBehaviour {
         timeToAttack = 1;
     }
 
+    private void Start()
+    {
+        range = GetComponent<CircleCollider2D>().radius;
+    }
+
     virtual public void Update()
     {
         if (attacking && target != null)
@@ -38,13 +46,13 @@ public abstract class Weapon : MonoBehaviour {
 
             if (timeToAttack <= 0)
             {
-                Attack();
+                Attack(target);
                 timeToAttack = 1;
             }
         }
     }
 
-    protected abstract void Attack();
+    public abstract void Attack(Transform target);
 
     public bool IsInRange(Transform character)
     {

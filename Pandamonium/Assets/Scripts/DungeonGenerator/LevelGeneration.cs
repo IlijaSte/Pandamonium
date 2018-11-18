@@ -124,7 +124,7 @@ public class LevelGeneration : MonoBehaviour {
             {
                 Vector2 roomPos = takenPositions[Random.Range(1, takenPositions.Count)];
                 room = rooms[gridSizeX + Mathf.RoundToInt(roomPos.x), gridSizeY + Mathf.RoundToInt(roomPos.y)];
-            } while (room == LevelGeneration.I.GetRoomAtPos(Player.I.transform.position));
+            } while (room == GetRoomAtPos(GameManager.I.playerInstance.transform.position));
             Vector2 spawnPos = room.GetRandomPos();
 
             spawnPos = new Vector2(Mathf.Floor(spawnPos.x) + 0.5f, Mathf.Floor(spawnPos.y) + 0.5f);
@@ -251,19 +251,9 @@ public class LevelGeneration : MonoBehaviour {
 				continue; //skip where there is no room
 			}
 			Vector2 drawPos = room.gridPos;
-            /*drawPos.x *= 16;//aspect ratio of map sprite
-			drawPos.y *= 8;
-			//create map obj and assign its variables
-			MapSpriteSelector mapper = Object.Instantiate(roomWhiteObj, drawPos, Quaternion.identity).GetComponent<MapSpriteSelector>();
-			mapper.type = room.type;
-			mapper.up = room.doorTop;
-			mapper.down = room.doorBot;
-			mapper.right = room.doorRight;
-			mapper.left = room.doorLeft;*/
 
             room.Init(GetRandomPrefab(), roomParent, nextLayerOrder++);
-            //Tilemap corridorTilemap = room.corridorTilemap;
-            //room.LowerCorridors();
+
 		}
 	}
 
