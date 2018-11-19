@@ -71,6 +71,9 @@ public class LevelGeneration : MonoBehaviour {
 
     protected virtual IEnumerator Start()
     {
+
+        PositionPlayer();
+
         yield return new WaitForSeconds(0.1f);
 
         float nodeSize = AstarPath.active.data.gridGraph.nodeSize;
@@ -81,6 +84,11 @@ public class LevelGeneration : MonoBehaviour {
 
         AstarPath.active.Scan();
         InstantiateEnemies();
+    }
+
+    protected void PositionPlayer()
+    {
+        GameManager.I.playerInstance.transform.position = rooms[gridSizeX, gridSizeY].GetRandomPos();
     }
 
     public void BoxFill(Tilemap map, TileBase tile, Vector3Int start, Vector3Int end)

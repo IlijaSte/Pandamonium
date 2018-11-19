@@ -10,12 +10,17 @@ public class FireStaff : RangedWeapon
 
     public override void Attack(Transform target)
     {
-        // kreiranje projektila na mestu nosioca
-        GameObject projectile = Instantiate(firePrefab);
-        projectile.transform.position = transform.position;
+        if (timeToAttack <= 0)
+        {
+            // kreiranje projektila na mestu nosioca
+            GameObject projectile = Instantiate(firePrefab);
+            projectile.transform.position = transform.position;
 
-        // ispaljivanje projektila
-        projectile.GetComponent<FireProjectile>().Shoot(transform, target, projectileSpeed);
+            // ispaljivanje projektila
+            projectile.GetComponent<FireProjectile>().Shoot(transform, target, projectileSpeed);
+
+            base.Attack(target);
+        }
     }
 
     public override void AttackInDirection(Vector2 direction)

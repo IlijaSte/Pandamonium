@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerWithJoystick : AttackingCharacter {
 
     public JoystickController controller;
-    protected Rigidbody2D rb;
 
     [HideInInspector]
     public Vector2 facingDirection;
+
+    public float lockAngle = 60;
 
     private bool isDead = false;
 
@@ -27,7 +28,6 @@ public class PlayerWithJoystick : AttackingCharacter {
     public override void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody2D>();
         facingDirection = Vector2.zero;
     }
 
@@ -66,6 +66,39 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     protected Transform GetFacingEnemy()
     {
+
+        List<Transform> visibleTargets = new List<Transform>();
+
+        float lockRadius = weapons[equippedWeaponIndex].range;
+
+        float minDistance = Mathf.Infinity;
+        Transform closestTarget = null;
+
+        Collider2D[] targetsInRadius = Physics2D.OverlapCircleAll(transform.position, lockRadius, ignoreMask);
+
+        for(int i = 0; i < targetsInRadius.Length; i++)
+        {
+            Vector2 dirToTarget = (targetsInRadius[i].transform.position - transform.position).normalized;
+
+            if(Vector2.Angle(facingDirection, dirToTarget) < lockAngle / 2)
+            {
+                float distance = Vector2.Distance(transform.position, targetsInRadius[i].transform.position);
+
+                if (distance < minDistance)
+                {
+                    if (CanSee(targetsInRadius[i].transform, distance))
+                    {
+                        minDistance = distance;
+                        closestTarget = targetsInRadius[i].transform;
+                    }
+                }
+            }
+
+            
+        }
+
+        return closestTarget;
+        /*
         Vector3 startCast = transform.position;
 
         RaycastHit2D[] results = new RaycastHit2D[6];
@@ -89,6 +122,7 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
 
         return null;
+        */
     }
 
     public void Attack()
@@ -96,7 +130,7 @@ public class PlayerWithJoystick : AttackingCharacter {
     {
 
         // promeniti pod hitno!!!
-
+        /*
         if (weapons[equippedWeaponIndex] is RangedWeapon)
         {
             weapons[equippedWeaponIndex].AttackInDirection(facingDirection);
@@ -110,15 +144,27 @@ public class PlayerWithJoystick : AttackingCharacter {
             {
                 weapons[equippedWeaponIndex].Attack(facingEnemy);
             }
+        }*/
+
+        Transform facingEnemy;
+
+        if (facingEnemy = GetFacingEnemy())
+        {
+            weapons[equippedWeaponIndex].Attack(facingEnemy);
         }
+        else
+        {
+            weapons[equippedWeaponIndex].AttackInDirection(facingDirection);
+        }
+
         //weapons[equippedWeaponIndex].Att
     }
 
-    public override void TakeDamage(float damage, Vector3 dir)
+    public override void TakeDamage(float damage)
     {
         if (!isDead)
         {
-            base.TakeDamage(damage, dir);
+            base.TakeDamage(damage);
 
             healthBar.fillAmount = health / maxHealth;
         }

@@ -606,6 +606,7 @@ MonoBehaviour:
   maxDashRange: 4
   controller: {fileID: 0}
   facingDirection: {x: 0, y: 0}
+  lockAngle: 60
 --- !u!114 &114566688973802844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -640,6 +641,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   speed: 1
+  knockback: 1
+  knockbackForce: 5
+  iField: {fileID: 0}
   range: 0
   timeToAttack: 1
 --- !u!114 &114693858186080010
@@ -666,9 +670,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   speed: 2
+  knockback: 0
+  knockbackForce: 5
+  iField: {fileID: 0}
   range: 0
   timeToAttack: 1
-  projectileSpeed: 5
+  projectileSpeed: 7
   firePrefab: {fileID: 1714793588657250, guid: 66803ba921559a94598a106ff2efb6db, type: 2}
 --- !u!114 &114898562783967118
 MonoBehaviour:

@@ -92,9 +92,9 @@ public class Enemy : AttackingCharacter {
         }
     }
 
-    public override void TakeDamage(float damage, Vector3 dir)
+    public override void TakeDamage(float damage)
     {
-        base.TakeDamage(damage, dir);
+        base.TakeDamage(damage);
         healthBar.fillAmount = health / maxHealth;
 
     }

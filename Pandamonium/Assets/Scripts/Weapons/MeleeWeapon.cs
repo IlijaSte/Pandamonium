@@ -9,7 +9,14 @@ public class MeleeWeapon : Weapon
     {
         if (timeToAttack <= 0)
         {
-            target.GetComponent<AttackingCharacter>().TakeDamage(damage, target.position - transform.position);
+            if (knockback)
+            {
+                target.GetComponent<AttackingCharacter>().TakeDamageWithKnockback(damage, (target.position - transform.position).normalized, knockbackForce);
+            }
+            else
+            {
+                target.GetComponent<AttackingCharacter>().TakeDamage(damage);
+            }
 
             base.Attack(target);
         }

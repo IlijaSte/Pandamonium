@@ -384,19 +384,19 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1628753790980070}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 10
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58156445177731462
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -629,6 +629,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   speed: 0.5
+  knockback: 0
+  knockbackForce: 5
+  iField: {fileID: 0}
+  range: 0
   timeToAttack: 1
   projectileSpeed: 2
   firePrefab: {fileID: 1714793588657250, guid: 3661731ec6bccf5478d07ac6ec8ba79f, type: 2}
@@ -680,6 +684,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   speed: 1
+  knockback: 0
+  knockbackForce: 5
+  iField: {fileID: 0}
+  range: 0
   timeToAttack: 1
 --- !u!114 &114214034657156396
 MonoBehaviour:

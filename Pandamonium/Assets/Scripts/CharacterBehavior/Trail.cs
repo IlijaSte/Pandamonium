@@ -7,7 +7,7 @@ public class Trail : MonoBehaviour {
     
     public static int numOfTrails = 0;
     public static float timeToDamage;
-    public static Player player;
+    public static AttackingCharacter player;
 
     public Transform myParent;
     private bool collidesWithPlayer = false;
@@ -22,7 +22,7 @@ public class Trail : MonoBehaviour {
             }
             numOfTrails++;
             collidesWithPlayer = true;
-            player = collision.transform.GetComponent<Player>();
+            player = collision.transform.GetComponent<AttackingCharacter>();
         }
     }
 

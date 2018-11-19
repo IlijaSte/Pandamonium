@@ -77,18 +77,33 @@ public class FireProjectile : MonoBehaviour
             return;
 
         AttackingCharacter character = other.GetComponent<AttackingCharacter>();
+        Weapon weaponComp = weapon.GetComponent<Weapon>();
 
         if (target != null && other.transform == target && character != null)                                      // ako je pogodio metu
         {
-            character.TakeDamage(damage, (other.transform.position - transform.position).normalized);
+            if (weaponComp.knockback)
+            {
+                character.TakeDamageWithKnockback(damage, (other.transform.position - transform.position).normalized, weaponComp.knockbackForce);
+            }
+            else
+            {
+                character.TakeDamage(damage);
+            }
             shot = false;
             Destroy(gameObject);
 
             return;
         }else if (other.CompareTag("Enemy"))
         {
-            print("hit enemy!");
-            (character as Enemy).TakeDamage(damage, (other.transform.position - transform.position).normalized);
+            if (weapon.GetComponent<Weapon>().knockback)
+            {
+                character.TakeDamageWithKnockback(damage, (other.transform.position - transform.position).normalized, weaponComp.knockbackForce);
+            }
+            else
+            {
+                character.TakeDamage(damage);
+            }
+
             shot = false;
             Destroy(gameObject);
 
