@@ -11,8 +11,6 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public float lockAngle = 60;
 
-    private bool isDead = false;
-
     public override void Awake()
     {
         if (!GameManager.joystick)

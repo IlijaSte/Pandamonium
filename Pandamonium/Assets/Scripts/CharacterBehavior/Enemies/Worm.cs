@@ -111,6 +111,9 @@ public class Worm : Enemy {
     protected override void Update()
     {
 
+        if (isDead)
+            return;
+
         if(!spottedPlayer){
 
             if (CanSee(player, vision.GetComponent<CircleCollider2D>().radius) &&

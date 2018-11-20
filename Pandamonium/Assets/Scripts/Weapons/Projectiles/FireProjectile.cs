@@ -9,6 +9,8 @@ public class FireProjectile : MonoBehaviour
     private Transform target;
     private float speed;
 
+    private Transform weaponParent;
+
     private float damage;
 
     private bool shot = false;
@@ -24,6 +26,7 @@ public class FireProjectile : MonoBehaviour
         this.speed = speed;
         this.damage = weapon.GetComponent<Weapon>().damage;
         shot = true;
+        weaponParent = weapon.parent.parent;
 
         Quaternion rot = Quaternion.LookRotation(Vector3.forward, target.position - transform.position);
         transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
@@ -73,7 +76,7 @@ public class FireProjectile : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (weapon != null && other.gameObject == weapon.parent.gameObject)                   // ako je projektil pogodio pucaca
+        if (weapon != null && weaponParent != null && other.gameObject == weaponParent.gameObject)                   // ako je projektil pogodio pucaca
             return;
 
         AttackingCharacter character = other.GetComponent<AttackingCharacter>();
@@ -110,7 +113,7 @@ public class FireProjectile : MonoBehaviour
             return;
         }
 
-        if (character != null && weapon != null && character.type == weapon.parent.GetComponent<AttackingCharacter>().type)  // ako je pogodio karaktera istog tipa
+        if (character != null && weapon != null && weaponParent != null && character.type == weaponParent.GetComponent<AttackingCharacter>().type)  // ako je pogodio karaktera istog tipa
         {
             return;
         }

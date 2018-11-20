@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4512577923314722}
   - component: {fileID: 114696526391286408}
+  - component: {fileID: 114134448777392930}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -40,6 +41,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114134448777392930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1848565710162406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a818deffbc504bf42ab4fbdd4edb6abe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  combatTextPrefab: {fileID: 114324912091261364, guid: f314e89d31251ab41a1021f4224fb2c5,
+    type: 2}
 --- !u!114 &114696526391286408
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -21,8 +21,6 @@ public class Player : AttackingCharacter {
     public GameObject attackIndicatorPrefab;
     private GameObject tapIndicator = null;
 
-    private bool isDead = false;
-
     public override void Awake()
     {
         base.Awake();

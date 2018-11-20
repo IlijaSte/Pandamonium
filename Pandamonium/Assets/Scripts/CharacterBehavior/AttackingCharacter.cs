@@ -39,7 +39,6 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected AIPath path;
 
-    [HideInInspector]
     public float normalSpeed = 6;
 
     public float maxDashRange = 4;
@@ -55,6 +54,10 @@ public class AttackingCharacter : MonoBehaviour {
     private ArrayList dotSources = new ArrayList();
 
     protected Rigidbody2D rb;
+
+    protected SpriteRenderer sprite;
+
+    public bool isDead = false;
 
     public virtual void Awake()
     {
@@ -76,8 +79,10 @@ public class AttackingCharacter : MonoBehaviour {
         if(vision == null)
             vision = transform.Find("Vision").GetComponent<CharacterVision>();
 
-        if(path)
-            normalSpeed = path.maxSpeed;
+        if (path)
+        {
+            path.maxSpeed = normalSpeed;
+        }
 
         health = maxHealth;
 
@@ -85,6 +90,7 @@ public class AttackingCharacter : MonoBehaviour {
 
         timeToDash = dashCooldown;
 
+        sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     public void StopAttacking()
@@ -92,7 +98,9 @@ public class AttackingCharacter : MonoBehaviour {
 
         target = null;
         playerState = PlayerState.IDLE;
-        weapons[equippedWeaponIndex].Stop();
+
+        if(equippedWeaponIndex < weapons.Length)
+            weapons[equippedWeaponIndex].Stop();
     }
 
     public virtual void Attack(Transform target)
@@ -231,7 +239,10 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected virtual void Update()
     {
-        
+
+        if (isDead)
+            return;
+
         if (timeToDash < dashCooldown)
         {
             timeToDash += Time.deltaTime;
@@ -341,9 +352,10 @@ public class AttackingCharacter : MonoBehaviour {
                 }
         }
 
+
         nextAttackBar.fillAmount = 1 - weapons[equippedWeaponIndex].timeToAttack;
 
-        if (weapons[equippedWeaponIndex].timeToAttack == 1)
+        if (weapons[equippedWeaponIndex].timeToAttack <= 0 || weapons[equippedWeaponIndex].timeToAttack == 1)
         {
             nextAttackBG.SetActive(false);
         }
@@ -353,11 +365,40 @@ public class AttackingCharacter : MonoBehaviour {
         }
     }
 
+    protected IEnumerator ColorTransition(Color color)
+    {
+        sprite.color = Color.red;
+
+        float i = 0;
+
+        while (i < 1)
+        {
+            i += Time.deltaTime * 2;
+            sprite.color = Color.Lerp(color, Color.white, i);
+            yield return null;
+        }
+    }
+
     public virtual void TakeDamage(float damage)
     {
+
+        if(GameManager.I.playerInstance == this)
+        {
+            UIManager.I.ShowHitDamage(GetComponentInChildren<Canvas>(), 1, damage, true);
+        }
+        else
+        {
+            UIManager.I.ShowHitDamage(GetComponentInChildren<Canvas>(), 1, damage);
+        }
+        
+
         if ((health -= damage) <= 0)    // * armorReduction
         {
             Die();
+        }
+        else
+        {
+            StartCoroutine(ColorTransition(Color.red));
         }
     }
 
@@ -365,6 +406,7 @@ public class AttackingCharacter : MonoBehaviour {
     {
 
         PlayerState lastState = playerState;
+        RigidbodyType2D lastType = rb.bodyType;
 
         playerState = PlayerState.IMMOBILE;
 
@@ -372,14 +414,18 @@ public class AttackingCharacter : MonoBehaviour {
         {
             path.enabled = false;
         }
+
+        rb.bodyType = RigidbodyType2D.Dynamic;
         rb.AddForce(dir * force, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(0.3f);
+
         if (path)
         {
             path.enabled = true;
         }
 
+        rb.bodyType = lastType;
         playerState = lastState;
     }
 
@@ -419,10 +465,31 @@ public class AttackingCharacter : MonoBehaviour {
         
     }
 
-    public virtual void Die()
+    public virtual IEnumerator Death()
     {
 
+        StopAttacking();
+
+        GetComponent<Collider2D>().enabled = false;
+        healthBar.transform.parent.gameObject.SetActive(false);
+        nextAttackBar.transform.parent.gameObject.SetActive(false);
+        sprite.enabled = false;
+
+        if(path)
+            path.enabled = false;
+
+        playerState = PlayerState.IMMOBILE;
+
+        yield return new WaitForSeconds(3f);
+
         Destroy(gameObject);
+    }
+
+    public virtual void Die()
+    {
+        isDead = true;
+
+        StartCoroutine(Death());
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
