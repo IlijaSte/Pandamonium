@@ -57,6 +57,7 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected SpriteRenderer sprite;
 
+    [HideInInspector]
     public bool isDead = false;
 
     public virtual void Awake()
