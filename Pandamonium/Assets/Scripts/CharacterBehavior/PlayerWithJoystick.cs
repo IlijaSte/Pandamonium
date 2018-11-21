@@ -27,12 +27,17 @@ public class PlayerWithJoystick : AttackingCharacter {
     {
         base.Start();
         facingDirection = Vector2.zero;
+
+        timeToDash = dashCooldown;
     }
 
     protected IEnumerator Dash()
     {
-        if (playerState != PlayerState.DASHING && !facingDirection.Equals(Vector2.zero))
+        if (playerState != PlayerState.DASHING && !facingDirection.Equals(Vector2.zero) && timeToDash >= dashCooldown)
         {
+
+            timeToDash = 0;
+
             float startTime = Time.time;
             Vector2 startPos = transform.position;
 
@@ -47,11 +52,18 @@ public class PlayerWithJoystick : AttackingCharacter {
             }
 
             playerState = PlayerState.IDLE;
+
         }
     }
 
     protected override void Update()
     {
+
+        if (timeToDash < dashCooldown)
+        {
+            timeToDash += Time.deltaTime;
+        }
+
         nextAttackBar.fillAmount = 1 - weapons[equippedWeaponIndex].timeToAttack;
 
         if (weapons[equippedWeaponIndex].timeToAttack <= 0)

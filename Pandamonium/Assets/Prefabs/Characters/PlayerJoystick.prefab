@@ -627,7 +627,7 @@ MonoBehaviour:
   maxHealth: 200
   type: 0
   vision: {fileID: 114898562783967118}
-  dashCooldown: 6
+  dashCooldown: 1.5
   dashSpeed: 16
   healthBar: {fileID: 0}
   nextAttackBar: {fileID: 114338790452832874}
