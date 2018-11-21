@@ -29,6 +29,27 @@ public class PlayerWithJoystick : AttackingCharacter {
         facingDirection = Vector2.zero;
     }
 
+    protected IEnumerator Dash()
+    {
+        if (playerState != PlayerState.DASHING && !facingDirection.Equals(Vector2.zero))
+        {
+            float startTime = Time.time;
+            Vector2 startPos = transform.position;
+
+            playerState = PlayerState.DASHING;
+
+            while (Time.time - startTime < 0.3f && Vector2.Distance(startPos, transform.position) < maxDashRange)
+            {
+                rb.AddForce(facingDirection * dashSpeed * 20, ForceMode2D.Force);
+                rb.velocity = Vector2.ClampMagnitude(rb.velocity, dashSpeed);
+
+                yield return new WaitForEndOfFrame();
+            }
+
+            playerState = PlayerState.IDLE;
+        }
+    }
+
     protected override void Update()
     {
         nextAttackBar.fillAmount = 1 - weapons[equippedWeaponIndex].timeToAttack;
@@ -45,21 +66,82 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     protected void FixedUpdate()
     {
-        if(!Mathf.Approximately(controller.InputDirection.x, 0) || !Mathf.Approximately(controller.InputDirection.y, 0))
-        {
-            if(rb.velocity.magnitude < normalSpeed)
-            {
-                facingDirection = controller.InputDirection.normalized;
-                rb.AddForce(controller.InputDirection * normalSpeed * 20, ForceMode2D.Force);
-            }
-            // rb.velocity = controller.InputDirection * normalSpeed;
 
+        if (SystemInfo.deviceType == DeviceType.Desktop)
+        {
+
+            if (playerState != PlayerState.DASHING)
+            {
+
+                Vector2 wasdDirection = Vector2.zero;
+
+                if (Input.GetKey(KeyCode.A))
+                {
+                    wasdDirection += Vector2.left;
+                }
+
+                if (Input.GetKey(KeyCode.D))
+                {
+                    wasdDirection += Vector2.right;
+                }
+
+                if (Input.GetKey(KeyCode.W))
+                {
+                    wasdDirection += Vector2.up;
+                }
+
+                if (Input.GetKey(KeyCode.S))
+                {
+                    wasdDirection += Vector2.down;
+                }
+
+
+
+                if (!wasdDirection.Equals(Vector2.zero))
+                {
+                    wasdDirection = wasdDirection.normalized;
+
+                    if (rb.velocity.magnitude < normalSpeed)
+                    {
+                        rb.AddForce(wasdDirection * normalSpeed * 20, ForceMode2D.Force);
+                        facingDirection = wasdDirection;
+                    }
+                }
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                Attack();
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                // DASH
+                StartCoroutine(Dash());
+            }
+
+            if (Input.GetKeyUp(KeyCode.Q))
+            {
+                ChangeWeapon();
+                UIManager.I.weaponChange.changeText();
+            }
         }
         else
         {
-            //rb.velocity = Vector2.zero;
+
+
+            facingDirection = rb.velocity.normalized;
+
+            if (!Mathf.Approximately(controller.InputDirection.x, 0) || !Mathf.Approximately(controller.InputDirection.y, 0))
+            {
+                if (rb.velocity.magnitude < normalSpeed)
+                {
+                    facingDirection = controller.InputDirection.normalized;
+                    rb.AddForce(controller.InputDirection * normalSpeed * 20, ForceMode2D.Force);
+                }
+
+            }
         }
-        
     }
 
     protected Transform GetFacingEnemy()
@@ -96,53 +178,10 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
 
         return closestTarget;
-        /*
-        Vector3 startCast = transform.position;
-
-        RaycastHit2D[] results = new RaycastHit2D[6];
-
-        for (int i = 0; i < Physics2D.CircleCast(startCast, 0.2f, facingDirection, colFilter, results, weapons[equippedWeaponIndex].range); i++) // ako mu je protivnik vidljiv (od zidova/prepreka)
-        {
-
-            AttackingCharacter attChar = results[i].transform.GetComponent<AttackingCharacter>();
-            if (attChar && attChar.type == type)
-                continue;
-
-            if (results[i].transform.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
-            {
-                return null;
-            }
-
-            if (results[i].transform.CompareTag("Enemy"))
-            {
-                return results[i].transform;
-            }
-        }
-
-        return null;
-        */
     }
 
     public void Attack()
-
     {
-
-        // promeniti pod hitno!!!
-        /*
-        if (weapons[equippedWeaponIndex] is RangedWeapon)
-        {
-            weapons[equippedWeaponIndex].AttackInDirection(facingDirection);
-        }
-        else
-        {
-
-            Transform facingEnemy;
-
-            if (facingEnemy = GetFacingEnemy())
-            {
-                weapons[equippedWeaponIndex].Attack(facingEnemy);
-            }
-        }*/
 
         Transform facingEnemy;
 
@@ -155,7 +194,6 @@ public class PlayerWithJoystick : AttackingCharacter {
             weapons[equippedWeaponIndex].AttackInDirection(facingDirection);
         }
 
-        //weapons[equippedWeaponIndex].Att
     }
 
     public override void TakeDamage(float damage)

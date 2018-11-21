@@ -7,6 +7,9 @@ public class UIManager : MonoBehaviour {
 
     public Text combatTextPrefab;
 
+    [HideInInspector]
+    public ButtonWeaponScript weaponChange;
+
     private static UIManager instance;
 
     public static UIManager I
@@ -19,6 +22,11 @@ public class UIManager : MonoBehaviour {
             }
             return instance;
         }
+    }
+
+    private void Start()
+    {
+        weaponChange = GetComponent<ButtonWeaponScript>();
     }
 
     public void ShowHitDamage(Canvas canvas, float yOffset, float damage, bool isPlayer = false)

@@ -628,11 +628,12 @@ MonoBehaviour:
   type: 0
   vision: {fileID: 114898562783967118}
   dashCooldown: 6
-  dashSpeed: 12
+  dashSpeed: 16
   healthBar: {fileID: 0}
   nextAttackBar: {fileID: 114338790452832874}
   normalSpeed: 6
   maxDashRange: 4
+  isDead: 0
   controller: {fileID: 0}
   facingDirection: {x: 0, y: 0}
   lockAngle: 60
@@ -827,7 +828,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0, y: 1.888}
+  m_AnchoredPosition: {x: -0, y: 1.8}
   m_SizeDelta: {x: 50, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224518299885880890
