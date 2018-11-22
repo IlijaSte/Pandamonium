@@ -26,14 +26,12 @@ public class LevelGeneration : MonoBehaviour {
 
     public Transform ground;
 
-    public IntRange numEnemies;
+    public float enemyCountMultiplier = 1f;
 
     public GameObject[] enemyPrefabs;
 
     private static LevelGeneration instance;
     private Transform enemyParent;
-
-    private int nextLayerOrder = 0;
 
     public static LevelGeneration I
     {
@@ -71,6 +69,9 @@ public class LevelGeneration : MonoBehaviour {
 
     protected virtual IEnumerator Start()
     {
+
+        PositionPlayer();
+
         yield return new WaitForSeconds(0.1f);
 
         float nodeSize = AstarPath.active.data.gridGraph.nodeSize;
@@ -81,6 +82,11 @@ public class LevelGeneration : MonoBehaviour {
 
         AstarPath.active.Scan();
         InstantiateEnemies();
+    }
+
+    protected void PositionPlayer()
+    {
+        GameManager.I.playerInstance.transform.position = rooms[gridSizeX, gridSizeY].GetRandomPos();
     }
 
     public void BoxFill(Tilemap map, TileBase tile, Vector3Int start, Vector3Int end)
@@ -115,22 +121,55 @@ public class LevelGeneration : MonoBehaviour {
     protected virtual void InstantiateEnemies()
     {
 
-        int definiteNumEnemies = numEnemies.Random;
+        foreach(Vector2 pos in takenPositions)
+        {
+            Room room = rooms[Mathf.RoundToInt(gridSizeX + pos.x), Mathf.RoundToInt(gridSizeY + pos.y)];
 
-        for(int i = 0; i < definiteNumEnemies; i++)
+            if (room == GetRoomAtPos(GameManager.I.playerInstance.transform.position))
+                continue;
+
+            // broj neprijatelja u sobi zavisi od razdaljine sobe od pocetne sobe i multiplier-a
+            int enemyCount = Mathf.RoundToInt(Random.Range(room.distanceFromStart * enemyCountMultiplier, room.distanceFromStart * enemyCountMultiplier + 1.5f));
+            List<Vector2> taken = new List<Vector2>();
+
+            for (int i = 0; i < enemyCount; i++)
+            {
+                Vector2 spawnPos;
+                do
+                {
+                    spawnPos = room.GetRandomPos();
+                } while (taken.Contains(spawnPos));
+
+                taken.Add(spawnPos);
+
+                spawnPos = new Vector2(Mathf.Floor(spawnPos.x) + 0.5f, Mathf.Floor(spawnPos.y) + 0.5f);
+
+                // da bi se u prve dve sobe stvarao samo prvi tip protivnika - verovatno menjati za sledece levele
+                if(room.distanceFromStart < 3)
+                {
+                    Instantiate(enemyPrefabs[0], spawnPos, Quaternion.identity, enemyParent);
+                }else
+                {
+                    Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnPos, Quaternion.identity, enemyParent);
+                }
+
+            }
+        }
+
+        /*for(int i = 0; i < definiteNumEnemies; i++)
         {
             Room room;
             do
             {
                 Vector2 roomPos = takenPositions[Random.Range(1, takenPositions.Count)];
                 room = rooms[gridSizeX + Mathf.RoundToInt(roomPos.x), gridSizeY + Mathf.RoundToInt(roomPos.y)];
-            } while (room == LevelGeneration.I.GetRoomAtPos(Player.I.transform.position));
+            } while (room == GetRoomAtPos(GameManager.I.playerInstance.transform.position));
             Vector2 spawnPos = room.GetRandomPos();
 
             spawnPos = new Vector2(Mathf.Floor(spawnPos.x) + 0.5f, Mathf.Floor(spawnPos.y) + 0.5f);
 
             Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnPos, Quaternion.identity, enemyParent);
-        }
+        }*/
 
     }
 
@@ -251,19 +290,9 @@ public class LevelGeneration : MonoBehaviour {
 				continue; //skip where there is no room
 			}
 			Vector2 drawPos = room.gridPos;
-            /*drawPos.x *= 16;//aspect ratio of map sprite
-			drawPos.y *= 8;
-			//create map obj and assign its variables
-			MapSpriteSelector mapper = Object.Instantiate(roomWhiteObj, drawPos, Quaternion.identity).GetComponent<MapSpriteSelector>();
-			mapper.type = room.type;
-			mapper.up = room.doorTop;
-			mapper.down = room.doorBot;
-			mapper.right = room.doorRight;
-			mapper.left = room.doorLeft;*/
 
-            room.Init(GetRandomPrefab(), roomParent, nextLayerOrder++);
-            //Tilemap corridorTilemap = room.corridorTilemap;
-            //room.LowerCorridors();
+            room.Init(GetRandomPrefab(), roomParent);
+
 		}
 	}
 

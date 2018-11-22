@@ -22,6 +22,10 @@ public class RoomHolder : MonoBehaviour {
     {
         acidTilemap = LevelGeneration.I.acidTilemap;
 
+        
+
+        DrawCorridors(doorTop, doorBot, doorLeft, doorRight);
+
         for (int i = Mathf.FloorToInt(transform.position.x - LevelGeneration.I.roomWidth / 2); i <= transform.position.x + LevelGeneration.I.roomWidth / 2; i++)
         {
             for (int j = Mathf.FloorToInt(transform.position.y - LevelGeneration.I.roomHeight / 2); j <= transform.position.y + LevelGeneration.I.roomHeight / 2; j++)
@@ -32,17 +36,15 @@ public class RoomHolder : MonoBehaviour {
 
                 if (groundTilemap.HasTile(groundTilePos))
                 {
-                    if(Room.IsTileWalkable(groundTilemap, groundTilePos))
+                    if (Room.IsTileWalkable(groundTilemap, groundTilePos))
                     {
                         acidTilemap.SetTile(tilePos, null);
                     }
-                    
+
                 }
             }
 
         }
-
-        DrawCorridors(doorTop, doorBot, doorLeft, doorRight);
     }
 
     private void DrawCorridor(Vector2 start, Vector2 direction)
@@ -59,18 +61,22 @@ public class RoomHolder : MonoBehaviour {
             if(direction.Equals(Vector2.left) || direction.Equals(Vector2.right))      // corridor left / right
             {
                 groundTilemap.SetTile(tilePos + new Vector3Int(0, 1, 0), LevelGeneration.I.groundPrefab);
+                //acidTilemap.SetTile(acidTilemap.WorldToCell(start) + new Vector3Int(0, 1, 0), null);
+
                 groundTilemap.SetTile(tilePos + new Vector3Int(0, -1, 0), LevelGeneration.I.groundPrefab);
+                //acidTilemap.SetTile(acidTilemap.WorldToCell(start) + new Vector3Int(0, -1, 0), null);
 
             }
             else
             {
                 groundTilemap.SetTile(tilePos + new Vector3Int(1, 0, 0), LevelGeneration.I.groundPrefab);
+                //acidTilemap.SetTile(acidTilemap.WorldToCell(start) + new Vector3Int(1, 0, 0), null);
+
                 groundTilemap.SetTile(tilePos + new Vector3Int(-1, 0, 0), LevelGeneration.I.groundPrefab);
+                //acidTilemap.SetTile(acidTilemap.WorldToCell(start) + new Vector3Int(-1, 0, 0), null);
             }
 
             obstacleTilemap.SetTile(tilePos, null);
-
-            acidTilemap.SetTile(acidTilemap.WorldToCell(start), null);
 
             start += direction;
         }
@@ -79,20 +85,30 @@ public class RoomHolder : MonoBehaviour {
 
         start -= direction;
 
+        acidTilemap.SetTile(acidTilemap.WorldToCell(start), null);
+
         Vector3Int corridorPos = LevelGeneration.I.corridorTilemap.WorldToCell(start);
 
         if (direction.Equals(Vector2.up) || direction.Equals(Vector2.down))
         {
-            LevelGeneration.I.corridorTilemap.SetTile(corridorPos, LevelGeneration.I.corridorPrefab);
-            LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(1, 0, 0), LevelGeneration.I.corridorPrefab);
-            LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(-1, 0, 0), LevelGeneration.I.corridorPrefab);
+            if (!LevelGeneration.I.corridorTilemap.HasTile(corridorPos + new Vector3Int(0, 1, 0)) &&
+                !LevelGeneration.I.corridorTilemap.HasTile(corridorPos + new Vector3Int(0, -1, 0)))
+            {
+                LevelGeneration.I.corridorTilemap.SetTile(corridorPos, LevelGeneration.I.corridorPrefab);
+                LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(1, 0, 0), LevelGeneration.I.corridorPrefab);
+                LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(-1, 0, 0), LevelGeneration.I.corridorPrefab);
+            }
 
         }
         else
         {
-            LevelGeneration.I.corridorTilemap.SetTile(corridorPos, LevelGeneration.I.corridorPrefab);
-            LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(0, 1, 0), LevelGeneration.I.corridorPrefab);
-            LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(0, -1, 0), LevelGeneration.I.corridorPrefab);
+            if (!LevelGeneration.I.corridorTilemap.HasTile(corridorPos + new Vector3Int(1, 0, 0)) &&
+                !LevelGeneration.I.corridorTilemap.HasTile(corridorPos + new Vector3Int(-1, 0, 0)))
+            {
+                LevelGeneration.I.corridorTilemap.SetTile(corridorPos, LevelGeneration.I.corridorPrefab);
+                LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(0, 1, 0), LevelGeneration.I.corridorPrefab);
+                LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(0, -1, 0), LevelGeneration.I.corridorPrefab);
+            }
 
         }
 

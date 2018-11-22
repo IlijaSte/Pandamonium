@@ -21,7 +21,6 @@ public class Enemy : AttackingCharacter {
         numEnemies ++;
 
         base.Start();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
 
         healthBar = transform.Find("EnemyCanvas").Find("HealthBarBG").Find("HealthBar").GetComponent<Image>();
 
@@ -40,6 +39,7 @@ public class Enemy : AttackingCharacter {
             setTag = (int)type + 1
         };
         AstarPath.active.UpdateGraphs(guo);
+        player = GameManager.I.playerInstance.transform;
     }
 
     protected override void Update()
@@ -92,9 +92,9 @@ public class Enemy : AttackingCharacter {
         }
     }
 
-    public override void TakeDamage(float damage, Vector3 dir)
+    public override void TakeDamage(float damage)
     {
-        base.TakeDamage(damage, dir);
+        base.TakeDamage(damage);
         healthBar.fillAmount = health / maxHealth;
 
     }

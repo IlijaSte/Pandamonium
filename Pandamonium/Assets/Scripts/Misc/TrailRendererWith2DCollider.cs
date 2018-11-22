@@ -126,7 +126,7 @@ public class TrailRendererWith2DCollider : MonoBehaviour
 
             if (Trail.timeToDamage <= 0)
             {
-                Trail.player.TakeDamage(damage, Vector3.zero);
+                Trail.player.TakeDamage(damage);
                 Trail.timeToDamage = 1;
             }
         }

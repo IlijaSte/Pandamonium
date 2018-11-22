@@ -14,12 +14,17 @@ public class Room {
     private Tilemap obstacleTilemap;
     private Tilemap groundTilemap;
 
+    // Distance from the start room (in room lengths)
+    public int distanceFromStart;
+
     public Room(Vector2 _gridPos, int _type){
 		gridPos = _gridPos;
 		type = _type;
+
+        distanceFromStart = Mathf.RoundToInt(Mathf.Abs(_gridPos.x) + Mathf.Abs(_gridPos.y));
 	}
 
-    public void Init(GameObject prefab, Transform parent, int layerOrder)
+    public void Init(GameObject prefab, Transform parent)
     {
         this.instance = Object.Instantiate(prefab, new Vector2(gridPos.x * LevelGeneration.I.roomWidth, gridPos.y * LevelGeneration.I.roomHeight), Quaternion.identity, parent).transform;
         roomHolder = instance.GetComponent<RoomHolder>();

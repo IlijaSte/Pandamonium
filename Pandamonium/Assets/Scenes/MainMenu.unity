@@ -475,6 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191a3998705aa6049809f47b12800b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathMenu: {fileID: 0}
 --- !u!4 &1906333628
 Transform:
   m_ObjectHideFlags: 0

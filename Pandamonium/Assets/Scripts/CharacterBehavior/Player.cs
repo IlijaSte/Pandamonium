@@ -21,20 +21,13 @@ public class Player : AttackingCharacter {
     public GameObject attackIndicatorPrefab;
     private GameObject tapIndicator = null;
 
-    private bool isDead = false;
-
-    private static Player instance;
-    
-    public static Player I
+    public override void Awake()
     {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<Player>();
-            }
-            return instance;
-        }
+        base.Awake();
+
+        if (GameManager.joystick)
+            gameObject.SetActive(false);
+        else GameManager.I.playerInstance = this;
     }
 
     public override void Start()
@@ -48,6 +41,7 @@ public class Player : AttackingCharacter {
         }
 
         base.Start();
+
     }
 
     protected IEnumerator ShowIndicator(GameObject prefab, Transform parent = null)
@@ -196,11 +190,11 @@ public class Player : AttackingCharacter {
         //if (!IsMoving())
     }
 
-    public override void TakeDamage(float damage, Vector3 dir)
+    public override void TakeDamage(float damage)
     {
         if (!isDead)
         {
-            base.TakeDamage(damage, dir);
+            base.TakeDamage(damage);
 
             healthBar.fillAmount = health / maxHealth;
         }
