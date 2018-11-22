@@ -16,6 +16,8 @@ public class RoomHolder : MonoBehaviour {
 
     private Tilemap acidTilemap;
 
+    public Vector3Int positionEndOfCorridor;
+
     public void Init(bool doorTop, bool doorBot, bool doorLeft, bool doorRight)
     {
         acidTilemap = LevelGeneration.I.acidTilemap;
@@ -47,11 +49,12 @@ public class RoomHolder : MonoBehaviour {
 
     private void DrawCorridor(Vector2 start, Vector2 direction)
     {
+        Vector3Int tilePos = new Vector3Int();
 
         while (Mathf.Abs(start.x - transform.position.x) <= LevelGeneration.I.roomWidth / 2 &&
                 Mathf.Abs(start.y - transform.position.y) <= LevelGeneration.I.roomHeight / 2)
         {
-            Vector3Int tilePos = groundTilemap.WorldToCell(start);
+            tilePos = groundTilemap.WorldToCell(start);
 
             groundTilemap.SetTile(tilePos, LevelGeneration.I.groundPrefab);
 
@@ -77,6 +80,8 @@ public class RoomHolder : MonoBehaviour {
 
             start += direction;
         }
+
+        positionEndOfCorridor = tilePos;
 
         start -= direction;
 

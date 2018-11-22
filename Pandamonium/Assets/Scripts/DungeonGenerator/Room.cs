@@ -77,4 +77,10 @@ public class Room {
     {
 
     }
+    
+    public RoomHolder getRoomHolder()
+    {
+        return roomHolder;
+    }
+    
 }
