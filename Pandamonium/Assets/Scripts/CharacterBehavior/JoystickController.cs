@@ -38,7 +38,6 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerUpHandler
                 , InputDirection.y * (bgImg.rectTransform.sizeDelta.y / 3));
         }
 
-        print(InputDirection);
     }
     public virtual void OnPointerDown(PointerEventData ped)
     {

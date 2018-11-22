@@ -69,6 +69,8 @@ public class AcidProjectile : MonoBehaviour {
         {
             GetComponent<SpriteRenderer>().flipX = true;
         }
+
+        indicator.localScale = new Vector2(0.1f, 0.1f);
     }
 
     public void Update()
@@ -81,6 +83,10 @@ public class AcidProjectile : MonoBehaviour {
         {
             collider.enabled = false;
         }
+
+        indicator.localScale = Vector2.Lerp(indicator.localScale, Vector2.one, Time.deltaTime);
+        indicator.GetComponent<SpriteRenderer>().color = Color.Lerp(indicator.GetComponent<SpriteRenderer>().color, new Color(1, 0, 0, 0.75f), Time.deltaTime);
+
 
         if(rb.velocity.y < 0 && transform.position.y <= target.y)
         {
@@ -96,7 +102,7 @@ public class AcidProjectile : MonoBehaviour {
 
         if (collision.transform == GameManager.I.playerInstance.transform)
         {
-            player.TakeDamage(damage, Vector3.zero);
+            player.TakeDamage(damage);
 
             if (worm != null)
                 player.TakeDamageOverTime(damage, 1, 3, worm.transform);

@@ -26,7 +26,7 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected Transform target = null;                                          // 2D objekat koji igrac napada/prati
 
-    protected enum PlayerState { IDLE, CHASING_ENEMY, ATTACKING, WALKING, DASHING }                     
+    protected enum PlayerState { IDLE, CHASING_ENEMY, ATTACKING, WALKING, DASHING, IMMOBILE }                     
     
     protected PlayerState playerState = PlayerState.IDLE;                       // trenutno stanje igraca
 
@@ -39,7 +39,6 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected AIPath path;
 
-    [HideInInspector]
     public float normalSpeed = 6;
 
     public float maxDashRange = 4;
@@ -53,6 +52,13 @@ public class AttackingCharacter : MonoBehaviour {
     protected Bounds currBounds;
 
     private ArrayList dotSources = new ArrayList();
+
+    protected Rigidbody2D rb;
+
+    protected SpriteRenderer sprite;
+
+    [HideInInspector]
+    public bool isDead = false;
 
     public virtual void Awake()
     {
@@ -69,11 +75,15 @@ public class AttackingCharacter : MonoBehaviour {
         colFilter.useLayerMask = true;
         colFilter.SetLayerMask(ignoreMask);
 
+        rb = GetComponent<Rigidbody2D>();
+
         if(vision == null)
             vision = transform.Find("Vision").GetComponent<CharacterVision>();
 
-        if(path)
-            normalSpeed = path.maxSpeed;
+        if (path)
+        {
+            path.maxSpeed = normalSpeed;
+        }
 
         health = maxHealth;
 
@@ -81,6 +91,7 @@ public class AttackingCharacter : MonoBehaviour {
 
         timeToDash = dashCooldown;
 
+        sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     public void StopAttacking()
@@ -88,7 +99,9 @@ public class AttackingCharacter : MonoBehaviour {
 
         target = null;
         playerState = PlayerState.IDLE;
-        weapons[equippedWeaponIndex].Stop();
+
+        if(equippedWeaponIndex < weapons.Length)
+            weapons[equippedWeaponIndex].Stop();
     }
 
     public virtual void Attack(Transform target)
@@ -227,7 +240,10 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected virtual void Update()
     {
-        
+
+        if (isDead)
+            return;
+
         if (timeToDash < dashCooldown)
         {
             timeToDash += Time.deltaTime;
@@ -306,7 +322,7 @@ public class AttackingCharacter : MonoBehaviour {
                         if (dashingAt)
                         {
                             if(weapons[equippedWeaponIndex].IsInRange(dashingAt))
-                                dashingAt.GetComponent<AttackingCharacter>().TakeDamage(weapons[equippedWeaponIndex].damage, Vector3.zero);
+                                dashingAt.GetComponent<AttackingCharacter>().TakeDamage(weapons[equippedWeaponIndex].damage);
                             Attack(dashingAt);
                             dashingAt = null;
                         }
@@ -337,9 +353,10 @@ public class AttackingCharacter : MonoBehaviour {
                 }
         }
 
+
         nextAttackBar.fillAmount = 1 - weapons[equippedWeaponIndex].timeToAttack;
 
-        if (weapons[equippedWeaponIndex].timeToAttack == 1)
+        if (weapons[equippedWeaponIndex].timeToAttack <= 0 || weapons[equippedWeaponIndex].timeToAttack == 1)
         {
             nextAttackBG.SetActive(false);
         }
@@ -349,12 +366,76 @@ public class AttackingCharacter : MonoBehaviour {
         }
     }
 
-    public virtual void TakeDamage(float damage, Vector3 dir)
+    protected IEnumerator ColorTransition(Color color)
     {
+        sprite.color = Color.red;
+
+        float i = 0;
+
+        while (i < 1)
+        {
+            i += Time.deltaTime * 2;
+            sprite.color = Color.Lerp(color, Color.white, i);
+            yield return null;
+        }
+    }
+
+    public virtual void TakeDamage(float damage)
+    {
+
+        if(GameManager.I.playerInstance == this)
+        {
+            UIManager.I.ShowHitDamage(GetComponentInChildren<Canvas>(), 1, damage, true);
+        }
+        else
+        {
+            UIManager.I.ShowHitDamage(GetComponentInChildren<Canvas>(), 1, damage);
+        }
+        
+
         if ((health -= damage) <= 0)    // * armorReduction
         {
             Die();
         }
+        else
+        {
+            StartCoroutine(ColorTransition(Color.red));
+        }
+    }
+
+    protected IEnumerator Knockback(Vector2 dir, float force)
+    {
+
+        PlayerState lastState = playerState;
+        RigidbodyType2D lastType = rb.bodyType;
+
+        playerState = PlayerState.IMMOBILE;
+
+        if (path)
+        {
+            path.enabled = false;
+        }
+
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.AddForce(dir * force, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(0.3f);
+
+        if (path)
+        {
+            path.enabled = true;
+        }
+
+        rb.bodyType = lastType;
+        playerState = lastState;
+    }
+
+    public virtual void TakeDamageWithKnockback(float damage, Vector2 dir, float force)
+    {
+        TakeDamage(damage);
+
+        StartCoroutine(Knockback(dir, force));
+
     }
 
     protected virtual IEnumerator DoT(Transform source, float damage, float interval, int times)
@@ -363,7 +444,7 @@ public class AttackingCharacter : MonoBehaviour {
         while(times-- > 0)
         {
             yield return new WaitForSeconds(interval);
-            TakeDamage(damage, Vector3.zero);
+            TakeDamage(damage);
            
         }
 
@@ -385,10 +466,31 @@ public class AttackingCharacter : MonoBehaviour {
         
     }
 
-    public virtual void Die()
+    public virtual IEnumerator Death()
     {
 
+        StopAttacking();
+
+        GetComponent<Collider2D>().enabled = false;
+        healthBar.transform.parent.gameObject.SetActive(false);
+        nextAttackBar.transform.parent.gameObject.SetActive(false);
+        sprite.enabled = false;
+
+        if(path)
+            path.enabled = false;
+
+        playerState = PlayerState.IMMOBILE;
+
+        yield return new WaitForSeconds(3f);
+
         Destroy(gameObject);
+    }
+
+    public virtual void Die()
+    {
+        isDead = true;
+
+        StartCoroutine(Death());
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

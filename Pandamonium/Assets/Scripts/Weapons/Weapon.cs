@@ -1,11 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Weapon : MonoBehaviour {
 
     public float damage;
     public float speed;
+
+    public bool knockback = false;
+    public float knockbackForce = 5;
+
+    [HideInInspector]
+    public InputField iField;
 
     [HideInInspector]
     public float range;
@@ -31,6 +39,11 @@ public abstract class Weapon : MonoBehaviour {
     {
         attacking = false;
         timeToAttack = 1;
+
+        if (iField)
+        {
+            knockbackForce = float.Parse(iField.text);
+        }
     }
 
     private void Start()
@@ -57,7 +70,14 @@ public abstract class Weapon : MonoBehaviour {
 
     public virtual void Attack(Transform target)
     {
-        timeToAttack = 1;
+        if(timeToAttack <= 0)
+            timeToAttack = 1;
+    }
+
+    public virtual void AttackInDirection(Vector2 direction)
+    {
+        if(timeToAttack <= 0)
+            timeToAttack = 1;
     }
 
     public bool IsInRange(Transform character)

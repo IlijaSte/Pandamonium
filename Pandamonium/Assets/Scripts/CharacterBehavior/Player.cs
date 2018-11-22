@@ -21,8 +21,6 @@ public class Player : AttackingCharacter {
     public GameObject attackIndicatorPrefab;
     private GameObject tapIndicator = null;
 
-    private bool isDead = false;
-
     public override void Awake()
     {
         base.Awake();
@@ -192,11 +190,11 @@ public class Player : AttackingCharacter {
         //if (!IsMoving())
     }
 
-    public override void TakeDamage(float damage, Vector3 dir)
+    public override void TakeDamage(float damage)
     {
         if (!isDead)
         {
-            base.TakeDamage(damage, dir);
+            base.TakeDamage(damage);
 
             healthBar.fillAmount = health / maxHealth;
         }

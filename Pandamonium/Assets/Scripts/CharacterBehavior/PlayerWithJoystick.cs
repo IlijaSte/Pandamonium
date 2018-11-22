@@ -5,12 +5,11 @@ using UnityEngine;
 public class PlayerWithJoystick : AttackingCharacter {
 
     public JoystickController controller;
-    protected Rigidbody2D rb;
 
     [HideInInspector]
     public Vector2 facingDirection;
 
-    private bool isDead = false;
+    public float lockAngle = 60;
 
     public override void Awake()
     {
@@ -27,12 +26,44 @@ public class PlayerWithJoystick : AttackingCharacter {
     public override void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody2D>();
         facingDirection = Vector2.zero;
+
+        timeToDash = dashCooldown;
+    }
+
+    protected IEnumerator Dash()
+    {
+        if (playerState != PlayerState.DASHING && !facingDirection.Equals(Vector2.zero) && timeToDash >= dashCooldown)
+        {
+
+            timeToDash = 0;
+
+            float startTime = Time.time;
+            Vector2 startPos = transform.position;
+
+            playerState = PlayerState.DASHING;
+
+            while (Time.time - startTime < 0.3f && Vector2.Distance(startPos, transform.position) < maxDashRange)
+            {
+                rb.AddForce(facingDirection * dashSpeed * 20, ForceMode2D.Force);
+                rb.velocity = Vector2.ClampMagnitude(rb.velocity, dashSpeed);
+
+                yield return new WaitForEndOfFrame();
+            }
+
+            playerState = PlayerState.IDLE;
+
+        }
     }
 
     protected override void Update()
     {
+
+        if (timeToDash < dashCooldown)
+        {
+            timeToDash += Time.deltaTime;
+        }
+
         nextAttackBar.fillAmount = 1 - weapons[equippedWeaponIndex].timeToAttack;
 
         if (weapons[equippedWeaponIndex].timeToAttack <= 0)
@@ -47,53 +78,122 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     protected void FixedUpdate()
     {
-        if(!Mathf.Approximately(controller.InputDirection.x, 0) || !Mathf.Approximately(controller.InputDirection.y, 0))
-        {
-            if(rb.velocity.magnitude < normalSpeed)
-            {
-                facingDirection = controller.InputDirection.normalized;
-                rb.AddForce(controller.InputDirection * normalSpeed * 20, ForceMode2D.Force);
-            }
-            // rb.velocity = controller.InputDirection * normalSpeed;
 
+        if (SystemInfo.deviceType == DeviceType.Desktop)
+        {
+
+            if (playerState != PlayerState.DASHING)
+            {
+
+                Vector2 wasdDirection = Vector2.zero;
+
+                if (Input.GetKey(KeyCode.A))
+                {
+                    wasdDirection += Vector2.left;
+                }
+
+                if (Input.GetKey(KeyCode.D))
+                {
+                    wasdDirection += Vector2.right;
+                }
+
+                if (Input.GetKey(KeyCode.W))
+                {
+                    wasdDirection += Vector2.up;
+                }
+
+                if (Input.GetKey(KeyCode.S))
+                {
+                    wasdDirection += Vector2.down;
+                }
+
+
+
+                if (!wasdDirection.Equals(Vector2.zero))
+                {
+                    wasdDirection = wasdDirection.normalized;
+
+                    if (rb.velocity.magnitude < normalSpeed)
+                    {
+                        rb.AddForce(wasdDirection * normalSpeed * 20, ForceMode2D.Force);
+                        facingDirection = wasdDirection;
+                    }
+                }
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                Attack();
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                // DASH
+                StartCoroutine(Dash());
+            }
+
+            if (Input.GetKeyUp(KeyCode.Q))
+            {
+                ChangeWeapon();
+                UIManager.I.weaponChange.changeText();
+            }
         }
         else
         {
-            //rb.velocity = Vector2.zero;
+
+
+            facingDirection = rb.velocity.normalized;
+
+            if (!Mathf.Approximately(controller.InputDirection.x, 0) || !Mathf.Approximately(controller.InputDirection.y, 0))
+            {
+                if (rb.velocity.magnitude < normalSpeed)
+                {
+                    facingDirection = controller.InputDirection.normalized;
+                    rb.AddForce(controller.InputDirection * normalSpeed * 20, ForceMode2D.Force);
+                }
+
+            }
         }
-        
     }
 
     protected Transform GetFacingEnemy()
     {
-        Vector3 startCast = transform.position;
 
-        RaycastHit2D[] results = new RaycastHit2D[6];
+        List<Transform> visibleTargets = new List<Transform>();
 
-        for (int i = 0; i < Physics2D.CircleCast(startCast, 0.2f, facingDirection, colFilter, results, weapons[equippedWeaponIndex].range); i++) // ako mu je protivnik vidljiv (od zidova/prepreka)
+        float lockRadius = weapons[equippedWeaponIndex].range;
+
+        float minDistance = Mathf.Infinity;
+        Transform closestTarget = null;
+
+        Collider2D[] targetsInRadius = Physics2D.OverlapCircleAll(transform.position, lockRadius, ignoreMask);
+
+        for(int i = 0; i < targetsInRadius.Length; i++)
         {
+            Vector2 dirToTarget = (targetsInRadius[i].transform.position - transform.position).normalized;
 
-            AttackingCharacter attChar = results[i].transform.GetComponent<AttackingCharacter>();
-            if (attChar && attChar.type == type)
-                continue;
-
-            if (results[i].transform.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
+            if(Vector2.Angle(facingDirection, dirToTarget) < lockAngle / 2)
             {
-                return null;
+                float distance = Vector2.Distance(transform.position, targetsInRadius[i].transform.position);
+
+                if (distance < minDistance)
+                {
+                    if (CanSee(targetsInRadius[i].transform, distance))
+                    {
+                        minDistance = distance;
+                        closestTarget = targetsInRadius[i].transform;
+                    }
+                }
             }
 
-            if (results[i].transform.CompareTag("Enemy"))
-            {
-                return results[i].transform;
-            }
+            
         }
 
-        return null;
+        return closestTarget;
     }
 
     public void Attack()
     {
-        
 
         Transform facingEnemy;
 
@@ -101,15 +201,18 @@ public class PlayerWithJoystick : AttackingCharacter {
         {
             weapons[equippedWeaponIndex].Attack(facingEnemy);
         }
+        else
+        {
+            weapons[equippedWeaponIndex].AttackInDirection(facingDirection);
+        }
 
-        //weapons[equippedWeaponIndex].Att
     }
 
-    public override void TakeDamage(float damage, Vector3 dir)
+    public override void TakeDamage(float damage)
     {
         if (!isDead)
         {
-            base.TakeDamage(damage, dir);
+            base.TakeDamage(damage);
 
             healthBar.fillAmount = health / maxHealth;
         }
