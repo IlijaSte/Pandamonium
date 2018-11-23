@@ -13,7 +13,8 @@ public class LevelGeneration : MonoBehaviour {
     public GameObject[] roomPrefabs;
     public TileBase corridorHorizPrefab;
     public TileBase corridorVertPrefab;
-    public TileBase corridorBridgePrefab;
+    public TileBase corridorBridgeHorizPrefab;
+    public TileBase corridorBridgeVertPrefab;
 
     public TileBase groundPrefab;
     public Tilemap corridorTilemap;
