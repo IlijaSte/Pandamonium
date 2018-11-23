@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d746e0082aaaaf0458b2b02bb4d45a47, type: 3}
-  m_Name: CorridorRuleTile
+  m_Name: corridorBridgeRuleTile
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 21300000, guid: cc298b3f922d5e14cafa8a7051be8c6d, type: 3}
   m_DefaultColliderType: 1
