@@ -5,13 +5,16 @@ using UnityEngine.Tilemaps;
 
 public class LevelGeneration : MonoBehaviour {
 	public Vector2 worldSize = new Vector2(4,4);
-	Room[,] rooms;
-	List<Vector2> takenPositions = new List<Vector2>();
-	int gridSizeX, gridSizeY, numberOfRooms = 20;
+	protected Room[,] rooms;
+	protected List<Vector2> takenPositions = new List<Vector2>();
+	protected int gridSizeX, gridSizeY, numberOfRooms = 20;
 	//public GameObject roomWhiteObj;
 
     public GameObject[] roomPrefabs;
-    public TileBase corridorPrefab;
+    public TileBase corridorHorizPrefab;
+    public TileBase corridorVertPrefab;
+    public TileBase corridorBridgeHorizPrefab;
+    public TileBase corridorBridgeVertPrefab;
 
     public TileBase groundPrefab;
     public Tilemap corridorTilemap;
