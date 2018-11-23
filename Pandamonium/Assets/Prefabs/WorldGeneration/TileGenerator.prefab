@@ -73,7 +73,7 @@ MonoBehaviour:
   groundPrefab: {fileID: 11400000, guid: c13e41d562a578c42830b7745183d1b3, type: 2}
   corridorTilemap: {fileID: 0}
   acidTilemap: {fileID: 0}
-  acidPrefab: {fileID: 11400000, guid: 67efc53f4270ce441a95c220a79972b1, type: 2}
+  acidPrefab: {fileID: 11400000, guid: 069acdcf805605f4191aefbbbb14ede6, type: 2}
   roomWidth: 26
   roomHeight: 26
   ground: {fileID: 0}

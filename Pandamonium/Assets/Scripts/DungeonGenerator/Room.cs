@@ -39,16 +39,16 @@ public class Room {
 
     public bool IsTileWalkable(Vector3Int tilePos)
     {
-        if ((groundTilemap.HasTile(tilePos) || corridorTilemap.HasTile(tilePos)) &&
-            (groundTilemap.HasTile(tilePos + new Vector3Int(1, 0, 0)) || corridorTilemap.HasTile(tilePos)) &&
-            (groundTilemap.HasTile(tilePos + new Vector3Int(-1, 0, 0)) || corridorTilemap.HasTile(tilePos + new Vector3Int(-1, 0, 0))) &&
-            (groundTilemap.HasTile(tilePos + new Vector3Int(0, 1, 0)) || corridorTilemap.HasTile(tilePos + new Vector3Int(0, 1, 0))) &&
-            (groundTilemap.HasTile(tilePos + new Vector3Int(0, -1, 0)) || corridorTilemap.HasTile(tilePos + new Vector3Int(0, -1, 0))) &&
+        if (groundTilemap.HasTile(tilePos) &&
+            groundTilemap.HasTile(tilePos + new Vector3Int(1, 0, 0)) &&
+            groundTilemap.HasTile(tilePos + new Vector3Int(-1, 0, 0)) &&
+            groundTilemap.HasTile(tilePos + new Vector3Int(0, 1, 0)) &&
+            groundTilemap.HasTile(tilePos + new Vector3Int(0, -1, 0)) &&
 
-            (groundTilemap.HasTile(tilePos + new Vector3Int(-1, -1, 0)) || corridorTilemap.HasTile(tilePos + new Vector3Int(-1, -1, 0))) &&
-            (groundTilemap.HasTile(tilePos + new Vector3Int(-1, 1, 0)) || corridorTilemap.HasTile(tilePos + new Vector3Int(-1, 1, 0))) &&
-            (groundTilemap.HasTile(tilePos + new Vector3Int(1, -1, 0)) || corridorTilemap.HasTile(tilePos + new Vector3Int(1, -1, 0))) &&
-            (groundTilemap.HasTile(tilePos + new Vector3Int(1, 1, 0)) || corridorTilemap.HasTile(tilePos + new Vector3Int(1, 1, 0))))
+            groundTilemap.HasTile(tilePos + new Vector3Int(-1, -1, 0)) &&
+            groundTilemap.HasTile(tilePos + new Vector3Int(-1, 1, 0)) &&
+            groundTilemap.HasTile(tilePos + new Vector3Int(1, -1, 0)) &&
+            groundTilemap.HasTile(tilePos + new Vector3Int(1, 1, 0)))
             return true;
 
         return false;

@@ -26,8 +26,6 @@ public class RoomHolder : MonoBehaviour {
         this.context = context;
         acidTilemap = LevelGeneration.I.acidTilemap;
 
-        
-
         DrawCorridors(context.doorTop, context.doorBot, context.doorLeft, context.doorRight);
 
         for (int i = Mathf.FloorToInt(transform.position.x - LevelGeneration.I.roomWidth / 2); i <= transform.position.x + LevelGeneration.I.roomWidth / 2; i++)
@@ -72,19 +70,12 @@ public class RoomHolder : MonoBehaviour {
             if(direction.Equals(Vector2.left) || direction.Equals(Vector2.right))      // corridor left / right
             {
                 corridorTilemap.SetTile(tilePos + new Vector3Int(0, 1, 0), prefab);
-                //acidTilemap.SetTile(acidTilemap.WorldToCell(start) + new Vector3Int(0, 1, 0), null);
-
                 corridorTilemap.SetTile(tilePos + new Vector3Int(0, -1, 0), prefab);
-                //acidTilemap.SetTile(acidTilemap.WorldToCell(start) + new Vector3Int(0, -1, 0), null);
-
             }
             else
             {
                 corridorTilemap.SetTile(tilePos + new Vector3Int(1, 0, 0), prefab);
-                //acidTilemap.SetTile(acidTilemap.WorldToCell(start) + new Vector3Int(1, 0, 0), null);
-
                 corridorTilemap.SetTile(tilePos + new Vector3Int(-1, 0, 0), prefab);
-                //acidTilemap.SetTile(acidTilemap.WorldToCell(start) + new Vector3Int(-1, 0, 0), null);
             }
 
             acidTilemap.SetTile(acidTilemap.WorldToCell(start), null);
@@ -103,22 +94,17 @@ public class RoomHolder : MonoBehaviour {
 
         if (direction.Equals(Vector2.up) || direction.Equals(Vector2.down))
         {
-            /*if (!LevelGeneration.I.corridorTilemap.HasTile(corridorPos + new Vector3Int(0, 1, 0)) &&
-                !LevelGeneration.I.corridorTilemap.HasTile(corridorPos + new Vector3Int(0, -1, 0)))
-            {*/
-                LevelGeneration.I.corridorTilemap.SetTile(corridorPos, LevelGeneration.I.corridorBridgeVertPrefab);
-                LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(1, 0, 0), LevelGeneration.I.corridorBridgeVertPrefab);
-                LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(-1, 0, 0), LevelGeneration.I.corridorBridgeVertPrefab);
+
+            LevelGeneration.I.corridorTilemap.SetTile(corridorPos, LevelGeneration.I.corridorBridgeVertPrefab);
+            LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(1, 0, 0), LevelGeneration.I.corridorBridgeVertPrefab);
+            LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(-1, 0, 0), LevelGeneration.I.corridorBridgeVertPrefab);
 
         }
         else
         {
-            /*if (!LevelGeneration.I.corridorTilemap.HasTile(corridorPos + new Vector3Int(1, 0, 0)) &&
-                !LevelGeneration.I.corridorTilemap.HasTile(corridorPos + new Vector3Int(-1, 0, 0)))
-            {*/
-                LevelGeneration.I.corridorTilemap.SetTile(corridorPos, LevelGeneration.I.corridorBridgeHorizPrefab);
-                LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(0, 1, 0), LevelGeneration.I.corridorBridgeHorizPrefab);
-                LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(0, -1, 0), LevelGeneration.I.corridorBridgeHorizPrefab);
+            LevelGeneration.I.corridorTilemap.SetTile(corridorPos, LevelGeneration.I.corridorBridgeHorizPrefab);
+            LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(0, 1, 0), LevelGeneration.I.corridorBridgeHorizPrefab);
+            LevelGeneration.I.corridorTilemap.SetTile(corridorPos + new Vector3Int(0, -1, 0), LevelGeneration.I.corridorBridgeHorizPrefab);
 
         }
 
@@ -132,12 +118,12 @@ public class RoomHolder : MonoBehaviour {
         }
         if (doorBot)
         {
-            DrawCorridor((Vector2)bottomEdge.position, Vector2.down); // proveriti za + 0.5f
+            DrawCorridor((Vector2)bottomEdge.position + new Vector2(0, 0.5f), Vector2.down); // proveriti za + 0.5f
 
         }
         if (doorLeft)
         {
-            DrawCorridor((Vector2)leftEdge.position, Vector2.left); // proveriti za + 0.5f
+            DrawCorridor((Vector2)leftEdge.position + new Vector2(0.5f, 0), Vector2.left); // proveriti za + 0.5f
 
         }
         if (doorRight)
@@ -147,13 +133,4 @@ public class RoomHolder : MonoBehaviour {
         }
 
     }
-
-    /*public void Update()
-    {
-        Debug.DrawLine(transform.position - new Vector3(width / 2, height / 2), transform.position + new Vector3(-width / 2, height / 2));
-        Debug.DrawLine(transform.position + new Vector3(width / 2, -height / 2), transform.position + new Vector3(width / 2, height / 2));
-        Debug.DrawLine(transform.position - new Vector3(width / 2, height / 2), transform.position + new Vector3(width / 2, -height / 2));
-        Debug.DrawLine(transform.position + new Vector3(-width / 2, height / 2), transform.position + new Vector3(width / 2, height / 2));
-
-    }*/
 }
