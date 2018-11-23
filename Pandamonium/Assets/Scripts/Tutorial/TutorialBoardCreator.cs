@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-/*public class TutorialBoardCreator : BoardCreator {
+/*
+public class TutorialBoardCreator : BoardCreator {
 
     public bool isTutorial;
     public GameObject tutorialParentCollider;
@@ -105,4 +105,5 @@ using UnityEngine;
         */
     /*}
 
-}*/
+}
+*/
