@@ -97,6 +97,10 @@ public class Enemy : AttackingCharacter {
         base.TakeDamage(damage);
         healthBar.fillAmount = health / maxHealth;
 
+        if(playerState != PlayerState.ATTACKING)
+        {
+            //Attack(GameManager.I.playerInstance.transform);
+        }
     }
 
     public override void Die()

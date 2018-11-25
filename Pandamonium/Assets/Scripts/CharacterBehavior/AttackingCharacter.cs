@@ -34,7 +34,8 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected CharacterMovement CM;
 
-    protected int ignoreMask;
+    [HideInInspector]
+    public int ignoreMask;
     protected ContactFilter2D colFilter;
 
     protected AIPath path;
@@ -110,6 +111,9 @@ public class AttackingCharacter : MonoBehaviour {
         if (this.target != null && target == this.target)                     // ako je target razlicit od trenutnog
             return;
 
+        if (playerState == PlayerState.IMMOBILE)
+            return;
+
         this.target = target;
         CM.MoveToPosition(target.position);
 
@@ -122,6 +126,11 @@ public class AttackingCharacter : MonoBehaviour {
         weapons[equippedWeaponIndex].gameObject.SetActive(false);
         equippedWeaponIndex = (equippedWeaponIndex + 1) % weapons.Length;
         weapons[equippedWeaponIndex].gameObject.SetActive(true);
+    }
+
+    public virtual Vector2 GetFacingDirection()
+    {
+        return rb.velocity;
     }
 
     public bool CanSee(Transform target, float range = Mathf.Infinity)
@@ -163,20 +172,25 @@ public class AttackingCharacter : MonoBehaviour {
 
     public virtual void MoveToPosition(Vector3 pos)
     {
-        playerState = PlayerState.WALKING;
-        CM.MoveToPosition(new Vector3(pos.x, pos.y, transform.position.z));
+        if (playerState != PlayerState.IMMOBILE)
+        {
+            playerState = PlayerState.WALKING;
+            CM.MoveToPosition(new Vector3(pos.x, pos.y, transform.position.z));
 
-        target = null;
+            target = null;
 
-        weapons[equippedWeaponIndex].Stop();
+            weapons[equippedWeaponIndex].Stop();
+        }
     }
 
     private float stopDashingAt;
 
     protected IEnumerator Dash(Vector3 to)
     {
-        if (playerState == PlayerState.DASHING || timeToDash < dashCooldown)
+        if (playerState == PlayerState.DASHING || playerState == PlayerState.IMMOBILE || timeToDash < dashCooldown)
             yield break;
+
+        timeToDash = 0;
 
         StopAttacking();
         stopDashingAt = 0;
@@ -186,7 +200,7 @@ public class AttackingCharacter : MonoBehaviour {
             yield return new WaitForEndOfFrame();
 
         if (playerState != PlayerState.WALKING)
-            yield return null;
+            yield break;
 
         playerState = PlayerState.DASHING;
 
@@ -197,15 +211,16 @@ public class AttackingCharacter : MonoBehaviour {
 
         path.maxSpeed = dashSpeed;
 
-        timeToDash = 0;
-        yield return null;
+        
     }
 
     protected IEnumerator Dash(Transform at)
     {
-        yield return StartCoroutine(Dash(at.position + (transform.position - at.position).normalized * 1.5f));
-        dashingAt = at;
-        yield return null;
+        if (playerState != PlayerState.IMMOBILE)
+        {
+            yield return StartCoroutine(Dash(at.position + (transform.position - at.position) * 0.25f));
+            dashingAt = at;
+        }
     }
 
     protected void UpdateGraph()
@@ -240,6 +255,8 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected virtual void Update()
     {
+
+        sprite.sortingOrder = -Mathf.RoundToInt(transform.position.y);
 
         if (isDead)
             return;
@@ -364,6 +381,7 @@ public class AttackingCharacter : MonoBehaviour {
         {
             nextAttackBG.SetActive(true);
         }
+
     }
 
     protected IEnumerator ColorTransition(Color color)
@@ -434,7 +452,8 @@ public class AttackingCharacter : MonoBehaviour {
     {
         TakeDamage(damage);
 
-        StartCoroutine(Knockback(dir, force));
+        if(playerState != PlayerState.DASHING)
+            StartCoroutine(Knockback(dir, force));
 
     }
 

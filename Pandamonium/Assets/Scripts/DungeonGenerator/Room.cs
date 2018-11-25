@@ -10,9 +10,9 @@ public class Room {
 
     public Transform instance;
     private RoomHolder roomHolder;
-    private Tilemap corridorTilemap;
-    private Tilemap obstacleTilemap;
-    private Tilemap groundTilemap;
+    public Tilemap corridorTilemap;
+    public Tilemap obstacleTilemap;
+    public Tilemap groundTilemap;
 
     // Distance from the start room (in room lengths)
     public int distanceFromStart;
@@ -37,8 +37,11 @@ public class Room {
 
     }
 
-    public bool IsTileWalkable(Vector3Int tilePos)
+    public bool IsTileWalkable(Vector3 pos)
     {
+
+        Vector3Int tilePos = groundTilemap.WorldToCell(pos); 
+
         if (groundTilemap.HasTile(tilePos) &&
             groundTilemap.HasTile(tilePos + new Vector3Int(1, 0, 0)) &&
             groundTilemap.HasTile(tilePos + new Vector3Int(-1, 0, 0)) &&
@@ -64,7 +67,7 @@ public class Room {
 
             pos = new Vector2(Random.Range(roomHolder.leftEdge.position.x, roomHolder.rightEdge.position.x), Random.Range(roomHolder.bottomEdge.position.y, roomHolder.topEdge.position.y));
 
-        } while (!IsTileWalkable(groundTilemap.WorldToCell(pos)));
+        } while (!IsTileWalkable(pos));
 
         return (Vector3)pos;
     }
