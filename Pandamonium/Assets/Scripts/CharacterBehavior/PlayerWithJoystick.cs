@@ -126,7 +126,15 @@ public class PlayerWithJoystick : AttackingCharacter {
                     wasdDirection += Vector2.down;
                 }
 
+                if (Input.GetKeyDown(KeyCode.LeftShift))
+                {
+                    normalSpeed = 30;
+                }
 
+                if (Input.GetKeyUp(KeyCode.LeftShift))
+                {
+                    normalSpeed = 6;
+                }
 
                 if (!wasdDirection.Equals(Vector2.zero))
                 {
