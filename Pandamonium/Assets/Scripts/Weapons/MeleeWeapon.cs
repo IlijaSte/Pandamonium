@@ -6,14 +6,17 @@ public class MeleeWeapon : Weapon
 {
     public float cleaveAngle = 180;
 
-    override public void Attack(Transform target)
+    override public bool Attack(Transform target)
     {
         if (timeToAttack <= 0)
         {
             Damage(target);
 
             base.Attack(target);
+            return true;
         }
+
+        return false;
     }
 
     protected void Damage(Transform target)

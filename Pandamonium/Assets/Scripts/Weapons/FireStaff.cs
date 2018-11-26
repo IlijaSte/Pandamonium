@@ -8,7 +8,7 @@ public class FireStaff : RangedWeapon
 
     public GameObject firePrefab;   // prefab projektila (vatre)
 
-    public override void Attack(Transform target)
+    public override bool Attack(Transform target)
     {
         if (timeToAttack <= 0)
         {
@@ -20,10 +20,13 @@ public class FireStaff : RangedWeapon
             projectile.GetComponent<FireProjectile>().Shoot(transform, target, projectileSpeed);
 
             base.Attack(target);
+            return true;
         }
+
+        return false;
     }
 
-    public override void AttackInDirection(Vector2 direction)
+    public override bool AttackInDirection(Vector2 direction)
     {
         
         if (timeToAttack <= 0)
@@ -37,7 +40,10 @@ public class FireStaff : RangedWeapon
             projectile.GetComponent<FireProjectile>().Shoot(transform, direction, projectileSpeed);
 
             base.AttackInDirection(direction);
+            return true;
         }
+
+        return false;
 
     }
 }
