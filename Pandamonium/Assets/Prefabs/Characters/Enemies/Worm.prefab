@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 4425208910922726}
   - component: {fileID: 212602623631793378}
   - component: {fileID: 95130699427380852}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: EnemySprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -533,6 +533,7 @@ MonoBehaviour:
   dashSpeed: 12
   healthBar: {fileID: 114619137388251790}
   nextAttackBar: {fileID: 114220975770498124}
+  ignoreMask: 0
   normalSpeed: 6
   maxDashRange: 4
   isDead: 0
@@ -617,7 +618,7 @@ Canvas:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1335749264126656}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}

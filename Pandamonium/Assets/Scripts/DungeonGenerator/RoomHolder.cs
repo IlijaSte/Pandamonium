@@ -38,7 +38,7 @@ public class RoomHolder : MonoBehaviour {
 
                 if (groundTilemap.HasTile(groundTilePos))
                 {
-                    if (context.IsTileWalkable(groundTilePos))
+                    if (context.IsTileWalkable(tilePos))
                     {
                         acidTilemap.SetTile(tilePos, null);
                     }

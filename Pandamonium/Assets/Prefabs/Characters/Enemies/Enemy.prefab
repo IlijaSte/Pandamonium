@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4579678950358708}
-  - component: {fileID: 96728589699361420}
+  - component: {fileID: 96180968139688952}
   m_Layer: 8
   m_Name: Trail
   m_TagString: Untagged
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 212933398877342650}
   - component: {fileID: 95701175880768276}
   - component: {fileID: 114963434698511256}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: EnemySprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,7 +554,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!96 &96728589699361420
+--- !u!96 &96180968139688952
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 1
@@ -587,9 +587,9 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingLayerID: -183264855
+  m_SortingLayer: 1
+  m_SortingOrder: 4
   m_Time: 45
   m_Parameters:
     serializedVersion: 2
@@ -599,13 +599,22 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.23913383
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -635,7 +644,7 @@ TrailRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 1
+      m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
@@ -663,6 +672,7 @@ MonoBehaviour:
   iField: {fileID: 0}
   range: 0
   timeToAttack: 1
+  parent: {fileID: 0}
   projectileSpeed: 2
   firePrefab: {fileID: 1714793588657250, guid: 3661731ec6bccf5478d07ac6ec8ba79f, type: 2}
 --- !u!114 &114079399296506460
@@ -718,6 +728,8 @@ MonoBehaviour:
   iField: {fileID: 0}
   range: 0
   timeToAttack: 1
+  parent: {fileID: 0}
+  cleaveAngle: 90
 --- !u!114 &114214034657156396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -751,8 +763,9 @@ MonoBehaviour:
   dashSpeed: 8
   healthBar: {fileID: 114791163046767886}
   nextAttackBar: {fileID: 114631011764471838}
+  ignoreMask: 0
   normalSpeed: 0.5
-  maxDashRange: 2
+  maxDashRange: 2.5
   isDead: 0
 --- !u!114 &114542684223825712
 MonoBehaviour:

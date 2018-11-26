@@ -12,11 +12,14 @@ public class FireProjectile : MonoBehaviour
     private Transform weaponParent;
 
     private float damage;
+    private float range;
 
     private bool shot = false;
     public Vector3 direction;
 
     public bool homing = false;
+
+    private Vector2 startPos;
 
     public void Shoot(Transform weapon, Transform target, float speed)
     {
@@ -25,9 +28,11 @@ public class FireProjectile : MonoBehaviour
         direction = (target.position - transform.position).normalized;
         this.speed = speed;
         this.damage = weapon.GetComponent<Weapon>().damage;
+        this.range = weapon.GetComponent<Weapon>().range;
         shot = true;
         weaponParent = weapon.parent.parent;
 
+        startPos = transform.position;
         Quaternion rot = Quaternion.LookRotation(Vector3.forward, target.position - transform.position);
         transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
     }
@@ -40,11 +45,12 @@ public class FireProjectile : MonoBehaviour
 
         this.target = null;
         this.damage = weapon.GetComponent<Weapon>().damage;
-
+        this.range = weapon.GetComponent<Weapon>().range;
         homing = false;
 
         shot = true;
 
+        startPos = transform.position;
         Quaternion rot = Quaternion.LookRotation(Vector3.forward, direction);
         transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
 
@@ -70,6 +76,11 @@ public class FireProjectile : MonoBehaviour
         else
         {
             transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed * Time.deltaTime);
+
+            if(Vector2.Distance(transform.position, startPos) >= range)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -92,6 +103,18 @@ public class FireProjectile : MonoBehaviour
             {
                 character.TakeDamage(damage);
             }
+
+            if (weaponParent != null)
+            {
+                if (weaponParent.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
+                {
+                    if (GameManager.I.playerInstance is PlayerWithJoystick)
+                    {
+                        (GameManager.I.playerInstance as PlayerWithJoystick).IncreaseEnergy(damage);
+                    }
+                }
+            }
+
             shot = false;
             Destroy(gameObject);
 
@@ -107,6 +130,17 @@ public class FireProjectile : MonoBehaviour
                 character.TakeDamage(damage);
             }
 
+            if(weaponParent != null)
+            {
+                if(weaponParent.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
+                {
+                    if(GameManager.I.playerInstance is PlayerWithJoystick)
+                    {
+                        (GameManager.I.playerInstance as PlayerWithJoystick).IncreaseEnergy(damage);
+                    }
+                }
+            }
+
             shot = false;
             Destroy(gameObject);
 
@@ -118,10 +152,10 @@ public class FireProjectile : MonoBehaviour
             return;
         }
 
-        if(other.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
+        /*if(other.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
         {
             Destroy(gameObject);
-        }
+        }*/
 
     }
     

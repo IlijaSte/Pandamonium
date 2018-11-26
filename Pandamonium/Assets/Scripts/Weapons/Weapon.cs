@@ -25,6 +25,8 @@ public abstract class Weapon : MonoBehaviour {
 
     protected ArrayList enemiesInRange = new ArrayList();                                                                                                                     //DZO JE SERONJA!!! 09.18.2018. Djole :)
 
+    public AttackingCharacter parent;
+
     virtual public void StartAttacking(Transform target)
     {
         if (!attacking)
@@ -49,23 +51,29 @@ public abstract class Weapon : MonoBehaviour {
     private void Start()
     {
         range = GetComponent<CircleCollider2D>().radius;
+
+        if(parent == null)
+        {
+            parent = transform.parent.parent.GetComponent<AttackingCharacter>();
+        }
     }
 
     virtual public void Update()
     {
+        
+        timeToAttack -= speed * Time.deltaTime;
         if (attacking && target != null)
         {
-            timeToAttack -= speed * Time.deltaTime;
-
             if (timeToAttack <= 0)
             {
                 Attack(target);
                 timeToAttack = 1;
             }
-        }else if(GameManager.joystick && timeToAttack > 0)
+        }/*else if(GameManager.joystick && timeToAttack > 0)
         {
             timeToAttack -= speed * Time.deltaTime;
-        }
+        }*/
+        
     }
 
     public virtual void Attack(Transform target)

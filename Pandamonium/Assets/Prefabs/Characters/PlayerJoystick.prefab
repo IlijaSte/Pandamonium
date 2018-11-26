@@ -631,9 +631,13 @@ MonoBehaviour:
   dashSpeed: 16
   healthBar: {fileID: 0}
   nextAttackBar: {fileID: 114338790452832874}
+  ignoreMask: 0
   normalSpeed: 6
   maxDashRange: 4
   isDead: 0
+  energyBar: {fileID: 0}
+  maxEnergy: 200
+  energyReduceSpeed: 1
   controller: {fileID: 0}
   facingDirection: {x: 0, y: 0}
   lockAngle: 60
@@ -676,6 +680,8 @@ MonoBehaviour:
   iField: {fileID: 0}
   range: 0
   timeToAttack: 1
+  parent: {fileID: 114562331877149714}
+  cleaveAngle: 180
 --- !u!114 &114693858186080010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -705,6 +711,7 @@ MonoBehaviour:
   iField: {fileID: 0}
   range: 0
   timeToAttack: 1
+  parent: {fileID: 0}
   projectileSpeed: 7
   firePrefab: {fileID: 1714793588657250, guid: 66803ba921559a94598a106ff2efb6db, type: 2}
 --- !u!114 &114898562783967118

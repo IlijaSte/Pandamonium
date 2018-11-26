@@ -1,8 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerWithJoystick : AttackingCharacter {
+
+    public Image energyBar;
+
+    public float maxEnergy = 100;
+    public float energyReduceSpeed = 0.33f;
+    private float energy = 0;
 
     public JoystickController controller;
 
@@ -56,6 +63,11 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
     }
 
+    public void StartDashing()
+    {
+        StartCoroutine(Dash());
+    }
+
     protected override void Update()
     {
 
@@ -74,6 +86,13 @@ public class PlayerWithJoystick : AttackingCharacter {
         {
             nextAttackBG.SetActive(true);
         }
+
+        if(energy > 0)
+        {
+            energy -= Time.deltaTime * energyReduceSpeed;
+        }
+
+        energyBar.fillAmount = energy / maxEnergy;
     }
 
     protected void FixedUpdate()
@@ -129,7 +148,7 @@ public class PlayerWithJoystick : AttackingCharacter {
             if (Input.GetMouseButtonDown(1))
             {
                 // DASH
-                StartCoroutine(Dash());
+                StartDashing();
             }
 
             if (Input.GetKeyUp(KeyCode.Q))
@@ -192,18 +211,37 @@ public class PlayerWithJoystick : AttackingCharacter {
         return closestTarget;
     }
 
+    public override Vector2 GetFacingDirection()
+    {
+        return facingDirection;
+    }
+
+    public void IncreaseEnergy(float amount)
+    {
+        energy = Mathf.Clamp(energy + amount, 0, maxEnergy);
+    }
+
     public void Attack()
     {
 
-        Transform facingEnemy;
-
-        if (facingEnemy = GetFacingEnemy())
+        if (weapons[equippedWeaponIndex] is MeleeWeapon)
         {
-            weapons[equippedWeaponIndex].Attack(facingEnemy);
+            int numHit = ((MeleeWeapon)weapons[equippedWeaponIndex]).AttackCleave();
+            IncreaseEnergy(numHit * weapons[equippedWeaponIndex].damage);
         }
         else
         {
-            weapons[equippedWeaponIndex].AttackInDirection(facingDirection);
+
+            Transform facingEnemy;
+
+            if (facingEnemy = GetFacingEnemy())
+            {
+                weapons[equippedWeaponIndex].Attack(facingEnemy);
+            }
+            else
+            {
+                weapons[equippedWeaponIndex].AttackInDirection(facingDirection);
+            }
         }
 
     }

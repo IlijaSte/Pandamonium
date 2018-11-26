@@ -42,12 +42,21 @@ public class Worm : Enemy {
 
         for (int i = 0; i < 3; i++) {
 
-            AcidProjectile projectile = Instantiate(projectilePrefab, (Vector2)transform.position + new Vector2(0, 1.5f), Quaternion.identity).GetComponent<AcidProjectile>();
-            Vector2 shootPos = (Vector2)targetPos + Random.insideUnitCircle;
+            Vector2 shootPos;
 
-            Transform indicator = Instantiate(indicatorPrefab, shootPos, Quaternion.identity).transform;
+            int it = 0;
+            do {
+                shootPos = (Vector2)targetPos + Random.insideUnitCircle;
+            } while (++it < 100 && !room.IsTileWalkable(shootPos));
 
-            projectile.Shoot(this, shootPos, indicator);
+            if (it < 100)
+            {
+                AcidProjectile projectile = Instantiate(projectilePrefab, (Vector2)transform.position + new Vector2(0, 1.5f), Quaternion.identity).GetComponent<AcidProjectile>();
+
+                Transform indicator = Instantiate(indicatorPrefab, shootPos, Quaternion.identity).transform;
+
+                projectile.Shoot(this, shootPos, indicator);
+            }
         }
 
     }
@@ -61,7 +70,7 @@ public class Worm : Enemy {
         do
         {
             emergePos = room.GetRandomPos();
-
+            
             tilePos = new Vector3Int(Mathf.FloorToInt(emergePos.x), Mathf.FloorToInt(emergePos.y), 0);
 
             /*if (tilePos.x < BoardCreator.I.columns && tilePos.y < BoardCreator.I.rows &&
@@ -84,8 +93,10 @@ public class Worm : Enemy {
             {
                 hitSmth = true;
             }*/
+            if (!hitSmth && !LevelGeneration.I.IsTileFree(emergePos))
+                hitSmth = true;
 
-            
+
         } while (hitSmth);
 
         return tilePos + new Vector3(0.5f, 0.5f);
@@ -108,8 +119,15 @@ public class Worm : Enemy {
 
     }
 
+    public override void Attack(Transform target)
+    {
+
+    }
+
     protected override void Update()
     {
+
+        sprite.sortingOrder = -Mathf.RoundToInt(transform.position.y);
 
         if (isDead)
             return;
