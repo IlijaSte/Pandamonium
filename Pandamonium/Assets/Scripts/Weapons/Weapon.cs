@@ -76,16 +76,24 @@ public abstract class Weapon : MonoBehaviour {
         
     }
 
-    public virtual void Attack(Transform target)
+    public virtual bool Attack(Transform target)
     {
-        if(timeToAttack <= 0)
+        if (timeToAttack <= 0)
+        {
             timeToAttack = 1;
+            return true;
+        }
+        return false;
     }
 
-    public virtual void AttackInDirection(Vector2 direction)
+    public virtual bool AttackInDirection(Vector2 direction)
     {
-        if(timeToAttack <= 0)
+        if (timeToAttack <= 0)
+        {
             timeToAttack = 1;
+            return true;
+        }
+        return false;
     }
 
     public bool IsInRange(Transform character)

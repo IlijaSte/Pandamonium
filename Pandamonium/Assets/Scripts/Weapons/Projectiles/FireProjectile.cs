@@ -104,17 +104,6 @@ public class FireProjectile : MonoBehaviour
                 character.TakeDamage(damage);
             }
 
-            if (weaponParent != null)
-            {
-                if (weaponParent.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
-                {
-                    if (GameManager.I.playerInstance is PlayerWithJoystick)
-                    {
-                        (GameManager.I.playerInstance as PlayerWithJoystick).IncreaseEnergy(damage);
-                    }
-                }
-            }
-
             shot = false;
             Destroy(gameObject);
 
@@ -128,17 +117,6 @@ public class FireProjectile : MonoBehaviour
             else
             {
                 character.TakeDamage(damage);
-            }
-
-            if(weaponParent != null)
-            {
-                if(weaponParent.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
-                {
-                    if(GameManager.I.playerInstance is PlayerWithJoystick)
-                    {
-                        (GameManager.I.playerInstance as PlayerWithJoystick).IncreaseEnergy(damage);
-                    }
-                }
             }
 
             shot = false;

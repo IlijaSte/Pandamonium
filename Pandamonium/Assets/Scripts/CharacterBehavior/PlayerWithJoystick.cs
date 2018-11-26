@@ -126,7 +126,15 @@ public class PlayerWithJoystick : AttackingCharacter {
                     wasdDirection += Vector2.down;
                 }
 
+                if (Input.GetKeyDown(KeyCode.LeftShift))
+                {
+                    normalSpeed = 30;
+                }
 
+                if (Input.GetKeyUp(KeyCode.LeftShift))
+                {
+                    normalSpeed = 6;
+                }
 
                 if (!wasdDirection.Equals(Vector2.zero))
                 {
@@ -216,9 +224,14 @@ public class PlayerWithJoystick : AttackingCharacter {
         return facingDirection;
     }
 
-    public void IncreaseEnergy(float amount)
+    protected void IncreaseEnergy(float amount)
     {
         energy = Mathf.Clamp(energy + amount, 0, maxEnergy);
+    }
+
+    protected void DecreaseEnergy(float amount)
+    {
+        energy = Mathf.Clamp(energy - amount, 0, maxEnergy);
     }
 
     public void Attack()
@@ -232,15 +245,21 @@ public class PlayerWithJoystick : AttackingCharacter {
         else
         {
 
-            Transform facingEnemy;
+            if (energy >= weapons[equippedWeaponIndex].damage)       // change damage to energy cost
+            {
+                Transform facingEnemy;
 
-            if (facingEnemy = GetFacingEnemy())
-            {
-                weapons[equippedWeaponIndex].Attack(facingEnemy);
-            }
-            else
-            {
-                weapons[equippedWeaponIndex].AttackInDirection(facingDirection);
+                if (facingEnemy = GetFacingEnemy())
+                {
+                    if(weapons[equippedWeaponIndex].Attack(facingEnemy))
+                        DecreaseEnergy(weapons[equippedWeaponIndex].damage);
+                }
+                else
+                {
+                    if(weapons[equippedWeaponIndex].AttackInDirection(facingDirection))
+                        DecreaseEnergy(weapons[equippedWeaponIndex].damage);
+                }
+
             }
         }
 
