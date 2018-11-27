@@ -100,7 +100,7 @@ public class Frogocite : Enemy
 
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.velocity = Vector2.zero; 
-        rb.AddForce(GetInitVelocity(), ForceMode2D.Impulse);
+        rb.AddForce(GetInitVelocity() * rb.mass, ForceMode2D.Impulse);
         
 
         indicator = Instantiate(indicatorPrefab, jumpTarget, Quaternion.identity).transform;
@@ -125,7 +125,10 @@ public class Frogocite : Enemy
             boxCollider2D.isTrigger = false;
 
             rb.bodyType = RigidbodyType2D.Kinematic;
-            
+
+            if (weapons[equippedWeaponIndex].IsInRange(player))
+                player.GetComponent<AttackingCharacter>().TakeDamage(weapons[equippedWeaponIndex].damage);
+            Attack(player);
         }
     }
 }
