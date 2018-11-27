@@ -7,7 +7,8 @@ public class LevelGeneration : MonoBehaviour {
 	public Vector2 worldSize = new Vector2(4,4);
 	protected Room[,] rooms;
 	protected List<Vector2> takenPositions = new List<Vector2>();
-	protected int gridSizeX, gridSizeY, numberOfRooms = 20;
+	protected int gridSizeX, gridSizeY;
+    public int numberOfRooms = 20;
 	//public GameObject roomWhiteObj;
 
     public GameObject[] roomPrefabs;
@@ -79,10 +80,10 @@ public class LevelGeneration : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
 
         float nodeSize = AstarPath.active.data.gridGraph.nodeSize;
-        AstarPath.active.data.gridGraph.SetDimensions(Mathf.RoundToInt((gridSizeX * roomWidth * 2 + roomWidth / 2) / nodeSize), Mathf.RoundToInt((gridSizeY * roomHeight * 2 + roomHeight / 2) / nodeSize), nodeSize);
+        AstarPath.active.data.gridGraph.SetDimensions(Mathf.RoundToInt((gridSizeX * roomWidth * 2 + roomWidth) / nodeSize), Mathf.RoundToInt((gridSizeY * roomHeight * 2 + roomHeight) / nodeSize), nodeSize);
         ground.localScale = new Vector2(gridSizeX * roomWidth * 2 + roomWidth / 2, gridSizeY * roomHeight * 2 + roomHeight / 2);
 
-        Camera.main.GetComponent<CameraMovement>().SetBounds(-ground.localScale / 2, ground.localScale / 2);
+        Camera.main.GetComponent<CameraMovement>().SetBounds(new Vector2(-gridSizeX * roomWidth - roomWidth / 2, -gridSizeY * roomHeight - roomHeight / 2), new Vector2(gridSizeX * roomWidth + roomWidth / 2, gridSizeY * roomHeight + roomHeight / 2));
 
         AstarPath.active.Scan();
         InstantiateEnemies();
@@ -148,10 +149,10 @@ public class LevelGeneration : MonoBehaviour {
                 continue;
 
             // broj neprijatelja u sobi zavisi od razdaljine sobe od pocetne sobe i multiplier-a
-            int enemyCount = Mathf.RoundToInt(Random.Range(room.distanceFromStart * enemyCountMultiplier, room.distanceFromStart * enemyCountMultiplier + 1.5f));
+            int totalDifficulty = Mathf.RoundToInt(Random.Range(room.distanceFromStart * enemyCountMultiplier, room.distanceFromStart * enemyCountMultiplier + 1.5f));
             List<Vector2> taken = new List<Vector2>();
 
-            for (int i = 0; i < enemyCount; i++)
+            while(totalDifficulty > 0)
             {
                 Vector2 spawnPos;
                 do
@@ -163,15 +164,26 @@ public class LevelGeneration : MonoBehaviour {
 
                 spawnPos = new Vector2(Mathf.Floor(spawnPos.x) + 0.5f, Mathf.Floor(spawnPos.y) + 0.5f);
 
+                GameObject newEnemy;
+
                 // da bi se u prve dve sobe stvarao samo prvi tip protivnika - verovatno menjati za sledece levele
-                if(room.distanceFromStart < 3)
+                if (room.distanceFromStart < 3)
                 {
-                    enemies.Add(Instantiate(enemyPrefabs[0], spawnPos, Quaternion.identity, enemyParent));
-                }else
+                    enemies.Add(newEnemy = Instantiate(enemyPrefabs[0], spawnPos, Quaternion.identity, enemyParent));
+                }
+                else
                 {
-                    enemies.Add(Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnPos, Quaternion.identity, enemyParent));
+                    GameObject newPrefab = null;
+                    do {
+                        newPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+                        
+                    } while (newPrefab.GetComponent<Enemy>().difficulty > totalDifficulty);
+
+                    newEnemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnPos, Quaternion.identity, enemyParent);
+                    enemies.Add(newEnemy);
                 }
 
+                totalDifficulty -= newEnemy.GetComponent<Enemy>().difficulty;
             }
         }
     }

@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldSize: {x: 3, y: 3}
+  numberOfRooms: 15
   roomPrefabs:
   - {fileID: 1021458116984078, guid: c5605b4466c9d1149b4f85722e6bb48c, type: 2}
   - {fileID: 1062512608064458, guid: 424b3ed87e137dc4eb52f05f0051eab9, type: 2}

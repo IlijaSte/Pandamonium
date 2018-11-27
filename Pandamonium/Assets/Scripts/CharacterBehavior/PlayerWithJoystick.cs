@@ -14,7 +14,7 @@ public class PlayerWithJoystick : AttackingCharacter {
     public JoystickController controller;
 
     [HideInInspector]
-    public Vector2 facingDirection;
+    public Vector2 facingDirection = Vector2.down;
 
     public float lockAngle = 60;
 
@@ -87,10 +87,10 @@ public class PlayerWithJoystick : AttackingCharacter {
             nextAttackBG.SetActive(true);
         }
 
-        if(energy > 0)
+        /*if(energy > 0)
         {
             energy -= Time.deltaTime * energyReduceSpeed;
-        }
+        }*/
 
         energyBar.fillAmount = energy / maxEnergy;
     }
@@ -169,7 +169,7 @@ public class PlayerWithJoystick : AttackingCharacter {
         {
 
 
-            facingDirection = rb.velocity.normalized;
+            //facingDirection = rb.velocity.normalized;
 
             if (!Mathf.Approximately(controller.InputDirection.x, 0) || !Mathf.Approximately(controller.InputDirection.y, 0))
             {

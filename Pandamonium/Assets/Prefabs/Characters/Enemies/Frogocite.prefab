@@ -457,6 +457,7 @@ MonoBehaviour:
   iField: {fileID: 0}
   range: 0
   timeToAttack: 1
+  parent: {fileID: 0}
   projectileSpeed: 2
   firePrefab: {fileID: 1714793588657250, guid: 3661731ec6bccf5478d07ac6ec8ba79f, type: 2}
 --- !u!114 &114068334897614330
@@ -480,9 +481,11 @@ MonoBehaviour:
   dashSpeed: 12
   healthBar: {fileID: 114791163046767886}
   nextAttackBar: {fileID: 114631011764471838}
+  ignoreMask: 0
   normalSpeed: 2
   maxDashRange: 4
   isDead: 0
+  difficulty: 3
   jumpSpeed: 0
   maxJumpRange: 4
   indicatorPrefab: {fileID: 1677782040419512, guid: d354f95f8310c1f418e1347aa9aa7874,
@@ -542,6 +545,8 @@ MonoBehaviour:
   iField: {fileID: 0}
   range: 0
   timeToAttack: 1
+  parent: {fileID: 0}
+  cleaveAngle: 180
 --- !u!114 &114214034657156396
 MonoBehaviour:
   m_ObjectHideFlags: 1

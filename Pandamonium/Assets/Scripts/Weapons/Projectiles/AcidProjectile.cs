@@ -15,6 +15,8 @@ public class AcidProjectile : MonoBehaviour {
     private Transform indicator;
     private Animator animator;
 
+    private float T = 0;
+
     private Vector2 GetInitVelocity()
     {
         float g = -Physics2D.gravity.y;
@@ -42,7 +44,7 @@ public class AcidProjectile : MonoBehaviour {
         // Impact time for the highest shot that hits.
         float T_max = Mathf.Sqrt((b + discRoot) * 2 / (g * g));
 
-        float T = (T_max + T_min) / 2;
+        T = (T_max + T_min) / 2;
 
         float vx = x / T;
         float vy = y / T + T * g / 2;
@@ -84,8 +86,8 @@ public class AcidProjectile : MonoBehaviour {
             collider.enabled = false;
         }
 
-        indicator.localScale = Vector2.Lerp(indicator.localScale, Vector2.one, Time.deltaTime);
-        indicator.GetComponent<SpriteRenderer>().color = Color.Lerp(indicator.GetComponent<SpriteRenderer>().color, new Color(1, 0, 0, 0.75f), Time.deltaTime);
+        indicator.localScale = Vector2.Lerp(indicator.localScale, new Vector2(0.75f, 0.75f), Time.deltaTime / T);
+        indicator.GetComponent<SpriteRenderer>().color = Color.Lerp(indicator.GetComponent<SpriteRenderer>().color, new Color(1, 0, 0, 0.75f), Time.deltaTime / T);
 
 
         if(rb.velocity.y < 0 && transform.position.y <= target.y)
