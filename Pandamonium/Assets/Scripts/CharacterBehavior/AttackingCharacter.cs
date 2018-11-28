@@ -218,7 +218,7 @@ public class AttackingCharacter : MonoBehaviour {
     {
         if (playerState != PlayerState.IMMOBILE)
         {
-            yield return StartCoroutine(Dash(at.position + (transform.position - at.position) * 0.25f));
+            yield return StartCoroutine(Dash(at.position + (transform.position - at.position) * 0.4f));
             dashingAt = at;
         }
     }
@@ -226,7 +226,7 @@ public class AttackingCharacter : MonoBehaviour {
     protected void UpdateGraph()
     {
 
-        Vector2 newApproxPosition = new Vector2(Mathf.Floor(transform.position.x), Mathf.Floor(transform.position.y)) + new Vector2(0.5f, 0.5f);
+        /*Vector2 newApproxPosition = new Vector2(Mathf.Floor(transform.position.x), Mathf.Floor(transform.position.y)) + new Vector2(0.5f, 0.5f);
 
         if (!newApproxPosition.Equals(approxPosition))
         {
@@ -250,7 +250,7 @@ public class AttackingCharacter : MonoBehaviour {
 
             approxPosition = newApproxPosition;
 
-        }
+        }*/
     }
 
     protected virtual void Update()

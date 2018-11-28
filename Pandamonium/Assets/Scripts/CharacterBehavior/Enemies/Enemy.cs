@@ -12,6 +12,8 @@ public class Enemy : AttackingCharacter {
     public static int numEnemies = 0;
     public static bool areAllEnemiesDead = false;
 
+    public int difficulty = 1;
+
     protected Vector2 startPos;
 
     protected Room room;
@@ -29,7 +31,7 @@ public class Enemy : AttackingCharacter {
         room = LevelGeneration.I.GetRoomAtPos(transform.position);
         startPos = transform.position;
 
-        approxPosition = new Vector2(Mathf.Floor(transform.position.x), Mathf.Floor(transform.position.y)) + new Vector2(0.5f, 0.5f);
+        /*approxPosition = new Vector2(Mathf.Floor(transform.position.x), Mathf.Floor(transform.position.y)) + new Vector2(0.5f, 0.5f);
         currBounds = new Bounds(approxPosition, Vector3.one);
 
         GraphUpdateObject guo = new GraphUpdateObject(currBounds)
@@ -38,7 +40,7 @@ public class Enemy : AttackingCharacter {
             modifyTag = true,
             setTag = (int)type + 1
         };
-        AstarPath.active.UpdateGraphs(guo);
+        AstarPath.active.UpdateGraphs(guo);*/
         player = GameManager.I.playerInstance.transform;
     }
 
@@ -109,13 +111,13 @@ public class Enemy : AttackingCharacter {
         if (numEnemies == 0)
             areAllEnemiesDead = true;
 
-        GraphUpdateObject guo = new GraphUpdateObject(currBounds)
+        /*GraphUpdateObject guo = new GraphUpdateObject(currBounds)
         {
             updatePhysics = true,
             modifyTag = true,
             setTag = 0
         };
-        AstarPath.active.UpdateGraphs(guo);
+        AstarPath.active.UpdateGraphs(guo);*/
 
         base.Die();
     }

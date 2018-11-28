@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
+    public Canvas joystickCanvas;
+
     public Text combatTextPrefab;
 
     [HideInInspector]
@@ -27,6 +29,11 @@ public class UIManager : MonoBehaviour {
     private void Start()
     {
         weaponChange = GetComponent<ButtonWeaponScript>();
+
+        if (SystemInfo.deviceType == DeviceType.Desktop)
+        {
+            joystickCanvas.enabled = false;
+        }
     }
 
     public void ShowHitDamage(Canvas canvas, float yOffset, float damage, bool isPlayer = false)

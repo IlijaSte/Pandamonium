@@ -537,6 +537,7 @@ MonoBehaviour:
   normalSpeed: 6
   maxDashRange: 4
   isDead: 0
+  difficulty: 2
   speed: 0.75
   projectilePrefab: {fileID: 1620057767749030, guid: b422b44fe3c6fc94aaed2421f58befda,
     type: 2}

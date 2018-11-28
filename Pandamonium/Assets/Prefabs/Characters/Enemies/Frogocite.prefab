@@ -485,6 +485,7 @@ MonoBehaviour:
   normalSpeed: 2
   maxDashRange: 4
   isDead: 0
+  difficulty: 3
   jumpSpeed: 0
   maxJumpRange: 4
   indicatorPrefab: {fileID: 1677782040419512, guid: d354f95f8310c1f418e1347aa9aa7874,

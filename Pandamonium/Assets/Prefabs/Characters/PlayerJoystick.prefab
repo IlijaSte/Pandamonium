@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 50608750452462778}
   - component: {fileID: 61104947272731624}
   - component: {fileID: 114562331877149714}
+  - component: {fileID: 114357103239029832}
   m_Layer: 15
   m_Name: PlayerJoystick
   m_TagString: Player
@@ -598,6 +599,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114357103239029832
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1587600068571070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 183748dd497aa473a98ff0cd8cb67fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  uniqueID: 4628927885979439035
+  updateError: 1
+  checkTime: 0.2
+  objectTag: 1
 --- !u!114 &114541426558961724
 MonoBehaviour:
   m_ObjectHideFlags: 1

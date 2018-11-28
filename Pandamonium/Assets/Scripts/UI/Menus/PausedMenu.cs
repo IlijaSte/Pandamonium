@@ -39,6 +39,12 @@ namespace LevelManagment
         {
             Application.Quit();
         }
+
+        protected override void OnDestroy()
+        {
+            Time.timeScale = 1;
+            base.OnDestroy();
+        }
     }
 }
 
