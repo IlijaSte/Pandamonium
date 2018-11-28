@@ -20,12 +20,19 @@ public class Frogocite : Enemy
     private float timeToJump;
     public float jumpCooldown = 6;
 
+    private Transform shadow;
+    private Vector2 oldShadowPos;
+    private Vector2 oldShadowRelativePos;
+    private float distance;
+
     public override void Start()
     {
         base.Start();
         //rb = GetComponent<Rigidbody2D>();
         timeToJump = jumpCooldown;
         boxCollider2D = GetComponent<BoxCollider2D>();
+
+        shadow = sprite.transform.GetChild(0);
     }
 
     protected override void Update()
@@ -48,6 +55,8 @@ public class Frogocite : Enemy
         float g = -Physics2D.gravity.y;
         float x = jumpTarget.x - transform.position.x;
         float y = jumpTarget.y - transform.position.y;
+
+        distance = Vector2.Distance(transform.position, jumpTarget);
 
         float b;
         float discriminant;
@@ -105,6 +114,9 @@ public class Frogocite : Enemy
 
         indicator = Instantiate(indicatorPrefab, jumpTarget, Quaternion.identity).transform;
 
+        oldShadowRelativePos = shadow.localPosition;
+        shadow.SetParent(null);
+        oldShadowPos = shadow.position;
        // timeToJump = 0;
     }
 
@@ -129,6 +141,14 @@ public class Frogocite : Enemy
             if (weapons[equippedWeaponIndex].IsInRange(player))
                 player.GetComponent<AttackingCharacter>().TakeDamage(weapons[equippedWeaponIndex].damage);
             Attack(player);
+
+            shadow.SetParent(sprite.transform);
+            shadow.localPosition = oldShadowRelativePos;
+        }
+
+        if (isJumping)
+        {
+            shadow.position = new Vector2(transform.position.x, Mathf.Lerp(oldShadowPos.y, jumpTarget.y, 1 - Vector2.Distance(jumpTarget, transform.position) / distance));
         }
     }
 }

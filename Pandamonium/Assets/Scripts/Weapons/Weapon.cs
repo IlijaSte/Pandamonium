@@ -62,6 +62,12 @@ public abstract class Weapon : MonoBehaviour {
     {
         
         timeToAttack -= speed * Time.deltaTime;
+
+        if(GameManager.I.playerInstance == parent)
+        {
+            UIManager.I.UpdateAttackCooldown(1 - timeToAttack);
+        }
+
         if (attacking && target != null)
         {
             if (timeToAttack <= 0)
