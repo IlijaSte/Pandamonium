@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
 public class TutorialBoardCreator : BoardCreator {
 
     public bool isTutorial;
@@ -103,6 +103,7 @@ public class TutorialBoardCreator : BoardCreator {
             tutorialFinishPosition = new Vector2(finishX, finishY);
          }
         */
-    }
+    /*}
 
 }
+*/

@@ -2,14 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using SampleGame;
 
 namespace LevelManagment
 {
     public class PausedMenu : Menu<PausedMenu>  {
-
-        //[SerializeField]
-        //private int mainMenuSceneBuildIndex = 1;
 
         public void Start()
         {
@@ -25,23 +21,15 @@ namespace LevelManagment
         public void OnRestartLevelPressed()
         {
             Time.timeScale = 1;
-            //if (GameManager.Instance != null)
-            //{
-            //    GameManager.Instance.ReloadLevel();
-            //}
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            LevelLoader.ReloadLevel();
+
+            GameManager.I.LoadSceneLong(SceneManager.GetActiveScene().name);
             base.OnBackPressed();
         }
 
         public void OnMainManuPressed()
         {
             Time.timeScale = 1;
-            //SceneManager.LoadScene(mainMenuSceneBuildIndex);
-            //if (MenuManager.Instance != null && MainMenu.Instance != null)
-            //{
-            //    MenuManager.Instance.OpenMenu(MainMenu.Instance);
-            //}
+
             GameManager.I.LoadScene("MainMenu");
             MainMenu.Open();            
         }
@@ -49,8 +37,13 @@ namespace LevelManagment
         // overriding the back method with application quiSt
         public override void OnBackPressed()
         {
-            //base.OnBackPressed();
             Application.Quit();
+        }
+
+        protected override void OnDestroy()
+        {
+            Time.timeScale = 1;
+            base.OnDestroy();
         }
     }
 }

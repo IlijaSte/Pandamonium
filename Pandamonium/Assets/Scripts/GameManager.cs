@@ -7,9 +7,12 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
+    public static bool joystick = true;
 
     private static GameManager instance;
     public static string nextScene;
+
+    public AttackingCharacter playerInstance;
 
     public static GameManager I
     {
@@ -24,16 +27,11 @@ public class GameManager : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-		if(SceneManager.GetActiveScene().name == "LoadingScene")
+		if(SceneManager.GetActiveScene().name.Equals("LoadingScene"))
         {
             //SceneManager.LoadScene(nextScene);
             StartCoroutine(LoadAsyncScene(nextScene));
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
     public void loadCharachterSelectionScene()
@@ -83,5 +81,10 @@ public class GameManager : MonoBehaviour {
             slider.value = progress;
             yield return null;
         }
+    }
+
+    public void SetJoystick(bool joystick)
+    {
+        GameManager.joystick = joystick;
     }
 }

@@ -7,7 +7,7 @@ public class CameraMovement : MonoBehaviour {
     public Vector3 stageLowerLeft;
     public Vector3 stageUpperRight;
 
-    public Transform player;
+    private Transform player;
 
     private float minVisibleX;
     private float maxVisibleX;
@@ -31,6 +31,9 @@ public class CameraMovement : MonoBehaviour {
         maxVisibleX = stageUpperRight.x - viewportWidth / 2f;
         minVisibleY = stageLowerLeft.y + viewportHeight / 2f;
         maxVisibleY = stageUpperRight.y - viewportHeight / 2f;
+
+        if(GameManager.I.playerInstance)
+            player = GameManager.I.playerInstance.transform;
     }
 	
     public void SetBounds(Vector2 lowerLeft, Vector2 upperRight)
@@ -46,6 +49,9 @@ public class CameraMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+        if(player == null)
+            player = GameManager.I.playerInstance.transform;
 
         transform.position = new Vector3(Mathf.Clamp(player.position.x, minVisibleX, maxVisibleX), Mathf.Clamp(player.position.y, minVisibleY, maxVisibleY), transform.position.z);
 	}

@@ -21,18 +21,13 @@ public class Player : AttackingCharacter {
     public GameObject attackIndicatorPrefab;
     private GameObject tapIndicator = null;
 
-    private static Player instance;
-
-    public static Player I
+    public override void Awake()
     {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<Player>();
-            }
-            return instance;
-        }
+        base.Awake();
+
+        if (GameManager.joystick)
+            gameObject.SetActive(false);
+        else GameManager.I.playerInstance = this;
     }
 
     public override void Start()
@@ -46,6 +41,7 @@ public class Player : AttackingCharacter {
         }
 
         base.Start();
+
     }
 
     protected IEnumerator ShowIndicator(GameObject prefab, Transform parent = null)
@@ -123,6 +119,8 @@ public class Player : AttackingCharacter {
                                           Vector2.zero, 0f, ignoreMask | (1 << LayerMask.NameToLayer("Ground")));
             foreach(RaycastHit2D hit in hit2D)
             {
+                if (hit.transform.CompareTag("Player")) continue;
+
                 if(hit.transform.GetComponent<TapDetector>() != null || hit.transform.CompareTag("Enemy"))
                 //if (hit2D.transform.CompareTag("Enemy"))                // ako je kliknuo na neprijatelja
                 {
@@ -192,16 +190,20 @@ public class Player : AttackingCharacter {
         //if (!IsMoving())
     }
 
-    public override void TakeDamage(float damage, Vector3 dir)
+    public override void TakeDamage(float damage)
     {
-        base.TakeDamage(damage, dir);
+        if (!isDead)
+        {
+            base.TakeDamage(damage);
 
-        healthBar.fillAmount = health / maxHealth;
+            healthBar.fillAmount = health / maxHealth;
+        }
     }
 
     public override void Die()
     {
-       // MenuManager.I.ShowMenu(MenuManager.I.deathMenu);
+        MenuManager.I.ShowMenu(MenuManager.I.deathMenu);
+        isDead = true;
         //base.Die();
     }
 }

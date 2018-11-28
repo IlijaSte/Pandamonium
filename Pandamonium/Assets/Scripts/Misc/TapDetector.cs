@@ -37,6 +37,6 @@ public class TapDetector : MonoBehaviour {
     public void OnMouseDown()
     {
         print("CLICK!");
-        Player.I.Attack(parent);
+        //Player.I.Attack(parent);
     }
 }

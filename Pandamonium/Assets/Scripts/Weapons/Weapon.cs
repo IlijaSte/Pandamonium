@@ -1,11 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Weapon : MonoBehaviour {
 
     public float damage;
     public float speed;
+
+    public bool knockback = false;
+    public float knockbackForce = 5;
+
+    [HideInInspector]
+    public InputField iField;
+
+    [HideInInspector]
+    public float range;
 
     protected bool attacking = false;
     [HideInInspector]
@@ -13,6 +24,8 @@ public abstract class Weapon : MonoBehaviour {
     protected Transform target;
 
     protected ArrayList enemiesInRange = new ArrayList();                                                                                                                     //DZO JE SERONJA!!! 09.18.2018. Djole :)
+
+    public AttackingCharacter parent;
 
     virtual public void StartAttacking(Transform target)
     {
@@ -28,23 +41,60 @@ public abstract class Weapon : MonoBehaviour {
     {
         attacking = false;
         timeToAttack = 1;
+
+        if (iField)
+        {
+            knockbackForce = float.Parse(iField.text);
+        }
+    }
+
+    private void Start()
+    {
+        range = GetComponent<CircleCollider2D>().radius;
+
+        if(parent == null)
+        {
+            parent = transform.parent.parent.GetComponent<AttackingCharacter>();
+        }
     }
 
     virtual public void Update()
     {
+        
+        timeToAttack -= speed * Time.deltaTime;
         if (attacking && target != null)
         {
-            timeToAttack -= speed * Time.deltaTime;
-
             if (timeToAttack <= 0)
             {
-                Attack();
+                Attack(target);
                 timeToAttack = 1;
             }
-        }
+        }/*else if(GameManager.joystick && timeToAttack > 0)
+        {
+            timeToAttack -= speed * Time.deltaTime;
+        }*/
+        
     }
 
-    protected abstract void Attack();
+    public virtual bool Attack(Transform target)
+    {
+        if (timeToAttack <= 0)
+        {
+            timeToAttack = 1;
+            return true;
+        }
+        return false;
+    }
+
+    public virtual bool AttackInDirection(Vector2 direction)
+    {
+        if (timeToAttack <= 0)
+        {
+            timeToAttack = 1;
+            return true;
+        }
+        return false;
+    }
 
     public bool IsInRange(Transform character)
     {

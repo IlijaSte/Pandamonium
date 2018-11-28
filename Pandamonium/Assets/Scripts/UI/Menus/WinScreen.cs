@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SampleGame;
 using UnityEngine.SceneManagement;
 
 namespace LevelManagment

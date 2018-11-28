@@ -1,132 +1,90 @@
-﻿using UnityEngine;
-using System;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class Room
-{
-    public int xPos;                      // The x coordinate of the lower left tile of the room.
-    public int yPos;                      // The y coordinate of the lower left tile of the room.
-    public int roomWidth;                     // How many tiles wide the room is.
-    public int roomHeight;                    // How many tiles high the room is.
-    public Direction enteringCorridor;    // The direction of the corridor that is entering this room.
+public class Room {
+	public Vector2 gridPos;
+	public int type;
+	public bool doorTop, doorBot, doorLeft, doorRight;
 
-    private BoardCreator context;
-    public Fragment fragment;
+    public Transform instance;
+    private RoomHolder roomHolder;
+    public Tilemap corridorTilemap;
+    public Tilemap obstacleTilemap;
+    public Tilemap groundTilemap;
 
-    public Room(BoardCreator context)
+    // Distance from the start room (in room lengths)
+    public int distanceFromStart;
+
+    public Room(Vector2 _gridPos, int _type){
+		gridPos = _gridPos;
+		type = _type;
+
+        distanceFromStart = Mathf.RoundToInt(Mathf.Abs(_gridPos.x) + Mathf.Abs(_gridPos.y));
+	}
+
+    public void Init(GameObject prefab, Transform parent)
     {
-        this.context = context;
+        this.instance = Object.Instantiate(prefab, new Vector2(gridPos.x * LevelGeneration.I.roomWidth, gridPos.y * LevelGeneration.I.roomHeight), Quaternion.identity, parent).transform;
+        roomHolder = instance.GetComponent<RoomHolder>();
+
+        corridorTilemap = roomHolder.corridorTilemap;
+        obstacleTilemap = roomHolder.obstacleTilemap;
+        groundTilemap = roomHolder.groundTilemap;
+
+        roomHolder.Init(this);
+
     }
 
-    // This is used for the first room.  It does not have a Corridor parameter since there are no corridors yet.
-    public void SetupRoom(IntRange widthRange, IntRange heightRange, int columns, int rows)
+    public bool IsTileWalkable(Vector3 pos)
     {
-        // Set a random width and height.
-        roomWidth = widthRange.Random;
-        roomHeight = heightRange.Random;
 
-        // Set the x and y coordinates so the room is roughly in the middle of the board.
-        System.Random random = new System.Random();
+        Vector3Int tilePos = groundTilemap.WorldToCell(pos); 
 
-        xPos = 1;
-        yPos = random.Next(0, rows - roomHeight / 2);
+        if (groundTilemap.HasTile(tilePos) &&
+            groundTilemap.HasTile(tilePos + new Vector3Int(1, 0, 0)) &&
+            groundTilemap.HasTile(tilePos + new Vector3Int(-1, 0, 0)) &&
+            groundTilemap.HasTile(tilePos + new Vector3Int(0, 1, 0)) &&
+            groundTilemap.HasTile(tilePos + new Vector3Int(0, -1, 0)) &&
 
-        (fragment = Fragment.GetFragmentAt(context, new Vector2Int(0, random.Next(0, rows - roomHeight / 2)))).SetRoom(this);
+            groundTilemap.HasTile(tilePos + new Vector3Int(-1, -1, 0)) &&
+            groundTilemap.HasTile(tilePos + new Vector3Int(-1, 1, 0)) &&
+            groundTilemap.HasTile(tilePos + new Vector3Int(1, -1, 0)) &&
+            groundTilemap.HasTile(tilePos + new Vector3Int(1, 1, 0)))
+            return true;
 
-        yPos = random.Next(fragment.yPos, fragment.yPos + 3);
+        return false;
     }
 
-
-    // This is an overload of the SetupRoom function and has a corridor parameter that represents the corridor entering the room.
-    public void SetupRoom(IntRange widthRange, IntRange heightRange, int columns, int rows, Corridor corridor, bool bonus = false)
+    public Vector2 GetRandomPos()
     {
-        if(!bonus)
-            // Set the entering corridor direction.
-            enteringCorridor = corridor.direction;
 
-        // Set random values for width and height.
-        roomWidth = widthRange.Random;
-        roomHeight = heightRange.Random;
+        Vector2 pos;
 
-        fragment = corridor.to;
-        fragment.SetRoom(this);
-
-        switch (corridor.direction)
+        do
         {
-            case Direction.North:
 
-                roomHeight = Mathf.Clamp(roomHeight, 1, fragment.yPos + fragment.GetHeight() - corridor.EndPositionY - 2);
+            pos = new Vector2(Random.Range(roomHolder.leftEdge.position.x, roomHolder.rightEdge.position.x), Random.Range(roomHolder.bottomEdge.position.y, roomHolder.topEdge.position.y));
 
-                yPos = corridor.EndPositionY;
+        } while (!IsTileWalkable(pos));
 
-                xPos = UnityEngine.Random.Range(Mathf.Clamp(corridor.EndPositionX - roomWidth, fragment.xPos + 1, corridor.EndPositionX - roomWidth), Mathf.Clamp(fragment.xPos + fragment.GetWidth() - roomWidth - 1, fragment.xPos + 1, fragment.xPos + fragment.GetWidth() - roomWidth - 1));
-
-                do
-                {
-                    roomWidth = widthRange.Random;
-                    xPos = UnityEngine.Random.Range(fragment.xPos, fragment.xPos + fragment.GetWidth() - roomWidth);
-                } while (xPos > corridor.EndPositionX || xPos + roomWidth - 1 < corridor.EndPositionX);
-
-                break;
-            case Direction.East:
-
-                roomWidth = Mathf.Clamp(roomWidth, 1, fragment.xPos + fragment.GetWidth() - corridor.EndPositionX - 1);
-
-                xPos = corridor.EndPositionX;
-
-                yPos = UnityEngine.Random.Range(Mathf.Clamp(corridor.EndPositionY - roomHeight, fragment.yPos + 1, corridor.EndPositionY - roomHeight + 1), Mathf.Clamp(fragment.yPos + fragment.GetHeight() - roomHeight - 1, fragment.yPos + 1, fragment.yPos + fragment.GetHeight() - roomHeight - 1));
-
-                do
-                {
-                    roomHeight = heightRange.Random;
-                    yPos = UnityEngine.Random.Range(fragment.yPos, fragment.yPos + fragment.GetHeight() - roomHeight);
-                } while (yPos > corridor.EndPositionY || yPos + roomHeight - 1 < corridor.EndPositionY);
-
-                break;
-            case Direction.South:
-
-                roomHeight = Mathf.Clamp(roomHeight, 1, corridor.EndPositionY - (fragment.yPos + 1));
-
-                yPos = corridor.EndPositionY - roomHeight; // + 1 ?
-
-                xPos = UnityEngine.Random.Range(Mathf.Clamp(corridor.EndPositionX - roomWidth, fragment.xPos + 1, corridor.EndPositionX - roomWidth), Mathf.Clamp(fragment.xPos + fragment.GetWidth() - roomWidth - 1, fragment.xPos + 1, fragment.xPos + fragment.GetWidth() - roomWidth - 1));
-
-                do
-                {
-                    roomWidth = widthRange.Random;
-                    xPos = UnityEngine.Random.Range(fragment.xPos, fragment.xPos + fragment.GetWidth() - roomWidth);
-                } while (xPos > corridor.EndPositionX || xPos + roomWidth - 1 < corridor.EndPositionX);
-
-                break;
-            case Direction.West:
-
-                roomWidth = Mathf.Clamp(roomWidth, 1, corridor.EndPositionX - (fragment.xPos + 1));
-
-                xPos = corridor.EndPositionX - roomWidth;
-
-                yPos = UnityEngine.Random.Range(Mathf.Clamp(corridor.EndPositionY - roomHeight, fragment.yPos + 1, corridor.EndPositionY - roomHeight + 1), Mathf.Clamp(fragment.yPos + fragment.GetHeight() - roomHeight - 1, fragment.yPos + 1, fragment.yPos + fragment.GetHeight() - roomHeight - 1));
-
-                do
-                {
-                    roomHeight = heightRange.Random;
-                    yPos = UnityEngine.Random.Range(fragment.yPos, fragment.yPos + fragment.GetHeight() - roomHeight);
-                } while (yPos > corridor.EndPositionY || yPos + roomHeight - 1 < corridor.EndPositionY);
-
-                break;
-        }
+        return (Vector3)pos;
     }
 
-    public static Room GetRoomAtPos(Vector2 pos)
+    public void LiftCorridors()
+    {
+        //corridorTilemap.SetTile()
+    }
+
+    public void LowerCorridors()
     {
 
-        return (Fragment.GetFragmentAt(BoardCreator.I, new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y)))).room;
-
     }
-
-    public Vector2Int GetRandomPos()
+    
+    public RoomHolder getRoomHolder()
     {
-
-        return new Vector2Int(UnityEngine.Random.Range(xPos + 1, xPos + roomWidth - 1), UnityEngine.Random.Range(yPos + 1, yPos + roomHeight - 1));
-
+        return roomHolder;
     }
-
+    
 }

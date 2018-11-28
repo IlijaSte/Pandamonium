@@ -18,9 +18,9 @@ public class CharacterMovement : MonoBehaviour {
 
     public void MoveToPosition(Vector3 targetPosition) {
 
-        
+
         path.isStopped = false;
-        
+
         path.destination = targetPosition; // !!!
         path.SearchPath();
     }

@@ -9,7 +9,8 @@ public class Frogocite : Enemy
     private Vector2 jumpTarget;
     public float maxJumpRange = 2;
 
-    private Rigidbody2D rb;
+    private BoxCollider2D boxCollider2D;
+    //private Rigidbody2D rb;
     private new CircleCollider2D collider;
     public GameObject indicatorPrefab;
     private Transform indicator;
@@ -22,8 +23,9 @@ public class Frogocite : Enemy
     public override void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody2D>();
+        //rb = GetComponent<Rigidbody2D>();
         timeToJump = jumpCooldown;
+        boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
     protected override void Update()
@@ -35,7 +37,7 @@ public class Frogocite : Enemy
 
         if (!isJumping && timeToJump >= jumpCooldown && playerState == PlayerState.CHASING_ENEMY && CanSee(player, maxJumpRange))
         {
-            Jump(player.position);
+            Jump(new Vector2(player.position.x, player.position.y));
         }
       
         base.Update();
@@ -80,9 +82,10 @@ public class Frogocite : Enemy
 
     public void Jump(Vector2 target)
     {
-        playerState = PlayerState.WALKING;
+        timeToJump = 0;
+        playerState = PlayerState.IMMOBILE;
         isJumping = true;
-        this.jumpTarget = new Vector2(target.x, target.y);
+        this.jumpTarget = target;// new Vector2(target.x, target.y);
 
         //collider = GetComponent<CircleCollider2D>();
         //collider.enabled = false;
@@ -90,13 +93,19 @@ public class Frogocite : Enemy
         path.enabled = false;
         //path.isStopped = true;
 
+
+        //boxCollider2D.enabled = false;
+        boxCollider2D.isTrigger = true;
+
+
         rb.bodyType = RigidbodyType2D.Dynamic;
-        GetComponent<BoxCollider2D>().enabled = false;
-        rb.AddForce(GetInitVelocity(), ForceMode2D.Impulse);
+        rb.velocity = Vector2.zero; 
+        rb.AddForce(GetInitVelocity() * rb.mass, ForceMode2D.Impulse);
+        
 
         indicator = Instantiate(indicatorPrefab, jumpTarget, Quaternion.identity).transform;
 
-        timeToJump = 0;
+       // timeToJump = 0;
     }
 
     public void FixedUpdate()
@@ -112,9 +121,14 @@ public class Frogocite : Enemy
             path.enabled = true;
             //path.isStopped = false;
 
-            GetComponent<BoxCollider2D>().enabled = true;
- 
+            //GetComponent<BoxCollider2D>().enabled = true;
+            boxCollider2D.isTrigger = false;
+
             rb.bodyType = RigidbodyType2D.Kinematic;
+
+            if (weapons[equippedWeaponIndex].IsInRange(player))
+                player.GetComponent<AttackingCharacter>().TakeDamage(weapons[equippedWeaponIndex].damage);
+            Attack(player);
         }
     }
 }
