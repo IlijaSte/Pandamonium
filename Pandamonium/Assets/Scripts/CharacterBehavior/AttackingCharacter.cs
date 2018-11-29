@@ -14,21 +14,25 @@ public class AttackingCharacter : MonoBehaviour {
     public enum CharacterType { PLAYER, ENEMY }
     public CharacterType type;
 
-    public CharacterVision vision;
-
     public float dashCooldown = 6;
     public float dashSpeed = 12;
+    public float maxDashRange = 4;
+
+    public float normalSpeed = 6;
 
     public Image healthBar;
     public Image nextAttackBar;
+
+    public CharacterVision vision;
 
     protected GameObject nextAttackBG;
 
     protected Transform target = null;                                          // 2D objekat koji igrac napada/prati
 
-    protected enum PlayerState { IDLE, CHASING_ENEMY, ATTACKING, WALKING, DASHING, IMMOBILE }                     
+    public enum PlayerState { IDLE, CHASING_ENEMY, ATTACKING, WALKING, DASHING, IMMOBILE }                     
     
-    protected PlayerState playerState = PlayerState.IDLE;                       // trenutno stanje igraca
+    [HideInInspector]
+    public PlayerState playerState = PlayerState.IDLE;                       // trenutno stanje igraca
 
     protected float health;
 
@@ -40,9 +44,7 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected AIPath path;
 
-    public float normalSpeed = 6;
-
-    public float maxDashRange = 4;
+    
 
     //protected bool dashed = false;
     protected float timeToDash;
@@ -120,6 +122,8 @@ public class AttackingCharacter : MonoBehaviour {
         playerState = PlayerState.CHASING_ENEMY;
         weapons[equippedWeaponIndex].Stop();
     }
+
+    public virtual void Attack() { }
 
     public void ChangeWeapon()
     {
@@ -493,7 +497,7 @@ public class AttackingCharacter : MonoBehaviour {
         GetComponent<Collider2D>().enabled = false;
         healthBar.transform.parent.gameObject.SetActive(false);
         nextAttackBar.transform.parent.gameObject.SetActive(false);
-        sprite.enabled = false;
+        sprite.gameObject.SetActive(false);
 
         if(path)
             path.enabled = false;

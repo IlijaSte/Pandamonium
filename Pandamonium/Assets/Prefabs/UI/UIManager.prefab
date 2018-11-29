@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4512577923314722}
   - component: {fileID: 114696526391286408}
   - component: {fileID: 114209893818532370}
-  - component: {fileID: 114877727662211180}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -56,7 +55,11 @@ MonoBehaviour:
   joystickCanvas: {fileID: 0}
   combatTextPrefab: {fileID: 114324912091261364, guid: f314e89d31251ab41a1021f4224fb2c5,
     type: 2}
-  weaponChange: {fileID: 0}
+  attackButton: {fileID: 0}
+  abilityButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114696526391286408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,15 +73,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1700260222444396, guid: 66971591d1a919a48a5680d93b460688, type: 2}
   deathMenu: {fileID: 1855370371046284, guid: 1b1e86775836ce64d8bf293366862809, type: 2}
---- !u!114 &114877727662211180
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1848565710162406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 225938ec95218484f85d076d66adec02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 0}

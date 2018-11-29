@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireProjectile : MonoBehaviour
 {
 
-    private Transform weapon;
+    private Ability ability;
     private Transform target;
     private float speed;
 
@@ -21,31 +21,31 @@ public class FireProjectile : MonoBehaviour
 
     private Vector2 startPos;
 
-    public void Shoot(Transform weapon, Transform target, float speed)
+    public void Shoot(Ability ability, Transform target, float speed)
     {
-        this.weapon = weapon;
+        this.ability = ability;
         this.target = target;
         direction = (target.position - transform.position).normalized;
         this.speed = speed;
-        this.damage = weapon.GetComponent<Weapon>().damage;
-        this.range = weapon.GetComponent<Weapon>().range;
+        this.damage = ability.damage;
+        this.range = ability.range;
         shot = true;
-        weaponParent = weapon.parent.parent;
+        weaponParent = ability.transform.parent.parent;     // promeniti
 
         startPos = transform.position;
         Quaternion rot = Quaternion.LookRotation(Vector3.forward, target.position - transform.position);
         transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
     }
 
-    public void Shoot(Transform weapon, Vector2 direction, float speed)
+    public void Shoot(Ability ability, Vector2 direction, float speed)
     {
-        this.weapon = weapon;
+        this.ability = ability;
         this.direction = direction;
         this.speed = speed;
 
         this.target = null;
-        this.damage = weapon.GetComponent<Weapon>().damage;
-        this.range = weapon.GetComponent<Weapon>().range;
+        this.damage = ability.damage;
+        this.range = ability.range;
         homing = false;
 
         shot = true;
@@ -60,7 +60,7 @@ public class FireProjectile : MonoBehaviour
     {
         if (!shot) return;
 
-        if(homing && (target == null || weapon == null))      // ako je target unisten/ubijen u medjuvremenu
+        if(homing && (target == null || ability == null))      // ako je target unisten/ubijen u medjuvremenu
         {
             homing = false;
             return;
@@ -87,17 +87,16 @@ public class FireProjectile : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (weapon != null && weaponParent != null && other.gameObject == weaponParent.gameObject)                   // ako je projektil pogodio pucaca
+        if (ability != null && weaponParent != null && other.gameObject == weaponParent.gameObject)                   // ako je projektil pogodio pucaca
             return;
 
         AttackingCharacter character = other.GetComponent<AttackingCharacter>();
-        Weapon weaponComp = weapon.GetComponent<Weapon>();
 
         if (target != null && other.transform == target && character != null)                                      // ako je pogodio metu
         {
-            if (weaponComp.knockback)
+            if (ability.knockback)
             {
-                character.TakeDamageWithKnockback(damage, (other.transform.position - transform.position).normalized, weaponComp.knockbackForce);
+                character.TakeDamageWithKnockback(damage, (other.transform.position - transform.position).normalized, ability.knockbackForce);
             }
             else
             {
@@ -110,9 +109,9 @@ public class FireProjectile : MonoBehaviour
             return;
         }else if (other.CompareTag("Enemy"))
         {
-            if (weapon.GetComponent<Weapon>().knockback)
+            if (ability.knockback)
             {
-                character.TakeDamageWithKnockback(damage, (other.transform.position - transform.position).normalized, weaponComp.knockbackForce);
+                character.TakeDamageWithKnockback(damage, (other.transform.position - transform.position).normalized, ability.knockbackForce);
             }
             else
             {
@@ -125,7 +124,7 @@ public class FireProjectile : MonoBehaviour
             return;
         }
 
-        if (character != null && weapon != null && weaponParent != null && character.type == weaponParent.GetComponent<AttackingCharacter>().type)  // ako je pogodio karaktera istog tipa
+        if (character != null && ability != null && weaponParent != null && character.type == weaponParent.GetComponent<AttackingCharacter>().type)  // ako je pogodio karaktera istog tipa
         {
             return;
         }

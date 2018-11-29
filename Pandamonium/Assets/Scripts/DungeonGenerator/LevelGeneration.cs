@@ -9,7 +9,11 @@ public class LevelGeneration : MonoBehaviour {
 	protected List<Vector2> takenPositions = new List<Vector2>();
 	protected int gridSizeX, gridSizeY;
     public int numberOfRooms = 20;
-	//public GameObject roomWhiteObj;
+
+    public int roomWidth;
+    public int roomHeight;
+
+    public float enemyCountMultiplier = 1f;
 
     public GameObject[] roomPrefabs;
     public TileBase corridorHorizPrefab;
@@ -23,14 +27,9 @@ public class LevelGeneration : MonoBehaviour {
     public Tilemap acidTilemap; 
     public TileBase acidPrefab;
 
-    // public Tilemap corridorTilemap;
     private Transform roomParent;
-    public int roomWidth;
-    public int roomHeight;
 
     public Transform ground;
-
-    public float enemyCountMultiplier = 1f;
 
     public GameObject[] enemyPrefabs;
     protected ArrayList enemies;
