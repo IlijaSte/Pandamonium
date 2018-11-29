@@ -107,6 +107,11 @@ public class AttackingCharacter : MonoBehaviour {
             weapons[equippedWeaponIndex].Stop();
     }
 
+    public void StopMoving()
+    {
+        CM.StopMoving();
+    }
+
     public virtual void Attack(Transform target)
     {
 
@@ -198,6 +203,7 @@ public class AttackingCharacter : MonoBehaviour {
 
         StopAttacking();
         stopDashingAt = 0;
+
         MoveToPosition(to);
 
         while (path.pathPending)
@@ -425,6 +431,28 @@ public class AttackingCharacter : MonoBehaviour {
         }
     }
 
+    public virtual void TakePoisonDamage(float damage)
+    {
+        if (GameManager.I.playerInstance == this)
+        {
+            UIManager.I.ShowPoisonDamage(GetComponentInChildren<Canvas>(), 1, damage);
+        }
+        else
+        {
+            UIManager.I.ShowHitDamage(GetComponentInChildren<Canvas>(), 1, damage);
+        }
+
+
+        if ((health -= damage) <= 0)    // * armorReduction
+        {
+            Die();
+        }
+        else
+        {
+            StartCoroutine(ColorTransition(Color.green));
+        }
+    }
+
     protected IEnumerator Knockback(Vector2 dir, float force)
     {
 
@@ -467,7 +495,8 @@ public class AttackingCharacter : MonoBehaviour {
         while(times-- > 0)
         {
             yield return new WaitForSeconds(interval);
-            TakeDamage(damage);
+            //TakeDamage(damage);
+            TakePoisonDamage(damage);
            
         }
 
@@ -511,9 +540,12 @@ public class AttackingCharacter : MonoBehaviour {
 
     public virtual void Die()
     {
-        isDead = true;
+        if (!isDead)
+        {
+            isDead = true;
 
-        StartCoroutine(Death());
+            StartCoroutine(Death());
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -85,11 +85,14 @@ public class Room {
         do
         {
 
-            pos = new Vector2(Random.Range(roomHolder.leftEdge.position.x, roomHolder.rightEdge.position.x), Random.Range(roomHolder.bottomEdge.position.y, roomHolder.topEdge.position.y));
+            pos = new Vector2(Random.Range(Mathf.RoundToInt(roomHolder.leftEdge.position.x), Mathf.RoundToInt(roomHolder.rightEdge.position.x)), Random.Range(Mathf.RoundToInt(roomHolder.bottomEdge.position.y), Mathf.RoundToInt(roomHolder.topEdge.position.y)));
+
+            //pos = new Vector2(Mathf.Floor(pos.x) + 0.5f, Mathf.Floor(pos.y) + 0.5f);
 
         } while (!IsTileWalkable(groundTilemap, pos));
 
-        return (Vector3)pos;
+        pos = new Vector2(Mathf.Floor(pos.x) + 0.5f, Mathf.Floor(pos.y) + 0.5f);
+        return pos;
     }
 
     public void LiftCorridors()

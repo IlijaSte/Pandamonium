@@ -210,8 +210,11 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public override void Die()
     {
-        MenuManager.I.ShowMenu(MenuManager.I.deathMenu);
-        isDead = true;
-        //base.Die();
+        if (!isDead)
+        {
+            MenuManager.I.ShowMenu(MenuManager.I.deathMenu);
+            isDead = true;
+            //base.Die();
+        }
     }
 }

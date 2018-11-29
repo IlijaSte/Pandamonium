@@ -161,8 +161,6 @@ public class LevelGeneration : MonoBehaviour {
 
                 taken.Add(spawnPos);
 
-                spawnPos = new Vector2(Mathf.Floor(spawnPos.x) + 0.5f, Mathf.Floor(spawnPos.y) + 0.5f);
-
                 GameObject newEnemy;
 
                 // da bi se u prve dve sobe stvarao samo prvi tip protivnika - verovatno menjati za sledece levele

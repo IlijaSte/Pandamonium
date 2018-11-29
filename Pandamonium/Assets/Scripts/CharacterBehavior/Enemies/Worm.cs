@@ -71,15 +71,13 @@ public class Worm : Enemy {
         {
             emergePos = room.GetRandomPos();
             
-            tilePos = new Vector3Int(Mathf.FloorToInt(emergePos.x), Mathf.FloorToInt(emergePos.y), 0);
-
             /*if (tilePos.x < BoardCreator.I.columns && tilePos.y < BoardCreator.I.rows &&
                 tilePos.x >= 0 && tilePos.y >= 0 && BoardCreator.I.tiles[tilePos.x][tilePos.y] == BoardCreator.TileType.Floor)
             {*/
             RaycastHit2D hit2D;
             hitSmth = false;
 
-            if (hit2D = Physics2D.Raycast(new Vector2(tilePos.x + 0.5f, tilePos.y + 0.5f), Vector2.zero, 0f, ignoreMask))
+            if (hit2D = Physics2D.Raycast(new Vector2(emergePos.x + 0.5f, emergePos.y + 0.5f), Vector2.zero, 0f, ignoreMask))
             {
 
                 if (hit2D.collider.gameObject.layer == LayerMask.NameToLayer("Characters"))
@@ -99,7 +97,7 @@ public class Worm : Enemy {
 
         } while (hitSmth);
 
-        return tilePos + new Vector3(0.5f, 0.5f);
+        return emergePos;
 
     }
 
