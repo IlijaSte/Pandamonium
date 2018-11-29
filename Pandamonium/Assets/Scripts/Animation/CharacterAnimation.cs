@@ -25,6 +25,11 @@ public class CharacterAnimation : AnimationMama {
         }
 
     }
+    protected override void FlipAnimation()
+    {
+        base.FlipAnimation();
+        
+    }
 
     protected virtual void animation360()
     {

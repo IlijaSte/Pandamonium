@@ -13,7 +13,7 @@ public abstract class AnimationMama : MonoBehaviour {
 
     protected abstract void updateVector2();
 
-    protected void FlipAnimation()
+    protected virtual void FlipAnimation()
     {
         updateVector2();
 

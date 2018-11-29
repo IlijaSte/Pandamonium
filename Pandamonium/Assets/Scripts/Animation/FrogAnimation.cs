@@ -9,7 +9,7 @@ public class FrogAnimation : CharacterAnimation
 
     void Update()
     {
-        animation360();
+        FlipAnimation();
     }
 
 }
