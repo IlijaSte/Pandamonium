@@ -77,6 +77,12 @@ public class Room {
         return false;
     }
 
+    public void PlaceDetail(Vector2 position, TileBase tile)
+    {
+        Vector3Int tilePos = roomHolder.detailTilemap.WorldToCell(position);
+        roomHolder.detailTilemap.SetTile(tilePos, tile);
+    }
+
     public Vector2 GetRandomPos()
     {
 

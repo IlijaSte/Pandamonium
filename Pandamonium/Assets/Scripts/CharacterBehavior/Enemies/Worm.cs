@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Worm : Enemy {
 
@@ -12,6 +13,7 @@ public class Worm : Enemy {
 
     public GameObject projectilePrefab;
     public GameObject indicatorPrefab;
+    public TileBase destructedTile;
 
     public enum WormState{ BURIED, EMERGING, ATTACKING, BURYING };
 
@@ -66,7 +68,6 @@ public class Worm : Enemy {
 
         bool hitSmth = false;
         Vector2 emergePos;
-        Vector3Int tilePos;
         do
         {
             emergePos = room.GetRandomPos();
@@ -120,6 +121,13 @@ public class Worm : Enemy {
     public override void Attack(Transform target)
     {
 
+    }
+
+    protected void StartSubmerging()
+    {
+        nextAttackBG.SetActive(false);
+
+        room.PlaceDetail(transform.position, destructedTile);
     }
 
     protected override void Update()
@@ -182,7 +190,7 @@ public class Worm : Enemy {
                 case WormState.ATTACKING:
 
                     FireProjectiles();
-                    nextAttackBG.SetActive(false);
+                    StartSubmerging();
 
                     break;
 

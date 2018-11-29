@@ -8,6 +8,7 @@ public class RoomHolder : MonoBehaviour {
     public Tilemap groundTilemap;
     public Tilemap corridorTilemap;
     public Tilemap obstacleTilemap;
+    public Tilemap detailTilemap;
 
     public Transform topEdge;
     public Transform bottomEdge;
