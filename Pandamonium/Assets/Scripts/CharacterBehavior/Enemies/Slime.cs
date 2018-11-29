@@ -6,6 +6,8 @@ public class Slime : Enemy {
 
     public float dashCastTime = 1;
 
+    protected bool isCharging = false;
+
     public override void Start()
     {
         base.Start();
@@ -13,14 +15,34 @@ public class Slime : Enemy {
 
     protected IEnumerator StartDashing()
     {
+
+        Vector2 targetPos = player.position;
+
         StopAttacking();
         StopMoving();
         playerState = PlayerState.IMMOBILE;
+        isCharging = true;
 
         yield return new WaitForSeconds(dashCastTime);
 
-        playerState = PlayerState.IDLE;
-        StartCoroutine(Dash(player));       // promeniti zbog cast vremena
+        if (isCharging)
+        {
+            playerState = PlayerState.IDLE;
+            StartCoroutine(Dash(targetPos));       // promeniti zbog cast vremena
+            isCharging = false;
+        }
+    }
+
+    public override void TakeDamageWithKnockback(float damage, Vector2 dir, float force)
+    {
+        if (isCharging)
+        {
+            isCharging = false;
+            playerState = PlayerState.IDLE;
+        }
+
+        base.TakeDamageWithKnockback(damage, dir, force);
+
     }
 
     protected override void Update()
