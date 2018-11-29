@@ -47,7 +47,7 @@ public class Worm : Enemy {
             int it = 0;
             do {
                 shootPos = (Vector2)targetPos + Random.insideUnitCircle;
-            } while (++it < 100 && !room.IsTileWalkable(shootPos));
+            } while (++it < 100 && !room.IsTileWalkable(room.groundTilemap, shootPos));
 
             if (it < 100)
             {

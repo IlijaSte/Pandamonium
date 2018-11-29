@@ -53,6 +53,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldSize: {x: 3, y: 3}
   numberOfRooms: 15
+  roomWidth: 28
+  roomHeight: 28
+  enemyCountMultiplier: 1
   roomPrefabs:
   - {fileID: 1021458116984078, guid: c5605b4466c9d1149b4f85722e6bb48c, type: 2}
   - {fileID: 1062512608064458, guid: 424b3ed87e137dc4eb52f05f0051eab9, type: 2}
@@ -75,10 +78,7 @@ MonoBehaviour:
   corridorTilemap: {fileID: 0}
   acidTilemap: {fileID: 0}
   acidPrefab: {fileID: 11400000, guid: 069acdcf805605f4191aefbbbb14ede6, type: 2}
-  roomWidth: 26
-  roomHeight: 26
   ground: {fileID: 0}
-  enemyCountMultiplier: 1
   enemyPrefabs:
   - {fileID: 1628753790980070, guid: 75c84e6b6e1cac542a790e6e97eb2d12, type: 2}
   - {fileID: 1994364961457230, guid: d6fddc9afdfce6d40a9c8f40754187dc, type: 2}

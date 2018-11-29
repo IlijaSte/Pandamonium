@@ -37,21 +37,41 @@ public class Room {
 
     }
 
-    public bool IsTileWalkable(Vector3 pos)
+    public bool IsTileWalkable(Tilemap tilemap, Vector3 pos)
     {
+        pos += new Vector3(0.5f, 0.5f);
+        Vector3Int tilePos = tilemap.WorldToCell(pos); 
 
-        Vector3Int tilePos = groundTilemap.WorldToCell(pos); 
+        if (tilemap.HasTile(tilePos) &&
+            tilemap.HasTile(tilePos + new Vector3Int(1, 0, 0)) &&
+            tilemap.HasTile(tilePos + new Vector3Int(-1, 0, 0)) &&
+            tilemap.HasTile(tilePos + new Vector3Int(0, 1, 0)) &&
+            tilemap.HasTile(tilePos + new Vector3Int(0, -1, 0)) &&
 
-        if (groundTilemap.HasTile(tilePos) &&
-            groundTilemap.HasTile(tilePos + new Vector3Int(1, 0, 0)) &&
-            groundTilemap.HasTile(tilePos + new Vector3Int(-1, 0, 0)) &&
-            groundTilemap.HasTile(tilePos + new Vector3Int(0, 1, 0)) &&
-            groundTilemap.HasTile(tilePos + new Vector3Int(0, -1, 0)) &&
+            tilemap.HasTile(tilePos + new Vector3Int(-1, -1, 0)) &&
+            tilemap.HasTile(tilePos + new Vector3Int(-1, 1, 0)) &&
+            tilemap.HasTile(tilePos + new Vector3Int(1, -1, 0)) &&
+            tilemap.HasTile(tilePos + new Vector3Int(1, 1, 0)))
+            return true;
 
-            groundTilemap.HasTile(tilePos + new Vector3Int(-1, -1, 0)) &&
-            groundTilemap.HasTile(tilePos + new Vector3Int(-1, 1, 0)) &&
-            groundTilemap.HasTile(tilePos + new Vector3Int(1, -1, 0)) &&
-            groundTilemap.HasTile(tilePos + new Vector3Int(1, 1, 0)))
+        return false;
+    }
+
+    public bool HasWalkableNeighbor(Tilemap tilemap, Vector3 pos)
+    {
+        pos += new Vector3(0.5f, 0.5f);
+        Vector3Int tilePos = tilemap.WorldToCell(pos);
+
+        if (!IsTileWalkable(tilemap, tilePos) &&
+            (IsTileWalkable(tilemap, tilePos + new Vector3(1, 0, 0)) ||
+            IsTileWalkable(tilemap, tilePos + new Vector3(-1, 0, 0)) ||
+            IsTileWalkable(tilemap, tilePos + new Vector3(0, 1, 0)) ||
+            IsTileWalkable(tilemap, tilePos + new Vector3(0, -1, 0)) ||
+
+            IsTileWalkable(tilemap, tilePos + new Vector3(-1, -1, 0)) ||
+            IsTileWalkable(tilemap, tilePos + new Vector3(-1, 1, 0)) ||
+            IsTileWalkable(tilemap, tilePos + new Vector3(1, -1, 0)) ||
+            IsTileWalkable(tilemap, tilePos + new Vector3(1, 1, 0))))
             return true;
 
         return false;
@@ -67,7 +87,7 @@ public class Room {
 
             pos = new Vector2(Random.Range(roomHolder.leftEdge.position.x, roomHolder.rightEdge.position.x), Random.Range(roomHolder.bottomEdge.position.y, roomHolder.topEdge.position.y));
 
-        } while (!IsTileWalkable(pos));
+        } while (!IsTileWalkable(groundTilemap, pos));
 
         return (Vector3)pos;
     }

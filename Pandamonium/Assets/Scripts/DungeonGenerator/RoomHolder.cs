@@ -26,6 +26,12 @@ public class RoomHolder : MonoBehaviour {
         this.context = context;
         acidTilemap = LevelGeneration.I.acidTilemap;
 
+        
+    }
+
+    private void Start()
+    {
+
         DrawCorridors(context.doorTop, context.doorBot, context.doorLeft, context.doorRight);
 
         for (int i = Mathf.FloorToInt(transform.position.x - LevelGeneration.I.roomWidth / 2); i <= transform.position.x + LevelGeneration.I.roomWidth / 2; i++)
@@ -38,19 +44,24 @@ public class RoomHolder : MonoBehaviour {
 
                 if (groundTilemap.HasTile(groundTilePos))
                 {
-                    if (context.IsTileWalkable(tilePos))
+                    if (context.IsTileWalkable(groundTilemap, tilePos))// || context.IsTileWalkable(corridorTilemap, tilePos))
                     {
                         acidTilemap.SetTile(tilePos, null);
+                        obstacleTilemap.SetTile(obstacleTilemap.WorldToCell(tilePos), null);
+                    }
+                    else if(!context.IsTileWalkable(corridorTilemap, tilePos) && !context.IsTileWalkable(LevelGeneration.I.corridorTilemap, tilePos))
+                    {
+                        obstacleTilemap.SetTile(obstacleTilemap.WorldToCell(tilePos), LevelGeneration.I.acidPrefab);
                     }
 
+                    /*if (context.HasWalkableNeighbor(ref groundTilemap, tilePos))// || context.HasWalkableNeighbor(corridorTilemap, tilePos))
+                    {
+                        obstacleTilemap.SetTile(obstacleTilemap.WorldToCell(tilePos), LevelGeneration.I.acidPrefab);
+                    }*/
                 }
             }
-
         }
-    }
 
-    private void Awake()
-    {
         
     }
 
@@ -71,11 +82,30 @@ public class RoomHolder : MonoBehaviour {
             {
                 corridorTilemap.SetTile(tilePos + new Vector3Int(0, 1, 0), prefab);
                 corridorTilemap.SetTile(tilePos + new Vector3Int(0, -1, 0), prefab);
+
+                if (!context.IsTileWalkable(context.groundTilemap, tilePos + new Vector3Int(0, 1, 0)))
+                {
+                    obstacleTilemap.SetTile(tilePos + new Vector3Int(0, 1, 0), LevelGeneration.I.acidPrefab);
+                }
+                if (!context.IsTileWalkable(context.groundTilemap, tilePos + new Vector3Int(0, -1, 0)))
+                {
+                    obstacleTilemap.SetTile(tilePos + new Vector3Int(0, -1, 0), LevelGeneration.I.acidPrefab);
+                }
+
             }
             else
             {
                 corridorTilemap.SetTile(tilePos + new Vector3Int(1, 0, 0), prefab);
                 corridorTilemap.SetTile(tilePos + new Vector3Int(-1, 0, 0), prefab);
+
+                if (!context.IsTileWalkable(context.groundTilemap, tilePos + new Vector3Int(1, 0, 0)))
+                {
+                    obstacleTilemap.SetTile(tilePos + new Vector3Int(1, 0, 0), LevelGeneration.I.acidPrefab);
+                }
+                if (!context.IsTileWalkable(context.groundTilemap, tilePos + new Vector3Int(-1, 0, 0)))
+                {
+                    obstacleTilemap.SetTile(tilePos + new Vector3Int(-1, 0, 0), LevelGeneration.I.acidPrefab);
+                }
             }
 
             acidTilemap.SetTile(acidTilemap.WorldToCell(start), null);
