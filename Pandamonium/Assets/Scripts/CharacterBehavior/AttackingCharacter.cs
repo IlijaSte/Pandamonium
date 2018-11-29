@@ -142,6 +142,8 @@ public class AttackingCharacter : MonoBehaviour {
         return rb.velocity;
     }
 
+    // metoda proverava da li karakter vidi target na zadatom range-u (od drugih karaktera i obstacle-a)
+
     public bool CanSee(Transform target, float range = Mathf.Infinity)
     {
 
@@ -179,6 +181,8 @@ public class AttackingCharacter : MonoBehaviour {
 
     }
 
+    // metoda za jednostavno pomeranje u tacku
+
     public virtual void MoveToPosition(Vector3 pos)
     {
         if (playerState != PlayerState.IMMOBILE)
@@ -204,6 +208,8 @@ public class AttackingCharacter : MonoBehaviour {
         StopAttacking();
         stopDashingAt = 0;
 
+        // krecemo da hodamo do cilja samo dok ne nadjemo celu putanju, nakon cega se ubrzavamo
+
         MoveToPosition(to);
 
         while (path.pathPending)
@@ -224,11 +230,15 @@ public class AttackingCharacter : MonoBehaviour {
         
     }
 
+    // za slucaj dash-ovanja na nesto umesto samo u tacku
+
     protected IEnumerator Dash(Transform at)
     {
         if (playerState != PlayerState.IMMOBILE)
         {
             yield return StartCoroutine(Dash(at.position + (transform.position - at.position) * 0.4f));
+
+            // dashingAt cuva za kasnije (u Update kada zavrsi Dash) za damage-ovanje - izmeniti
             dashingAt = at;
         }
     }
@@ -355,6 +365,10 @@ public class AttackingCharacter : MonoBehaviour {
                         }
                         else
                         {
+                            if (type == CharacterType.ENEMY && weapons[equippedWeaponIndex].IsInRange(GameManager.I.playerInstance.transform))
+                            {
+                                GameManager.I.playerInstance.TakeDamage(weapons[equippedWeaponIndex].damage);
+                            }
                             playerState = PlayerState.IDLE;
                         }
 
@@ -373,6 +387,10 @@ public class AttackingCharacter : MonoBehaviour {
                         }
                         else
                         {
+                            if (type == CharacterType.ENEMY && weapons[equippedWeaponIndex].IsInRange(GameManager.I.playerInstance.transform))
+                            {
+                                GameManager.I.playerInstance.TakeDamage(weapons[equippedWeaponIndex].damage);
+                            }
                             playerState = PlayerState.WALKING;
                         }
                     }
