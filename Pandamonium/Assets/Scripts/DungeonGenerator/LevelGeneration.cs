@@ -19,6 +19,8 @@ public class LevelGeneration : MonoBehaviour {
 
     public GameObject lastRoom;
 
+    public GameObject healthPoolPrefab;
+
     public TileBase corridorHorizPrefab;
     public TileBase corridorVertPrefab;
     public TileBase corridorBridgeHorizPrefab;
@@ -89,6 +91,7 @@ public class LevelGeneration : MonoBehaviour {
 
         AstarPath.active.Scan();
         InstantiateEnemies();
+        InstantiateHealthPool();
     }
 
     protected void PositionPlayer()
@@ -138,6 +141,23 @@ public class LevelGeneration : MonoBehaviour {
         }
 
         return true;
+    }
+
+    protected virtual void InstantiateHealthPool()
+    {
+        Vector2 pos = takenPositions[Random.Range(1, takenPositions.Count - 2)];
+
+        Room room = rooms[Mathf.RoundToInt(gridSizeX + pos.x), Mathf.RoundToInt(gridSizeY + pos.y)];
+
+        Vector2 spawnPos;
+
+        do
+        {
+            spawnPos = room.GetRandomPos();
+
+        } while (!IsTileFree(spawnPos));
+
+        Instantiate(healthPoolPrefab, spawnPos, Quaternion.identity);
     }
 
     protected virtual void InstantiateEnemies()
@@ -298,7 +318,7 @@ public class LevelGeneration : MonoBehaviour {
             checkingPos = new Vector2(x, y);
 
             i++;
-        } while (i < 100 && (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || (takenPositions.Count > 1 && neighborPos.Equals(Vector2.zero))));
+        } while (i < 100 && (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY));
         if (inc >= 100)
         { // break loop if it takes too long: this loop isnt garuanteed to find solution, which is fine for this
             print("Error: could not find position with only one neighbor");

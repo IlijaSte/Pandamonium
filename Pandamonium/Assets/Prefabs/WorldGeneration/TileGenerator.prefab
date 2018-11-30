@@ -68,6 +68,8 @@ MonoBehaviour:
   - {fileID: 1966675948856250, guid: d963c51a60776484b9c04d6ef9e5d35f, type: 2}
   - {fileID: 1160568486293258, guid: e27121bbdc763374ebaed67cb53a0c84, type: 2}
   lastRoom: {fileID: 1647094732337640, guid: a597b96c5464f334ba66c2448d5f71ce, type: 2}
+  healthPoolPrefab: {fileID: 1459476336166136, guid: d0391d70682586d4182ba2e26c55987d,
+    type: 2}
   corridorHorizPrefab: {fileID: 11400000, guid: ccb467220ec57864b93694e5b9c07034,
     type: 2}
   corridorVertPrefab: {fileID: 11400000, guid: 6a7badba3559a4d4eb7c45b5130e5ce0, type: 2}
