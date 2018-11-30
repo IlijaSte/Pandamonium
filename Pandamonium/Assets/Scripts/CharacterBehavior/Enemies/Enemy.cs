@@ -48,7 +48,7 @@ public class Enemy : AttackingCharacter {
 
     protected void DropItem()
     {
-        if(Random.Range(0, (float)1) >= 0.05f && dropPrefabs.Length > 0)
+        if(Random.Range(0, (float)1) >= 0.95f && dropPrefabs.Length > 0)
             Instantiate(dropPrefabs[Random.Range(0, dropPrefabs.Length)], transform.position, Quaternion.identity);
     }
 
