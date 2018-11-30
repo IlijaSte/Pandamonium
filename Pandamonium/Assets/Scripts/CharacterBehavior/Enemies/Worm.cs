@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Worm : Enemy {
 
@@ -12,6 +13,7 @@ public class Worm : Enemy {
 
     public GameObject projectilePrefab;
     public GameObject indicatorPrefab;
+    public TileBase destructedTile;
 
     public enum WormState{ BURIED, EMERGING, ATTACKING, BURYING };
 
@@ -47,7 +49,7 @@ public class Worm : Enemy {
             int it = 0;
             do {
                 shootPos = (Vector2)targetPos + Random.insideUnitCircle;
-            } while (++it < 100 && !room.IsTileWalkable(shootPos));
+            } while (++it < 100 && !room.IsTileWalkable(room.groundTilemap, shootPos));
 
             if (it < 100)
             {
@@ -66,20 +68,17 @@ public class Worm : Enemy {
 
         bool hitSmth = false;
         Vector2 emergePos;
-        Vector3Int tilePos;
         do
         {
             emergePos = room.GetRandomPos();
             
-            tilePos = new Vector3Int(Mathf.FloorToInt(emergePos.x), Mathf.FloorToInt(emergePos.y), 0);
-
             /*if (tilePos.x < BoardCreator.I.columns && tilePos.y < BoardCreator.I.rows &&
                 tilePos.x >= 0 && tilePos.y >= 0 && BoardCreator.I.tiles[tilePos.x][tilePos.y] == BoardCreator.TileType.Floor)
             {*/
             RaycastHit2D hit2D;
             hitSmth = false;
 
-            if (hit2D = Physics2D.Raycast(new Vector2(tilePos.x + 0.5f, tilePos.y + 0.5f), Vector2.zero, 0f, ignoreMask))
+            if (hit2D = Physics2D.Raycast(new Vector2(emergePos.x + 0.5f, emergePos.y + 0.5f), Vector2.zero, 0f, ignoreMask))
             {
 
                 if (hit2D.collider.gameObject.layer == LayerMask.NameToLayer("Characters"))
@@ -99,7 +98,7 @@ public class Worm : Enemy {
 
         } while (hitSmth);
 
-        return tilePos + new Vector3(0.5f, 0.5f);
+        return emergePos;
 
     }
 
@@ -122,6 +121,11 @@ public class Worm : Enemy {
     public override void Attack(Transform target)
     {
 
+    }
+
+    protected void StartSubmerging()
+    {
+        nextAttackBG.SetActive(false);
     }
 
     protected override void Update()
@@ -179,12 +183,14 @@ public class Worm : Enemy {
                     nextAttackBG.SetActive(true);
                     targetPos = player.position;
 
+                    room.PlaceDetail(transform.position, destructedTile);
+
                     break;
 
                 case WormState.ATTACKING:
 
                     FireProjectiles();
-                    nextAttackBG.SetActive(false);
+                    StartSubmerging();
 
                     break;
 

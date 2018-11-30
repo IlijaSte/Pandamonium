@@ -718,7 +718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 2
-  radius: 0.5
+  radius: 1
   height: 2
   repathRate: 0.5
   canSearch: 1
@@ -816,6 +816,9 @@ MonoBehaviour:
   ignoreMask: 0
   isDead: 0
   difficulty: 1
+  dropPrefabs:
+  - {fileID: 1597709171064980, guid: 936e67524d0a86645b38d0abbb56d0e6, type: 2}
+  dashCastTime: 1
 --- !u!114 &114542684223825712
 MonoBehaviour:
   m_ObjectHideFlags: 1

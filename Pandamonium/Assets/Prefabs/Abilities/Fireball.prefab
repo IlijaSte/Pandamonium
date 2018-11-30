@@ -57,6 +57,7 @@ MonoBehaviour:
   manaCost: 5
   knockback: 0
   knockbackForce: 1
+  buttonSprite: {fileID: 21300000, guid: cac1d946af6d000409c242abce796483, type: 3}
   projectileSpeed: 7
-  fireballPrefab: {fileID: 1714793588657250, guid: 66803ba921559a94598a106ff2efb6db,
+  fireballPrefab: {fileID: 1236645130428778, guid: f21b03d8107c94c42be901673b45d45a,
     type: 2}

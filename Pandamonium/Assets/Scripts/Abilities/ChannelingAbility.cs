@@ -34,7 +34,14 @@ public class ChannelingAbility : Ability {
 
     protected virtual void DoTick()
     {
-        (am.parent as PlayerWithJoystick).DecreaseEnergy(manaCost);
-        lastTick = Time.time;
+        if ((am.parent as PlayerWithJoystick).energy >= manaCost)
+        {
+            (am.parent as PlayerWithJoystick).DecreaseEnergy(manaCost);
+            lastTick = Time.time;
+        }
+        else
+        {
+            StopChanneling();
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ability : MonoBehaviour {
 
@@ -12,6 +13,8 @@ public class Ability : MonoBehaviour {
 
     public bool knockback = false;
     public float knockbackForce = 1;
+
+    public Sprite buttonSprite;
 
     protected float cdProgress = 0;
 

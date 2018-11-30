@@ -45,6 +45,16 @@ public class UIManager : MonoBehaviour {
         newObj.GetComponent<CombatText>().Show(canvas, damage, (isPlayer ? Color.red : Color.white));
     }
 
+    public void ShowPoisonDamage(Canvas canvas, float yOffset, float damage, bool isPlayer = false)
+    {
+        Vector2 spawnPos = canvas.transform.position + new Vector3(0, yOffset);
+
+        Transform newObj = Instantiate(combatTextPrefab, spawnPos, Quaternion.identity).transform;
+        newObj.SetParent(canvas.transform);
+        newObj.localScale = Vector3.one;
+        newObj.GetComponent<CombatText>().Show(canvas, damage, Color.green);
+    }
+
     public Button GetAbilityButton(int index)
     {
         return abilityButtons[index];
@@ -53,6 +63,11 @@ public class UIManager : MonoBehaviour {
     public void UpdateAttackCooldown(float progress)
     {
         attackButton.GetComponent<Image>().fillAmount = progress;
+    }
+
+    public void ChangeAbilitySprite(int index, Sprite sprite)
+    {
+        abilityButtons[index].GetComponent<Image>().sprite = sprite;
     }
 
     public void UpdateAbilityCooldown(int index, float progress)

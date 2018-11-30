@@ -45,6 +45,11 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
     }
 
+    public void PickupBlueprint(Blueprint bp)
+    {
+        abilityManager.AddAbility(bp.ability);
+    }
+
     protected override void Update()
     {
 
@@ -120,15 +125,25 @@ public class PlayerWithJoystick : AttackingCharacter {
                 //Attack();
             }
 
-            if (Input.GetMouseButtonDown(1) || Input.GetKey(KeyCode.Alpha1))
+            if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Alpha1))
             {
                 // DASH
                 abilityManager.UseAbility(0);
             }
 
-            if (Input.GetKey(KeyCode.Alpha2))
+            if(Input.GetMouseButtonUp(1) || Input.GetKeyUp(KeyCode.Alpha1))
+            {
+                abilityManager.StopUsingAbility(0);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 abilityManager.UseAbility(1);
+            }
+
+            if (Input.GetKeyUp(KeyCode.Alpha2))
+            {
+                abilityManager.StopUsingAbility(1);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -138,7 +153,7 @@ public class PlayerWithJoystick : AttackingCharacter {
 
             if (Input.GetKeyUp(KeyCode.Alpha3))
             {
-                abilityManager.StopUsingAblility(2);
+                abilityManager.StopUsingAbility(2);
             }
 
             if (Input.GetKeyUp(KeyCode.Q))
@@ -195,7 +210,7 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public void StopUsingAbility(int abilityIndex)
     {
-        abilityManager.StopUsingAblility(abilityIndex);
+        abilityManager.StopUsingAbility(abilityIndex);
     }
 
     public override void TakeDamage(float damage)
@@ -210,8 +225,11 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public override void Die()
     {
-        MenuManager.I.ShowMenu(MenuManager.I.deathMenu);
-        isDead = true;
-        //base.Die();
+        if (!isDead)
+        {
+            MenuManager.I.ShowMenu(MenuManager.I.deathMenu);
+            isDead = true;
+            //base.Die();
+        }
     }
 }

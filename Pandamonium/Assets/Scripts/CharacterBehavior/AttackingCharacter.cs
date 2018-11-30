@@ -63,6 +63,15 @@ public class AttackingCharacter : MonoBehaviour {
     [HideInInspector]
     public bool isDead = false;
 
+    protected bool isKnockedBack = false;
+
+    protected bool attackable = true;
+
+    public bool IsAttackable()
+    {
+        return attackable;
+    }
+
     public virtual void Awake()
     {
 
@@ -107,6 +116,11 @@ public class AttackingCharacter : MonoBehaviour {
             weapons[equippedWeaponIndex].Stop();
     }
 
+    public void StopMoving()
+    {
+        CM.StopMoving();
+    }
+
     public virtual void Attack(Transform target)
     {
 
@@ -136,6 +150,8 @@ public class AttackingCharacter : MonoBehaviour {
     {
         return rb.velocity;
     }
+
+    // metoda proverava da li karakter vidi target na zadatom range-u (od drugih karaktera i obstacle-a)
 
     public bool CanSee(Transform target, float range = Mathf.Infinity)
     {
@@ -174,6 +190,8 @@ public class AttackingCharacter : MonoBehaviour {
 
     }
 
+    // metoda za jednostavno pomeranje u tacku
+
     public virtual void MoveToPosition(Vector3 pos)
     {
         if (playerState != PlayerState.IMMOBILE)
@@ -198,6 +216,9 @@ public class AttackingCharacter : MonoBehaviour {
 
         StopAttacking();
         stopDashingAt = 0;
+
+        // krecemo da hodamo do cilja samo dok ne nadjemo celu putanju, nakon cega se ubrzavamo
+
         MoveToPosition(to);
 
         while (path.pathPending)
@@ -218,11 +239,15 @@ public class AttackingCharacter : MonoBehaviour {
         
     }
 
+    // za slucaj dash-ovanja na nesto umesto samo u tacku
+
     protected IEnumerator Dash(Transform at)
     {
         if (playerState != PlayerState.IMMOBILE)
         {
             yield return StartCoroutine(Dash(at.position + (transform.position - at.position) * 0.4f));
+
+            // dashingAt cuva za kasnije (u Update kada zavrsi Dash) za damage-ovanje - izmeniti
             dashingAt = at;
         }
     }
@@ -349,6 +374,10 @@ public class AttackingCharacter : MonoBehaviour {
                         }
                         else
                         {
+                            if (type == CharacterType.ENEMY && weapons[equippedWeaponIndex].IsInRange(GameManager.I.playerInstance.transform))
+                            {
+                                GameManager.I.playerInstance.TakeDamage(weapons[equippedWeaponIndex].damage);
+                            }
                             playerState = PlayerState.IDLE;
                         }
 
@@ -367,6 +396,10 @@ public class AttackingCharacter : MonoBehaviour {
                         }
                         else
                         {
+                            if (type == CharacterType.ENEMY && weapons[equippedWeaponIndex].IsInRange(GameManager.I.playerInstance.transform))
+                            {
+                                GameManager.I.playerInstance.TakeDamage(weapons[equippedWeaponIndex].damage);
+                            }
                             playerState = PlayerState.WALKING;
                         }
                     }
@@ -425,9 +458,31 @@ public class AttackingCharacter : MonoBehaviour {
         }
     }
 
+    public virtual void TakePoisonDamage(float damage)
+    {
+        if (GameManager.I.playerInstance == this)
+        {
+            UIManager.I.ShowPoisonDamage(GetComponentInChildren<Canvas>(), 1, damage);
+        }
+        else
+        {
+            UIManager.I.ShowHitDamage(GetComponentInChildren<Canvas>(), 1, damage);
+        }
+
+
+        if ((health -= damage) <= 0)    // * armorReduction
+        {
+            Die();
+        }
+        else
+        {
+            StartCoroutine(ColorTransition(Color.green));
+        }
+    }
+
     protected IEnumerator Knockback(Vector2 dir, float force)
     {
-
+        isKnockedBack = true;
         PlayerState lastState = playerState;
         RigidbodyType2D lastType = rb.bodyType;
 
@@ -450,14 +505,18 @@ public class AttackingCharacter : MonoBehaviour {
 
         rb.bodyType = lastType;
         playerState = lastState;
+
+        isKnockedBack = false;
     }
 
     public virtual void TakeDamageWithKnockback(float damage, Vector2 dir, float force)
     {
         TakeDamage(damage);
 
-        if(playerState != PlayerState.DASHING)
+        if (playerState != PlayerState.DASHING && !isKnockedBack)
+        {
             StartCoroutine(Knockback(dir, force));
+        }
 
     }
 
@@ -467,7 +526,8 @@ public class AttackingCharacter : MonoBehaviour {
         while(times-- > 0)
         {
             yield return new WaitForSeconds(interval);
-            TakeDamage(damage);
+            //TakeDamage(damage);
+            TakePoisonDamage(damage);
            
         }
 
@@ -511,9 +571,12 @@ public class AttackingCharacter : MonoBehaviour {
 
     public virtual void Die()
     {
-        isDead = true;
+        if (!isDead)
+        {
+            isDead = true;
 
-        StartCoroutine(Death());
+            StartCoroutine(Death());
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

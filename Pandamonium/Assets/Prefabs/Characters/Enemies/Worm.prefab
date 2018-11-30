@@ -230,7 +230,7 @@ Transform:
   m_GameObject: {fileID: 1994364961457230}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1, y: 1, z: 1}
-  m_LocalScale: {x: 0.5, y: 0.50000024, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 224861534227835104}
   - {fileID: 4425208910922726}
@@ -528,14 +528,15 @@ MonoBehaviour:
   equippedWeaponIndex: 0
   maxHealth: 25
   type: 1
-  vision: {fileID: 114249692666320324}
   dashCooldown: 6
   dashSpeed: 12
+  maxDashRange: 4
+  normalSpeed: 6
   healthBar: {fileID: 114619137388251790}
   nextAttackBar: {fileID: 114220975770498124}
+  vision: {fileID: 114249692666320324}
+  playerState: 0
   ignoreMask: 0
-  normalSpeed: 6
-  maxDashRange: 4
   isDead: 0
   difficulty: 2
   speed: 0.75
@@ -543,6 +544,7 @@ MonoBehaviour:
     type: 2}
   indicatorPrefab: {fileID: 1605630707581996, guid: 62994842edcb1ac418ef99abe1f827cb,
     type: 2}
+  destructedTile: {fileID: 11400000, guid: 05543d7f3341bd74ebd26663c57c6d71, type: 2}
   state: 0
 --- !u!212 &212602623631793378
 SpriteRenderer:

@@ -555,7 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityPrefabs:
   - {fileID: 1191792085917580, guid: 3c8c5ccc723a01c41938cea664b642e0, type: 2}
-  - {fileID: 1903469109095692, guid: 7c852484e13400649bb9296a6248e244, type: 2}
+  - {fileID: 1657346493881052, guid: ed157ce01ec166c498164ddb861b9cdd, type: 2}
   - {fileID: 1779642358091622, guid: d5e218ab773d86149a1bc724528eee88, type: 2}
   parent: {fileID: 114562331877149714}
 --- !u!114 &114076633458484650
@@ -669,7 +669,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - {fileID: 114902774531894712}
-  - {fileID: 0}
   equippedWeaponIndex: 0
   maxHealth: 200
   type: 0
@@ -906,8 +905,8 @@ RectTransform:
   m_Father: {fileID: 4505154834509626}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0, y: 1.8}
   m_SizeDelta: {x: 50, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
