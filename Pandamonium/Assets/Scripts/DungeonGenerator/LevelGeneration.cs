@@ -16,6 +16,9 @@ public class LevelGeneration : MonoBehaviour {
     public float enemyCountMultiplier = 1f;
 
     public GameObject[] roomPrefabs;
+
+    public GameObject lastRoom;
+
     public TileBase corridorHorizPrefab;
     public TileBase corridorVertPrefab;
     public TileBase corridorBridgeHorizPrefab;
@@ -144,7 +147,7 @@ public class LevelGeneration : MonoBehaviour {
         {
             Room room = rooms[Mathf.RoundToInt(gridSizeX + pos.x), Mathf.RoundToInt(gridSizeY + pos.y)];
 
-            if (room == GetRoomAtPos(GameManager.I.playerInstance.transform.position))
+            if (room.type == Room.RoomType.START || room.type == Room.RoomType.OBELISK)
                 continue;
 
             // broj neprijatelja u sobi zavisi od razdaljine sobe od pocetne sobe i multiplier-a
@@ -224,7 +227,7 @@ public class LevelGeneration : MonoBehaviour {
             {
                 checkPos = ObeliskPosition();
                 iterations++;
-            } while (NumberOfNeighbors(checkPos, takenPositions) > 1 && iterations < 100);
+            } while (NumberOfNeighbors(checkPos, takenPositions) > 2 && iterations < 100);
             if (iterations >= 50)
                 print("error: could not create obelisk room with fewer neighbors than : " + NumberOfNeighbors(checkPos, takenPositions));
         }
@@ -273,6 +276,9 @@ public class LevelGeneration : MonoBehaviour {
         int x = 0, y = 0;
         Vector2 checkingPos = Vector2.zero;
         Vector2 neighborPos = Vector2.zero;
+
+        int i = 0;
+
         do
         {
             inc = 0;
@@ -282,7 +288,7 @@ public class LevelGeneration : MonoBehaviour {
                 //as one neighbor. This will make it more likely that it returns a room that branches out
                 index = Mathf.RoundToInt(Random.value * (takenPositions.Count - 1));
                 inc++;
-            } while (NumberOfNeighbors(takenPositions[index], takenPositions) > 1 && inc < 100);
+            } while (NumberOfNeighbors(takenPositions[index], takenPositions) > 2 && inc < 100);
             x = (int)takenPositions[index].x;
             y = (int)takenPositions[index].y;
             neighborPos = takenPositions[index];
@@ -290,7 +296,9 @@ public class LevelGeneration : MonoBehaviour {
             y += 1;
 
             checkingPos = new Vector2(x, y);
-        } while (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || (takenPositions.Count > 1 && neighborPos.Equals(Vector2.zero)));
+
+            i++;
+        } while (i < 100 && (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || (takenPositions.Count > 1 && neighborPos.Equals(Vector2.zero))));
         if (inc >= 100)
         { // break loop if it takes too long: this loop isnt garuanteed to find solution, which is fine for this
             print("Error: could not find position with only one neighbor");
@@ -362,7 +370,16 @@ public class LevelGeneration : MonoBehaviour {
 			}
 			Vector2 drawPos = room.gridPos;
 
-            room.Init(GetRandomPrefab(), roomParent);
+            switch (room.type)
+            {
+                case Room.RoomType.OBELISK:
+                    room.Init(lastRoom, roomParent);
+                    break;
+                default:
+                    room.Init(GetRandomPrefab(), roomParent);
+                    break;
+            }
+            
 
 		}
 	}
