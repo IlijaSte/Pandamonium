@@ -155,7 +155,7 @@ public class LevelGeneration : MonoBehaviour {
         {
             spawnPos = room.GetRandomPos();
 
-        } while (!IsTileFree(spawnPos));
+        } while (!IsTileFree(spawnPos) || !IsTileFree(spawnPos + Vector2.right));
 
         Instantiate(healthPoolPrefab, spawnPos, Quaternion.identity);
     }
@@ -247,7 +247,7 @@ public class LevelGeneration : MonoBehaviour {
             {
                 checkPos = ObeliskPosition();
                 iterations++;
-            } while (NumberOfNeighbors(checkPos, takenPositions) > 2 && iterations < 100);
+            } while (NumberOfNeighbors(checkPos, takenPositions) > 3 && iterations < 100);
             if (iterations >= 50)
                 print("error: could not create obelisk room with fewer neighbors than : " + NumberOfNeighbors(checkPos, takenPositions));
         }
@@ -308,7 +308,7 @@ public class LevelGeneration : MonoBehaviour {
                 //as one neighbor. This will make it more likely that it returns a room that branches out
                 index = Mathf.RoundToInt(Random.value * (takenPositions.Count - 1));
                 inc++;
-            } while (NumberOfNeighbors(takenPositions[index], takenPositions) > 2 && inc < 100);
+            } while (NumberOfNeighbors(takenPositions[index], takenPositions) > 3 && inc < 100);
             x = (int)takenPositions[index].x;
             y = (int)takenPositions[index].y;
             neighborPos = takenPositions[index];
@@ -318,10 +318,15 @@ public class LevelGeneration : MonoBehaviour {
             checkingPos = new Vector2(x, y);
 
             i++;
-        } while (i < 100 && (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY));
+        } while (i < 100 && (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || neighborPos.Equals(Vector2.zero)));
         if (inc >= 100)
         { // break loop if it takes too long: this loop isnt garuanteed to find solution, which is fine for this
             print("Error: could not find position with only one neighbor");
+        }
+
+        if(i > 100)
+        {
+            print("Error: could not find a suitable position for the obelisk room");
         }
         return checkingPos;
     }

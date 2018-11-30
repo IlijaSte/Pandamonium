@@ -291,7 +291,7 @@ public class AttackingCharacter : MonoBehaviour {
     protected virtual void Update()
     {
 
-        sprite.sortingOrder = -Mathf.RoundToInt(transform.position.y);
+        sprite.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100);
 
         if (isDead)
             return;

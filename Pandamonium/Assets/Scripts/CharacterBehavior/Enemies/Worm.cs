@@ -131,7 +131,7 @@ public class Worm : Enemy {
     protected override void Update()
     {
 
-        sprite.sortingOrder = -Mathf.RoundToInt(transform.position.y);
+        sprite.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100);
 
         if (isDead)
             return;
