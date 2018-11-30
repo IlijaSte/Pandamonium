@@ -180,6 +180,8 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   homing: 0
   area: {fileID: 114307119241648136}
+  aoeIndicator: {fileID: 1095624685629076, guid: 333bbee81e62fe742b22549a1fe76eaf,
+    type: 2}
 --- !u!212 &212493353064311522
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -65,6 +65,11 @@ public class UIManager : MonoBehaviour {
         attackButton.GetComponent<Image>().fillAmount = progress;
     }
 
+    public void ChangeAbilitySprite(int index, Sprite sprite)
+    {
+        abilityButtons[index].GetComponent<Image>().sprite = sprite;
+    }
+
     public void UpdateAbilityCooldown(int index, float progress)
     {
         abilityButtons[index].GetComponent<Image>().fillAmount = progress;

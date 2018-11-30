@@ -54,4 +54,12 @@ public class Slime : Enemy {
 
         base.Update();
     }
+
+    public override void Die()
+    {
+
+        DropItem();
+
+        base.Die();
+    }
 }

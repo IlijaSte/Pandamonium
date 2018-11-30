@@ -42,7 +42,7 @@ public class Frogocite : Enemy
             timeToJump += Time.deltaTime;
         }
 
-        if (!isJumping && timeToJump >= jumpCooldown && playerState == PlayerState.CHASING_ENEMY && CanSee(player, maxJumpRange))
+        if (!isJumping && !isKnockedBack && timeToJump >= jumpCooldown && playerState == PlayerState.CHASING_ENEMY && CanSee(player, maxJumpRange))
         {
             Jump(new Vector2(player.position.x, player.position.y));
         }
@@ -117,6 +117,8 @@ public class Frogocite : Enemy
         oldShadowRelativePos = shadow.localPosition;
         shadow.SetParent(null);
         oldShadowPos = shadow.position;
+
+        attackable = false;
        // timeToJump = 0;
     }
 
@@ -144,6 +146,8 @@ public class Frogocite : Enemy
 
             shadow.SetParent(sprite.transform);
             shadow.localPosition = oldShadowRelativePos;
+
+            attackable = true;
         }
 
         if (isJumping)

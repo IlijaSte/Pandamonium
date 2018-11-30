@@ -21,14 +21,38 @@ public class AbilityManager : MonoBehaviour {
 
         // MENJATI
 
-        foreach(GameObject prefab in abilityPrefabs)
+        AddAbility(abilityPrefabs[0].GetComponent<Ability>());
+        AddAbility(abilityPrefabs[Random.Range(1, abilityPrefabs.Length)].GetComponent<Ability>());
+
+        /*foreach (GameObject prefab in abilityPrefabs)
         {
             abilities.Add(Instantiate(prefab, transform).GetComponent<Ability>());
+        }*/
+    }
+
+    public void AddAbility(Ability ability)
+    {
+
+        Ability newAbility = Instantiate(ability.gameObject, transform).GetComponent<Ability>();
+
+        if(abilities.Count < 3)
+        {
+            abilities.Add(newAbility);
         }
+        else
+        {
+            abilities[abilities.Count - 1] = newAbility;
+        }
+
+        UIManager.I.ChangeAbilitySprite(abilities.Count - 1, newAbility.buttonSprite);
     }
 
     public void UseAbility(int index)
     {
+
+        if (abilities.Count - 1 < index)
+            return;
+
         if (parent is PlayerWithJoystick)
         {
             if ((parent as PlayerWithJoystick).energy >= abilities[index].manaCost)
@@ -49,8 +73,11 @@ public class AbilityManager : MonoBehaviour {
         }
     }
 
-    public void StopUsingAblility(int abilityIndex)
+    public void StopUsingAbility(int abilityIndex)
     {
+        if (abilities.Count - 1 < abilityIndex)
+            return;
+
         if (abilities[abilityIndex] is ChannelingAbility)
         {
             (abilities[abilityIndex] as ChannelingAbility).StopChanneling();

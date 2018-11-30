@@ -117,6 +117,7 @@ MonoBehaviour:
   manaCost: 1
   knockback: 0
   knockbackForce: 3
+  buttonSprite: {fileID: 21300000, guid: 986e1b6fd9ddf0f478236cba37ec1d05, type: 3}
   tickInterval: 1
   flameArcAngle: 60
 --- !u!114 &114799266244186182

@@ -46,7 +46,7 @@ public class HazardousArea : MonoBehaviour {
         {
             AttackingCharacter enemy = enemiesInArea[i];
 
-            if (enemy && !enemy.isDead)
+            if (enemy && !enemy.isDead && enemy.IsAttackable())
                 enemy.TakeDamage(damage);
         }
 
@@ -58,7 +58,7 @@ public class HazardousArea : MonoBehaviour {
         {
             AttackingCharacter enemy = enemiesInArea[i];
 
-            if (enemy && !enemy.isDead)
+            if (enemy && !enemy.isDead && enemy.IsAttackable())
                 enemy.TakeDamageWithKnockback(damage, (enemy.transform.position - transform.position).normalized, force);
         }
     }
