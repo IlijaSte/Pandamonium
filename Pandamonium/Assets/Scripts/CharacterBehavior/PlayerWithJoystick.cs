@@ -5,18 +5,20 @@ using UnityEngine.UI;
 
 public class PlayerWithJoystick : AttackingCharacter {
 
+    public float maxEnergy = 100;
+
+    [HideInInspector]
+    public float energy = 0;
+
+    public float lockAngle = 60;
+
     public Image energyBar;
 
-    public float maxEnergy = 100;
-    public float energyReduceSpeed = 0.33f;
-    private float energy = 0;
-
+    public AbilityManager abilityManager;
     public JoystickController controller;
 
     [HideInInspector]
     public Vector2 facingDirection = Vector2.down;
-
-    public float lockAngle = 60;
 
     public override void Awake()
     {
@@ -36,45 +38,20 @@ public class PlayerWithJoystick : AttackingCharacter {
         facingDirection = Vector2.zero;
 
         timeToDash = dashCooldown;
-    }
 
-    protected IEnumerator Dash()
-    {
-        if (playerState != PlayerState.DASHING && !facingDirection.Equals(Vector2.zero) && timeToDash >= dashCooldown)
+        if(abilityManager == null)
         {
-
-            timeToDash = 0;
-
-            float startTime = Time.time;
-            Vector2 startPos = transform.position;
-
-            playerState = PlayerState.DASHING;
-
-            while (Time.time - startTime < 0.3f && Vector2.Distance(startPos, transform.position) < maxDashRange)
-            {
-                rb.AddForce(facingDirection * dashSpeed * 20, ForceMode2D.Force);
-                rb.velocity = Vector2.ClampMagnitude(rb.velocity, dashSpeed);
-
-                yield return new WaitForEndOfFrame();
-            }
-
-            playerState = PlayerState.IDLE;
-
+            abilityManager = GetComponentInChildren<AbilityManager>();
         }
     }
 
-    public void StartDashing()
+    public void PickupBlueprint(Blueprint bp)
     {
-        StartCoroutine(Dash());
+        abilityManager.AddAbility(bp.ability);
     }
 
     protected override void Update()
     {
-
-        if (timeToDash < dashCooldown)
-        {
-            timeToDash += Time.deltaTime;
-        }
 
         nextAttackBar.fillAmount = 1 - weapons[equippedWeaponIndex].timeToAttack;
 
@@ -86,11 +63,6 @@ public class PlayerWithJoystick : AttackingCharacter {
         {
             nextAttackBG.SetActive(true);
         }
-
-        /*if(energy > 0)
-        {
-            energy -= Time.deltaTime * energyReduceSpeed;
-        }*/
 
         energyBar.fillAmount = energy / maxEnergy;
     }
@@ -150,26 +122,47 @@ public class PlayerWithJoystick : AttackingCharacter {
 
             if (Input.GetMouseButtonDown(0))
             {
-                Attack();
+                //Attack();
             }
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Alpha1))
             {
                 // DASH
-                StartDashing();
+                abilityManager.UseAbility(0);
+            }
+
+            if(Input.GetMouseButtonUp(1) || Input.GetKeyUp(KeyCode.Alpha1))
+            {
+                abilityManager.StopUsingAbility(0);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                abilityManager.UseAbility(1);
+            }
+
+            if (Input.GetKeyUp(KeyCode.Alpha2))
+            {
+                abilityManager.StopUsingAbility(1);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                abilityManager.UseAbility(2);
+            }
+
+            if (Input.GetKeyUp(KeyCode.Alpha3))
+            {
+                abilityManager.StopUsingAbility(2);
             }
 
             if (Input.GetKeyUp(KeyCode.Q))
             {
                 ChangeWeapon();
-                UIManager.I.weaponChange.changeText();
             }
         }
         else
         {
-
-
-            //facingDirection = rb.velocity.normalized;
 
             if (!Mathf.Approximately(controller.InputDirection.x, 0) || !Mathf.Approximately(controller.InputDirection.y, 0))
             {
@@ -183,42 +176,6 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
     }
 
-    protected Transform GetFacingEnemy()
-    {
-
-        List<Transform> visibleTargets = new List<Transform>();
-
-        float lockRadius = weapons[equippedWeaponIndex].range;
-
-        float minDistance = Mathf.Infinity;
-        Transform closestTarget = null;
-
-        Collider2D[] targetsInRadius = Physics2D.OverlapCircleAll(transform.position, lockRadius, ignoreMask);
-
-        for(int i = 0; i < targetsInRadius.Length; i++)
-        {
-            Vector2 dirToTarget = (targetsInRadius[i].transform.position - transform.position).normalized;
-
-            if(Vector2.Angle(facingDirection, dirToTarget) < lockAngle / 2)
-            {
-                float distance = Vector2.Distance(transform.position, targetsInRadius[i].transform.position);
-
-                if (distance < minDistance)
-                {
-                    if (CanSee(targetsInRadius[i].transform, distance))
-                    {
-                        minDistance = distance;
-                        closestTarget = targetsInRadius[i].transform;
-                    }
-                }
-            }
-
-            
-        }
-
-        return closestTarget;
-    }
-
     public override Vector2 GetFacingDirection()
     {
         return facingDirection;
@@ -229,12 +186,12 @@ public class PlayerWithJoystick : AttackingCharacter {
         energy = Mathf.Clamp(energy + amount, 0, maxEnergy);
     }
 
-    protected void DecreaseEnergy(float amount)
+    public void DecreaseEnergy(float amount)
     {
         energy = Mathf.Clamp(energy - amount, 0, maxEnergy);
     }
 
-    public void Attack()
+    public override void Attack()
     {
 
         if (weapons[equippedWeaponIndex] is MeleeWeapon)
@@ -242,27 +199,18 @@ public class PlayerWithJoystick : AttackingCharacter {
             int numHit = ((MeleeWeapon)weapons[equippedWeaponIndex]).AttackCleave();
             IncreaseEnergy(numHit * weapons[equippedWeaponIndex].damage);
         }
-        else
-        {
 
-            if (energy >= weapons[equippedWeaponIndex].damage)       // change damage to energy cost
-            {
-                Transform facingEnemy;
+    }
 
-                if (facingEnemy = GetFacingEnemy())
-                {
-                    if(weapons[equippedWeaponIndex].Attack(facingEnemy))
-                        DecreaseEnergy(weapons[equippedWeaponIndex].damage);
-                }
-                else
-                {
-                    if(weapons[equippedWeaponIndex].AttackInDirection(facingDirection))
-                        DecreaseEnergy(weapons[equippedWeaponIndex].damage);
-                }
+    public void UseAbility(int abilityIndex)
+    {
+        abilityManager.UseAbility(abilityIndex);
 
-            }
-        }
+    }
 
+    public void StopUsingAbility(int abilityIndex)
+    {
+        abilityManager.StopUsingAbility(abilityIndex);
     }
 
     public override void TakeDamage(float damage)
@@ -277,8 +225,11 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public override void Die()
     {
-        MenuManager.I.ShowMenu(MenuManager.I.deathMenu);
-        isDead = true;
-        //base.Die();
+        if (!isDead)
+        {
+            MenuManager.I.ShowMenu(MenuManager.I.deathMenu);
+            isDead = true;
+            //base.Die();
+        }
     }
 }

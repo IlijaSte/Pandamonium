@@ -14,6 +14,8 @@ public class Enemy : AttackingCharacter {
 
     public int difficulty = 1;
 
+    public GameObject[] dropPrefabs;
+
     protected Vector2 startPos;
 
     protected Room room;
@@ -44,6 +46,12 @@ public class Enemy : AttackingCharacter {
         player = GameManager.I.playerInstance.transform;
     }
 
+    protected void DropItem()
+    {
+        if(Random.Range(0, (float)1) >= 0.95f && dropPrefabs.Length > 0)
+            Instantiate(dropPrefabs[Random.Range(0, dropPrefabs.Length)], transform.position, Quaternion.identity);
+    }
+
     protected override void Update()
     {
 
@@ -58,9 +66,18 @@ public class Enemy : AttackingCharacter {
 
             case PlayerState.CHASING_ENEMY:
 
-                if(LevelGeneration.I.GetRoomAtPos(target.position) != room)
+                if (target == null)
                 {
-                    MoveToPosition(startPos);
+                    StopAttacking();
+                    StopMoving();
+                }
+                else
+                {
+
+                    if (LevelGeneration.I.GetRoomAtPos(target.position) != room)
+                    {
+                        MoveToPosition(startPos);
+                    }
                 }
 
                 break;

@@ -17,7 +17,7 @@ public class FireStaff : RangedWeapon
             projectile.transform.position = transform.position;
 
             // ispaljivanje projektila
-            projectile.GetComponent<FireProjectile>().Shoot(transform, target, projectileSpeed);
+            //projectile.GetComponent<FireProjectile>().Shoot(transform, target, projectileSpeed);
 
             base.Attack(target);
             return true;
@@ -37,7 +37,7 @@ public class FireStaff : RangedWeapon
             projectile.transform.position = transform.position;
 
             // ispaljivanje projektila
-            projectile.GetComponent<FireProjectile>().Shoot(transform, direction, projectileSpeed);
+            //projectile.GetComponent<FireProjectile>().Shoot(transform, direction, projectileSpeed);
 
             base.AttackInDirection(direction);
             return true;
