@@ -7,7 +7,7 @@ public class CharacterAnimation : AnimationMama {
 
     protected AIPath path;
 
-    void Start()
+    protected virtual void Start()
     {
         path = transform.parent.GetComponent<AIPath>();
         animator = GetComponent<Animator>();
