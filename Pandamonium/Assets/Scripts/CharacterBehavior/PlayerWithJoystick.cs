@@ -47,7 +47,7 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public void PickupBlueprint(Blueprint bp)
     {
-        abilityManager.AddAbility(bp.ability);
+        abilityManager.AddAbility(bp);
     }
 
     protected override void Update()
@@ -222,6 +222,18 @@ public class PlayerWithJoystick : AttackingCharacter {
             healthBar.fillAmount = health / maxHealth;
         }
     }
+
+    public override void TakePoisonDamage(float damage)
+    {
+        
+        if (!isDead)
+        {
+            base.TakePoisonDamage(damage);
+
+            healthBar.fillAmount = health / maxHealth;
+        }
+    }
+
 
     public override void Die()
     {
