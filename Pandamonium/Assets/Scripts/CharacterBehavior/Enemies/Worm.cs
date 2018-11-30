@@ -126,8 +126,6 @@ public class Worm : Enemy {
     protected void StartSubmerging()
     {
         nextAttackBG.SetActive(false);
-
-        room.PlaceDetail(transform.position, destructedTile);
     }
 
     protected override void Update()
@@ -184,6 +182,8 @@ public class Worm : Enemy {
 
                     nextAttackBG.SetActive(true);
                     targetPos = player.position;
+
+                    room.PlaceDetail(transform.position, destructedTile);
 
                     break;
 

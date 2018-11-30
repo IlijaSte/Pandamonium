@@ -63,6 +63,15 @@ public class AttackingCharacter : MonoBehaviour {
     [HideInInspector]
     public bool isDead = false;
 
+    protected bool isKnockedBack = false;
+
+    protected bool attackable = true;
+
+    public bool IsAttackable()
+    {
+        return attackable;
+    }
+
     public virtual void Awake()
     {
 
@@ -473,7 +482,7 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected IEnumerator Knockback(Vector2 dir, float force)
     {
-
+        isKnockedBack = true;
         PlayerState lastState = playerState;
         RigidbodyType2D lastType = rb.bodyType;
 
@@ -496,14 +505,18 @@ public class AttackingCharacter : MonoBehaviour {
 
         rb.bodyType = lastType;
         playerState = lastState;
+
+        isKnockedBack = false;
     }
 
     public virtual void TakeDamageWithKnockback(float damage, Vector2 dir, float force)
     {
         TakeDamage(damage);
 
-        if(playerState != PlayerState.DASHING)
+        if (playerState != PlayerState.DASHING && !isKnockedBack)
+        {
             StartCoroutine(Knockback(dir, force));
+        }
 
     }
 

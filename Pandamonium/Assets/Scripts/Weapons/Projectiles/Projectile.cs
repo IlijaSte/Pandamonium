@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour {
 
     private Vector2 startPos;
 
-    public void Shoot(Ability ability, Transform target, float speed)
+    public virtual void Shoot(Ability ability, Transform target, float speed)
     {
         this.ability = ability;
         this.target = target;
@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour {
         transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
     }
 
-    public void Shoot(Ability ability, Vector2 direction, float speed)
+    public virtual void Shoot(Ability ability, Vector2 direction, float speed)
     {
         this.ability = ability;
         this.direction = direction;
@@ -54,6 +54,11 @@ public class Projectile : MonoBehaviour {
         Quaternion rot = Quaternion.LookRotation(Vector3.forward, direction);
         transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
 
+    }
+
+    protected virtual void OnEndOfRange()
+    {
+        
     }
 
     protected virtual void Update()
@@ -79,6 +84,7 @@ public class Projectile : MonoBehaviour {
 
             if (Vector2.Distance(transform.position, startPos) >= range)
             {
+                OnEndOfRange();
                 Destroy(gameObject);
             }
         }
@@ -104,7 +110,7 @@ public class Projectile : MonoBehaviour {
 
         AttackingCharacter character = other.GetComponent<AttackingCharacter>();
 
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") && character.IsAttackable())
         {
 
             OnHitEnemy(character);
