@@ -252,10 +252,12 @@ public class AttackingCharacter : MonoBehaviour {
         }
     }
 
-    public virtual void Heal(float amount)
+    public virtual void Heal()
     {
-        health = Mathf.Clamp(health + amount, 0, maxHealth);
-        healthBar.fillAmount = health / maxHealth;
+        health = maxHealth;
+        healthBar.fillAmount = 1;
+
+        UIManager.I.ShowHeal(GetComponentInChildren<Canvas>(), 1);
     }
 
     protected void UpdateGraph()

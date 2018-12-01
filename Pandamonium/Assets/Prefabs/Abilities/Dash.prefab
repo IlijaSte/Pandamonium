@@ -58,4 +58,5 @@ MonoBehaviour:
   knockback: 0
   knockbackForce: 1
   buttonSprite: {fileID: 21300000, guid: e60f0b2807df0d6479e1b1423e1e4289, type: 3}
+  bgSprite: {fileID: 21300000, guid: 829c190b1dbb93a47b62361a469732d6, type: 3}
   dashSpeed: 16

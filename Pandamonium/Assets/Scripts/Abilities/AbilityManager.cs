@@ -44,7 +44,7 @@ public class AbilityManager : MonoBehaviour {
             abilities[abilities.Count - 1] = newAbility;
         }
 
-        UIManager.I.ChangeAbilitySprite(abilities.Count - 1, newAbility.buttonSprite);
+        UIManager.I.ChangeAbilitySprite(abilities.Count - 1, newAbility.buttonSprite, newAbility.bgSprite);
     }
 
     public void AddAbility(Blueprint bp)
@@ -80,7 +80,7 @@ public class AbilityManager : MonoBehaviour {
             abilities[abilities.Count - 1] = newAbility;
         }
 
-        UIManager.I.ChangeAbilitySprite(abilities.Count - 1, newAbility.buttonSprite);
+        UIManager.I.ChangeAbilitySprite(abilities.Count - 1, newAbility.buttonSprite, newAbility.bgSprite);
     }
 
     public void UseAbility(int index)
