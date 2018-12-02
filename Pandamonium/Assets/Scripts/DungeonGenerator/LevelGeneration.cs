@@ -73,7 +73,7 @@ public class LevelGeneration : MonoBehaviour {
         FillAcid();     // fills room with acid (or other obstacle type in the future)
 		SetRoomDoors(); //assigns the doors where rooms would connect
 		DrawMap(); //instantiates objects to make up a map
-
+        SetRoomDifficulties();
 	}
 
     protected virtual IEnumerator Start()
@@ -143,6 +143,64 @@ public class LevelGeneration : MonoBehaviour {
         return true;
     }
 
+    protected virtual void SetRoomDifficulties()
+    {
+        Stack<Room> roomsToTraverse = new Stack<Room>();
+        ArrayList passedRooms = new ArrayList();
+
+        rooms[gridSizeX, gridSizeY].distanceFromStart = 0;
+        roomsToTraverse.Push(rooms[gridSizeX, gridSizeY]);
+
+        while(roomsToTraverse.Count > 0)
+        {
+
+            Room currRoom = roomsToTraverse.Pop();
+
+            print("Room difficulty: " + currRoom.distanceFromStart);
+
+            if (gridSizeX + currRoom.gridPos.x + 1 < gridSizeX * 2)
+            {
+                Room room = rooms[gridSizeX + currRoom.gridPos.x + 1, gridSizeY + currRoom.gridPos.y];
+                if (room != null && !passedRooms.Contains(room) && currRoom.doorRight)
+                {
+
+                    roomsToTraverse.Push(room);
+                    room.distanceFromStart = currRoom.distanceFromStart + 1;
+                }
+            }
+            if (gridSizeX + currRoom.gridPos.x - 1 >= 0)
+            {
+                Room room = rooms[gridSizeX + currRoom.gridPos.x - 1, gridSizeY + currRoom.gridPos.y];
+                if (room != null && !passedRooms.Contains(room) && currRoom.doorLeft)
+                {
+                    roomsToTraverse.Push(room);
+                    room.distanceFromStart = currRoom.distanceFromStart + 1;
+                }
+            }
+            if (gridSizeY + currRoom.gridPos.y + 1 < gridSizeY * 2)
+            {
+                Room room = rooms[gridSizeX + currRoom.gridPos.x, gridSizeY + currRoom.gridPos.y + 1];
+                if (room != null && !passedRooms.Contains(room) && currRoom.doorTop)
+                {
+                    roomsToTraverse.Push(room);
+                    room.distanceFromStart = currRoom.distanceFromStart + 1;
+                }
+            }
+            if (gridSizeY + currRoom.gridPos.y - 1 >= 0)
+            {
+                Room room = rooms[gridSizeX + currRoom.gridPos.x, gridSizeY + currRoom.gridPos.y - 1];
+                if (room != null && !passedRooms.Contains(room) && currRoom.doorBot)
+                {
+                    roomsToTraverse.Push(room);
+                    room.distanceFromStart = currRoom.distanceFromStart + 1;
+                }
+            }
+
+            passedRooms.Add(currRoom);
+
+        }
+    }
+
     protected virtual void InstantiateHealthPool()
     {
         Vector2 pos = takenPositions[Random.Range(1, takenPositions.Count - 2)];
@@ -155,7 +213,7 @@ public class LevelGeneration : MonoBehaviour {
         {
             spawnPos = room.GetRandomPos();
 
-        } while (!IsTileFree(spawnPos) || !IsTileFree(spawnPos + Vector2.right));
+        } while (!room.IsTileWalkable(room.groundTilemap, spawnPos + Vector2.right) || !IsTileFree(spawnPos) || !IsTileFree(spawnPos + Vector2.right));
 
         Instantiate(healthPoolPrefab, spawnPos, Quaternion.identity);
     }
@@ -211,9 +269,9 @@ public class LevelGeneration : MonoBehaviour {
     protected virtual void CreateRooms(){
 		//setup
 		rooms = new Room[gridSizeX * 2,gridSizeY * 2];
-        rooms[gridSizeX, gridSizeY] = new Room(Vector2.zero, Room.RoomType.START);
+        rooms[gridSizeX, gridSizeY] = new Room(Vector2Int.zero, Room.RoomType.START);
 		takenPositions.Insert(0,Vector2.zero);
-		Vector2 checkPos = Vector2.zero;
+		Vector2Int checkPos = Vector2Int.zero;
 		//magic numbers
 		float randomCompare = 0.2f, randomCompareStart = 0.2f, randomCompareEnd = 0.01f;
         //add rooms
@@ -257,9 +315,9 @@ public class LevelGeneration : MonoBehaviour {
 
     }
 
-	Vector2 NewPosition(){
+	Vector2Int NewPosition(){
 		int x = 0, y = 0;
-		Vector2 checkingPos = Vector2.zero;
+		Vector2Int checkingPos = Vector2Int.zero;
         Vector2 neighborPos = Vector2.zero;
 
         do
@@ -285,16 +343,16 @@ public class LevelGeneration : MonoBehaviour {
 					x -= 1;
 				}
 			}
-			checkingPos = new Vector2(x,y);
+			checkingPos = new Vector2Int(x,y);
 		}while (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || (takenPositions.Count > 1 && neighborPos.Equals(Vector2.zero))); //make sure the position is valid
 		return checkingPos;
 	}
 
-    Vector2 ObeliskPosition()
+    Vector2Int ObeliskPosition()
     {
         int index = 0, inc = 0;
         int x = 0, y = 0;
-        Vector2 checkingPos = Vector2.zero;
+        Vector2Int checkingPos = Vector2Int.zero;
         Vector2 neighborPos = Vector2.zero;
 
         int i = 0;
@@ -315,7 +373,7 @@ public class LevelGeneration : MonoBehaviour {
 
             y += 1;
 
-            checkingPos = new Vector2(x, y);
+            checkingPos = new Vector2Int(x, y);
 
             i++;
         } while (i < 100 && (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || neighborPos.Equals(Vector2.zero)));
@@ -331,10 +389,10 @@ public class LevelGeneration : MonoBehaviour {
         return checkingPos;
     }
 
-	Vector2 SelectiveNewPosition(){ // method differs from the above in the two commented ways
+	Vector2Int SelectiveNewPosition(){ // method differs from the above in the two commented ways
 		int index = 0, inc = 0;
 		int x =0, y =0;
-		Vector2 checkingPos = Vector2.zero;
+		Vector2Int checkingPos = Vector2Int.zero;
         Vector2 neighborPos = Vector2.zero;
 		do{
 			inc = 0;
@@ -362,7 +420,7 @@ public class LevelGeneration : MonoBehaviour {
 					x -= 1;
 				}
 			}
-			checkingPos = new Vector2(x,y);
+			checkingPos = new Vector2Int(x, y);
 		}while (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || (takenPositions.Count > 1 && neighborPos.Equals(Vector2.zero)));
 		if (inc >= 100){ // break loop if it takes too long: this loop isnt garuanteed to find solution, which is fine for this
 			print("Error: could not find position with only one neighbor");

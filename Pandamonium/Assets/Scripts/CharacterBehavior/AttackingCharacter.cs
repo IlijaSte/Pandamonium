@@ -49,7 +49,7 @@ public class AttackingCharacter : MonoBehaviour {
     //protected bool dashed = false;
     protected float timeToDash;
     protected Transform dashingAt = null;
-    protected float maxRaycastDistance = 50;
+    protected static float maxRaycastDistance = 50;
 
     protected Vector2 approxPosition;
     protected Bounds currBounds;
@@ -159,16 +159,18 @@ public class AttackingCharacter : MonoBehaviour {
         if (range == Mathf.Infinity && !weapons[equippedWeaponIndex].IsInRange(target))
             return false;
 
-        //range = maxRaycastDistance;
+        range = Mathf.Clamp(range, 0, maxRaycastDistance);
 
         Vector3 startCast = transform.position;
         Vector3 endCast = target.position;
 
         Debug.DrawRay(startCast, endCast - startCast);
 
-        RaycastHit2D[] results = new RaycastHit2D[6];
+        RaycastHit2D[] results;
 
-        for (int i = 0; i < Physics2D.CircleCast(startCast, 0.2f, (endCast - startCast).normalized, colFilter, results, range); i++) // ako mu je protivnik vidljiv (od zidova/prepreka)
+        results = Physics2D.CircleCastAll(startCast, 0.2f, (endCast - startCast).normalized, range, colFilter.layerMask);
+
+        for (int i = 0; i < results.Length; i++) // ako mu je protivnik vidljiv (od zidova/prepreka)
         {
 
             AttackingCharacter attChar = results[i].transform.GetComponent<AttackingCharacter>();
