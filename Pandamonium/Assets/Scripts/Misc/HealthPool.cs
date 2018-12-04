@@ -17,7 +17,7 @@ public class HealthPool : MonoBehaviour {
 
         if(collision.transform.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
         {
-            GameManager.I.playerInstance.Heal(healAmount);
+            GameManager.I.playerInstance.Heal();
             GetComponent<SpriteRenderer>().sprite = emptySprite;
 
             healed = true;

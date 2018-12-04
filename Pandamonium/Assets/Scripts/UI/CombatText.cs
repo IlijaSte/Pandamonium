@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CombatText : MonoBehaviour {
 
 
-    float damage;
+    float amount;
     Color color;
     float endY;
 
@@ -24,20 +24,32 @@ public class CombatText : MonoBehaviour {
 
     public void Show(Canvas canvas, float damage, Color color)
     {
-        this.damage = damage;
+        this.amount = damage;
         this.color = color;
         i = 0;
 
         endY = 2;
 
-        
+        comp = GetComponent<Text>();
+
+        comp.text = amount.ToString() + " damage";
+    }
+
+    public void ShowHeal(Canvas canvas, Color color)
+    {
+        this.color = color;
+        i = 0;
+
+        endY = 2;
+
+        comp = GetComponent<Text>();
+
+        comp.text = "Max Health";
     }
 
     private void Start()
     {
-        comp = GetComponent<Text>();
-
-        comp.text = damage.ToString() + " damage";
+        
         comp.color = color;
 
         Color startColor = new Color(comp.color.r, comp.color.g, comp.color.b);

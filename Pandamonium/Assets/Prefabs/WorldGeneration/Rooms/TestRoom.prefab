@@ -55,8 +55,6 @@ GameObject:
   - component: {fileID: 3664157343274121764}
   - component: {fileID: 2113883505884080418}
   - component: {fileID: 50078104507305896}
-  - component: {fileID: 66716153449930872}
-  - component: {fileID: 114251288794235660}
   m_Layer: 17
   m_Name: ObstacleTilemap
   m_TagString: Untagged
@@ -336,41 +334,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!66 &66716153449930872
-CompositeCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1348270314292662}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths: []
-  m_CompositePaths:
-    m_Paths: []
-  m_VertexDistance: 0.0005
---- !u!114 &114251288794235660
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1348270314292662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0184ff86886f974d95dfead14754f36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MultiplicativeColor: {r: 0, g: 0, b: 0, a: 0.3019608}
-  AdditiveColor: {r: 0, g: 0, b: 0, a: 0}
-  Material: {fileID: 2100000, guid: 0a8c132f813f5514b9f5b48ff3956482, type: 2}
-  LightObstacleScale: 1
 --- !u!114 &114312061071994912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -385,6 +348,7 @@ MonoBehaviour:
   groundTilemap: {fileID: 8195094282835089672}
   corridorTilemap: {fileID: 8195094280011694032}
   obstacleTilemap: {fileID: 8195094279619968658}
+  detailTilemap: {fileID: 0}
   topEdge: {fileID: 4334075305925820}
   bottomEdge: {fileID: 4534097609113522}
   leftEdge: {fileID: 4395009650541092}

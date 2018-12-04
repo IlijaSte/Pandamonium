@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour {
     public Text combatTextPrefab;
 
     public Button attackButton;
-    public Button[] abilityButtons;
+    public Transform[] abilityButtonHolders;
 
     private static UIManager instance;
 
@@ -55,9 +55,19 @@ public class UIManager : MonoBehaviour {
         newObj.GetComponent<CombatText>().Show(canvas, damage, Color.green);
     }
 
+    public void ShowHeal(Canvas canvas, float yOffset)
+    {
+        Vector2 spawnPos = canvas.transform.position + new Vector3(0, yOffset);
+
+        Transform newObj = Instantiate(combatTextPrefab, spawnPos, Quaternion.identity).transform;
+        newObj.SetParent(canvas.transform);
+        newObj.localScale = Vector3.one;
+        newObj.GetComponent<CombatText>().ShowHeal(canvas, Color.cyan);
+    }
+
     public Button GetAbilityButton(int index)
     {
-        return abilityButtons[index];
+        return abilityButtonHolders[index].GetComponentInChildren<Button>();
     }
 
     public void UpdateAttackCooldown(float progress)
@@ -65,13 +75,15 @@ public class UIManager : MonoBehaviour {
         attackButton.GetComponent<Image>().fillAmount = progress;
     }
 
-    public void ChangeAbilitySprite(int index, Sprite sprite)
+    public void ChangeAbilitySprite(int index, Sprite sprite, Sprite backgroundSprite)
     {
-        abilityButtons[index].GetComponent<Image>().sprite = sprite;
+        abilityButtonHolders[index].GetChild(0).GetComponent<Image>().sprite = backgroundSprite;
+        abilityButtonHolders[index].GetChild(1).GetComponent<Image>().sprite = sprite;
+       
     }
 
     public void UpdateAbilityCooldown(int index, float progress)
     {
-        abilityButtons[index].GetComponent<Image>().fillAmount = progress;
+        abilityButtonHolders[index].GetChild(1).GetComponent<Image>().fillAmount = progress;
     }
 }

@@ -51,11 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f288b11a4078a5040b0f6657b4b4e36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldSize: {x: 3, y: 3}
-  numberOfRooms: 15
+  worldSize: {x: 2, y: 2}
+  numberOfRooms: 11
   roomWidth: 28
   roomHeight: 28
-  enemyCountMultiplier: 2
+  enemyCountMultiplier: 1.5
   roomPrefabs:
   - {fileID: 1021458116984078, guid: c5605b4466c9d1149b4f85722e6bb48c, type: 2}
   - {fileID: 1062512608064458, guid: 424b3ed87e137dc4eb52f05f0051eab9, type: 2}
