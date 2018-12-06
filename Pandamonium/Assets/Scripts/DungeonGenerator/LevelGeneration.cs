@@ -267,70 +267,51 @@ public class LevelGeneration : MonoBehaviour {
     }
 
     protected virtual void CreateRooms(){
-        //setup
-        int obeliskIterations = 0;
+		//setup
+		rooms = new Room[gridSizeX * 2,gridSizeY * 2];
+        rooms[gridSizeX, gridSizeY] = new Room(Vector2Int.zero, Room.RoomType.START);
+		takenPositions.Insert(0,Vector2.zero);
+		Vector2Int checkPos = Vector2Int.zero;
+		//magic numbers
+		float randomCompare = 0.2f, randomCompareStart = 0.2f, randomCompareEnd = 0.01f;
+        //add rooms
+		for (int i =0; i < numberOfRooms -1; i++){
 
-        Vector2Int obeliskCheckPos;
+			float randomPerc = ((float) i) / (((float)numberOfRooms - 1));
+			randomCompare = Mathf.Lerp(randomCompareStart, randomCompareEnd, randomPerc);
+			//grab new position
+			checkPos = NewPosition();
+			//test new position
+			if (NumberOfNeighbors(checkPos, takenPositions) > 1 && Random.value > randomCompare){
+				int iterations = 0;
+				do{
+					checkPos = SelectiveNewPosition();
+					iterations++;
+				}while(NumberOfNeighbors(checkPos, takenPositions) > 1 && iterations < 100);
+				if (iterations >= 50)
+					print("error: could not create with fewer neighbors than : " + NumberOfNeighbors(checkPos, takenPositions));
+			}
+			//finalize position
+			rooms[(int) checkPos.x + gridSizeX, (int) checkPos.y + gridSizeY] = new Room(checkPos, 0);
+			takenPositions.Insert(0,checkPos);
+		}
 
-        do
+        checkPos = ObeliskPosition();
+
+        if (NumberOfNeighbors(checkPos, takenPositions) > 1)
         {
-            
-            rooms = new Room[gridSizeX * 2, gridSizeY * 2];
-            rooms[gridSizeX, gridSizeY] = new Room(Vector2Int.zero, Room.RoomType.START);
-            takenPositions.Insert(0, Vector2.zero);
-
-            rooms[gridSizeX, gridSizeY - 1] = new Room(new Vector2Int(0, -1), Room.RoomType.DEFAULT);
-            takenPositions.Insert(0, new Vector2Int(0, -1));
-
-            Vector2Int checkPos = Vector2Int.zero;
-            //magic numbers
-            float randomCompare = 0.2f, randomCompareStart = 0.2f, randomCompareEnd = 0.01f;
-            //add rooms
-            for (int i = 0; i < numberOfRooms - 2; i++)
+            int iterations = 0;
+            do
             {
+                checkPos = ObeliskPosition();
+                iterations++;
+            } while (NumberOfNeighbors(checkPos, takenPositions) > 3 && iterations < 100);
+            if (iterations >= 50)
+                print("error: could not create obelisk room with fewer neighbors than : " + NumberOfNeighbors(checkPos, takenPositions));
+        }
 
-                float randomPerc = ((float)i) / (((float)numberOfRooms - 1));
-                randomCompare = Mathf.Lerp(randomCompareStart, randomCompareEnd, randomPerc);
-                //grab new position
-                checkPos = NewPosition();
-                //test new position
-                if (NumberOfNeighbors(checkPos, takenPositions) > 1 && Random.value > randomCompare)
-                {
-                    int iterations = 0;
-                    do
-                    {
-                        checkPos = SelectiveNewPosition();
-                        iterations++;
-                    } while (NumberOfNeighbors(checkPos, takenPositions) > 1 && iterations < 100);
-                    if (iterations >= 50)
-                        print("error: could not create with fewer neighbors than : " + NumberOfNeighbors(checkPos, takenPositions));
-                }
-                //finalize position
-                rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, 0);
-                takenPositions.Insert(0, checkPos);
-            }
-
-            bool valid;
-
-            valid = ObeliskPosition(out obeliskCheckPos);
-
-            if (NumberOfNeighbors(obeliskCheckPos, takenPositions) > 3)
-            {
-                obeliskIterations = 0;
-                do
-                {
-                    valid = ObeliskPosition(out obeliskCheckPos);
-                    obeliskIterations++;
-                } while (!valid && obeliskIterations < 100);
-                if (obeliskIterations >= 50)
-                    print("error: could not create obelisk room with fewer neighbors than : " + NumberOfNeighbors(obeliskCheckPos, takenPositions));
-            }
-
-        } while (obeliskIterations >= 100);
-
-
-        rooms[(int)obeliskCheckPos.x + gridSizeX, (int)obeliskCheckPos.y + gridSizeY] = new Room(obeliskCheckPos, Room.RoomType.OBELISK);
-        takenPositions.Insert(0, obeliskCheckPos);
+        rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, Room.RoomType.OBELISK);
+        takenPositions.Insert(0, checkPos);
 
     }
 
@@ -367,7 +348,7 @@ public class LevelGeneration : MonoBehaviour {
 		return checkingPos;
 	}
 
-    bool ObeliskPosition(out Vector2Int pos)
+    Vector2Int ObeliskPosition()
     {
         int index = 0, inc = 0;
         int x = 0, y = 0;
@@ -404,11 +385,8 @@ public class LevelGeneration : MonoBehaviour {
         if(i > 100)
         {
             print("Error: could not find a suitable position for the obelisk room");
-            pos = Vector2Int.zero;
-            return false;
         }
-        pos = checkingPos;
-        return true;
+        return checkingPos;
     }
 
 	Vector2Int SelectiveNewPosition(){ // method differs from the above in the two commented ways
