@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Room {
-    public Vector2 gridPos;
+    public Vector2Int gridPos;
 
     public enum RoomType {DEFAULT, START, OBELISK }
     public RoomType type;
@@ -21,11 +21,9 @@ public class Room {
     // Distance from the start room (in room lengths)
     public int distanceFromStart;
 
-    public Room(Vector2 _gridPos, RoomType _type){
+    public Room(Vector2Int _gridPos, RoomType _type){
 		gridPos = _gridPos;
 		type = _type;
-
-        distanceFromStart = Mathf.RoundToInt(Mathf.Abs(_gridPos.x) + Mathf.Abs(_gridPos.y));
 	}
 
     public void Init(GameObject prefab, Transform parent)

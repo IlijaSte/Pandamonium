@@ -47,11 +47,12 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public void PickupBlueprint(Blueprint bp)
     {
-        abilityManager.AddAbility(bp.ability);
+        abilityManager.AddAbility(bp);
     }
 
     protected override void Update()
     {
+        sprite.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100);
 
         nextAttackBar.fillAmount = 1 - weapons[equippedWeaponIndex].timeToAttack;
 
@@ -166,10 +167,15 @@ public class PlayerWithJoystick : AttackingCharacter {
 
             if (!Mathf.Approximately(controller.InputDirection.x, 0) || !Mathf.Approximately(controller.InputDirection.y, 0))
             {
+
                 if (rb.velocity.magnitude < normalSpeed)
                 {
                     facingDirection = controller.InputDirection.normalized;
-                    rb.AddForce(controller.InputDirection * normalSpeed * 20, ForceMode2D.Force);
+
+                    if (controller.InputDirection.magnitude > 0.33f)
+                    {
+                        rb.AddForce(controller.InputDirection.normalized * normalSpeed * 20, ForceMode2D.Force);
+                    }
                 }
 
             }
@@ -222,6 +228,18 @@ public class PlayerWithJoystick : AttackingCharacter {
             healthBar.fillAmount = health / maxHealth;
         }
     }
+
+    public override void TakePoisonDamage(float damage)
+    {
+        
+        if (!isDead)
+        {
+            base.TakePoisonDamage(damage);
+
+            healthBar.fillAmount = health / maxHealth;
+        }
+    }
+
 
     public override void Die()
     {

@@ -63,6 +63,11 @@ public class Worm : Enemy {
 
     }
 
+    public override void TakeDamageWithKnockback(float damage, Vector2 dir, float force)
+    {
+        TakeDamage(damage);
+    }
+
     private Vector3 FindEmergePosition()
     {
 
@@ -131,7 +136,7 @@ public class Worm : Enemy {
     protected override void Update()
     {
 
-        sprite.sortingOrder = -Mathf.RoundToInt(transform.position.y);
+        sprite.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100);
 
         if (isDead)
             return;

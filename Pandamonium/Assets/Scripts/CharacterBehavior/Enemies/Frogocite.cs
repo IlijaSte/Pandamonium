@@ -155,4 +155,16 @@ public class Frogocite : Enemy
             shadow.position = new Vector2(transform.position.x, Mathf.Lerp(oldShadowPos.y, jumpTarget.y, 1 - Vector2.Distance(jumpTarget, transform.position) / distance));
         }
     }
+
+    public override void TakeDamage(float damage)
+    {
+        if(!isJumping)
+            base.TakeDamage(damage);
+    }
+
+    public override void TakeDamageWithKnockback(float damage, Vector2 dir, float force)
+    {
+        if(!isJumping)
+            base.TakeDamageWithKnockback(damage, dir, force);
+    }
 }

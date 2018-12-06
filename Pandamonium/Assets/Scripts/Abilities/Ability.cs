@@ -15,6 +15,7 @@ public class Ability : MonoBehaviour {
     public float knockbackForce = 1;
 
     public Sprite buttonSprite;
+    public Sprite bgSprite;
 
     protected float cdProgress = 0;
 

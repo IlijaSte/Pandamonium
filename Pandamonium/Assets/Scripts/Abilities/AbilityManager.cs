@@ -35,6 +35,42 @@ public class AbilityManager : MonoBehaviour {
 
         Ability newAbility = Instantiate(ability.gameObject, transform).GetComponent<Ability>();
 
+        if (abilities.Count < 3)
+        {
+            abilities.Add(newAbility);
+        }
+        else
+        {
+            abilities[abilities.Count - 1] = newAbility;
+        }
+
+        UIManager.I.ChangeAbilitySprite(abilities.Count - 1, newAbility.buttonSprite, newAbility.bgSprite);
+    }
+
+    public void AddAbility(Blueprint bp)
+    {
+
+        Ability ability;
+        bool hasAbility;
+
+        do {
+
+            hasAbility = false;
+            ability = bp.GetAbility();
+
+            foreach(Ability ablt in abilities)
+            {
+                if (ability.GetType().Equals(ablt.GetType()))
+                {
+                    hasAbility = true;
+                    break;
+                }
+            }
+
+        } while (hasAbility);
+
+        Ability newAbility = Instantiate(ability.gameObject, transform).GetComponent<Ability>();
+
         if(abilities.Count < 3)
         {
             abilities.Add(newAbility);
@@ -44,7 +80,7 @@ public class AbilityManager : MonoBehaviour {
             abilities[abilities.Count - 1] = newAbility;
         }
 
-        UIManager.I.ChangeAbilitySprite(abilities.Count - 1, newAbility.buttonSprite);
+        UIManager.I.ChangeAbilitySprite(abilities.Count - 1, newAbility.buttonSprite, newAbility.bgSprite);
     }
 
     public void UseAbility(int index)
@@ -86,6 +122,9 @@ public class AbilityManager : MonoBehaviour {
 
     public void UpdateAbilityCooldown(Ability ability, float progress)
     {
+        if (!abilities.Contains(ability))
+            return;
+
         UIManager.I.UpdateAbilityCooldown(abilities.IndexOf(ability), progress);
     }
 }

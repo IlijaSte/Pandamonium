@@ -15,6 +15,11 @@ public class Blueprint : Collectible {
         base.Start();
     }
 
+    public Ability GetAbility()
+    {
+        return abilities[Random.Range(0, abilities.Length)];
+    }
+
     protected override void OnPickup()
     {
 
