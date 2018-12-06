@@ -167,10 +167,15 @@ public class PlayerWithJoystick : AttackingCharacter {
 
             if (!Mathf.Approximately(controller.InputDirection.x, 0) || !Mathf.Approximately(controller.InputDirection.y, 0))
             {
+
                 if (rb.velocity.magnitude < normalSpeed)
                 {
                     facingDirection = controller.InputDirection.normalized;
-                    rb.AddForce(controller.InputDirection * normalSpeed * 20, ForceMode2D.Force);
+
+                    if (controller.InputDirection.magnitude > 0.33f)
+                    {
+                        rb.AddForce(controller.InputDirection.normalized * normalSpeed * 20, ForceMode2D.Force);
+                    }
                 }
 
             }
