@@ -7,7 +7,7 @@ public class CharacterAnimation : AnimationMama {
 
     protected AIPath path;
 
-    void Start()
+    protected virtual void Start()
     {
         path = transform.parent.GetComponent<AIPath>();
         animator = GetComponent<Animator>();
@@ -24,6 +24,11 @@ public class CharacterAnimation : AnimationMama {
             vector2 = vector3D;
         }
 
+    }
+    protected override void FlipAnimation()
+    {
+        base.FlipAnimation();
+        
     }
 
     protected virtual void animation360()
