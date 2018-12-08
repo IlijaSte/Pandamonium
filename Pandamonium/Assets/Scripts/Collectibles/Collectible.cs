@@ -95,10 +95,10 @@ public class Collectible : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if(collision.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
+        if(collision.transform.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
         {
             OnPickup();
         }

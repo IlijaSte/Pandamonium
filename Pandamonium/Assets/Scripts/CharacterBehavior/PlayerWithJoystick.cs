@@ -52,6 +52,7 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     protected override void Update()
     {
+        sprite.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100);
 
         nextAttackBar.fillAmount = 1 - weapons[equippedWeaponIndex].timeToAttack;
 
