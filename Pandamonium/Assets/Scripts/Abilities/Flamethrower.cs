@@ -5,7 +5,7 @@ using UnityEngine;
 public class Flamethrower : ChannelingAbility {
 
     private ParticleSystem ps;
-    private HazardousArea area;
+    private EnemyHazardousArea area;
 
     public float flameArcAngle = 60;
 
@@ -13,7 +13,7 @@ public class Flamethrower : ChannelingAbility {
     {
         base.Start();
         ps = GetComponent<ParticleSystem>();
-        area = GetComponentInChildren<HazardousArea>();
+        area = GetComponentInChildren<EnemyHazardousArea>();
         ParticleSystem.ShapeModule shape = ps.shape;
 
         shape.arc = flameArcAngle;

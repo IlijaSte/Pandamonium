@@ -17,6 +17,7 @@ public class LevelGeneration : MonoBehaviour {
 
     public GameObject[] roomPrefabs;
 
+    public GameObject firstRoom;
     public GameObject lastRoom;
 
     public GameObject healthPoolPrefab;
@@ -457,6 +458,9 @@ public class LevelGeneration : MonoBehaviour {
             {
                 case Room.RoomType.OBELISK:
                     room.Init(lastRoom, roomParent);
+                    break;
+                case Room.RoomType.START:
+                    room.Init(firstRoom, roomParent);
                     break;
                 default:
                     room.Init(GetRandomPrefab(), roomParent);

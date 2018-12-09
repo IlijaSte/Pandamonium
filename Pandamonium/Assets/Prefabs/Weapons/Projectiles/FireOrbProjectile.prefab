@@ -38,9 +38,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4504514577882892}
-  - component: {fileID: 114307119241648136}
   - component: {fileID: 58271796461129980}
   - component: {fileID: 50797109992045174}
+  - component: {fileID: 114583016227944684}
   m_Layer: 10
   m_Name: AoE
   m_TagString: Untagged
@@ -155,7 +155,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.54624283, y: 0.4969294}
   m_EdgeRadius: 0
---- !u!114 &114307119241648136
+--- !u!114 &114583016227944684
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1532653425655686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f03322a7d044dbc4792b8568cf0d3783, type: 3}
+  m_Script: {fileID: 11500000, guid: a4ddc70e3eb321a4d9fcf5c0d67ee817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114945914125239962
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0, z: 0}
   homing: 0
-  area: {fileID: 114307119241648136}
+  area: {fileID: 114583016227944684}
   aoeIndicator: {fileID: 1095624685629076, guid: 333bbee81e62fe742b22549a1fe76eaf,
     type: 2}
 --- !u!212 &212493353064311522
