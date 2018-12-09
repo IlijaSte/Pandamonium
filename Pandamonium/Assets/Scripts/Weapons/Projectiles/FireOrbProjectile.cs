@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireOrbProjectile : Projectile {
 
-    public HazardousArea area;
+    public EnemyHazardousArea area;
     public GameObject aoeIndicator;
 
     protected Rigidbody2D rb;

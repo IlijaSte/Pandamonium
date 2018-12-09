@@ -22,7 +22,7 @@ public class AbilityManager : MonoBehaviour {
         // MENJATI
 
         AddAbility(abilityPrefabs[0].GetComponent<Ability>());
-        AddAbility(abilityPrefabs[Random.Range(1, abilityPrefabs.Length)].GetComponent<Ability>());
+        AddAbility(abilityPrefabs[1].GetComponent<Ability>());
 
         /*foreach (GameObject prefab in abilityPrefabs)
         {
