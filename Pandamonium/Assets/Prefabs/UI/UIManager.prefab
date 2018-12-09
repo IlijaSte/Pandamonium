@@ -52,11 +52,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a818deffbc504bf42ab4fbdd4edb6abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCanvas: {fileID: 0}
   joystickCanvas: {fileID: 0}
+  minimapCanvas: {fileID: 0}
   combatTextPrefab: {fileID: 114324912091261364, guid: f314e89d31251ab41a1021f4224fb2c5,
     type: 2}
   attackButton: {fileID: 0}
-  abilityButtons:
+  abilityButtonHolders:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
