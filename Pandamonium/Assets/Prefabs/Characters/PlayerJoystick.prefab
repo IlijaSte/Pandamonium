@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 223354853956471306}
   - component: {fileID: 114566688973802844}
   - component: {fileID: 114930982135448756}
-  m_Layer: 15
+  m_Layer: 5
   m_Name: PlayerCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 224905530038679844}
   - component: {fileID: 222233823322435266}
   - component: {fileID: 114338790452832874}
-  m_Layer: 15
+  m_Layer: 5
   m_Name: NextAttackBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 224518299885880890}
   - component: {fileID: 222161175124486834}
   - component: {fileID: 114076633458484650}
-  m_Layer: 15
+  m_Layer: 5
   m_Name: NextAttackBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,8 +555,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityPrefabs:
   - {fileID: 1191792085917580, guid: 3c8c5ccc723a01c41938cea664b642e0, type: 2}
-  - {fileID: 1657346493881052, guid: ed157ce01ec166c498164ddb861b9cdd, type: 2}
+  - {fileID: 1903469109095692, guid: 7c852484e13400649bb9296a6248e244, type: 2}
   - {fileID: 1779642358091622, guid: d5e218ab773d86149a1bc724528eee88, type: 2}
+  - {fileID: 1657346493881052, guid: ed157ce01ec166c498164ddb861b9cdd, type: 2}
   parent: {fileID: 114562331877149714}
 --- !u!114 &114076633458484650
 MonoBehaviour:

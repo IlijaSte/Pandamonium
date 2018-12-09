@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
+    public Canvas mainCanvas;
     public Canvas joystickCanvas;
+    public Canvas minimapCanvas;
 
     public Text combatTextPrefab;
 

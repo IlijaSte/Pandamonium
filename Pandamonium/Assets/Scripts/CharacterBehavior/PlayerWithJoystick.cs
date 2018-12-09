@@ -68,6 +68,33 @@ public class PlayerWithJoystick : AttackingCharacter {
         energyBar.fillAmount = energy / maxEnergy;
     }
 
+    protected IEnumerator CaptureScreenshot()
+    {
+        UIManager.I.mainCanvas.GetComponent<CanvasGroup>().alpha = 0;
+        UIManager.I.joystickCanvas.GetComponent<CanvasGroup>().alpha = 0;
+        UIManager.I.minimapCanvas.GetComponent<CanvasGroup>().alpha = 0;
+
+        Camera.main.cullingMask &= ~(1 << LayerMask.NameToLayer("UI"));
+
+        for (int i = 0; i <= 100; i++)
+        {
+            if (!System.IO.File.Exists(Application.persistentDataPath + "\\capture" + i + ".png"))
+            {
+                ScreenCapture.CaptureScreenshot(Application.persistentDataPath + "\\capture" + i + ".png", 2);
+                break;
+            }
+        }
+        
+
+        yield return new WaitForSeconds(0.25f);
+
+        Camera.main.cullingMask |= (1 << LayerMask.NameToLayer("UI"));
+
+        UIManager.I.minimapCanvas.GetComponent<CanvasGroup>().alpha = 1;
+        UIManager.I.mainCanvas.GetComponent<CanvasGroup>().alpha = 1;
+        UIManager.I.joystickCanvas.GetComponent<CanvasGroup>().alpha = 1;
+    }
+
     protected void FixedUpdate()
     {
 
@@ -160,6 +187,12 @@ public class PlayerWithJoystick : AttackingCharacter {
             if (Input.GetKeyUp(KeyCode.Q))
             {
                 ChangeWeapon();
+            }
+
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                StartCoroutine(CaptureScreenshot());
+                
             }
         }
         else
