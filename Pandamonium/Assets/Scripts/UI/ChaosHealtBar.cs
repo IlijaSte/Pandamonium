@@ -11,10 +11,10 @@ public class ChaosHealtBar : Image
   
     protected override void Start()
     {
+
         base.Start();
         triangles = transform.GetComponentsInChildren<ChaosHealtBar>();
         //print(triangles.Length);
-          
     }
 
     public void FillAmount(float amount)
@@ -35,20 +35,20 @@ public class ChaosHealtBar : Image
             {
                 //part to lose
                 float part = (1 - amount) * triangles.Length;
-                while (part > 0 && i < triangles.Length - 2)
+                while (part > 0 && i < triangles.Length)
                 {
-                    if(triangles.Length < 17) print(triangles.Length + ", part to lose:" + part);
-                    while (part > 1 && i < triangles.Length - 2)
+                    //if(triangles.Length < 17) print(triangles.Length + ", part to lose:" + part);
+                    while (part > 1 && i < triangles.Length - 1)
                     {
-                        if (triangles.Length < 17) print(triangles.Length + ",triangle" + i + " = 0");
+                       // if (triangles.Length < 17) print(triangles.Length + ",triangle" + i + " = 0");
                         triangles[i++].fillAmount = 0;
                        part -= 1 ;
                     }
-                    triangles[i].fillAmount = 0.5f;// 1 - part;
-                    if (triangles.Length < 17) print(triangles.Length + ",triangle" + i + " = " + (1-part));
+                    triangles[i].fillAmount = 1 - part;
+                    //if (triangles.Length < 17) print(triangles.Length + ",triangle" + i + " = " + (1 - part));
                     part = 0;
-
                 }
+                
             }
             
 
