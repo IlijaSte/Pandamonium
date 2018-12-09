@@ -11,23 +11,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1628753790980070}
   m_IsPrefabParent: 1
---- !u!1 &1117594978439770
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4157977459293168}
-  - component: {fileID: 114121749672228834}
-  - component: {fileID: 58156445177731462}
-  m_Layer: 0
-  m_Name: Sword
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1133748692560544
 GameObject:
   m_ObjectHideFlags: 1
@@ -160,9 +143,9 @@ GameObject:
   - component: {fileID: 114079399296506460}
   - component: {fileID: 61133381025590982}
   - component: {fileID: 50176549523694390}
-  - component: {fileID: 114068334897614330}
+  - component: {fileID: 114842749471232120}
   m_Layer: 15
-  m_Name: Frogocite
+  m_Name: EliteFrogocite
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,19 +217,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4157977459293168
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1117594978439770}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4446852320589226}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4426844956101872
 Transform:
   m_ObjectHideFlags: 1
@@ -271,7 +241,6 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.50000024, z: 1}
   m_Children:
   - {fileID: 224439984083567830}
-  - {fileID: 4157977459293168}
   - {fileID: 4555995027009710}
   - {fileID: 4524254496093204}
   - {fileID: 4555761264660044}
@@ -315,7 +284,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4446852320589226}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &4555761264660044
 Transform:
@@ -330,7 +299,7 @@ Transform:
   - {fileID: 4523971315404016}
   - {fileID: 4509912867086986}
   m_Father: {fileID: 4446852320589226}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4555995027009710
 Transform:
@@ -339,12 +308,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1548557022160412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.52, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.96, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children:
   - {fileID: 4426844956101872}
   m_Father: {fileID: 4446852320589226}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50176549523694390
 Rigidbody2D:
@@ -353,7 +322,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1628753790980070}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
@@ -366,21 +335,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &58156445177731462
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1117594978439770}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.5
 --- !u!58 &58204975923244792
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -438,7 +392,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.6210556}
+  m_Offset: {x: -0.020632923, y: 0.32556778}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -449,7 +403,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 1.8038988}
+  m_Size: {x: 1.1478142, y: 1.063034}
   m_EdgeRadius: 0
 --- !u!95 &95701175880768276
 Animator:
@@ -481,49 +435,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  speed: 0.5
+  speed: 1
   knockback: 0
   knockbackForce: 5
   iField: {fileID: 0}
   range: 0
   timeToAttack: 1
-  parent: {fileID: 0}
-  projectileSpeed: 2
+  parent: {fileID: 114842749471232120}
+  projectileSpeed: 5
   firePrefab: {fileID: 1714793588657250, guid: 3661731ec6bccf5478d07ac6ec8ba79f, type: 2}
---- !u!114 &114068334897614330
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1628753790980070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7013d3ddb95fca04dafd9d690cb43e9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 114121749672228834}
-  equippedWeaponIndex: 0
-  maxHealth: 25
-  type: 1
-  dashCooldown: 6
-  dashSpeed: 12
-  maxDashRange: 4
-  normalSpeed: 2
-  healthBar: {fileID: 114791163046767886}
-  nextAttackBar: {fileID: 114631011764471838}
-  vision: {fileID: 114214034657156396}
-  playerState: 0
-  ignoreMask: 0
-  isDead: 0
-  difficulty: 3
-  dropPrefabs: []
-  jumpSpeed: 0
-  maxJumpRange: 4
-  indicatorPrefab: {fileID: 1677782040419512, guid: d354f95f8310c1f418e1347aa9aa7874,
-    type: 2}
-  isJumping: 0
-  jumpCooldown: 3
 --- !u!114 &114079399296506460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -559,26 +479,6 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 0
   whenCloseToDestination: 0
   constrainInsideGraph: 1
---- !u!114 &114121749672228834
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1117594978439770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7ff13f6b518d824aa56ebfaf6cde287, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 5
-  speed: 1
-  knockback: 0
-  knockbackForce: 5
-  iField: {fileID: 0}
-  range: 0
-  timeToAttack: 1
-  parent: {fileID: 0}
-  cleaveAngle: 180
 --- !u!114 &114214034657156396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -590,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79d0180b41341143b6b230c263bebfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 114068334897614330}
+  character: {fileID: 0}
 --- !u!114 &114542684223825712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -765,6 +665,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 0}
+--- !u!114 &114842749471232120
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1628753790980070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b427b23617edf2f4093a80ba13048bbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 114032032825087448}
+  equippedWeaponIndex: 0
+  maxHealth: 25
+  type: 1
+  dashCooldown: 6
+  dashSpeed: 12
+  maxDashRange: 4
+  normalSpeed: 4
+  healthBar: {fileID: 114791163046767886}
+  nextAttackBar: {fileID: 114631011764471838}
+  vision: {fileID: 114214034657156396}
+  playerState: 0
+  ignoreMask: 0
+  isDead: 0
+  difficulty: 3
+  dropPrefabs: []
+  jumpSpeed: 0
+  maxJumpRange: 3.5
+  indicatorPrefab: {fileID: 1677782040419512, guid: d354f95f8310c1f418e1347aa9aa7874,
+    type: 2}
+  isJumping: 0
+  jumpCooldown: 4
+  jumpTriggerDistance: 2.5
 --- !u!114 &114987825729212746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -992,7 +927,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.02, y: 3.79}
+  m_AnchoredPosition: {x: 0.04, y: 2.25}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224517443710393318

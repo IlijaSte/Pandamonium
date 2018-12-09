@@ -19,7 +19,7 @@ public class Ability : MonoBehaviour {
 
     protected float cdProgress = 0;
 
-    protected AbilityManager am;
+    public AbilityManager am;
 
     protected virtual void Start()
     {

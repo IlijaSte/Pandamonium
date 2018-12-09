@@ -17,13 +17,18 @@ public class Frogocite : Enemy
     private Animator animator;
 
     public bool isJumping = false;
-    private float timeToJump;
+    protected float timeToJump;
     public float jumpCooldown = 6;
 
     private Transform shadow;
     private Vector2 oldShadowPos;
     private Vector2 oldShadowRelativePos;
+    private float T;
+    private float shadowT;
+
     private float distance;
+
+    private float oldDrag;
 
     public override void Start()
     {
@@ -35,6 +40,14 @@ public class Frogocite : Enemy
         shadow = sprite.transform.GetChild(0);
     }
 
+    protected virtual void DoJump()
+    {
+        if (!isJumping && !isKnockedBack && timeToJump >= jumpCooldown && playerState == PlayerState.CHASING_ENEMY && CanSee(player, maxJumpRange))
+        {
+            Jump(new Vector2(player.position.x, player.position.y));
+        }
+    }
+
     protected override void Update()
     {
         if (timeToJump < jumpCooldown)
@@ -42,10 +55,7 @@ public class Frogocite : Enemy
             timeToJump += Time.deltaTime;
         }
 
-        if (!isJumping && !isKnockedBack && timeToJump >= jumpCooldown && playerState == PlayerState.CHASING_ENEMY && CanSee(player, maxJumpRange))
-        {
-            Jump(new Vector2(player.position.x, player.position.y));
-        }
+        DoJump();
       
         base.Update();
     }
@@ -79,7 +89,7 @@ public class Frogocite : Enemy
         // Impact time for the highest shot that hits.
         float T_max = Mathf.Sqrt((b + discRoot) * 2 / (g * g));
 
-        float T = (T_max + T_min) / 2;
+        T = (T_max + T_min) / 2;
 
         float vx = x / T;
         float vy = y / T + T * g / 2;
@@ -106,8 +116,10 @@ public class Frogocite : Enemy
         //boxCollider2D.enabled = false;
         boxCollider2D.isTrigger = true;
 
-
+        oldDrag = rb.drag;
+        rb.drag = 0;
         rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.gravityScale = 1;
         rb.velocity = Vector2.zero; 
         rb.AddForce(GetInitVelocity() * rb.mass, ForceMode2D.Impulse);
         
@@ -119,10 +131,18 @@ public class Frogocite : Enemy
         oldShadowPos = shadow.position;
 
         attackable = false;
+
+        shadowT = 0;
        // timeToJump = 0;
     }
 
-    public void FixedUpdate()
+    protected virtual void OnLand()
+    {
+        if (weapons[equippedWeaponIndex].IsInRange(player))
+            player.GetComponent<AttackingCharacter>().TakeDamage(weapons[equippedWeaponIndex].damage);
+    }
+
+    public virtual void FixedUpdate()
     {
         if (isJumping && rb.velocity.y < 0 && transform.position.y <= jumpTarget.y)
         {
@@ -138,10 +158,13 @@ public class Frogocite : Enemy
             //GetComponent<BoxCollider2D>().enabled = true;
             boxCollider2D.isTrigger = false;
 
+            rb.drag = oldDrag;
+
+            rb.gravityScale = 0;
             rb.bodyType = RigidbodyType2D.Kinematic;
 
-            if (weapons[equippedWeaponIndex].IsInRange(player))
-                player.GetComponent<AttackingCharacter>().TakeDamage(weapons[equippedWeaponIndex].damage);
+            OnLand();
+
             Attack(player);
 
             shadow.SetParent(sprite.transform);
@@ -152,7 +175,8 @@ public class Frogocite : Enemy
 
         if (isJumping)
         {
-            shadow.position = new Vector2(transform.position.x, Mathf.Lerp(oldShadowPos.y, jumpTarget.y, 1 - Vector2.Distance(jumpTarget, transform.position) / distance));
+            shadowT += Time.deltaTime;
+            shadow.position = new Vector2(transform.position.x, Mathf.Lerp(oldShadowPos.y, jumpTarget.y, shadowT / T));
         }
     }
 
@@ -164,6 +188,7 @@ public class Frogocite : Enemy
 
     public override void TakeDamageWithKnockback(float damage, Vector2 dir, float force)
     {
+
         if(!isJumping)
             base.TakeDamageWithKnockback(damage, dir, force);
     }
