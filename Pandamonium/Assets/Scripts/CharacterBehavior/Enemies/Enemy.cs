@@ -26,7 +26,7 @@ public class Enemy : AttackingCharacter {
 
         base.Start();
 
-        healthBar = transform.Find("EnemyCanvas").Find("HealthBarBG").Find("HealthBar").GetComponent<Image>();
+        //healthBar = transform.GetComponentsInChildren<ChaosHealtBar>()[0];//.Find("HealthBarBG").Find("HealthBar").GetComponent<ChaosHealtBar>();
 
         type = CharacterType.ENEMY;
 
@@ -114,7 +114,7 @@ public class Enemy : AttackingCharacter {
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
-        healthBar.fillAmount = health / maxHealth;
+        healthBar.FillAmount( health / maxHealth);
 
         if(playerState != PlayerState.ATTACKING)
         {
