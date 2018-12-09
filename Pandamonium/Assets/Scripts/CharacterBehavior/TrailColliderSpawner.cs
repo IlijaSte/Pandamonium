@@ -17,6 +17,9 @@ public class TrailColliderSpawner : MonoBehaviour {
     private GameObject parentObj;
     private GameObject childObj;
 
+    private float minSize;
+    private float maxSize;
+
     // Use this for initialization
     void Start () {
 
@@ -24,7 +27,12 @@ public class TrailColliderSpawner : MonoBehaviour {
 
         //col = GetComponent<CompositeCollider2D>();
 
-        time = GetComponent<TrailRenderer>().time;
+        TrailRenderer tr = GetComponent<TrailRenderer>();
+
+        time = tr.time;
+        //minSize = tr.widthCurve.keys[0].value;
+        minSize = 0.5f;
+        maxSize = tr.widthCurve.keys[tr.widthCurve.length - 1].value;
 
         parentObj = GameObject.Find("Trails");
 
@@ -56,7 +64,7 @@ public class TrailColliderSpawner : MonoBehaviour {
 
     void CreateNewCollider(Vector2 position)
     {
-        tc.CreateCollider(position, colliderSize, time);
+        tc.CreateCollider(position, minSize, maxSize, time);
     }
 
 	// Update is called once per frame
@@ -68,7 +76,7 @@ public class TrailColliderSpawner : MonoBehaviour {
             transform.SetParent(childObj.transform);
         }
 
-        if(Vector2.Distance(lastPos, transform.position) > colliderSize)
+        if(Vector2.Distance(lastPos, transform.position) > minSize)
         {
             lastPos = transform.position;
 
