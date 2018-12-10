@@ -23,6 +23,8 @@ public class Room {
 
     public ArrayList enemies;
 
+    public Vector2 spawnPoint;
+
     public Room(Vector2Int _gridPos, RoomType _type){
 		gridPos = _gridPos;
 		type = _type;
@@ -40,6 +42,10 @@ public class Room {
 
         roomHolder.Init(this);
 
+        if(type == RoomType.START)
+        {
+            spawnPoint = (Vector2)instance.Find("Portal").position - new Vector2(0, 2);
+        }
     }
 
     public bool IsTileWalkable(Tilemap tilemap, Vector3 pos)

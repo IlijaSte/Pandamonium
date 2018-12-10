@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 3664157344746530416}
   - component: {fileID: 2113883505414084328}
   - component: {fileID: 50040388272121048}
+  - component: {fileID: 66789703426311682}
   m_Layer: 17
   m_Name: ObstacleTilemap
   m_TagString: Untagged
@@ -168,6 +169,7 @@ GameObject:
   - component: {fileID: 4758829787900510}
   - component: {fileID: 212665472279167822}
   - component: {fileID: 95212402365971584}
+  - component: {fileID: 61998989043193260}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -365,6 +367,53 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &61998989043193260
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1670165650576512}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.013478994, y: -1.5095806}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4.1683674, y: 6.8}
+    newSize: {x: 12.765625, y: 20.825}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.7396588, y: 2.9721346}
+  m_EdgeRadius: 0
+--- !u!66 &66789703426311682
+CompositeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1381230208152016}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 1
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths:
+  - m_Collider: {fileID: 2113883505414084328}
+    m_ColliderPaths: []
+  m_CompositePaths:
+    m_Paths: []
+  m_VertexDistance: 0.0005
 --- !u!95 &95212402365971584
 Animator:
   serializedVersion: 3
@@ -435,9 +484,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -183264855
-  m_SortingLayer: 1
-  m_SortingOrder: 4
+  m_SortingLayerID: -2025459693
+  m_SortingLayer: 2
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: a5ce2061ddc793045867eae55be3dc50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -459,7 +508,7 @@ TilemapCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
 --- !u!156049354 &2569400265681762550
 Grid:

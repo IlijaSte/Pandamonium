@@ -47,6 +47,7 @@ public class LevelGeneration : MonoBehaviour
     private ArrayList enemyPositions = new ArrayList();
 
     private static readonly int ELITE_FROGOCID_INDEX = 3;
+    private static readonly int FROGOCID_INDEX = 2;
 
     public static LevelGeneration I
     {
@@ -99,13 +100,13 @@ public class LevelGeneration : MonoBehaviour
 
         AstarPath.active.Scan();
         InstantiateEnemies();
-        InstantiateEliteFrogocid();
+        //InstantiateEliteFrogocid();
         InstantiateHealthPool();
     }
 
     protected void PositionPlayer()
     {
-        GameManager.I.playerInstance.transform.position = rooms[gridSizeX, gridSizeY].GetRandomPos();
+        GameManager.I.playerInstance.transform.position = rooms[gridSizeX, gridSizeY].spawnPoint;
     }
 
     public void BoxFill(Tilemap map, TileBase tile, Vector3Int start, Vector3Int end)
@@ -285,6 +286,8 @@ public class LevelGeneration : MonoBehaviour
             // broj neprijatelja u sobi zavisi od razdaljine sobe od pocetne sobe i multiplier-a
             int totalDifficulty = Mathf.RoundToInt(Random.Range(room.distanceFromStart * enemyCountMultiplier, room.distanceFromStart * enemyCountMultiplier + 1.5f));
 
+            bool hasFrogocid = false;
+
             while (totalDifficulty > 0)
             {
                 Vector2 spawnPos;
@@ -310,14 +313,15 @@ public class LevelGeneration : MonoBehaviour
                     {
                         newPrefab = enemyPrefabs[prefabIndex = Random.Range(0, enemyPrefabs.Length)];
 
-                    } while (prefabIndex == ELITE_FROGOCID_INDEX || newPrefab.GetComponent<Enemy>().difficulty > totalDifficulty);
+                    } while ((prefabIndex == ELITE_FROGOCID_INDEX && !hasFrogocid) || newPrefab.GetComponent<Enemy>().difficulty > totalDifficulty);
 
                     newEnemy = Instantiate(newPrefab, spawnPos, Quaternion.identity, enemyParent);
 
                     enemies.Add(newEnemy);
                     room.PutEnemy(newEnemy);
-                    // MENJATI
-
+                    
+                    if(prefabIndex == FROGOCID_INDEX)
+                        hasFrogocid = true;
                 }
 
                 totalDifficulty -= newEnemy.GetComponent<Enemy>().difficulty;
