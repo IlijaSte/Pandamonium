@@ -21,8 +21,8 @@ public class Fireball : Ability {
         Transform facingEnemy = GetFacingEnemy();
 
         if(facingEnemy)
-            projectile.GetComponent<FireProjectile>().Shoot(this, facingEnemy, projectileSpeed);
+            projectile.GetComponent<FireProjectile>().Shoot(am.parent.transform, facingEnemy, damage, range, projectileSpeed, knockback, knockbackForce);
         else
-            projectile.GetComponent<FireProjectile>().Shoot(this, direction, projectileSpeed);
+            projectile.GetComponent<FireProjectile>().Shoot(am.parent.transform, direction, damage, range, projectileSpeed, knockback, knockbackForce);
     }
 }

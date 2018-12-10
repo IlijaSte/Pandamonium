@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
-    protected Ability ability;
     protected Transform target;
     protected float speed;
 
@@ -20,35 +19,39 @@ public class Projectile : MonoBehaviour {
     public bool homing = false;
 
     private Vector2 startPos;
+    protected bool knockback;
+    protected float kbForce;
 
-    public virtual void Shoot(Ability ability, Transform target, float speed)
+    public virtual void Shoot(Transform parent, Transform target, float damage, float range, float speed, bool knockback = false, float kbForce = 0)
     {
-        this.ability = ability;
         this.target = target;
         direction = (target.position - transform.position).normalized;
+        this.knockback = knockback;
+        this.kbForce = kbForce;
         this.speed = speed;
-        this.damage = ability.damage;
-        this.range = ability.range;
+        this.damage = damage;
+        this.range = range;
         shot = true;
-        parent = ability.transform.parent.parent;     // promeniti
+        this.parent = parent;
 
         startPos = transform.position;
         Quaternion rot = Quaternion.LookRotation(Vector3.forward, target.position - transform.position);
         transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
     }
 
-    public virtual void Shoot(Ability ability, Vector2 direction, float speed)
+    public virtual void Shoot(Transform parent, Vector2 direction, float damage, float range, float speed, bool knockback = false, float kbForce = 0)
     {
-        this.ability = ability;
         this.direction = direction;
         this.speed = speed;
-
+        this.knockback = knockback;
+        this.kbForce = kbForce;
         this.target = null;
-        this.damage = ability.damage;
-        this.range = ability.range;
+        this.damage = damage;
+        this.range = range;
         homing = false;
 
         shot = true;
+        this.parent = parent;
 
         startPos = transform.position;
         Quaternion rot = Quaternion.LookRotation(Vector3.forward, direction);
@@ -65,7 +68,7 @@ public class Projectile : MonoBehaviour {
     {
         if (!shot) return;
 
-        if (homing && (target == null || ability == null))      // ako je target unisten/ubijen u medjuvremenu
+        if (homing && target == null)      // ako je target unisten/ubijen u medjuvremenu
         {
             homing = false;
             return;
@@ -92,9 +95,9 @@ public class Projectile : MonoBehaviour {
 
     protected virtual void OnHitEnemy(AttackingCharacter enemyHit)
     {
-        if (ability.knockback)
+        if (knockback)
         {
-            enemyHit.TakeDamageWithKnockback(damage, (enemyHit.transform.position - transform.position).normalized, ability.knockbackForce);
+            enemyHit.TakeDamageWithKnockback(damage, (enemyHit.transform.position - transform.position).normalized, kbForce);
         }
         else
         {
@@ -105,12 +108,12 @@ public class Projectile : MonoBehaviour {
     public void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (ability != null && parent != null && other.gameObject == parent.gameObject)                   // ako je projektil pogodio pucaca
+        if (parent != null && other.gameObject == parent.gameObject)                   // ako je projektil pogodio pucaca
             return;
 
         AttackingCharacter character = other.GetComponent<AttackingCharacter>();
 
-        if (other.CompareTag("Enemy") && character.IsAttackable())
+        if (character != null && parent != null && character.type != parent.GetComponent<AttackingCharacter>().type && character.IsAttackable())
         {
 
             OnHitEnemy(character);
@@ -121,7 +124,7 @@ public class Projectile : MonoBehaviour {
             return;
         }
 
-        if (character != null && ability != null && parent != null && character.type == parent.GetComponent<AttackingCharacter>().type)  // ako je pogodio karaktera istog tipa
+        if (character != null && parent != null && character.type == parent.GetComponent<AttackingCharacter>().type)  // ako je pogodio karaktera istog tipa
         {
             return;
         }

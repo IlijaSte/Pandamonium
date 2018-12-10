@@ -8,6 +8,7 @@ public class FireOrb : Ability {
 
     public float aoeDamage = 2;
     public float aoeRadius = 2;
+
     private float realRadius = 2;
 
     public GameObject fireOrbPrefab;
@@ -29,9 +30,9 @@ public class FireOrb : Ability {
         Transform facingEnemy = GetFacingEnemy();
 
         if (facingEnemy)
-            projectile.GetComponent<FireOrbProjectile>().Shoot(this, facingEnemy, projectileSpeed);
+            projectile.GetComponent<FireOrbProjectile>().Shoot(this, facingEnemy);
         else
-            projectile.GetComponent<FireOrbProjectile>().Shoot(this, direction, projectileSpeed);
+            projectile.GetComponent<FireOrbProjectile>().Shoot(this, direction);
     }
 
     public void ShowAoeIndicator(Vector2 position, GameObject prefab)
@@ -51,7 +52,7 @@ public class FireOrb : Ability {
 
         float i = 0;
 
-        while(i < 1)
+        while (i < 1)
         {
             i += Time.deltaTime;
 
@@ -62,4 +63,5 @@ public class FireOrb : Ability {
 
         Destroy(indicator.gameObject);
     }
+
 }
