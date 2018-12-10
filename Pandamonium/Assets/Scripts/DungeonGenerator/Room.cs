@@ -21,9 +21,14 @@ public class Room {
     // Distance from the start room (in room lengths)
     public int distanceFromStart;
 
+    public ArrayList enemies;
+
+    public Vector2 spawnPoint;
+
     public Room(Vector2Int _gridPos, RoomType _type){
 		gridPos = _gridPos;
 		type = _type;
+        enemies = new ArrayList();
 	}
 
     public void Init(GameObject prefab, Transform parent)
@@ -37,6 +42,10 @@ public class Room {
 
         roomHolder.Init(this);
 
+        if(type == RoomType.START)
+        {
+            spawnPoint = (Vector2)instance.Find("Portal").position - new Vector2(0, 2);
+        }
     }
 
     public bool IsTileWalkable(Tilemap tilemap, Vector3 pos)
@@ -57,6 +66,11 @@ public class Room {
             return true;
 
         return false;
+    }
+
+    public void PutEnemy(GameObject enemy)
+    {
+        enemies.Add(enemy);
     }
 
     public bool HasWalkableNeighbor(Tilemap tilemap, Vector3 pos)

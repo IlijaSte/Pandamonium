@@ -670,7 +670,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1460057469874838}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: 9.63, y: -3.004, z: 0}
+=======
+  m_LocalPosition: {x: 2.45, y: 0, z: 0}
+>>>>>>> 8cab54234c1119a33c0ff16551c31fc49379d06d
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 224977159002204304}
@@ -715,7 +719,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1288107990479948}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: -0.12, y: 2.58, z: 0}
+=======
+  m_LocalPosition: {x: 0, y: 2.58, z: 0}
+>>>>>>> 8cab54234c1119a33c0ff16551c31fc49379d06d
   m_LocalScale: {x: 0.32370886, y: 0.32370886, z: 0.32370886}
   m_Children:
   - {fileID: 4208140009032814}
@@ -881,7 +889,11 @@ Animator:
   m_Controller: {fileID: 9100000, guid: aefb497336154e744be8e34f9d047c54, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
+<<<<<<< HEAD
   m_ApplyRootMotion: 0
+=======
+  m_ApplyRootMotion: 1
+>>>>>>> 8cab54234c1119a33c0ff16551c31fc49379d06d
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1212,7 +1224,11 @@ MonoBehaviour:
   indicatorPrefab: {fileID: 1677782040419512, guid: d354f95f8310c1f418e1347aa9aa7874,
     type: 2}
   isJumping: 0
+<<<<<<< HEAD
   jumpCooldown: 3
+=======
+  jumpCooldown: 4
+>>>>>>> 8cab54234c1119a33c0ff16551c31fc49379d06d
 --- !u!212 &212759324723707068
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1253,7 +1269,11 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
+<<<<<<< HEAD
   m_Size: {x: 5, y: 3.48}
+=======
+  m_Size: {x: 25.949999, y: 23.109999}
+>>>>>>> 8cab54234c1119a33c0ff16551c31fc49379d06d
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

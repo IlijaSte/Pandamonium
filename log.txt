@@ -1,0 +1,31 @@
+[33mcommit 54dd3b0196cc56f8931eeeebc6beaee56a0832b8[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: IlijaSte <ilijaste96@gmail.com>
+Date:   Sun Dec 9 16:39:22 2018 +0100
+
+    nem pojma
+
+[33mcommit ba84cea87a90b033c5c4803bb292f8f71f09add8[m
+Merge: 2544e8f 6e3fcc2
+Author: IlijaSte <ilijaste96@gmail.com>
+Date:   Sun Dec 9 15:22:12 2018 +0100
+
+    Merge branch 'master' of https://github.com/IlijaSte/Pandamonium
+
+[33mcommit 2544e8ff13de8715765e40591b0c527c0cab4e76[m
+Author: IlijaSte <ilijaste96@gmail.com>
+Date:   Sun Dec 9 15:21:48 2018 +0100
+
+    odradjen frogocid, sitne promene oko ability-a i weapon-a
+
+[33mcommit 6e3fcc24c53ea3e90a53cfac393cbb7eb7b3f0ef[m
+Author: tamarixx <tamarixx.96@gmail.com>
+Date:   Sun Dec 9 13:46:51 2018 +0100
+
+    range frogocit
+
+[33mcommit c5dec25d89ccb1f9466fae4c82886c9b1bd0ad20[m
+Merge: 3ffd1ad fbce9a7
+Author: tamarixx <tamarixx.96@gmail.com>
+Date:   Sun Dec 9 13:43:27 2018 +0100
+
+    Merge branch 'master' of https://github.com/cHaosGameStudio/Pandamonium

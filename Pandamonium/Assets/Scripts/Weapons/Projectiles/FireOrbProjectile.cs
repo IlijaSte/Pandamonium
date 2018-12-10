@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class FireOrbProjectile : Projectile {
 
-    public HazardousArea area;
+    public EnemyHazardousArea area;
     public GameObject aoeIndicator;
 
     protected Rigidbody2D rb;
 
     protected float secondaryDamage;
+
+    FireOrb ability;
 
     protected virtual void Start()
     {
@@ -23,50 +25,50 @@ public class FireOrbProjectile : Projectile {
 
     }
 
-    public override void Shoot(Ability ability, Vector2 direction, float speed)
+    public virtual void Shoot(FireOrb ability, Vector2 direction)
     {
-        base.Shoot(ability, direction, speed);
-
-        secondaryDamage = (ability as FireOrb).aoeDamage;
+        base.Shoot(ability.am.parent.transform, direction, ability.damage, ability.range, ability.projectileSpeed, ability.knockback, ability.knockbackForce);
+        this.ability = ability;
+        secondaryDamage = ability.aoeDamage;
     }
 
-    public override void Shoot(Ability ability, Transform target, float speed)
+    public virtual void Shoot(FireOrb ability, Transform target)
     {
-        base.Shoot(ability, target, speed);
-
-        secondaryDamage = (ability as FireOrb).aoeDamage;
+        base.Shoot(ability.am.parent.transform, target, ability.damage, ability.range, ability.projectileSpeed, ability.knockback, ability.knockbackForce);
+        this.ability = ability;
+        secondaryDamage = ability.aoeDamage;
     }
 
     protected override void OnEndOfRange()
     {
         base.OnEndOfRange();
 
-        if (ability.knockback)
+        if (knockback)
         {
-            area.DealDamageWithKnockback(secondaryDamage, ability.knockbackForce);
+            area.DealDamageWithKnockback(secondaryDamage, kbForce);
         }
         else
         {
             area.DealDamage(secondaryDamage);
         }
 
-        (ability as FireOrb).ShowAoeIndicator(transform.position, aoeIndicator);
+        ability.ShowAoeIndicator(transform.position, aoeIndicator);
     }
 
     protected override void OnHitEnemy(AttackingCharacter enemyHit)
     {
         base.OnHitEnemy(enemyHit);
 
-        if (ability.knockback)
+        if (knockback)
         {
-            area.DealDamageWithKnockback(secondaryDamage, ability.knockbackForce);
+            area.DealDamageWithKnockback(secondaryDamage, kbForce);
         }
         else
         {
             area.DealDamage(secondaryDamage);
         }
 
-        (ability as FireOrb).ShowAoeIndicator(transform.position, aoeIndicator);
+        ability.ShowAoeIndicator(transform.position, aoeIndicator);
     }
 
 }

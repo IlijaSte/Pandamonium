@@ -20,7 +20,7 @@ public class AttackingCharacter : MonoBehaviour {
 
     public float normalSpeed = 6;
 
-    public Image healthBar;
+    public ChaosHealtBar healthBar;
     public Image nextAttackBar;
 
     public CharacterVision vision;
@@ -82,7 +82,8 @@ public class AttackingCharacter : MonoBehaviour {
     public virtual void Start()
     {
 
-        ignoreMask = (1 << LayerMask.NameToLayer("Obstacles")) | (1 << LayerMask.NameToLayer("Characters"));
+        //ignoreMask = (1 << LayerMask.NameToLayer("Obstacles")) | (1 << LayerMask.NameToLayer("Characters"));
+        ignoreMask = 1 << LayerMask.NameToLayer("Characters");
 
         colFilter.useLayerMask = true;
         colFilter.SetLayerMask(ignoreMask);
@@ -98,6 +99,11 @@ public class AttackingCharacter : MonoBehaviour {
         }
 
         health = maxHealth;
+        if (type.Equals(CharacterType.PLAYER))
+            healthBar.buildHealtBar(17, false);
+        else healthBar.buildHealtBar(13, true);
+        //healthBar.buildHealtBar(13);
+
 
         nextAttackBG = nextAttackBar.transform.parent.gameObject;
 
@@ -144,6 +150,11 @@ public class AttackingCharacter : MonoBehaviour {
         weapons[equippedWeaponIndex].gameObject.SetActive(false);
         equippedWeaponIndex = (equippedWeaponIndex + 1) % weapons.Length;
         weapons[equippedWeaponIndex].gameObject.SetActive(true);
+    }
+
+    public virtual void OnWeaponAttack()
+    {
+
     }
 
     public virtual Vector2 GetFacingDirection()
@@ -198,12 +209,9 @@ public class AttackingCharacter : MonoBehaviour {
     {
         if (playerState != PlayerState.IMMOBILE)
         {
+            StopAttacking();
             playerState = PlayerState.WALKING;
             CM.MoveToPosition(new Vector3(pos.x, pos.y, transform.position.z));
-
-            target = null;
-
-            weapons[equippedWeaponIndex].Stop();
         }
     }
 
@@ -257,7 +265,7 @@ public class AttackingCharacter : MonoBehaviour {
     public virtual void Heal()
     {
         health = maxHealth;
-        healthBar.fillAmount = 1;
+        healthBar.FillAmount(1);
 
         UIManager.I.ShowHeal(GetComponentInChildren<Canvas>(), 1);
     }
