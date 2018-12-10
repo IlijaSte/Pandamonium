@@ -44,6 +44,10 @@ public class LevelGeneration : MonoBehaviour
     private static LevelGeneration instance;
     private Transform enemyParent;
 
+    private ArrayList enemyPositions = new ArrayList();
+
+    private static readonly int ELITE_FROGOCID_INDEX = 3;
+
     public static LevelGeneration I
     {
         get
@@ -95,6 +99,7 @@ public class LevelGeneration : MonoBehaviour
 
         AstarPath.active.Scan();
         InstantiateEnemies();
+        InstantiateEliteFrogocid();
         InstantiateHealthPool();
     }
 
@@ -222,6 +227,51 @@ public class LevelGeneration : MonoBehaviour
         Instantiate(healthPoolPrefab, spawnPos, Quaternion.identity);
     }
 
+    protected virtual void InstantiateEliteFrogocid()
+    {
+        foreach (Vector2 pos in takenPositions)
+        {
+            Room room = rooms[Mathf.RoundToInt(gridSizeX + pos.x), Mathf.RoundToInt(gridSizeY + pos.y)];
+
+            if (room.type == Room.RoomType.START || room.type == Room.RoomType.OBELISK)
+                continue;
+
+            int frogNumber = 0;
+
+            foreach(GameObject enemy in room.enemies)
+            {
+                if (enemy.GetComponent<Frogocite>())
+                {
+                    frogNumber++;
+                }
+            }
+
+            if (frogNumber > 0)
+            {
+                int eliteNumber = Random.Range(0, frogNumber + 1);
+
+                for(int i = 0; i < eliteNumber; i++)
+                {
+                    Vector2 spawnPos;
+                    do
+                    {
+                        spawnPos = room.GetRandomPos();
+                    } while (enemyPositions.Contains(spawnPos));
+
+                    enemyPositions.Add(spawnPos);
+
+                    GameObject newEnemy;
+                    GameObject newPrefab = enemyPrefabs[ELITE_FROGOCID_INDEX];
+
+                    newEnemy = Instantiate(newPrefab, spawnPos, Quaternion.identity, enemyParent);
+
+                    enemies.Add(newEnemy);
+                    room.PutEnemy(newEnemy);
+                }
+            }
+        }
+    }
+
     protected virtual void InstantiateEnemies()
     {
 
@@ -234,7 +284,6 @@ public class LevelGeneration : MonoBehaviour
 
             // broj neprijatelja u sobi zavisi od razdaljine sobe od pocetne sobe i multiplier-a
             int totalDifficulty = Mathf.RoundToInt(Random.Range(room.distanceFromStart * enemyCountMultiplier, room.distanceFromStart * enemyCountMultiplier + 1.5f));
-            List<Vector2> taken = new List<Vector2>();
 
             while (totalDifficulty > 0)
             {
@@ -242,9 +291,9 @@ public class LevelGeneration : MonoBehaviour
                 do
                 {
                     spawnPos = room.GetRandomPos();
-                } while (taken.Contains(spawnPos));
+                } while (enemyPositions.Contains(spawnPos));
 
-                taken.Add(spawnPos);
+                enemyPositions.Add(spawnPos);
 
                 GameObject newEnemy;
 
@@ -256,14 +305,19 @@ public class LevelGeneration : MonoBehaviour
                 else
                 {
                     GameObject newPrefab = null;
+                    int prefabIndex;
                     do
                     {
-                        newPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+                        newPrefab = enemyPrefabs[prefabIndex = Random.Range(0, enemyPrefabs.Length)];
 
-                    } while (newPrefab.GetComponent<Enemy>().difficulty > totalDifficulty);
+                    } while (prefabIndex == ELITE_FROGOCID_INDEX || newPrefab.GetComponent<Enemy>().difficulty > totalDifficulty);
 
-                    newEnemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnPos, Quaternion.identity, enemyParent);
+                    newEnemy = Instantiate(newPrefab, spawnPos, Quaternion.identity, enemyParent);
+
                     enemies.Add(newEnemy);
+                    room.PutEnemy(newEnemy);
+                    // MENJATI
+
                 }
 
                 totalDifficulty -= newEnemy.GetComponent<Enemy>().difficulty;
@@ -280,7 +334,7 @@ public class LevelGeneration : MonoBehaviour
 
         do
         {
-
+            takenPositions.Clear();
             rooms = new Room[gridSizeX * 2, gridSizeY * 2];
             rooms[gridSizeX, gridSizeY] = new Room(Vector2Int.zero, Room.RoomType.START);
             takenPositions.Insert(0, Vector2.zero);

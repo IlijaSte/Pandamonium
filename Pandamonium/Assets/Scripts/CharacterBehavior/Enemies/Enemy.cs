@@ -20,6 +20,8 @@ public class Enemy : AttackingCharacter {
 
     protected Room room;
 
+    protected bool detectedPlayer = false;
+
     public override void Start()
     {
         numEnemies ++;
@@ -70,6 +72,7 @@ public class Enemy : AttackingCharacter {
                 {
                     StopAttacking();
                     StopMoving();
+                    detectedPlayer = false;
                 }
                 else
                 {
@@ -77,6 +80,7 @@ public class Enemy : AttackingCharacter {
                     if (LevelGeneration.I.GetRoomAtPos(target.position) != room)
                     {
                         MoveToPosition(startPos);
+                        detectedPlayer = false;
                     }
                 }
 
@@ -84,11 +88,19 @@ public class Enemy : AttackingCharacter {
 
             case PlayerState.IDLE:
                 {
-                    Transform closest;
-
-                    if ((closest = vision.GetClosest()) != null && LevelGeneration.I.GetRoomAtPos(closest.position) == room)
+                    if (!detectedPlayer)
                     {
-                        Attack(closest);
+                        Transform closest;
+
+                        if ((closest = vision.GetClosest()) != null && LevelGeneration.I.GetRoomAtPos(closest.position) == room)
+                        {
+                            Attack(closest);
+                            detectedPlayer = true;
+                        }
+                    }
+                    else
+                    {
+                        Attack(player);
                     }
 
                     break;
@@ -135,6 +147,8 @@ public class Enemy : AttackingCharacter {
             setTag = 0
         };
         AstarPath.active.UpdateGraphs(guo);*/
+
+        room.enemies.Remove(gameObject);
 
         base.Die();
     }

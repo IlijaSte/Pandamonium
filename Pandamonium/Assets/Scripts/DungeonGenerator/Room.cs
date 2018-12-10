@@ -21,9 +21,12 @@ public class Room {
     // Distance from the start room (in room lengths)
     public int distanceFromStart;
 
+    public ArrayList enemies;
+
     public Room(Vector2Int _gridPos, RoomType _type){
 		gridPos = _gridPos;
 		type = _type;
+        enemies = new ArrayList();
 	}
 
     public void Init(GameObject prefab, Transform parent)
@@ -57,6 +60,11 @@ public class Room {
             return true;
 
         return false;
+    }
+
+    public void PutEnemy(GameObject enemy)
+    {
+        enemies.Add(enemy);
     }
 
     public bool HasWalkableNeighbor(Tilemap tilemap, Vector3 pos)

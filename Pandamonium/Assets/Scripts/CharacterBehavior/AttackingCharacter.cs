@@ -82,7 +82,8 @@ public class AttackingCharacter : MonoBehaviour {
     public virtual void Start()
     {
 
-        ignoreMask = (1 << LayerMask.NameToLayer("Obstacles")) | (1 << LayerMask.NameToLayer("Characters"));
+        //ignoreMask = (1 << LayerMask.NameToLayer("Obstacles")) | (1 << LayerMask.NameToLayer("Characters"));
+        ignoreMask = 1 << LayerMask.NameToLayer("Characters");
 
         colFilter.useLayerMask = true;
         colFilter.SetLayerMask(ignoreMask);
@@ -146,6 +147,11 @@ public class AttackingCharacter : MonoBehaviour {
         weapons[equippedWeaponIndex].gameObject.SetActive(true);
     }
 
+    public virtual void OnWeaponAttack()
+    {
+
+    }
+
     public virtual Vector2 GetFacingDirection()
     {
         return rb.velocity;
@@ -198,12 +204,9 @@ public class AttackingCharacter : MonoBehaviour {
     {
         if (playerState != PlayerState.IMMOBILE)
         {
+            StopAttacking();
             playerState = PlayerState.WALKING;
             CM.MoveToPosition(new Vector3(pos.x, pos.y, transform.position.z));
-
-            target = null;
-
-            weapons[equippedWeaponIndex].Stop();
         }
     }
 

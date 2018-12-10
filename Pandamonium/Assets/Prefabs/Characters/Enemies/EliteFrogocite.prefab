@@ -699,7 +699,8 @@ MonoBehaviour:
     type: 2}
   isJumping: 0
   jumpCooldown: 4
-  jumpTriggerDistance: 2.5
+  jumpTriggerDistance: 3
+  fleeing: 0
 --- !u!114 &114987825729212746
 MonoBehaviour:
   m_ObjectHideFlags: 1

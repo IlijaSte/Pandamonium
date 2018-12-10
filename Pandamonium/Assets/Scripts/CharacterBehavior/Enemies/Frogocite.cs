@@ -102,18 +102,14 @@ public class Frogocite : Enemy
     public void Jump(Vector2 target)
     {
         timeToJump = 0;
+        StopAttacking();
         playerState = PlayerState.IMMOBILE;
         isJumping = true;
-        this.jumpTarget = target;// new Vector2(target.x, target.y);
-
-        //collider = GetComponent<CircleCollider2D>();
-        //collider.enabled = false;
+        
+        this.jumpTarget = target;
 
         path.enabled = false;
-        //path.isStopped = true;
 
-
-        //boxCollider2D.enabled = false;
         boxCollider2D.isTrigger = true;
 
         oldDrag = rb.drag;
@@ -153,9 +149,7 @@ public class Frogocite : Enemy
             Destroy(indicator.gameObject);
 
             path.enabled = true;
-            //path.isStopped = false;
 
-            //GetComponent<BoxCollider2D>().enabled = true;
             boxCollider2D.isTrigger = false;
 
             rb.drag = oldDrag;
