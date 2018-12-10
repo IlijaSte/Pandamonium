@@ -98,6 +98,11 @@ public class AttackingCharacter : MonoBehaviour {
         }
 
         health = maxHealth;
+        if (type.Equals(CharacterType.PLAYER))
+            healthBar.buildHealtBar(17, false);
+        else healthBar.buildHealtBar(13, true);
+        //healthBar.buildHealtBar(13);
+
 
         nextAttackBG = nextAttackBar.transform.parent.gameObject;
 
