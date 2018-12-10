@@ -20,7 +20,7 @@ public class AttackingCharacter : MonoBehaviour {
 
     public float normalSpeed = 6;
 
-    public Image healthBar;
+    public ChaosHealtBar healthBar;
     public Image nextAttackBar;
 
     public CharacterVision vision;
@@ -260,7 +260,7 @@ public class AttackingCharacter : MonoBehaviour {
     public virtual void Heal()
     {
         health = maxHealth;
-        healthBar.fillAmount = 1;
+        healthBar.FillAmount(1);
 
         UIManager.I.ShowHeal(GetComponentInChildren<Canvas>(), 1);
     }
