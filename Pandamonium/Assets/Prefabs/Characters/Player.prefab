@@ -574,13 +574,15 @@ MonoBehaviour:
   equippedWeaponIndex: 0
   maxHealth: 200
   type: 0
-  vision: {fileID: 114774126793390590}
   dashCooldown: 1
   dashSpeed: 16
+  maxDashRange: 4
+  normalSpeed: 6
   healthBar: {fileID: 0}
   nextAttackBar: {fileID: 114916057105450400}
-  normalSpeed: 6
-  maxDashRange: 4
+  vision: {fileID: 114774126793390590}
+  playerState: 0
+  ignoreMask: 0
   isDead: 0
   oneClick: 0
   tapIndicatorPrefab: {fileID: 1677782040419512, guid: a496918d631092a489d9a0cf9ac9ab7f,
@@ -659,6 +661,8 @@ MonoBehaviour:
   iField: {fileID: 0}
   range: 0
   timeToAttack: 1
+  parent: {fileID: 0}
+  cleaveAngle: 180
 --- !u!114 &114649143069366310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -689,8 +693,9 @@ MonoBehaviour:
   iField: {fileID: 0}
   range: 0
   timeToAttack: 1
+  parent: {fileID: 0}
   projectileSpeed: 5
-  firePrefab: {fileID: 1714793588657250, guid: 66803ba921559a94598a106ff2efb6db, type: 2}
+  firePrefab: {fileID: 0}
 --- !u!114 &114751189184029790
 MonoBehaviour:
   m_ObjectHideFlags: 1
