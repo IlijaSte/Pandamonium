@@ -4668,34 +4668,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
-<<<<<<< HEAD
---- !u!1102 &1102018588727281210
-AnimatorState:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: New Animation
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 65ff7991695283a429db2793a4fc85b5, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
-=======
->>>>>>> 8cab54234c1119a33c0ff16551c31fc49379d06d
 --- !u!1102 &1102026410363227104
 AnimatorState:
   serializedVersion: 5
@@ -5136,12 +5108,8 @@ AnimatorState:
   m_Name: AnimFrogMeleeAttack
   m_Speed: 1
   m_CycleOffset: 0
-<<<<<<< HEAD
-  m_Transitions: []
-=======
   m_Transitions:
   - {fileID: 1101399579987173844}
->>>>>>> 8cab54234c1119a33c0ff16551c31fc49379d06d
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -5252,13 +5220,9 @@ AnimatorState:
   m_Name: AnimFrogMeleeWalking
   m_Speed: 1
   m_CycleOffset: 0
-<<<<<<< HEAD
-  m_Transitions: []
-=======
   m_Transitions:
   - {fileID: 1101022887489306326}
   - {fileID: 1101343829688317026}
->>>>>>> 8cab54234c1119a33c0ff16551c31fc49379d06d
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -5685,15 +5649,11 @@ AnimatorState:
   m_Name: AnimFrogMeleeIdle
   m_Speed: 1
   m_CycleOffset: 0
-<<<<<<< HEAD
-  m_Transitions: []
-=======
   m_Transitions:
   - {fileID: 1101387441597625350}
   - {fileID: 1101562976037625476}
   - {fileID: 1101190472130243114}
   - {fileID: 1101745843051256028}
->>>>>>> 8cab54234c1119a33c0ff16551c31fc49379d06d
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -5863,12 +5823,8 @@ AnimatorState:
   m_Name: AnimFrogMeleeJump
   m_Speed: 1
   m_CycleOffset: 0
-<<<<<<< HEAD
-  m_Transitions: []
-=======
   m_Transitions:
   - {fileID: 1101031093504819366}
->>>>>>> 8cab54234c1119a33c0ff16551c31fc49379d06d
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -6137,24 +6093,6 @@ AnimatorStateMachine:
     m_Position: {x: -60, y: 132, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102307350965494356}
-<<<<<<< HEAD
-    m_Position: {x: -25, y: 197, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102841877415553076}
-    m_Position: {x: 10, y: 262, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102018588727281210}
-    m_Position: {x: 45, y: 327, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102013516338675508}
-    m_Position: {x: 80, y: 392, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102369866876586494}
-    m_Position: {x: 115, y: 457, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102740200685194512}
-    m_Position: {x: 150, y: 522, z: 0}
-=======
     m_Position: {x: 528, y: 408, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102841877415553076}
@@ -6168,7 +6106,6 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 1102740200685194512}
     m_Position: {x: 528, y: 552, z: 0}
->>>>>>> 8cab54234c1119a33c0ff16551c31fc49379d06d
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
