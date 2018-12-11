@@ -20,6 +20,8 @@ public class PlayerWithJoystick : AttackingCharacter {
     [HideInInspector]
     public Vector2 facingDirection = Vector2.down;
 
+    protected int coins = 0;
+
     public override void Awake()
     {
         if (!GameManager.joystick)
@@ -48,6 +50,11 @@ public class PlayerWithJoystick : AttackingCharacter {
     public void PickupBlueprint(Blueprint bp)
     {
         abilityManager.AddAbility(bp);
+    }
+
+    public void PickupCoins(int amount)
+    {
+        coins += amount;
     }
 
     protected override void Update()

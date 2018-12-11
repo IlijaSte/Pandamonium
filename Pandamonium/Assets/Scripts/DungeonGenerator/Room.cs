@@ -44,7 +44,10 @@ public class Room {
 
         if(type == RoomType.START)
         {
-            spawnPoint = (Vector2)instance.Find("Portal").position - new Vector2(0, 2);
+            if (instance.Find("Portal"))
+            {
+                spawnPoint = (Vector2)instance.Find("Portal").position - new Vector2(0, 2);
+            }
         }
     }
 
