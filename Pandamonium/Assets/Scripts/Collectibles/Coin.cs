@@ -8,6 +8,6 @@ public class Coin : Collectible {
     {
 
         (GameManager.I.playerInstance as PlayerWithJoystick).PickupCoins(1);
-
+        base.OnPickup();
     }
 }

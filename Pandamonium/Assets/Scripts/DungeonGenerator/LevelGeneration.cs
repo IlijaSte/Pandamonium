@@ -100,7 +100,6 @@ public class LevelGeneration : MonoBehaviour
 
         AstarPath.active.Scan();
         InstantiateEnemies();
-        //InstantiateEliteFrogocid();
         InstantiateHealthPool();
     }
 
@@ -223,7 +222,7 @@ public class LevelGeneration : MonoBehaviour
         {
             spawnPos = room.GetRandomPos();
 
-        } while (!room.IsTileWalkable(room.groundTilemap, spawnPos + Vector2.right) || !IsTileFree(spawnPos) || !IsTileFree(spawnPos + Vector2.right));
+        } while (!room.IsTileWalkable(room.groundTilemap, spawnPos) || !room.IsTileWalkable(room.groundTilemap, spawnPos + Vector2.right) || !IsTileFree(spawnPos) || !IsTileFree(spawnPos + Vector2.right));
 
         Instantiate(healthPoolPrefab, spawnPos, Quaternion.identity);
     }

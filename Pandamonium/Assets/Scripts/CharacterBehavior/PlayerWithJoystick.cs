@@ -21,7 +21,7 @@ public class PlayerWithJoystick : AttackingCharacter {
     public Vector2 facingDirection = Vector2.down;
 
     protected int coins = 0;
-
+    public Text coinText;
     public override void Awake()
     {
         if (!GameManager.joystick)
@@ -55,6 +55,7 @@ public class PlayerWithJoystick : AttackingCharacter {
     public void PickupCoins(int amount)
     {
         coins += amount;
+        coinText.text = coins.ToString();
     }
 
     protected override void Update()

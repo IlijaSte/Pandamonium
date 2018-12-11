@@ -9,7 +9,6 @@ public class Collectible : MonoBehaviour {
     protected Vector2 startPos;
 
     private float minBounceVelocity = 0.05f;
-    private float bounceForce = 1f;
 
     private bool dropping = false;
     private int numBounces = 0;
@@ -61,7 +60,7 @@ public class Collectible : MonoBehaviour {
         return velocity;
     }
 
-    protected virtual void Drop()
+    public virtual void Drop()
     {
         startPos = transform.position;
 
@@ -76,10 +75,11 @@ public class Collectible : MonoBehaviour {
 
         if(dropping && rb.velocity.y < 0 && transform.position.y <= dropPos.y)
         {
-            if(rb.velocity.magnitude > minBounceVelocity && numBounces < 5)
+            print("usao");
+            if(numBounces < 5)
             {
                 numBounces++;
-                rb.AddForce(Vector2.up * bounceForce * (5 / numBounces), ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * -rb.velocity.y * 2, ForceMode2D.Impulse);
             }
             else
             {
