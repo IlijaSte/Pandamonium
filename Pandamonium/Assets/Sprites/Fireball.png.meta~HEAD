@@ -106,7 +106,11 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
+<<<<<<< HEAD:Pandamonium/Assets/Sprites/Idle_000.png.meta
+    spriteID: 0a69d86c468e6f54d913f50b54ad0dd0
+=======
     spriteID: 1959b1b25af84b942b9a1177c0cb0c8a
+>>>>>>> 5daa243270a6a01b26a780c86967d1e13672c5b9:Pandamonium/Assets/Sprites/Fireball.png.meta~HEAD
     vertices: []
     indices: 
     edges: []

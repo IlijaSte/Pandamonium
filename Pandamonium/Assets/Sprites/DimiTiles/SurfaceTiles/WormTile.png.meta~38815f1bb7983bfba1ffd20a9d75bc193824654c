@@ -106,7 +106,11 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
+<<<<<<< HEAD:Pandamonium/Assets/Sprites/Idle_001.png.meta
+    spriteID: 43d2c3eac5236bc4299b93902b986f69
+=======
     spriteID: a6783e87d02365442bc6a1f08975f222
+>>>>>>> 5daa243270a6a01b26a780c86967d1e13672c5b9:Pandamonium/Assets/Sprites/DimiTiles/SurfaceTiles/WormTile.png.meta~38815f1bb7983bfba1ffd20a9d75bc193824654c
     vertices: []
     indices: 
     edges: []

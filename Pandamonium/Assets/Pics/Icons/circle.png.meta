@@ -117,7 +117,11 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
+<<<<<<< HEAD:Pandamonium/Assets/Pics/circle.png.meta
+    spriteID: 90893ea42eb59a1489b1ac3703bca87a
+=======
     spriteID: cca11fb307c13254888f2e054215608a
+>>>>>>> 5daa243270a6a01b26a780c86967d1e13672c5b9:Pandamonium/Assets/Pics/Icons/circle.png.meta
     vertices: []
     indices: 
     edges: []
