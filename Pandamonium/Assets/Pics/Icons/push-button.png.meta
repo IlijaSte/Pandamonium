@@ -117,7 +117,11 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
+<<<<<<< HEAD:Pandamonium/Assets/Pics/push-button.png.meta
+    spriteID: a9e7b5c70e03b3749abeed84f90e650a
+=======
     spriteID: df535b1196198bf448402b313dbe502b
+>>>>>>> 5daa243270a6a01b26a780c86967d1e13672c5b9:Pandamonium/Assets/Pics/Icons/push-button.png.meta
     vertices: []
     indices: 
     edges: []

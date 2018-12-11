@@ -117,7 +117,11 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
+<<<<<<< HEAD:Pandamonium/Assets/Pics/wait.png.meta
+    spriteID: d9b1c260a431e1a4e860ac5cb7644181
+=======
     spriteID: 59b640ccf879fd840bd40a05942744f6
+>>>>>>> 5daa243270a6a01b26a780c86967d1e13672c5b9:Pandamonium/Assets/Pics/Icons/wait.png.meta
     vertices: []
     indices: 
     edges: []
