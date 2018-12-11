@@ -15,6 +15,25 @@ public class FrogAnimation : CharacterAnimation
 
     void Update()
     {
+<<<<<<< HEAD
+        FlipAnimation();
+
+        AttackingCharacter.PlayerState currentState = transform.parent.GetComponent<Frogocite>().playerState;
+        if(!currentState.Equals(state))
+        {
+            state = currentState;
+            switch(state)
+            {
+                case AttackingCharacter.PlayerState.IDLE:
+                    animator.SetBool("Walking", false);
+                    animator.SetBool("Jumping", false);
+                    animator.SetBool("Attacking", false);
+                    break;
+                case AttackingCharacter.PlayerState.WALKING:
+                    animator.SetBool("Walking", true);
+                    animator.SetBool("Jumping", false);
+                    animator.SetBool("Attacking", false);
+=======
         animation360();
         /*
         FlipAnimation();
@@ -42,11 +61,16 @@ public class FrogAnimation : CharacterAnimation
                 case AttackingCharacter.PlayerState.WALKING:
                 case AttackingCharacter.PlayerState.CHASING_ENEMY:
                     animator.SetBool("Walking", true);
+>>>>>>> 8cab54234c1119a33c0ff16551c31fc49379d06d
                     break;
                 case AttackingCharacter.PlayerState.ATTACKING:
                     animator.SetBool("Attacking", true);
                     break;
                 case AttackingCharacter.PlayerState.IMMOBILE:
+<<<<<<< HEAD
+                    if(transform.parent.GetComponent<Frogocite>().isJumping)
+                        animator.SetBool("Jumping", true);
+=======
                     if (transform.parent.GetComponent<Frogocite>().isJumping)
                     {
                         animator.SetBool("Jumping", true);
@@ -55,10 +79,15 @@ public class FrogAnimation : CharacterAnimation
                     {
                         animator.SetBool("Dying", true);
                     }
+>>>>>>> 8cab54234c1119a33c0ff16551c31fc49379d06d
                     break;
 
             }
         }
+<<<<<<< HEAD
+        
+
+=======
 
         /*
          * case AttackingCharacter.PlayerState.IDLE:
@@ -93,6 +122,7 @@ public class FrogAnimation : CharacterAnimation
                     }
                     break;
                     */
+>>>>>>> 8cab54234c1119a33c0ff16551c31fc49379d06d
 
     }
 

@@ -83,6 +83,7 @@ public class ChaosHealtBar : Image
 
     public void FillAmount(float amount)
     {
+
         //if it is not a regular healtbar
         if(halfTriangles != null && halfTriangles.Length > 0)
         {
@@ -94,7 +95,9 @@ public class ChaosHealtBar : Image
             }
             else
             {
+
                 int i = halfTriangles.Length - 1;
+                //part to lose
                 float part = (1 - amount) * (halfTriangles.Length - 1);
                 while (part > 0 && i > 0)
                 {
