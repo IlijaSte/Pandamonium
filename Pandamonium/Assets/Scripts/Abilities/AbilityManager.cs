@@ -21,13 +21,44 @@ public class AbilityManager : MonoBehaviour {
 
         // MENJATI
 
-        AddAbility(abilityPrefabs[0].GetComponent<Ability>());
-        AddAbility(abilityPrefabs[1].GetComponent<Ability>());
+        if (SaveManager.I.gameState != null)
+        {
+            foreach (string abName in SaveManager.I.gameState.abilities)
+            {
+                foreach (GameObject ability in abilityPrefabs)
+                {
+                    Ability ab = ability.GetComponent<Ability>();
+
+                    if (ab.abilityName.Equals(abName))
+                    {
+                        AddAbility(ab);
+                    }
+                }
+            }
+        }
+        else
+        {
+            AddAbility(abilityPrefabs[0].GetComponent<Ability>());
+            AddAbility(abilityPrefabs[1].GetComponent<Ability>());
+        }
 
         /*foreach (GameObject prefab in abilityPrefabs)
         {
             abilities.Add(Instantiate(prefab, transform).GetComponent<Ability>());
         }*/
+    }
+
+    public List<string> GetAbilities()
+    {
+
+        List<string> ret = new List<string>();
+
+        foreach(Ability ability in abilities)
+        {
+            ret.Add(ability.abilityName);
+        }
+
+        return ret;
     }
 
     public void AddAbility(Ability ability)

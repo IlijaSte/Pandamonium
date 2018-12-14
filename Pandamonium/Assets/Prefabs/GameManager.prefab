@@ -53,6 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInstance: {fileID: 0}
+  currentLevel: 0
+  nextScene: 
 --- !u!114 &114845349572401252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -64,3 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eeaf4c7f7944e146854697612aec230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState:
+    gameLevel: 0
+    coins: 0

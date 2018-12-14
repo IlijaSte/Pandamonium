@@ -49,7 +49,8 @@ public class SaveManager : MonoBehaviour {
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(savePath);
-        GameState game = new GameState(GameManager.I.currentLevel, (GameManager.I.playerInstance as PlayerWithJoystick).coins);
+        PlayerWithJoystick player = GameManager.I.playerInstance as PlayerWithJoystick;
+        GameState game = new GameState(GameManager.I.currentLevel, player.coins, player.abilityManager.GetAbilities());
         gameState = game;
         bf.Serialize(file, game);
         file.Close();
@@ -66,6 +67,11 @@ public class SaveManager : MonoBehaviour {
             gameState = game;
            // (GameManager.I.playerInstance as PlayerWithJoystick).coins = game.coins;
 
+            foreach(string ability in gameState.abilities)
+            {
+                print(ability);
+            }
+
             file.Close();
         }
         else
@@ -81,10 +87,13 @@ public class SaveManager : MonoBehaviour {
         public int gameLevel;
         public int coins;
 
-        public GameState(int gameLevel, int coins)
+        public List<string> abilities;
+
+        public GameState(int gameLevel, int coins, List<string> abilities)
         {
             this.gameLevel = gameLevel;
             this.coins = coins;
+            this.abilities = abilities;
         }
 
     }

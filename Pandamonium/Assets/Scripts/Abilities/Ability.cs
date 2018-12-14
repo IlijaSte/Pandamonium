@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Ability : MonoBehaviour {
 
+    public string abilityName;
+
     public float cooldown = 1;
     public float range = 5;
     public float damage = 1;
