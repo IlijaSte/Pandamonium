@@ -184,10 +184,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4512340879041576}
+  - component: {fileID: 114928499536954650}
   - component: {fileID: 114488719264996668}
   - component: {fileID: 61351630708410954}
   - component: {fileID: 50111874687818898}
-  - component: {fileID: 114928499536954650}
   m_Layer: 15
   m_Name: Worm
   m_TagString: Enemy
@@ -515,9 +515,6 @@ MonoBehaviour:
   equippedWeaponIndex: 0
   maxHealth: 25
   type: 1
-  dashCooldown: 6
-  dashSpeed: 12
-  maxDashRange: 4
   normalSpeed: 6
   healthBar: {fileID: 114946352627019972}
   nextAttackBar: {fileID: 114220975770498124}

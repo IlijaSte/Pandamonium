@@ -69,6 +69,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   speed: 1
-  range: 5
+  knockback: 0
+  knockbackForce: 5
+  range: 3
+  timeToAttack: 0
+  parent: {fileID: 0}
   projectileSpeed: 6
   firePrefab: {fileID: 1714793588657250, guid: 3661731ec6bccf5478d07ac6ec8ba79f, type: 2}

@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class Dash : Ability {
 
-    public float dashSpeed = 5;
+    //public float dashSpeed = 5;
+
+    public float maxDashRange = 4;
 
     private bool isJumping = false;
 
@@ -37,7 +39,7 @@ public class Dash : Ability {
         lastPos = transform.position;
         distancePassed = 0f;
         //rb.drag = 0;
-        rb.AddForce(am.parent.GetFacingDirection() * am.parent.maxDashRange * rb.drag, ForceMode2D.Impulse);
+        rb.AddForce(am.parent.GetFacingDirection() * maxDashRange * rb.drag, ForceMode2D.Impulse);
     }
 
     private void FixedUpdate()

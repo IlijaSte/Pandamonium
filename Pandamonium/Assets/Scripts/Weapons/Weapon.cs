@@ -12,10 +12,6 @@ public abstract class Weapon : MonoBehaviour {
     public bool knockback = false;
     public float knockbackForce = 5;
 
-    [HideInInspector]
-    public InputField iField;
-
-    [HideInInspector]
     public float range;
 
     protected bool attacking = false;
@@ -41,16 +37,11 @@ public abstract class Weapon : MonoBehaviour {
     {
         attacking = false;
         timeToAttack = 1;
-
-        if (iField)
-        {
-            knockbackForce = float.Parse(iField.text);
-        }
     }
 
     private void Start()
     {
-        range = GetComponent<CircleCollider2D>().radius;
+        GetComponent<CircleCollider2D>().radius = range;
 
         if(parent == null)
         {
@@ -78,10 +69,7 @@ public abstract class Weapon : MonoBehaviour {
                 Attack(target);
                 timeToAttack = 1;
             }
-        }/*else if(GameManager.joystick && timeToAttack > 0)
-        {
-            timeToAttack -= speed * Time.deltaTime;
-        }*/
+        }
         
     }
 

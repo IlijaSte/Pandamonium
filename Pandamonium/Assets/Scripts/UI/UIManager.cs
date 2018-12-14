@@ -9,6 +9,9 @@ public class UIManager : MonoBehaviour {
     public Canvas joystickCanvas;
     public Canvas minimapCanvas;
 
+    public ChaosHealtBar healthBar;
+    public Image energyBar;
+    public Text coinsText;
     public Text combatTextPrefab;
 
     public Button attackButton;
