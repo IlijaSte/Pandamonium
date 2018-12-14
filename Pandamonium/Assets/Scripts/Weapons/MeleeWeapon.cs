@@ -5,6 +5,7 @@ using UnityEngine;
 public class MeleeWeapon : Weapon
 {
     public float cleaveAngle = 180;
+    public WeaponAnimation animator;
 
     override public bool Attack(Transform target)
     {
@@ -36,6 +37,9 @@ public class MeleeWeapon : Weapon
 
         if (timeToAttack > 0)
             return 0;
+
+        if(animator)
+            animator.WeaponStrike();
 
         List<Transform> visibleTargets = new List<Transform>();
 

@@ -35,7 +35,7 @@ public class WeaponAnimation : AnimationMama {
     {
         //  animator.SetLayerWeight(3, 1);
         print(weapon.timeToAttack);
-        if(weapon.timeToAttack == 1)
+        if(weapon.timeToAttack <= 0)
             animator.SetTrigger("WeaponStrike");
     }
 
