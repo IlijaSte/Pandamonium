@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Pathfinding;
 
-public class AttackingCharacter : MonoBehaviour {
+public abstract class AttackingCharacter : MonoBehaviour {
 
     public Weapon[] weapons;
     public int equippedWeaponIndex;                                               // opremljeno oruzje igraca
@@ -14,10 +14,6 @@ public class AttackingCharacter : MonoBehaviour {
     public enum CharacterType { PLAYER, ENEMY }
     public CharacterType type;
 
-    public float dashCooldown = 6;
-    public float dashSpeed = 12;
-    public float maxDashRange = 4;
-
     public float normalSpeed = 6;
 
     public ChaosHealtBar healthBar;
@@ -26,8 +22,6 @@ public class AttackingCharacter : MonoBehaviour {
     public CharacterVision vision;
 
     protected GameObject nextAttackBG;
-
-    protected Transform target = null;                                          // 2D objekat koji igrac napada/prati
 
     public enum PlayerState { IDLE, CHASING_ENEMY, ATTACKING, WALKING, DASHING, IMMOBILE }                     
     
@@ -44,11 +38,6 @@ public class AttackingCharacter : MonoBehaviour {
 
     protected AIPath path;
 
-    
-
-    //protected bool dashed = false;
-    protected float timeToDash;
-    protected Transform dashingAt = null;
     protected static float maxRaycastDistance = 50;
 
     protected Vector2 approxPosition;
@@ -93,11 +82,6 @@ public class AttackingCharacter : MonoBehaviour {
         if(vision == null)
             vision = transform.Find("Vision").GetComponent<CharacterVision>();
 
-        if (path)
-        {
-            path.maxSpeed = normalSpeed;
-        }
-
         health = maxHealth;
         if (type.Equals(CharacterType.PLAYER))
             healthBar.buildHealtBar(17, false);
@@ -107,40 +91,7 @@ public class AttackingCharacter : MonoBehaviour {
 
         nextAttackBG = nextAttackBar.transform.parent.gameObject;
 
-        timeToDash = dashCooldown;
-
         sprite = GetComponentInChildren<SpriteRenderer>();
-    }
-
-    public void StopAttacking()
-    {
-
-        target = null;
-        playerState = PlayerState.IDLE;
-
-        if(equippedWeaponIndex < weapons.Length)
-            weapons[equippedWeaponIndex].Stop();
-    }
-
-    public void StopMoving()
-    {
-        CM.StopMoving();
-    }
-
-    public virtual void Attack(Transform target)
-    {
-
-        if (this.target != null && target == this.target)                     // ako je target razlicit od trenutnog
-            return;
-
-        if (playerState == PlayerState.IMMOBILE)
-            return;
-
-        this.target = target;
-        CM.MoveToPosition(target.position);
-
-        playerState = PlayerState.CHASING_ENEMY;
-        weapons[equippedWeaponIndex].Stop();
     }
 
     public virtual void Attack() { }
@@ -208,65 +159,6 @@ public class AttackingCharacter : MonoBehaviour {
 
     }
 
-    // metoda za jednostavno pomeranje u tacku
-
-    public virtual void MoveToPosition(Vector3 pos)
-    {
-        if (playerState != PlayerState.IMMOBILE)
-        {
-            StopAttacking();
-            playerState = PlayerState.WALKING;
-            CM.MoveToPosition(new Vector3(pos.x, pos.y, transform.position.z));
-        }
-    }
-
-    private float stopDashingAt;
-
-    protected IEnumerator Dash(Vector3 to)
-    {
-        if (playerState == PlayerState.DASHING || playerState == PlayerState.IMMOBILE || timeToDash < dashCooldown)
-            yield break;
-
-        timeToDash = 0;
-
-        StopAttacking();
-        stopDashingAt = 0;
-
-        // krecemo da hodamo do cilja samo dok ne nadjemo celu putanju, nakon cega se ubrzavamo
-
-        MoveToPosition(to);
-
-        while (path.pathPending)
-            yield return new WaitForEndOfFrame();
-
-        if (playerState != PlayerState.WALKING)
-            yield break;
-
-        playerState = PlayerState.DASHING;
-
-        if (path.remainingDistance > maxDashRange)
-        {
-            stopDashingAt = path.remainingDistance - maxDashRange;
-        }
-
-        path.maxSpeed = dashSpeed;
-
-        
-    }
-
-    // za slucaj dash-ovanja na nesto umesto samo u tacku
-
-    protected IEnumerator Dash(Transform at)
-    {
-        if (playerState != PlayerState.IMMOBILE)
-        {
-            yield return StartCoroutine(Dash(at.position + (transform.position - at.position) * 0.4f));
-
-            // dashingAt cuva za kasnije (u Update kada zavrsi Dash) za damage-ovanje - izmeniti
-            dashingAt = at;
-        }
-    }
-
     public virtual void Heal()
     {
         health = maxHealth;
@@ -312,124 +204,6 @@ public class AttackingCharacter : MonoBehaviour {
 
         if (isDead)
             return;
-
-        if (timeToDash < dashCooldown)
-        {
-            timeToDash += Time.deltaTime;
-        }
-
-        switch (playerState)
-        {
-            case PlayerState.CHASING_ENEMY:                                     // ako trenutno juri protivnika
-                {
-
-                    if (target == null)                                         // ako je protivnik mrtav
-                    {
-                        
-                        StopAttacking();
-
-                        break;
-                    }
-
-                    if (CanSee(target)) {
-
-                        weapons[equippedWeaponIndex].StartAttacking(target);                  // krece da napada oruzjem
-                        playerState = PlayerState.ATTACKING;
-
-                        CM.StopMoving();     
-                    }
-                    else
-                    {
-                        if (!CM.destination.Equals(target.position))          // ako se protivnik u medjuvremenu pomerio
-                        {
-                            CM.MoveToPosition(target.position);
-                        }
-                    }
-
-                    break;
-                }
-
-            case PlayerState.ATTACKING:
-                {
-                    Worm worm;
-                    if (target == null || ((worm = target.GetComponent<Worm>()) != null && worm.state == Worm.WormState.BURIED))                                         // ako je protivnik mrtav
-                    {
-                        StopAttacking();
-
-                        break;
-                    }
-
-                    if (!CanSee(target)) {                                      // ako mu je protivnik nestao iz weapon range-a
-
-                        Transform tempTarget = target;
-                        StopAttacking();
-                        Attack(tempTarget);
-                    }
-
-                    break;
-                }
-
-            case PlayerState.WALKING:
-                {
-
-                    if (!path.pathPending && (path.reachedEndOfPath || !path.hasPath))      // ako je stigao do destinacije
-                    { 
-                        playerState = PlayerState.IDLE;
-                    }
-
-                    break;
-                }
-
-            case PlayerState.DASHING:
-                {
-
-                    if ((stopDashingAt == 0 && path.reachedEndOfPath) || (Mathf.Approximately(path.velocity.x, 0) && Mathf.Approximately(path.velocity.y, 0)))      // ako je stigao do destinacije
-                    {
-
-                        path.maxSpeed = normalSpeed;
-
-                        if (dashingAt)
-                        {
-                            if(weapons[equippedWeaponIndex].IsInRange(dashingAt))
-                                dashingAt.GetComponent<AttackingCharacter>().TakeDamage(weapons[equippedWeaponIndex].damage);
-                            Attack(dashingAt);
-                            dashingAt = null;
-                        }
-                        else
-                        {
-                            if (type == CharacterType.ENEMY && weapons[equippedWeaponIndex].IsInRange(GameManager.I.playerInstance.transform))
-                            {
-                                GameManager.I.playerInstance.TakeDamage(weapons[equippedWeaponIndex].damage);
-                            }
-                            playerState = PlayerState.IDLE;
-                        }
-
-                    }
-                    else if (stopDashingAt > 0 && path.remainingDistance < stopDashingAt)
-                    {
-
-                        
-                        path.maxSpeed = normalSpeed;
-
-                        if (dashingAt)
-                        {
-                            Attack(dashingAt);
-                            dashingAt = null;
-
-                        }
-                        else
-                        {
-                            if (type == CharacterType.ENEMY && weapons[equippedWeaponIndex].IsInRange(GameManager.I.playerInstance.transform))
-                            {
-                                GameManager.I.playerInstance.TakeDamage(weapons[equippedWeaponIndex].damage);
-                            }
-                            playerState = PlayerState.WALKING;
-                        }
-                    }
-                    break;
-                }
-        }
-
 
         nextAttackBar.fillAmount = 1 - weapons[equippedWeaponIndex].timeToAttack;
 
@@ -572,27 +346,9 @@ public class AttackingCharacter : MonoBehaviour {
         
     }
 
-    public virtual IEnumerator Death()
-    {
+    protected abstract IEnumerator Death();
 
-        StopAttacking();
-
-        GetComponent<Collider2D>().enabled = false;
-        healthBar.transform.parent.gameObject.SetActive(false);
-        nextAttackBar.transform.parent.gameObject.SetActive(false);
-        sprite.gameObject.SetActive(false);
-
-        if(path)
-            path.enabled = false;
-
-        playerState = PlayerState.IMMOBILE;
-
-        yield return new WaitForSeconds(3f);
-
-        Destroy(gameObject);
-    }
-
-    public virtual void Die()
+    protected virtual void Die()
     {
         if (!isDead)
         {

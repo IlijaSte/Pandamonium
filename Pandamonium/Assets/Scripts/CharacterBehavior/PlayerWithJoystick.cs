@@ -12,6 +12,7 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public float lockAngle = 60;
 
+    [HideInInspector]
     public Image energyBar;
 
     public AbilityManager abilityManager;
@@ -21,7 +22,7 @@ public class PlayerWithJoystick : AttackingCharacter {
     public Vector2 facingDirection = Vector2.down;
 
     public int coins = 0;
-    public Text coinText;
+
     public override void Awake()
     {
         if (!GameManager.joystick)
@@ -36,10 +37,12 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public override void Start()
     {
-        base.Start();
-        facingDirection = Vector2.zero;
 
-        timeToDash = dashCooldown;
+        healthBar = UIManager.I.healthBar;
+        energyBar = UIManager.I.energyBar;
+
+        base.Start();
+        facingDirection = Vector2.down;
 
         if(abilityManager == null)
         {
@@ -50,8 +53,9 @@ public class PlayerWithJoystick : AttackingCharacter {
         if (state != null)
         {
             coins = state.coins;
-            coinText.text = coins.ToString();
+            UIManager.I.coinsText.text = coins.ToString();
         }
+
     }
 
     public void PickupBlueprint(Blueprint bp)
@@ -62,7 +66,7 @@ public class PlayerWithJoystick : AttackingCharacter {
     public void PickupCoins(int amount)
     {
         coins += amount;
-        coinText.text = coins.ToString();
+        UIManager.I.coinsText.text = coins.ToString();
     }
 
     protected override void Update()
@@ -291,7 +295,7 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
     }
 
-    public override void Die()
+    protected override void Die()
     {
         if (!isDead)
         {
@@ -316,4 +320,8 @@ public class PlayerWithJoystick : AttackingCharacter {
             SaveManager.I.SaveGame();
     }
 
+    protected override IEnumerator Death()
+    {
+        yield break;
+    }
 }

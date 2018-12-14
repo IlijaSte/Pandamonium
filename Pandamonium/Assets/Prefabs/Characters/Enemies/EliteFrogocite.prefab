@@ -136,12 +136,12 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4446852320589226}
+  - component: {fileID: 114842749471232120}
   - component: {fileID: 114827865454664310}
   - component: {fileID: 114733104367778590}
   - component: {fileID: 114079399296506460}
   - component: {fileID: 61133381025590982}
   - component: {fileID: 50176549523694390}
-  - component: {fileID: 114842749471232120}
   m_Layer: 15
   m_Name: EliteFrogocite
   m_TagString: Enemy
@@ -452,8 +452,7 @@ MonoBehaviour:
   speed: 1
   knockback: 0
   knockbackForce: 5
-  iField: {fileID: 0}
-  range: 0
+  range: 4
   timeToAttack: 1
   parent: {fileID: 114842749471232120}
   projectileSpeed: 5
@@ -695,9 +694,6 @@ MonoBehaviour:
   equippedWeaponIndex: 0
   maxHealth: 25
   type: 1
-  dashCooldown: 6
-  dashSpeed: 12
-  maxDashRange: 4
   normalSpeed: 4
   healthBar: {fileID: 114540278190755616}
   nextAttackBar: {fileID: 114631011764471838}

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Pathfinding;
 
 // ponasanje igraca (kretanje, napad, ...)
-public class Player : AttackingCharacter {
+/*public class Player : AttackingCharacter {
 
     [HideInInspector]
     public bool oneClick = false;
@@ -206,4 +206,4 @@ public class Player : AttackingCharacter {
         isDead = true;
         //base.Die();
     }
-}
+}*/

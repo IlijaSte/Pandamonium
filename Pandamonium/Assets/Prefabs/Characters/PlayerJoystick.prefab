@@ -120,8 +120,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4505154834509626}
-  - component: {fileID: 50608750452462778}
   - component: {fileID: 114562331877149714}
+  - component: {fileID: 50608750452462778}
   - component: {fileID: 114357103239029832}
   - component: {fileID: 58937281963073672}
   m_Layer: 15
@@ -398,7 +398,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1587600068571070}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.18, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4017765627769762}
@@ -770,9 +770,6 @@ MonoBehaviour:
   equippedWeaponIndex: 0
   maxHealth: 200
   type: 0
-  dashCooldown: 1.5
-  dashSpeed: 1
-  maxDashRange: 6
   normalSpeed: 6
   healthBar: {fileID: 0}
   nextAttackBar: {fileID: 114338790452832874}
@@ -788,7 +785,6 @@ MonoBehaviour:
   controller: {fileID: 0}
   facingDirection: {x: 0, y: 0}
   coins: 0
-  coinText: {fileID: 0}
 --- !u!114 &114566688973802844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -848,8 +844,7 @@ MonoBehaviour:
   speed: 1
   knockback: 1
   knockbackForce: 5
-  iField: {fileID: 0}
-  range: 0
+  range: 1.876284
   timeToAttack: 1
   parent: {fileID: 114562331877149714}
   cleaveAngle: 180

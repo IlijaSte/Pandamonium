@@ -235,15 +235,15 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4446852320589226}
+  - component: {fileID: 114298731515323964}
   - component: {fileID: 114827865454664310}
   - component: {fileID: 114733104367778590}
   - component: {fileID: 114079399296506460}
   - component: {fileID: 61133381025590982}
   - component: {fileID: 50176549523694390}
-  - component: {fileID: 114298731515323964}
   - component: {fileID: 114296518519994400}
   m_Layer: 15
-  m_Name: Enemy
+  m_Name: Slime
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -704,11 +704,11 @@ MonoBehaviour:
   speed: 1
   knockback: 0
   knockbackForce: 5
-  iField: {fileID: 0}
-  range: 0
+  range: 1.5
   timeToAttack: 1
   parent: {fileID: 0}
   cleaveAngle: 90
+  animator: {fileID: 0}
 --- !u!114 &114214034657156396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -768,9 +768,6 @@ MonoBehaviour:
   equippedWeaponIndex: 0
   maxHealth: 25
   type: 1
-  dashCooldown: 6
-  dashSpeed: 8
-  maxDashRange: 2.5
   normalSpeed: 0.5
   healthBar: {fileID: 114830820382727566}
   nextAttackBar: {fileID: 114631011764471838}
@@ -783,6 +780,9 @@ MonoBehaviour:
   dropPrefabs:
   - {fileID: 1597709171064980, guid: 936e67524d0a86645b38d0abbb56d0e6, type: 2}
   dashCastTime: 1
+  dashCooldown: 6
+  dashSpeed: 8
+  maxDashRange: 2.5
 --- !u!114 &114542684223825712
 MonoBehaviour:
   m_ObjectHideFlags: 1
