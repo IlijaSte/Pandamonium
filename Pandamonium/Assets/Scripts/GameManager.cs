@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour {
 
     public void LoadNextLevel()
     {
+        SaveManager.I.SaveGame();
         currentLevel++;
         if (currentLevel >= NUM_OF_LEVELS) currentLevel = 0;
         // u build settings mora da bude game level za game levelom, redom

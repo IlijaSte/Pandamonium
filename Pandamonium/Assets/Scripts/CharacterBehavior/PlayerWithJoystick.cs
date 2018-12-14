@@ -303,9 +303,15 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
     }
 
-    private void OnDisable()
+    private void OnApplicationPause(bool paused)
     {
-        if(SaveManager.I != null)
+        if(paused && SaveManager.I != null)
+            SaveManager.I.SaveGame();
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (SaveManager.I != null)
             SaveManager.I.SaveGame();
     }
 

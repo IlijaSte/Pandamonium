@@ -23,7 +23,7 @@ public class CharacterVision : MonoBehaviour {
         {
             if (tr == null) continue;           // !!!
 
-            BoxCollider2D collider = tr.GetComponent<BoxCollider2D>();
+            Collider2D collider = tr.GetComponent<Collider2D>();
 
             if (collider == null || (collider != null && !collider.enabled)) continue;
 

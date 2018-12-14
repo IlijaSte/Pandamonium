@@ -121,9 +121,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4505154834509626}
   - component: {fileID: 50608750452462778}
-  - component: {fileID: 61104947272731624}
   - component: {fileID: 114562331877149714}
   - component: {fileID: 114357103239029832}
+  - component: {fileID: 58937281963073672}
   m_Layer: 15
   m_Name: PlayerJoystick
   m_TagString: Player
@@ -549,8 +549,8 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3.25
---- !u!61 &61104947272731624
-BoxCollider2D:
+--- !u!58 &58937281963073672
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -561,19 +561,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.031118095, y: 0.18567634}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: -0.03, y: 0.18}
   serializedVersion: 2
-  m_Size: {x: 0.66392505, y: 0.5394387}
-  m_EdgeRadius: 0
+  m_Radius: 0.34
 --- !u!95 &95044428507323028
 Animator:
   serializedVersion: 3
@@ -729,7 +719,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1587600068571070}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 183748dd497aa473a98ff0cd8cb67fc5, type: 3}
   m_Name: 
