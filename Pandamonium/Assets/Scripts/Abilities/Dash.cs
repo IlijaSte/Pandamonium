@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Pathfinding;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,17 +7,47 @@ public class Dash : Ability {
 
     public float dashSpeed = 5;
 
+    private bool isJumping = false;
+
+    private Rigidbody2D rb;
+
+    private Vector2 jumpTarget;
+
+    private Vector2 lastPos;
+    private float distancePassed = 0f;
+
+    private Collider2D col;
+
     protected override void Cast(Vector2 fromPosition, Vector2 direction)
     {
         base.Cast(fromPosition, direction);
 
-        StartCoroutine(DoDash(direction));
+        rb = am.parent.GetComponent<Rigidbody2D>();
+        col = am.parent.GetComponent<Collider2D>();
+
+        DoDash();
+        //StartCoroutine(DoDash(direction));
+
     }
 
-    protected IEnumerator DoDash(Vector2 direction)
+    void DoDash()
+    {
+        isJumping = true;
+
+        lastPos = transform.position;
+        distancePassed = 0f;
+        //rb.drag = 0;
+        rb.AddForce(am.parent.GetFacingDirection() * am.parent.maxDashRange * rb.drag, ForceMode2D.Impulse);
+    }
+
+    private void FixedUpdate()
     {
 
-        Rigidbody2D rb = am.parent.GetComponent<Rigidbody2D>();
+    }
+    /*protected IEnumerator DoDash(Vector2 direction)
+    {
+
+        
 
         if (!direction.Equals(Vector2.zero))
         {
@@ -37,6 +68,6 @@ public class Dash : Ability {
             am.parent.playerState = AttackingCharacter.PlayerState.IDLE;
 
         }
-    }
+    }*/
 
 }

@@ -238,11 +238,13 @@ public class PlayerWithJoystick : AttackingCharacter {
     protected void IncreaseEnergy(float amount)
     {
         energy = Mathf.Clamp(energy + amount, 0, maxEnergy);
+        abilityManager.UpdateAbilityButtons();
     }
 
     public void DecreaseEnergy(float amount)
     {
         energy = Mathf.Clamp(energy - amount, 0, maxEnergy);
+        abilityManager.UpdateAbilityButtons();
     }
 
     public override void Attack()
@@ -288,7 +290,6 @@ public class PlayerWithJoystick : AttackingCharacter {
             healthBar.FillAmount(health / maxHealth);
         }
     }
-
 
     public override void Die()
     {

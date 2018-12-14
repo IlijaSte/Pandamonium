@@ -771,8 +771,8 @@ MonoBehaviour:
   maxHealth: 200
   type: 0
   dashCooldown: 1.5
-  dashSpeed: 16
-  maxDashRange: 4
+  dashSpeed: 1
+  maxDashRange: 6
   normalSpeed: 6
   healthBar: {fileID: 0}
   nextAttackBar: {fileID: 114338790452832874}

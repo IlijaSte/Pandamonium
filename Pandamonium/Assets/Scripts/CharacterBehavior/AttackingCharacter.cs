@@ -157,6 +157,11 @@ public class AttackingCharacter : MonoBehaviour {
 
     }
 
+    public Room GetRoom()
+    {
+        return LevelGeneration.I.GetRoomAtPos(transform.position);
+    }
+
     public virtual Vector2 GetFacingDirection()
     {
         return rb.velocity;

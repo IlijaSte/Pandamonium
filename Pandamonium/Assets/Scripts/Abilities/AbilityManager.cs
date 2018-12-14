@@ -42,6 +42,8 @@ public class AbilityManager : MonoBehaviour {
             AddAbility(abilityPrefabs[1].GetComponent<Ability>());
         }
 
+        UpdateAbilityButtons();
+
         /*foreach (GameObject prefab in abilityPrefabs)
         {
             abilities.Add(Instantiate(prefab, transform).GetComponent<Ability>());
@@ -157,5 +159,25 @@ public class AbilityManager : MonoBehaviour {
             return;
 
         UIManager.I.UpdateAbilityCooldown(abilities.IndexOf(ability), progress);
+    }
+
+    public void UpdateAbilityButtons()
+    {
+        PlayerWithJoystick player = parent as PlayerWithJoystick;
+
+        int i = 0;
+
+        foreach(Ability ability in abilities)
+        {
+            if(player.energy < ability.manaCost)
+            {
+                UIManager.I.DisableAbilityButton(i);
+            }
+            else
+            {
+                UIManager.I.EnableAbilityButton(i);
+            }
+            i++;
+        }
     }
 }

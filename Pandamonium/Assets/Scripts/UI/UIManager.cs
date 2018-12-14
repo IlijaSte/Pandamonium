@@ -88,4 +88,14 @@ public class UIManager : MonoBehaviour {
     {
         abilityButtonHolders[index].GetChild(1).GetComponent<Image>().fillAmount = progress;
     }
+    
+    public void DisableAbilityButton(int index)
+    {
+        abilityButtonHolders[index].GetChild(1).GetComponent<Image>().enabled = false;
+    }
+
+    public void EnableAbilityButton(int index)
+    {
+        abilityButtonHolders[index].GetChild(1).GetComponent<Image>().enabled = true;
+    }
 }

@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 4541395170774058}
   - component: {fileID: 8195094282336533546}
   - component: {fileID: 3664157343285624482}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 4035520449097284}
   - component: {fileID: 8195094279614831344}
   - component: {fileID: 3664157345545966878}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CorridorTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
