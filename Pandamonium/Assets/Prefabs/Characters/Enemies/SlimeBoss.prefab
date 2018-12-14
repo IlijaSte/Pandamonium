@@ -204,8 +204,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4693524041302680}
-  - component: {fileID: 114121924634983892}
   - component: {fileID: 114020503871049822}
+  - component: {fileID: 114121924634983892}
   - component: {fileID: 114295290870350862}
   - component: {fileID: 114718712080257254}
   - component: {fileID: 61725077377612850}
@@ -488,14 +488,16 @@ MonoBehaviour:
   equippedWeaponIndex: 0
   maxHealth: 100
   type: 1
-  vision: {fileID: 114184462561219684}
-  dashCooldown: 6
-  dashSpeed: 12
-  healthBar: {fileID: 114277197262475798}
-  nextAttackBar: {fileID: 114231558236676070}
   normalSpeed: 2
-  maxDashRange: 4
+  healthBar: {fileID: 0}
+  nextAttackBar: {fileID: 114231558236676070}
+  vision: {fileID: 114184462561219684}
+  playerState: 0
+  ignoreMask: 0
   isDead: 0
+  difficulty: 1
+  coinPrefab: {fileID: 0}
+  dropPrefabs: []
   enemySpawnInterval: 10
   spawnRadius: 5
   enemyPrefab: {fileID: 1628753790980070, guid: 75c84e6b6e1cac542a790e6e97eb2d12,
@@ -719,9 +721,11 @@ MonoBehaviour:
   speed: 0.5
   knockback: 0
   knockbackForce: 5
-  iField: {fileID: 0}
-  range: 0
+  range: 0.95
   timeToAttack: 1
+  parent: {fileID: 0}
+  cleaveAngle: 180
+  animator: {fileID: 0}
 --- !u!114 &114705409338819484
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -69,4 +69,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   speed: 5
-  range: 0
+  knockback: 0
+  knockbackForce: 5
+  range: 1
+  timeToAttack: 0
+  parent: {fileID: 0}
+  cleaveAngle: 180
+  animator: {fileID: 0}

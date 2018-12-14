@@ -23,18 +23,23 @@ public class Enemy : AttackingCharacter {
 
     protected bool detectedPlayer = false;
 
+    protected Transform target = null;                                          // 2D objekat koji igrac napada/prati
+
     public override void Start()
     {
         numEnemies ++;
 
         base.Start();
 
-        //healthBar = transform.GetComponentsInChildren<ChaosHealtBar>()[0];//.Find("HealthBarBG").Find("HealthBar").GetComponent<ChaosHealtBar>();
-
         type = CharacterType.ENEMY;
 
         room = LevelGeneration.I.GetRoomAtPos(transform.position);
         startPos = transform.position;
+
+        if (path)
+        {
+            path.maxSpeed = normalSpeed;
+        }
 
         /*approxPosition = new Vector2(Mathf.Floor(transform.position.x), Mathf.Floor(transform.position.y)) + new Vector2(0.5f, 0.5f);
         currBounds = new Bounds(approxPosition, Vector3.one);
@@ -49,6 +54,32 @@ public class Enemy : AttackingCharacter {
         player = GameManager.I.playerInstance.transform;
     }
 
+    public virtual void MoveToPosition(Vector3 pos)
+    {
+        if (playerState != PlayerState.IMMOBILE)
+        {
+            StopAttacking();
+            playerState = PlayerState.WALKING;
+            CM.MoveToPosition(new Vector3(pos.x, pos.y, transform.position.z));
+        }
+    }
+
+    public virtual void Attack(Transform target)
+    {
+
+        if (this.target != null && target == this.target)                     // ako je target razlicit od trenutnog
+            return;
+
+        if (playerState == PlayerState.IMMOBILE)
+            return;
+
+        this.target = target;
+        CM.MoveToPosition(target.position);
+
+        playerState = PlayerState.CHASING_ENEMY;
+        weapons[equippedWeaponIndex].Stop();
+    }
+
     protected void DropItem()
     {
         if(Random.Range(0, (float)1) >= 0.95f && dropPrefabs.Length > 0)
@@ -60,6 +91,21 @@ public class Enemy : AttackingCharacter {
         Instantiate(coinPrefab, transform.position, Quaternion.identity).GetComponent<Collectible>().SetDropDirection((transform.position - player.position).normalized);
     }
 
+    public void StopAttacking()
+    {
+
+        target = null;
+        playerState = PlayerState.IDLE;
+
+        if (equippedWeaponIndex < weapons.Length)
+            weapons[equippedWeaponIndex].Stop();
+    }
+
+    public void StopMoving()
+    {
+        CM.StopMoving();
+    }
+
     protected override void Update()
     {
 
@@ -69,29 +115,89 @@ public class Enemy : AttackingCharacter {
 
         switch (playerState)
         {
-
-            case PlayerState.ATTACKING:
-
-            case PlayerState.CHASING_ENEMY:
-
-                if (target == null)
-                {
-                    StopAttacking();
-                    StopMoving();
-                    detectedPlayer = false;
-                }
-                else
+            case PlayerState.CHASING_ENEMY:                                     // ako trenutno juri protivnika
                 {
 
-                    if (LevelGeneration.I.GetRoomAtPos(target.position) != room)
+                    if (target == null)                                         // ako je protivnik mrtav
+                    {
+
+                        StopAttacking();
+                        StopMoving();
+                        detectedPlayer = false;
+                        break;
+                    }
+
+                    if (CanSee(target))
+                    {
+
+                        weapons[equippedWeaponIndex].StartAttacking(target);                  // krece da napada oruzjem
+                        playerState = PlayerState.ATTACKING;
+
+                        CM.StopMoving();
+                    }
+                    else if (!CM.destination.Equals(target.position))          // ako se protivnik u medjuvremenu pomerio
+                    {
+                        CM.MoveToPosition(target.position);
+                    }
+                    else if (LevelGeneration.I.GetRoomAtPos(target.position) != room)
                     {
                         MoveToPosition(startPos);
                         detectedPlayer = false;
                     }
+                    
+
+                    break;
                 }
 
-                break;
+            case PlayerState.ATTACKING:
+                {
+                    Worm worm;
+                    if (target == null || ((worm = target.GetComponent<Worm>()) != null && worm.state == Worm.WormState.BURIED))                                         // ako je protivnik mrtav
+                    {
+                        StopAttacking();
+                        StopMoving();
+                        detectedPlayer = false;
+                        break;
+                    }
 
+                    if (!CanSee(target))
+                    {                                      // ako mu je protivnik nestao iz weapon range-a
+
+                        Transform tempTarget = target;
+                        StopAttacking();
+                        Attack(tempTarget);
+                    }
+                    else if (LevelGeneration.I.GetRoomAtPos(target.position) != room)
+                    {
+                        MoveToPosition(startPos);
+                        detectedPlayer = false;
+                    }
+
+                    break;
+                }
+
+            case PlayerState.WALKING:
+                {
+
+                    if (!path.pathPending && (path.reachedEndOfPath || !path.hasPath))      // ako je stigao do destinacije
+                    {
+                        playerState = PlayerState.IDLE;
+                    }else
+
+                    if (((Vector2)path.destination).Equals(startPos))      // ako se vraca na mesto
+                    {
+                        Transform closest;
+
+                        if ((closest = vision.GetClosest()) != null && LevelGeneration.I.GetRoomAtPos(closest.position) == room)
+                        {
+                            Attack(closest);
+                        }
+                    }
+
+
+
+                    break;
+                }
             case PlayerState.IDLE:
                 {
                     if (!detectedPlayer)
@@ -112,20 +218,6 @@ public class Enemy : AttackingCharacter {
                     break;
                 }
 
-            case PlayerState.WALKING:
-                {
-                    if (((Vector2)path.destination).Equals(startPos))      // ako se vraca na mesto
-                    {
-                        Transform closest;
-
-                        if ((closest = vision.GetClosest()) != null && LevelGeneration.I.GetRoomAtPos(closest.position) == room)
-                        {
-                            Attack(closest);
-                        }
-                    }
-
-                    break;
-                }
         }
     }
 
@@ -140,7 +232,26 @@ public class Enemy : AttackingCharacter {
         }
     }
 
-    public override void Die()
+    protected override IEnumerator Death()
+    {
+        StopAttacking();
+
+        GetComponent<Collider2D>().enabled = false;
+        healthBar.transform.parent.gameObject.SetActive(false);
+        nextAttackBar.transform.parent.gameObject.SetActive(false);
+        sprite.gameObject.SetActive(false);
+
+        if (path)
+            path.enabled = false;
+
+        playerState = PlayerState.IMMOBILE;
+
+        yield return new WaitForSeconds(3f);
+
+        Destroy(gameObject);
+    }
+
+    protected override void Die()
     {
         DropCoins();
 

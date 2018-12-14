@@ -6,11 +6,66 @@ public class Slime : Enemy {
 
     public float dashCastTime = 1;
 
+    public float dashCooldown = 6;
+    public float dashSpeed = 12;
+    public float maxDashRange = 4;
+
+    protected float timeToDash;
     protected bool isCharging = false;
 
     public override void Start()
     {
         base.Start();
+        timeToDash = dashCooldown;
+    }
+
+    private float stopDashingAt;
+
+    protected Transform dashingAt = null;
+
+    protected IEnumerator Dash(Vector3 to)
+    {
+        if (playerState == PlayerState.DASHING || playerState == PlayerState.IMMOBILE || timeToDash < dashCooldown)
+            yield break;
+
+        timeToDash = 0;
+
+        StopAttacking();
+        stopDashingAt = 0;
+
+        // krecemo da hodamo do cilja samo dok ne nadjemo celu putanju, nakon cega se ubrzavamo
+
+        MoveToPosition(to);
+
+        while (path.pathPending)
+            yield return new WaitForEndOfFrame();
+
+        if (playerState != PlayerState.WALKING)
+            yield break;
+
+        playerState = PlayerState.DASHING;
+
+        if (path.remainingDistance > maxDashRange)
+        {
+            stopDashingAt = path.remainingDistance - maxDashRange;
+        }
+
+        path.maxSpeed = dashSpeed;
+
+
+    }
+
+    // za slucaj dash-ovanja na nesto umesto samo u tacku
+
+    protected IEnumerator Dash(Transform at)
+    {
+        if (playerState != PlayerState.IMMOBILE)
+        {
+            yield return StartCoroutine(Dash(at.position + (transform.position - at.position) * 0.4f));
+
+            // dashingAt cuva za kasnije (u Update kada zavrsi Dash) za damage-ovanje - izmeniti
+            dashingAt = at;
+        }
     }
 
     protected IEnumerator StartDashing()
@@ -53,9 +108,57 @@ public class Slime : Enemy {
         }
 
         base.Update();
+
+        if(playerState == PlayerState.DASHING)
+        {
+
+            if ((stopDashingAt == 0 && path.reachedEndOfPath) || (Mathf.Approximately(path.velocity.x, 0) && Mathf.Approximately(path.velocity.y, 0)))      // ako je stigao do destinacije
+            {
+
+                path.maxSpeed = normalSpeed;
+
+                if (dashingAt)
+                {
+                    if (weapons[equippedWeaponIndex].IsInRange(dashingAt))
+                        dashingAt.GetComponent<AttackingCharacter>().TakeDamage(weapons[equippedWeaponIndex].damage);
+                    Attack(dashingAt);
+                    dashingAt = null;
+                }
+                else
+                {
+                    if (type == CharacterType.ENEMY && weapons[equippedWeaponIndex].IsInRange(GameManager.I.playerInstance.transform))
+                    {
+                        GameManager.I.playerInstance.TakeDamage(weapons[equippedWeaponIndex].damage);
+                    }
+                    playerState = PlayerState.IDLE;
+                }
+
+            }
+            else if (stopDashingAt > 0 && path.remainingDistance < stopDashingAt)
+            {
+
+
+                path.maxSpeed = normalSpeed;
+
+                if (dashingAt)
+                {
+                    Attack(dashingAt);
+                    dashingAt = null;
+
+                }
+                else
+                {
+                    if (type == CharacterType.ENEMY && weapons[equippedWeaponIndex].IsInRange(GameManager.I.playerInstance.transform))
+                    {
+                        GameManager.I.playerInstance.TakeDamage(weapons[equippedWeaponIndex].damage);
+                    }
+                    playerState = PlayerState.WALKING;
+                }
+            }
+        }
     }
 
-    public override void Die()
+    protected override void Die()
     {
 
         DropItem();
