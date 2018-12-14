@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b6eaed189271644889a2c0d047ee28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityName: fireball
   cooldown: 0.5
   range: 7
   damage: 5
@@ -59,6 +60,7 @@ MonoBehaviour:
   knockbackForce: 1
   buttonSprite: {fileID: 21300000, guid: cac1d946af6d000409c242abce796483, type: 3}
   bgSprite: {fileID: 21300000, guid: a4be0568e32caef4f8139cd4f2222f6c, type: 3}
+  am: {fileID: 0}
   projectileSpeed: 7
   fireballPrefab: {fileID: 1236645130428778, guid: f21b03d8107c94c42be901673b45d45a,
     type: 2}
