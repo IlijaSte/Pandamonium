@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChaosHealtBar : Image
+public class ChaosHealtBar : ChaosBar
 {
+    enum BarType { HEALTH, POISIOM, ENERGY}
 
     private ChaosHealtBar[] halfTriangles;
     private ChaosHealtBar[] halfTrianglesBG;
@@ -14,9 +15,9 @@ public class ChaosHealtBar : Image
     private Transform foregroundParent;
     private Transform backgroundParent;
 
-    private Color32[] colorsForeground;
-    private Color32[] colorsTriangle;
-    private Color32[] colorsPoison;
+    private Color[] colorsBackground;
+    private Color[] colorsForeground;
+    private Color[] colorsPoison;
 
     private Vector2 triangleOriginDistances;
 
@@ -29,37 +30,48 @@ public class ChaosHealtBar : Image
         else triangleOriginDistances = new Vector2(11f, 2f);
     }
 
-    private void SetColors()
+    
+    private void SetColors(HealthBarHolder hbh)
     {
-        colorsTriangle = new Color32[2];
-        colorsPoison = new Color32[2];
-        colorsForeground = new Color32[2];
-        colorsForeground[0] = colorsForeground[1] = new Color32(48, 19, 20, 255);
-        colorsTriangle[0] = new Color32(130, 25, 34, 255);
-        colorsTriangle[1] = new Color32(165, 30, 35, 255);
-        //posion color:
-    }
+        colorsBackground = hbh.colorsBackground;
+        colorsForeground = hbh.colorsForeground;
+        colorsPoison = hbh.colorsPoison;
+
+    /*
+    colorsForeground = new Color32[2];
+    colorsPoison = new Color32[2];
+    colorsBackground = new Color32[2];
+    colorsBackground[0] = colorsBackground[1] = new Color32(48, 19, 20, 255);
+    colorsForeground[0] = new Color32(130, 25, 34, 255);
+    colorsForeground[1] = new Color32(165, 30, 35, 255);
+    */
+
+    //posion color:
+}
+    
 
     public void buildHealtBar(int numTriangles, bool isMini)
     {
         this.isMini = isMini;
 
         SetTriangleOriginDistances();
-        SetColors();
+        //SetColors();
 
         HealthBarHolder hbh = GetComponent<HealthBarHolder>();
         prefabs = hbh.halfTrianglesPrefabs;
         foregroundParent = hbh.foregroundParent;
         backgroundParent = hbh.backgroundParent;
-        
+
+        SetColors(hbh);
+
 
         halfTriangles = new ChaosHealtBar[numTriangles * 2];
         halfTrianglesBG = new ChaosHealtBar[numTriangles * 2];
 
-        InstantiateTriangles(colorsForeground, triangleOriginDistances, halfTrianglesBG, backgroundParent);
-        InstantiateTriangles(colorsTriangle, triangleOriginDistances, halfTriangles, foregroundParent);
+        InstantiateTriangles(colorsBackground, triangleOriginDistances, halfTrianglesBG, backgroundParent);
+        InstantiateTriangles(colorsForeground, triangleOriginDistances, halfTriangles, foregroundParent);
     }
-    private void InstantiateTriangles(Color32[] colors, Vector2 distances, ChaosHealtBar[] halfTriangles, Transform parentObject)
+    private void InstantiateTriangles(Color[] colors, Vector2 distances, ChaosHealtBar[] halfTriangles, Transform parentObject)
     {
         Vector3 position = Vector3.zero;
         for (int i = 0; i < halfTriangles.Length; i += 2)
@@ -119,6 +131,7 @@ public class ChaosHealtBar : Image
         return triangle.color.Equals(new Color(0, 0, 0, 0));
     }
    
+
 }
 	
 	

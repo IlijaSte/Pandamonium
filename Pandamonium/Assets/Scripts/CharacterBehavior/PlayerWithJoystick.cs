@@ -252,6 +252,7 @@ public class PlayerWithJoystick : AttackingCharacter {
         {
             int numHit = ((MeleeWeapon)weapons[equippedWeaponIndex]).AttackCleave();
             IncreaseEnergy(numHit * weapons[equippedWeaponIndex].damage);
+           
         }
 
     }

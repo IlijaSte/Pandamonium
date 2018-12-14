@@ -26,5 +26,13 @@ public abstract class AnimationMama : MonoBehaviour {
             sr.flipX = true;
         else sr.flipX = false;
     }
+    protected virtual void updateAngleTo360()
+    {
 
+        if (vector2.y < 0)
+            angle = 180 + 180 - Vector2.Angle(vector2, new Vector2(1, 0));
+        else
+            angle = Vector2.Angle(vector2, new Vector2(1, 0));
+
+    }
 }

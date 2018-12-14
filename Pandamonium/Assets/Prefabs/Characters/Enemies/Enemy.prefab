@@ -910,6 +910,15 @@ MonoBehaviour:
   - {fileID: 114494268493945388, guid: 85275db898f93324694c1abe63d2bd0f, type: 2}
   backgroundParent: {fileID: 224244275737027684}
   foregroundParent: {fileID: 224865116528386428}
+  colorsBackground:
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  colorsForeground:
+  - {r: 0.64705884, g: 0.1137255, b: 0.13725491, a: 1}
+  - {r: 0.5058824, g: 0.098039225, b: 0.12941177, a: 1}
+  colorsPoison:
+  - {r: 2.7816e-41, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 2.7819e-41, a: 1}
 --- !u!114 &114827865454664310
 MonoBehaviour:
   m_ObjectHideFlags: 1
