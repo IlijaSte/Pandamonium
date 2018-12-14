@@ -20,7 +20,7 @@ public abstract class Weapon : MonoBehaviour {
 
     protected bool attacking = false;
     [HideInInspector]
-    public float timeToAttack = 1;     // brojac koji se smanjuje u zavisnosti od brzine oruzja, kada dodje do 0 ispali se projektil i vraca se brojac na 1
+    public float timeToAttack = 0;     // brojac koji se smanjuje u zavisnosti od brzine oruzja, kada dodje do 0 ispali se projektil i vraca se brojac na 1
     protected Transform target;
 
     protected ArrayList enemiesInRange = new ArrayList();                                                                                                                     //DZO JE SERONJA!!! 09.18.2018. Djole :)
