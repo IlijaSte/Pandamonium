@@ -779,6 +779,7 @@ MonoBehaviour:
   ignoreMask: 0
   isDead: 0
   difficulty: 1
+  coinPrefab: {fileID: 1606118361087090, guid: ac91c914535a4d14a9dc3d1d0ea9e513, type: 2}
   dropPrefabs:
   - {fileID: 1597709171064980, guid: 936e67524d0a86645b38d0abbb56d0e6, type: 2}
   dashCastTime: 1

@@ -14,6 +14,7 @@ public class Enemy : AttackingCharacter {
 
     public int difficulty = 1;
 
+    public GameObject coinPrefab;
     public GameObject[] dropPrefabs;
 
     protected Vector2 startPos;
@@ -52,6 +53,11 @@ public class Enemy : AttackingCharacter {
     {
         if(Random.Range(0, (float)1) >= 0.95f && dropPrefabs.Length > 0)
             Instantiate(dropPrefabs[Random.Range(0, dropPrefabs.Length)], transform.position, Quaternion.identity);
+    }
+
+    protected void DropCoins(int amount = 1)
+    {
+        Instantiate(coinPrefab, transform.position, Quaternion.identity);
     }
 
     protected override void Update()
@@ -136,6 +142,9 @@ public class Enemy : AttackingCharacter {
 
     public override void Die()
     {
+
+        DropCoins();
+
         numEnemies--;
         if (numEnemies == 0)
             areAllEnemiesDead = true;
