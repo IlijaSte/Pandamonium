@@ -9,29 +9,20 @@ namespace LevelManagment
     {
         public void OnNextLevelPressed()
         {
-            //Time.timeScale = 1;
-            //if (GameManager.Instance != null)
-            //{
-            //    GameManager.Instance.LoadNextLevel();
-            //}
+            GameManager.I.LoadNextLevel();
             base.OnBackPressed();
-            LevelLoader.LoadNextLevel();
-            //SceneManager.LoadScene(1);
         }
 
         public void OnRestartPressed()
         {
-            //Time.timeScale = 1;
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            base.OnBackPressed();
-            LevelLoader.ReloadLevel();
+            GameManager.I.LoadSceneLong(SceneManager.GetActiveScene().name);
         }
 
         public void OnMainMenuPressed()
         {
-            //Time.timeScale = 1;
-            //MainMenu.Open();
-            LevelLoader.LoadMainMenuLevel();
+            GameManager.I.LoadScene("MainMenu");
+
+            // ???
             MainMenu.Open();
         }
     }

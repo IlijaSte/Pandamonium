@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class Room {
     public Vector2Int gridPos;
 
-    public enum RoomType {DEFAULT, START, OBELISK }
+    public enum RoomType {DEFAULT, START, OBELISK, INTRO }
     public RoomType type;
 
 	//public int type;
@@ -24,6 +24,8 @@ public class Room {
     public ArrayList enemies;
 
     public Vector2 spawnPoint;
+
+    public Room nextTo;
 
     public Room(Vector2Int _gridPos, RoomType _type){
 		gridPos = _gridPos;

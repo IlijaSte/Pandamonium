@@ -75,3 +75,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1700260222444396, guid: 66971591d1a919a48a5680d93b460688, type: 2}
   deathMenu: {fileID: 1855370371046284, guid: 1b1e86775836ce64d8bf293366862809, type: 2}
+  gameEndMenu: {fileID: 1161247890817298, guid: d354c7e484310f245aad2b8415f5b4dd,
+    type: 2}

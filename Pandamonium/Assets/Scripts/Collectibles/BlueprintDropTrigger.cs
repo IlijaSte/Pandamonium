@@ -18,6 +18,8 @@ public class BlueprintDropTrigger : MonoBehaviour {
 
         if(collision.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
         {
+            MenuManager.I.ShowMenu(MenuManager.I.gameEndMenu);
+            //GameManager.I.LevelEnd();
             Drop();
         }
     }

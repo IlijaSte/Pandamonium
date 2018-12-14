@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 222308690945566974}
   - component: {fileID: 114498631824937664}
   - component: {fileID: 114003154739172468}
+  - component: {fileID: 114647685499194024}
   m_Layer: 5
   m_Name: ButtonTutorial
   m_TagString: Untagged
@@ -92,6 +93,7 @@ GameObject:
   - component: {fileID: 222922052712249550}
   - component: {fileID: 114917246971979478}
   - component: {fileID: 114426022831381990}
+  - component: {fileID: 114354536097429958}
   m_Layer: 5
   m_Name: ButtonPlay
   m_TagString: Untagged
@@ -258,18 +260,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114498631824937664}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: LoadSceneLong
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: TutorialScene
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114018539961310392
@@ -454,6 +445,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114354536097429958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1455515640994018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d5688b6b409be4da3042d146c5a97c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gotoScene: CharacterSelection
+  longLoad: 0
 --- !u!114 &114397896776487372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -508,18 +512,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114917246971979478}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: CharacterSelection
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114431792754445476
@@ -669,6 +662,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114647685499194024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1283408513801572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d5688b6b409be4da3042d146c5a97c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gotoScene: TutorialScene
+  longLoad: 1
 --- !u!114 &114714892071125978
 MonoBehaviour:
   m_ObjectHideFlags: 1

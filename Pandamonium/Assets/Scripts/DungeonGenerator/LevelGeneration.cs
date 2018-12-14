@@ -9,7 +9,8 @@ public class LevelGeneration : MonoBehaviour
     protected Room[,] rooms;
     protected List<Vector2> takenPositions = new List<Vector2>();
     protected int gridSizeX, gridSizeY;
-    public int numberOfRooms = 20;
+    protected int numberOfRooms = 20;
+    public IntRange roomNumberRange = new IntRange(6, 8);
 
     public int roomWidth;
     public int roomHeight;
@@ -42,9 +43,9 @@ public class LevelGeneration : MonoBehaviour
     protected ArrayList enemies;
 
     private static LevelGeneration instance;
-    private Transform enemyParent;
+    protected Transform enemyParent;
 
-    private ArrayList enemyPositions = new ArrayList();
+    protected ArrayList enemyPositions = new ArrayList();
 
     private static readonly int ELITE_FROGOCID_INDEX = 3;
     private static readonly int FROGOCID_INDEX = 2;
@@ -63,7 +64,7 @@ public class LevelGeneration : MonoBehaviour
 
     void Awake()
     {
-
+        numberOfRooms = roomNumberRange.Random;
         if (numberOfRooms >= (worldSize.x * 2) * (worldSize.y * 2))
         { // make sure we dont try to make more rooms than can fit in our grid
             numberOfRooms = Mathf.RoundToInt((worldSize.x * 2) * (worldSize.y * 2));
@@ -137,6 +138,11 @@ public class LevelGeneration : MonoBehaviour
         return rooms[gridSizeX + Mathf.RoundToInt(pos.x / roomWidth), gridSizeY + Mathf.RoundToInt(pos.y / roomHeight)];
     }
 
+    public Room GetRoomAtGridPos(Vector2 gridPos)
+    {
+        return rooms[gridSizeX + Mathf.RoundToInt(gridPos.x), gridSizeY + Mathf.RoundToInt(gridPos.y)];
+    }
+
     public bool IsTileFree(Vector2 pos)
     {
         Vector3Int tilePos = acidTilemap.WorldToCell(pos);
@@ -164,8 +170,6 @@ public class LevelGeneration : MonoBehaviour
         {
 
             Room currRoom = roomsToTraverse.Pop();
-
-            print("Room difficulty: " + currRoom.distanceFromStart);
 
             if (gridSizeX + currRoom.gridPos.x + 1 < gridSizeX * 2)
             {
@@ -227,51 +231,6 @@ public class LevelGeneration : MonoBehaviour
         Instantiate(healthPoolPrefab, spawnPos, Quaternion.identity);
     }
 
-    protected virtual void InstantiateEliteFrogocid()
-    {
-        foreach (Vector2 pos in takenPositions)
-        {
-            Room room = rooms[Mathf.RoundToInt(gridSizeX + pos.x), Mathf.RoundToInt(gridSizeY + pos.y)];
-
-            if (room.type == Room.RoomType.START || room.type == Room.RoomType.OBELISK)
-                continue;
-
-            int frogNumber = 0;
-
-            foreach(GameObject enemy in room.enemies)
-            {
-                if (enemy.GetComponent<Frogocite>())
-                {
-                    frogNumber++;
-                }
-            }
-
-            if (frogNumber > 0)
-            {
-                int eliteNumber = Random.Range(0, frogNumber + 1);
-
-                for(int i = 0; i < eliteNumber; i++)
-                {
-                    Vector2 spawnPos;
-                    do
-                    {
-                        spawnPos = room.GetRandomPos();
-                    } while (enemyPositions.Contains(spawnPos));
-
-                    enemyPositions.Add(spawnPos);
-
-                    GameObject newEnemy;
-                    GameObject newPrefab = enemyPrefabs[ELITE_FROGOCID_INDEX];
-
-                    newEnemy = Instantiate(newPrefab, spawnPos, Quaternion.identity, enemyParent);
-
-                    enemies.Add(newEnemy);
-                    room.PutEnemy(newEnemy);
-                }
-            }
-        }
-    }
-
     protected virtual void InstantiateEnemies()
     {
 
@@ -297,35 +256,45 @@ public class LevelGeneration : MonoBehaviour
 
                 enemyPositions.Add(spawnPos);
 
+                GameObject newPrefab = null;
                 GameObject newEnemy;
+
+                int prefabIndex = 0;
 
                 // da bi se u prve dve sobe stvarao samo prvi tip protivnika - verovatno menjati za sledece levele
                 if (room.distanceFromStart < 3)
                 {
-                    enemies.Add(newEnemy = Instantiate(enemyPrefabs[0], spawnPos, Quaternion.identity, enemyParent));
+                    newPrefab = enemyPrefabs[0];
+                    prefabIndex = 0;
                 }
                 else
                 {
-                    GameObject newPrefab = null;
-                    int prefabIndex;
                     do
                     {
                         newPrefab = enemyPrefabs[prefabIndex = Random.Range(0, enemyPrefabs.Length)];
 
                     } while ((prefabIndex == ELITE_FROGOCID_INDEX && !hasFrogocid) || newPrefab.GetComponent<Enemy>().difficulty > totalDifficulty);
+                }
 
-                    newEnemy = Instantiate(newPrefab, spawnPos, Quaternion.identity, enemyParent);
+                newEnemy = Instantiate(newPrefab, spawnPos, Quaternion.identity, enemyParent);
 
-                    enemies.Add(newEnemy);
-                    room.PutEnemy(newEnemy);
+                enemies.Add(newEnemy);
+                room.PutEnemy(newEnemy);
                     
-                    if(prefabIndex == FROGOCID_INDEX)
-                        hasFrogocid = true;
+                if(prefabIndex == FROGOCID_INDEX) { 
+                    hasFrogocid = true;
                 }
 
                 totalDifficulty -= newEnemy.GetComponent<Enemy>().difficulty;
             }
         }
+    }
+
+    protected virtual int CreateIntroRooms()
+    {
+        rooms[gridSizeX, gridSizeY - 1] = new Room(new Vector2Int(0, -1), Room.RoomType.DEFAULT);
+        takenPositions.Insert(0, new Vector2Int(0, -1));
+        return 1;
     }
 
     protected virtual void CreateRooms()
@@ -342,14 +311,13 @@ public class LevelGeneration : MonoBehaviour
             rooms[gridSizeX, gridSizeY] = new Room(Vector2Int.zero, Room.RoomType.START);
             takenPositions.Insert(0, Vector2.zero);
 
-            rooms[gridSizeX, gridSizeY - 1] = new Room(new Vector2Int(0, -1), Room.RoomType.DEFAULT);
-            takenPositions.Insert(0, new Vector2Int(0, -1));
+            int introRooms = CreateIntroRooms();
 
             Vector2Int checkPos = Vector2Int.zero;
             //magic numbers
             float randomCompare = 0.2f, randomCompareStart = 0.2f, randomCompareEnd = 0.01f;
             //add rooms
-            for (int i = 0; i < numberOfRooms - 2; i++)
+            for (int i = 0; i < numberOfRooms - introRooms; i++)
             {
 
                 float randomPerc = ((float)i) / (((float)numberOfRooms - 1));
@@ -369,7 +337,7 @@ public class LevelGeneration : MonoBehaviour
                         print("error: could not create with fewer neighbors than : " + NumberOfNeighbors(checkPos, takenPositions));
                 }
                 //finalize position
-                rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, 0);
+                rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, Room.RoomType.DEFAULT);
                 takenPositions.Insert(0, checkPos);
             }
 
@@ -397,11 +365,12 @@ public class LevelGeneration : MonoBehaviour
 
     }
 
-    Vector2Int NewPosition()
+    protected Vector2Int NewPosition()
     {
         int x = 0, y = 0;
         Vector2Int checkingPos = Vector2Int.zero;
         Vector2 neighborPos = Vector2.zero;
+        Room neighborRoom;
 
         do
         {
@@ -410,6 +379,7 @@ public class LevelGeneration : MonoBehaviour
             y = (int)takenPositions[index].y;
 
             neighborPos = takenPositions[index];
+            neighborRoom = GetRoomAtGridPos(neighborPos);
 
             bool UpDown = (Random.value < 0.5f);//randomly pick wether to look on hor or vert axis
             bool positive = (Random.value < 0.5f);//pick whether to be positive or negative on that axis
@@ -436,7 +406,8 @@ public class LevelGeneration : MonoBehaviour
                 }
             }
             checkingPos = new Vector2Int(x, y);
-        } while (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || (takenPositions.Count > 1 && neighborPos.Equals(Vector2.zero))); //make sure the position is valid
+        } while (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || (takenPositions.Count > 1 && neighborPos.Equals(Vector2.zero)) || (takenPositions.Count > 2 && neighborRoom.type == Room.RoomType.INTRO)); //make sure the position is valid
+
         return checkingPos;
     }
 
@@ -446,6 +417,7 @@ public class LevelGeneration : MonoBehaviour
         int x = 0, y = 0;
         Vector2Int checkingPos = Vector2Int.zero;
         Vector2 neighborPos = Vector2.zero;
+        Room neighborRoom;
 
         int i = 0;
 
@@ -462,13 +434,14 @@ public class LevelGeneration : MonoBehaviour
             x = (int)takenPositions[index].x;
             y = (int)takenPositions[index].y;
             neighborPos = takenPositions[index];
+            neighborRoom = GetRoomAtGridPos(neighborPos);
 
             y += 1;
 
             checkingPos = new Vector2Int(x, y);
 
             i++;
-        } while (i < 100 && (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || neighborPos.Equals(Vector2.zero)));
+        } while (i < 100 && (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || neighborPos.Equals(Vector2.zero)) || (takenPositions.Count > 2 && neighborRoom.type == Room.RoomType.INTRO));
         if (inc >= 100)
         { // break loop if it takes too long: this loop isnt garuanteed to find solution, which is fine for this
             print("Error: could not find position with only one neighbor");
@@ -490,6 +463,7 @@ public class LevelGeneration : MonoBehaviour
         int x = 0, y = 0;
         Vector2Int checkingPos = Vector2Int.zero;
         Vector2 neighborPos = Vector2.zero;
+        Room neighborRoom;
         do
         {
             inc = 0;
@@ -503,6 +477,8 @@ public class LevelGeneration : MonoBehaviour
             x = (int)takenPositions[index].x;
             y = (int)takenPositions[index].y;
             neighborPos = takenPositions[index];
+            neighborRoom = GetRoomAtGridPos(neighborPos);
+
             bool UpDown = (Random.value < 0.5f);
             bool positive = (Random.value < 0.5f);
             if (UpDown)
@@ -528,7 +504,7 @@ public class LevelGeneration : MonoBehaviour
                 }
             }
             checkingPos = new Vector2Int(x, y);
-        } while (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || (takenPositions.Count > 1 && neighborPos.Equals(Vector2.zero)));
+        } while (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || (takenPositions.Count > 1 && neighborPos.Equals(Vector2.zero)) || (takenPositions.Count > 2 && neighborRoom.type == Room.RoomType.INTRO));
         if (inc >= 100)
         { // break loop if it takes too long: this loop isnt garuanteed to find solution, which is fine for this
             print("Error: could not find position with only one neighbor");
@@ -620,6 +596,11 @@ public class LevelGeneration : MonoBehaviour
                 else
                 {
                     rooms[x, y].doorBot = (rooms[x, y - 1] != null && (rooms[x, y - 1].type == Room.RoomType.DEFAULT));
+
+                    if (rooms[x, y - 1] != null && rooms[x, y - 1].type == Room.RoomType.INTRO)
+                            rooms[x, y].doorBot = rooms[x, y - 1].nextTo == rooms[x, y];
+
+
                 }
                 if (y + 1 >= gridSizeY * 2)
                 { //check bellow
@@ -629,6 +610,8 @@ public class LevelGeneration : MonoBehaviour
                 {
                     rooms[x, y].doorTop = (rooms[x, y + 1] != null && (rooms[x, y + 1].type == Room.RoomType.DEFAULT || rooms[x, y + 1].type == Room.RoomType.OBELISK));
 
+                    if (rooms[x, y + 1] != null && rooms[x, y + 1].type == Room.RoomType.INTRO)
+                        rooms[x, y].doorTop = rooms[x, y + 1].nextTo == rooms[x, y];
                 }
                 if (x - 1 < 0)
                 { //check left
@@ -638,6 +621,10 @@ public class LevelGeneration : MonoBehaviour
                 else
                 {
                     rooms[x, y].doorLeft = (rooms[x - 1, y] != null && (rooms[x - 1, y].type == Room.RoomType.DEFAULT));
+
+                    if (rooms[x - 1, y] != null && rooms[x - 1, y].type == Room.RoomType.INTRO)
+                        rooms[x, y].doorLeft = rooms[x - 1, y].nextTo == rooms[x, y];
+
                 }
                 if (x + 1 >= gridSizeX * 2)
                 { //check right
@@ -647,7 +634,25 @@ public class LevelGeneration : MonoBehaviour
                 else
                 {
                     rooms[x, y].doorRight = (rooms[x + 1, y] != null && (rooms[x + 1, y].type == Room.RoomType.DEFAULT));
+
+                    if (rooms[x + 1, y] != null && rooms[x + 1, y].type == Room.RoomType.INTRO)
+                        rooms[x, y].doorRight = rooms[x + 1, y].nextTo == rooms[x, y];
                 }
+
+                if (rooms[x, y].type == Room.RoomType.INTRO)
+                {
+                    rooms[x, y].doorBot = false;
+                    rooms[x, y].doorTop = false;
+                    rooms[x, y].doorLeft = false;
+                    rooms[x, y].doorRight = false;
+
+                    rooms[x, y].doorBot = rooms[x, y].gridPos.y - rooms[x, y].nextTo.gridPos.y > 0;
+                    rooms[x, y].doorTop = rooms[x, y].gridPos.y - rooms[x, y].nextTo.gridPos.y < 0;
+
+                    rooms[x, y].doorLeft = rooms[x, y].gridPos.x - rooms[x, y].nextTo.gridPos.x > 0;
+                    rooms[x, y].doorRight = rooms[x, y].gridPos.x - rooms[x, y].nextTo.gridPos.x < 0;
+                }
+
             }
         }
 

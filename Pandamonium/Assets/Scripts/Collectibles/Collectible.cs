@@ -15,11 +15,18 @@ public class Collectible : MonoBehaviour {
 
     private Vector2 dropPos;
 
+    private Vector2 dropDirection = Vector2.zero;
+
 	protected virtual void Start () {
 
         rb = GetComponent<Rigidbody2D>();
         Drop();
 	}
+
+    public virtual void SetDropDirection(Vector2 dir)
+    {
+        dropDirection = dir;
+    }
 
     private Vector2 GetInitVelocity(Vector2 jumpTarget)
     {
@@ -64,7 +71,10 @@ public class Collectible : MonoBehaviour {
     {
         startPos = transform.position;
 
-        dropPos = startPos + Random.insideUnitCircle;
+        if (dropDirection.Equals(Vector2.zero))
+            dropPos = startPos + Random.insideUnitCircle;
+        else
+            dropPos = startPos + dropDirection;
 
         rb.AddForce(GetInitVelocity(dropPos), ForceMode2D.Impulse);
         dropping = true;
@@ -75,7 +85,6 @@ public class Collectible : MonoBehaviour {
 
         if(dropping && rb.velocity.y < 0 && transform.position.y <= dropPos.y)
         {
-            print("usao");
             if(numBounces < 5)
             {
                 numBounces++;

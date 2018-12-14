@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour {
 
     public GameObject pauseMenu;
     public GameObject deathMenu;
+    public GameObject gameEndMenu;
 
     public static MenuManager I
     {

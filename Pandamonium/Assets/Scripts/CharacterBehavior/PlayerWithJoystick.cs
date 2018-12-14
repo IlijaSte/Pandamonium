@@ -20,7 +20,7 @@ public class PlayerWithJoystick : AttackingCharacter {
     [HideInInspector]
     public Vector2 facingDirection = Vector2.down;
 
-    protected int coins = 0;
+    public int coins = 0;
     public Text coinText;
     public override void Awake()
     {
@@ -44,6 +44,13 @@ public class PlayerWithJoystick : AttackingCharacter {
         if(abilityManager == null)
         {
             abilityManager = GetComponentInChildren<AbilityManager>();
+        }
+
+        SaveManager.GameState state = SaveManager.I.gameState;
+        if (state != null)
+        {
+            coins = state.coins;
+            coinText.text = coins.ToString();
         }
     }
 
@@ -288,7 +295,17 @@ public class PlayerWithJoystick : AttackingCharacter {
         {
             MenuManager.I.ShowMenu(MenuManager.I.deathMenu);
             isDead = true;
+
+            //menjati
+            coins = 0;
             //base.Die();
         }
     }
+
+    private void OnDisable()
+    {
+        if(SaveManager.I != null)
+            SaveManager.I.SaveGame();
+    }
+
 }

@@ -57,7 +57,7 @@ public class Enemy : AttackingCharacter {
 
     protected void DropCoins(int amount = 1)
     {
-        Instantiate(coinPrefab, transform.position, Quaternion.identity);
+        Instantiate(coinPrefab, transform.position, Quaternion.identity).GetComponent<Collectible>().SetDropDirection((transform.position - player.position).normalized);
     }
 
     protected override void Update()
@@ -142,7 +142,6 @@ public class Enemy : AttackingCharacter {
 
     public override void Die()
     {
-
         DropCoins();
 
         numEnemies--;
