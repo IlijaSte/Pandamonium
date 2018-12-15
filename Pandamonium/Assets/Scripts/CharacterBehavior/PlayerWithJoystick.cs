@@ -21,8 +21,6 @@ public class PlayerWithJoystick : AttackingCharacter {
     [HideInInspector]
     public Vector2 facingDirection = Vector2.down;
 
-    public int coins = 0;
-
     private float addedRotation = 0;
 
     public override void Awake()
@@ -51,13 +49,6 @@ public class PlayerWithJoystick : AttackingCharacter {
             abilityManager = GetComponentInChildren<AbilityManager>();
         }
 
-        SaveManager.GameState state = SaveManager.I.gameState;
-        if (state != null)
-        {
-            coins = state.coins;
-            UIManager.I.coinsText.text = coins.ToString();
-        }
-
     }
 
     public void AddRotation(float angle)
@@ -72,8 +63,8 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public void PickupCoins(int amount)
     {
-        coins += amount;
-        UIManager.I.coinsText.text = coins.ToString();
+        GameManager.I.PickupCoins(amount);
+        
     }
 
     protected override void Update()
@@ -312,25 +303,18 @@ public class PlayerWithJoystick : AttackingCharacter {
             isDead = true;
 
             //menjati
-            coins = 0;
+            GameManager.I.OnDeath();
             //base.Die();
         }
-    }
-
-    private void OnApplicationPause(bool paused)
-    {
-        if(paused && SaveManager.I != null)
-            SaveManager.I.SaveGame();
-    }
-
-    private void OnApplicationQuit()
-    {
-        if (SaveManager.I != null)
-            SaveManager.I.SaveGame();
     }
 
     protected override IEnumerator Death()
     {
         yield break;
+    }
+
+    private void OnApplicationQuit()
+    {
+        GameManager.I.abilities = abilityManager.GetAbilities();
     }
 }
