@@ -1,12 +1,56 @@
 fileFormatVersion: 2
 guid: a0aa879bf5b2542468c4642a60c76b2b
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: frogocid jump-01_0
+    21300002: frogocid jump-01_1
+    21300004: frogocid jump-01_2
+    21300006: frogocid jump-01_3
+    21300008: frogocid jump-01_4
+    21300010: frogocid jump-01_5
+    21300012: frogocid jump-01_6
+    21300014: frogocid jump-01_7
+    21300016: frogocid jump-01_8
+    21300018: frogocid jump-01_9
+    21300020: frogocid jump-01_10
+    21300022: frogocid jump-01_11
+    21300024: frogocid jump-01_12
+    21300026: frogocid jump-01_13
+    21300028: frogocid jump-01_14
+    21300030: frogocid jump-01_15
+    21300032: frogocid jump-01_16
+    21300034: frogocid jump-01_17
+    21300036: frogocid jump-01_18
+    21300038: frogocid jump-01_19
+    21300040: frogocid jump-01_20
+    21300042: frogocid jump-01_21
+    21300044: frogocid jump-01_22
+    21300046: frogocid jump-01_23
+    21300048: frogocid jump-01_24
+    21300050: frogocid jump-01_25
+    21300052: frogocid jump-01_26
+    21300054: frogocid jump-01_27
+    21300056: frogocid jump-01_28
+    21300058: frogocid jump-01_29
+    21300060: frogocid jump-01_30
+    21300062: frogocid jump-01_31
+    21300064: frogocid jump-01_32
+    21300066: frogocid jump-01_33
+    21300068: frogocid jump-01_34
+    21300070: frogocid jump-01_35
+    21300072: frogocid jump-01_36
+    21300074: frogocid jump-01_37
+    21300076: frogocid jump-01_38
+    21300078: frogocid jump-01_39
+    21300080: frogocid jump-01_40
+    21300082: frogocid jump-01_41
+    21300084: frogocid jump-01_42
+    21300086: frogocid jump-01_43
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -32,13 +76,13 @@ TextureImporter:
     filterMode: -1
     aniso: -1
     mipBias: -1
-    wrapU: -1
-    wrapV: -1
+    wrapU: 1
+    wrapV: 1
     wrapW: -1
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -47,9 +91,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
@@ -67,13 +111,937 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: frogocid jump-01_0
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 4780
+        width: 811
+        height: 683
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc68302249bf32f45b57d9832c35d1e1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_1
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 4790
+        width: 812
+        height: 673
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f3c31598c156d8489ee4b8a2ce6e5a8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_2
+      rect:
+        serializedVersion: 2
+        x: 2611
+        y: 4790
+        width: 822
+        height: 673
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff74e610315a67b47b405d4432b7ca08
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_3
+      rect:
+        serializedVersion: 2
+        x: 3858
+        y: 4800
+        width: 807
+        height: 663
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea312da7e960edc4f9bb9069f94f0e0f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_4
+      rect:
+        serializedVersion: 2
+        x: 5121
+        y: 4820
+        width: 811
+        height: 643
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19d3463da53d7a848a42a0c797ec480b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_5
+      rect:
+        serializedVersion: 2
+        x: 6383
+        y: 4820
+        width: 811
+        height: 667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a968715a56ced2f4584ddeba007b88d2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_6
+      rect:
+        serializedVersion: 2
+        x: 7635
+        y: 4835
+        width: 814
+        height: 652
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fce7df707f861ff458aa5a5ce73d1f0f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_7
+      rect:
+        serializedVersion: 2
+        x: 8902
+        y: 4831
+        width: 814
+        height: 663
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0f988767cb8c794f80387289fa9aec0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_8
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 3929
+        width: 816
+        height: 663
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9493363d5e1f9e4093733994126b16b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_9
+      rect:
+        serializedVersion: 2
+        x: 1403
+        y: 3933
+        width: 812
+        height: 664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42e5e86377f4e1043aa30954bfb9ed9a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_10
+      rect:
+        serializedVersion: 2
+        x: 2636
+        y: 3928
+        width: 811
+        height: 639
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49572cb8776f6bc48bbfddf11b4fdf15
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_11
+      rect:
+        serializedVersion: 2
+        x: 3848
+        y: 3909
+        width: 812
+        height: 663
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a85ffa3f218f079489449abac648245a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_12
+      rect:
+        serializedVersion: 2
+        x: 5086
+        y: 3899
+        width: 836
+        height: 673
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b99f1f3deb4324d48a942b4bee5e6df8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_13
+      rect:
+        serializedVersion: 2
+        x: 6284
+        y: 3899
+        width: 910
+        height: 673
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46bfcee7fe5ac4541b207a5048f1b3d4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_14
+      rect:
+        serializedVersion: 2
+        x: 7496
+        y: 3899
+        width: 1005
+        height: 673
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1db22bcd09e01e84092dbca3eb3f6eff
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_15
+      rect:
+        serializedVersion: 2
+        x: 8729
+        y: 3874
+        width: 1094
+        height: 698
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c540b2353773c54d96c8a0bff6c9708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_16
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 3023
+        width: 1094
+        height: 697
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82556bf8afb9fe44ab34378b00be02b3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_17
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 3023
+        width: 1094
+        height: 697
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69bd48ffb34c93b4da8bd6188d8e5bc5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_18
+      rect:
+        serializedVersion: 2
+        x: 2443
+        y: 3013
+        width: 1123
+        height: 707
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f65300509a165a4588585b69306fd2f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_19
+      rect:
+        serializedVersion: 2
+        x: 3670
+        y: 3013
+        width: 1148
+        height: 707
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19b1a01fc7fadc1459286fcf8df77fbe
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_20
+      rect:
+        serializedVersion: 2
+        x: 4932
+        y: 3013
+        width: 1154
+        height: 707
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bb19a1ddf051f74d917d2e927fb2bcf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_21
+      rect:
+        serializedVersion: 2
+        x: 6214
+        y: 3013
+        width: 1134
+        height: 707
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78af97e8c694aad4195e42802c745b80
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_22
+      rect:
+        serializedVersion: 2
+        x: 7491
+        y: 3013
+        width: 1109
+        height: 707
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 545527da91584b246b42ec5e42179d5e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_23
+      rect:
+        serializedVersion: 2
+        x: 8760
+        y: 3013
+        width: 1108
+        height: 741
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f60522bb606d288478d0cf2876c232c4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_24
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 2087
+        width: 1114
+        height: 703
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbf3feee1cdfadb478882c4c8128030e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_25
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 2087
+        width: 1133
+        height: 703
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60614c4427725f248a1add9438b9b400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_26
+      rect:
+        serializedVersion: 2
+        x: 2448
+        y: 2077
+        width: 1153
+        height: 703
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b77fcf1a37663224d84ef5e41f67dd1d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_27
+      rect:
+        serializedVersion: 2
+        x: 3672
+        y: 2082
+        width: 1147
+        height: 703
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a51df788a80e65e429adfd56343763c1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_28
+      rect:
+        serializedVersion: 2
+        x: 4927
+        y: 2087
+        width: 1124
+        height: 708
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f55f68ecda280e4428fd965c64707f02
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_29
+      rect:
+        serializedVersion: 2
+        x: 6214
+        y: 2092
+        width: 1094
+        height: 697
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d49e9e394bb8674897343bd899f387c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_30
+      rect:
+        serializedVersion: 2
+        x: 7477
+        y: 2087
+        width: 1093
+        height: 697
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e15523d738d74c940bc53698f2eed70d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_31
+      rect:
+        serializedVersion: 2
+        x: 8729
+        y: 2092
+        width: 1094
+        height: 698
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e6605f723554e54295d8dc804246273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_32
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 1146
+        width: 1005
+        height: 673
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d32d65e74130acd44900c63ce98b167f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_33
+      rect:
+        serializedVersion: 2
+        x: 1306
+        y: 1146
+        width: 909
+        height: 673
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5e4cc63c1ba742488b596b6405ad3be
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_34
+      rect:
+        serializedVersion: 2
+        x: 2601
+        y: 1146
+        width: 841
+        height: 673
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6f78caf2f9af2f42bfb1406d5b25059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_35
+      rect:
+        serializedVersion: 2
+        x: 3853
+        y: 1156
+        width: 812
+        height: 663
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 235a91c73ea84cf46a45c32b9c499768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_36
+      rect:
+        serializedVersion: 2
+        x: 5159
+        y: 1176
+        width: 811
+        height: 643
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 472bd182094946d4087a817510106e6c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_37
+      rect:
+        serializedVersion: 2
+        x: 6368
+        y: 1186
+        width: 812
+        height: 668
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f2035cb7b977da4d8a425f8823b8c41
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_38
+      rect:
+        serializedVersion: 2
+        x: 7640
+        y: 1181
+        width: 812
+        height: 663
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 602b46626c460a44086dabcc4bfaba4a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_39
+      rect:
+        serializedVersion: 2
+        x: 8902
+        y: 1196
+        width: 812
+        height: 653
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2bcd3edd02d3b8489468cb30702ec81
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_40
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 250
+        width: 811
+        height: 667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8e675727e6ca4e4091806f95024deb3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_41
+      rect:
+        serializedVersion: 2
+        x: 1428
+        y: 226
+        width: 812
+        height: 663
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42d262ced260fa34e843dfdb0cc7008a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_42
+      rect:
+        serializedVersion: 2
+        x: 2621
+        y: 215
+        width: 821
+        height: 674
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dac455af523ddd24db068dbc4b733684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid jump-01_43
+      rect:
+        serializedVersion: 2
+        x: 3839
+        y: 206
+        width: 811
+        height: 682
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef235b6d5b6a86d45a039d1a9f5d638d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 87582140a316fc044b86a22d7d252192
     vertices: []
     indices: 
     edges: []

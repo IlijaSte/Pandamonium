@@ -1,7 +1,21 @@
 fileFormatVersion: 2
 guid: 692118e55733f7e4eb5d19e42f6dd8ec
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: frog dying_0
+    21300002: frog dying_1
+    21300004: frog dying_2
+    21300006: frog dying_3
+    21300008: frog dying_4
+    21300010: frog dying_5
+    21300012: frog dying_6
+    21300014: frog dying_7
+    21300016: frog dying_8
+    21300018: frog dying_9
+    21300020: frog dying_10
+    21300022: frog dying_11
+    21300024: frog dying_12
+    21300026: frog dying_13
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -113,11 +127,291 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: frog dying_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1107
+        width: 1097
+        height: 1108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ec501cdf45fdc442a779a46978b79a6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frog dying_1
+      rect:
+        serializedVersion: 2
+        x: 1096
+        y: 1107
+        width: 1097
+        height: 1108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01db0b5a887108a4b80de5f916bfa2c4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frog dying_2
+      rect:
+        serializedVersion: 2
+        x: 2203
+        y: 1107
+        width: 1097
+        height: 1108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76a00a809e03f5c4496af2c72e9e54f1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frog dying_3
+      rect:
+        serializedVersion: 2
+        x: 3288
+        y: 1107
+        width: 1097
+        height: 1108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9810d0f344a68c148ac7d9f6143426aa
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frog dying_4
+      rect:
+        serializedVersion: 2
+        x: 4384
+        y: 1107.5
+        width: 1096.875
+        height: 1107.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96861ccb1abcae346b6284016e0a493c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frog dying_5
+      rect:
+        serializedVersion: 2
+        x: 5480
+        y: 1107.5
+        width: 1096.875
+        height: 1107.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 937075d9146e2544ea0ed4805795f66c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frog dying_6
+      rect:
+        serializedVersion: 2
+        x: 6576
+        y: 1107.5
+        width: 1096.875
+        height: 1107.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21adc4218e28eed46bde68f300ac971d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frog dying_7
+      rect:
+        serializedVersion: 2
+        x: 7672
+        y: 1107.5
+        width: 1096.875
+        height: 1107.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7846a4895a0c9f149a4841d12982925c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frog dying_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0.5
+        width: 1096.875
+        height: 1107.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad2cd20885de0794ba5a0996ca6c6bbe
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frog dying_9
+      rect:
+        serializedVersion: 2
+        x: 1106
+        y: 22
+        width: 1097
+        height: 1108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8128294af9367540b7e5516d5805c64
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frog dying_10
+      rect:
+        serializedVersion: 2
+        x: 2192
+        y: 11
+        width: 1097
+        height: 1108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05c9713e0642f9d41ae11767d850b31e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frog dying_11
+      rect:
+        serializedVersion: 2
+        x: 3288
+        y: 11
+        width: 1097
+        height: 1108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d9644de00c5eea4b8018a1ea5a5eee4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frog dying_12
+      rect:
+        serializedVersion: 2
+        x: 4384
+        y: 0.5
+        width: 1096.875
+        height: 1107.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42371e81005353a4794e74cb0d482d19
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frog dying_13
+      rect:
+        serializedVersion: 2
+        x: 5480
+        y: 0.5
+        width: 1096.875
+        height: 1107.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52dffe42828dbe84a8745a549cedeb6e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 82afd8411df9c344f9e896bdb5029843
     vertices: []
     indices: 
     edges: []
