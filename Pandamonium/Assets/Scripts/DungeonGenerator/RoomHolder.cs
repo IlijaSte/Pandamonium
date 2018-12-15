@@ -21,6 +21,8 @@ public class RoomHolder : MonoBehaviour {
 
     public Vector3Int positionEndOfCorridor;
 
+    private List<Vector2> stairsPositions;
+
     //public void Init(bool doorTop, bool doorBot, bool doorLeft, bool doorRight)
     public void Init(Room context)
     {
@@ -32,7 +34,7 @@ public class RoomHolder : MonoBehaviour {
 
     private void Start()
     {
-
+        stairsPositions = new List<Vector2>();
         DrawCorridors(context.doorTop, context.doorBot, context.doorLeft, context.doorRight);
 
         for (int i = Mathf.FloorToInt(transform.position.x - LevelGeneration.I.roomWidth / 2); i <= transform.position.x + LevelGeneration.I.roomWidth / 2; i++)
@@ -52,7 +54,18 @@ public class RoomHolder : MonoBehaviour {
                     }
                     else if(!context.IsTileWalkable(corridorTilemap, tilePos) && !context.IsTileWalkable(LevelGeneration.I.corridorTilemap, tilePos))
                     {
-                        obstacleTilemap.SetTile(obstacleTilemap.WorldToCell(tilePos), LevelGeneration.I.acidPrefab);
+                        bool walkable = false;
+                        foreach(Vector2 stairsPos in stairsPositions)
+                        {
+                            if(tilePos.Equals(new Vector3Int(Mathf.FloorToInt(stairsPos.x), Mathf.FloorToInt(stairsPos.y) + 1, 0)))
+                            {
+                                walkable = true;
+                                break;
+                            }
+                        }
+
+                        if(!walkable)
+                            obstacleTilemap.SetTile(obstacleTilemap.WorldToCell(tilePos), LevelGeneration.I.acidPrefab);
                     }
 
                     /*if (context.HasWalkableNeighbor(ref groundTilemap, tilePos))// || context.HasWalkableNeighbor(corridorTilemap, tilePos))
@@ -68,6 +81,38 @@ public class RoomHolder : MonoBehaviour {
 
     private void DrawCorridor(Vector2 start, Vector2 direction)
     {
+
+        // napraviti stepenice
+
+        Vector2 stairsPos = Vector2.zero;
+
+        if(direction.Equals(Vector2.right) || direction.Equals(Vector2.left))
+        {
+
+            int dir = 1;
+
+            float stairsAngle = 0;
+            if (direction.Equals(Vector2.right))
+            {
+                stairsAngle = 0;
+                dir = 1;
+            }
+            else if (direction.Equals(Vector2.left))
+            {
+                stairsAngle = 180;
+                dir = -1;
+            }
+
+            GameObject stairs = Instantiate(LevelGeneration.I.stairsPrefab, start, Quaternion.Euler(0, stairsAngle, 0), transform);
+            stairs.GetComponentInChildren<Stairs>().right = (dir == 1);
+            stairsPos = start;
+            stairsPositions.Add(stairsPos);
+            //start.x += dir;
+            start.y += 1;
+            Vector3Int pos = obstacleTilemap.WorldToCell(start);
+            obstacleTilemap.SetTile(pos, null);
+        }
+
         Vector3Int tilePos = new Vector3Int();
 
         while (Mathf.Abs(start.x - transform.position.x) <= LevelGeneration.I.roomWidth / 2 &&
@@ -84,7 +129,7 @@ public class RoomHolder : MonoBehaviour {
                 corridorTilemap.SetTile(tilePos + new Vector3Int(0, 1, 0), prefab);
                 corridorTilemap.SetTile(tilePos + new Vector3Int(0, -1, 0), prefab);
 
-                if (!context.IsTileWalkable(context.groundTilemap, tilePos + new Vector3Int(0, 1, 0)))
+                if (!tilePos.Equals(stairsPos) && !context.IsTileWalkable(context.groundTilemap, tilePos + new Vector3Int(0, 1, 0)))
                 {
                     obstacleTilemap.SetTile(tilePos + new Vector3Int(0, 1, 0), LevelGeneration.I.acidPrefab);
                 }

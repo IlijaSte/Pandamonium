@@ -23,17 +23,26 @@ public class AbilityManager : MonoBehaviour {
 
         if (SaveManager.I.gameState != null)
         {
-            foreach (string abName in SaveManager.I.gameState.abilities)
+            if (GameManager.I.currentLevel > 0)
             {
-                foreach (GameObject ability in abilityPrefabs)
+                foreach (string abName in SaveManager.I.gameState.abilities)
                 {
-                    Ability ab = ability.GetComponent<Ability>();
-
-                    if (ab.abilityName.Equals(abName))
+                    foreach (GameObject ability in abilityPrefabs)
                     {
-                        AddAbility(ab);
+                        Ability ab = ability.GetComponent<Ability>();
+
+                        if (ab.abilityName.Equals(abName))
+                        {
+                            AddAbility(ab);
+                        }
                     }
                 }
+            }
+            else
+            {
+                AddAbility(abilityPrefabs[0].GetComponent<Ability>());
+                AddAbility(abilityPrefabs[1].GetComponent<Ability>());
+
             }
         }
         else

@@ -21,7 +21,7 @@ public class PlayerWithJoystick : AttackingCharacter {
     [HideInInspector]
     public Vector2 facingDirection = Vector2.down;
 
-    public int coins = 0;
+    private float addedRotation = 0;
 
     public override void Awake()
     {
@@ -49,13 +49,11 @@ public class PlayerWithJoystick : AttackingCharacter {
             abilityManager = GetComponentInChildren<AbilityManager>();
         }
 
-        SaveManager.GameState state = SaveManager.I.gameState;
-        if (state != null)
-        {
-            coins = state.coins;
-            UIManager.I.coinsText.text = coins.ToString();
-        }
+    }
 
+    public void AddRotation(float angle)
+    {
+        addedRotation += angle;
     }
 
     public void PickupBlueprint(Blueprint bp)
@@ -65,8 +63,8 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public void PickupCoins(int amount)
     {
-        coins += amount;
-        UIManager.I.coinsText.text = coins.ToString();
+        GameManager.I.PickupCoins(amount);
+        
     }
 
     protected override void Update()
@@ -161,6 +159,8 @@ public class PlayerWithJoystick : AttackingCharacter {
 
                     if (rb.velocity.magnitude < normalSpeed)
                     {
+                        float a = (Vector2.SignedAngle(Vector2.right, wasdDirection) + addedRotation) * Mathf.Deg2Rad;
+                        wasdDirection = new Vector2(Mathf.Cos(a), Mathf.Sin(a));
                         rb.AddForce(wasdDirection * normalSpeed * 20, ForceMode2D.Force);
                         facingDirection = wasdDirection;
                     }
@@ -303,25 +303,18 @@ public class PlayerWithJoystick : AttackingCharacter {
             isDead = true;
 
             //menjati
-            coins = 0;
+            GameManager.I.OnDeath();
             //base.Die();
         }
-    }
-
-    private void OnApplicationPause(bool paused)
-    {
-        if(paused && SaveManager.I != null)
-            SaveManager.I.SaveGame();
-    }
-
-    private void OnApplicationQuit()
-    {
-        if (SaveManager.I != null)
-            SaveManager.I.SaveGame();
     }
 
     protected override IEnumerator Death()
     {
         yield break;
+    }
+
+    private void OnApplicationQuit()
+    {
+        GameManager.I.abilities = abilityManager.GetAbilities();
     }
 }

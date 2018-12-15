@@ -44,7 +44,7 @@ public class CombatText : MonoBehaviour {
 
         comp = GetComponent<Text>();
 
-        comp.text = "Max Health";
+        comp.text = "50% Health";
     }
 
     private void Start()

@@ -139,7 +139,8 @@ public class Enemy : AttackingCharacter {
                     {
                         CM.MoveToPosition(target.position);
                     }
-                    else if (LevelGeneration.I.GetRoomAtPos(target.position) != room)
+
+                    if (LevelGeneration.I.GetRoomAtPos(target.position) != room)
                     {
                         MoveToPosition(startPos);
                         detectedPlayer = false;
@@ -167,7 +168,7 @@ public class Enemy : AttackingCharacter {
                         StopAttacking();
                         Attack(tempTarget);
                     }
-                    else if (LevelGeneration.I.GetRoomAtPos(target.position) != room)
+                    if (LevelGeneration.I.GetRoomAtPos(target.position) != room)
                     {
                         MoveToPosition(startPos);
                         detectedPlayer = false;

@@ -37,7 +37,7 @@ namespace LevelManagment
         // overriding the back method with application quiSt
         public override void OnBackPressed()
         {
-            Application.Quit();
+            GameManager.I.GameOver();
         }
 
         protected override void OnDestroy()

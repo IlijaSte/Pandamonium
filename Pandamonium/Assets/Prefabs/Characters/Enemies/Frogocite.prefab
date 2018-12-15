@@ -526,7 +526,7 @@ MonoBehaviour:
   playerState: 0
   ignoreMask: 0
   isDead: 0
-  difficulty: 3
+  difficulty: 2
   coinPrefab: {fileID: 1606118361087090, guid: ac91c914535a4d14a9dc3d1d0ea9e513, type: 2}
   dropPrefabs: []
   jumpSpeed: 0

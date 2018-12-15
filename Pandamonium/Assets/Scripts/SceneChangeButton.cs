@@ -10,6 +10,8 @@ public class SceneChangeButton : MonoBehaviour {
     public string gotoScene;
     public bool longLoad = false;
     public bool isStarter = false;
+    public string action = "";
+    public string parameter = "";
 
     private void Start()
     {
@@ -17,7 +19,7 @@ public class SceneChangeButton : MonoBehaviour {
 
         if (isStarter)
         {
-            thisButton.onClick.AddListener(delegate { GameManager.I.StartGame(); });
+            thisButton.onClick.AddListener(delegate { GameManager.I.StartGame(0); });
         }
         else
         {
@@ -28,7 +30,17 @@ public class SceneChangeButton : MonoBehaviour {
             }
             else
             {
-                thisButton.onClick.AddListener(delegate { GameManager.I.LoadScene(gotoScene); });
+                if (action.Equals("GameMode"))
+                {
+                    thisButton.onClick.AddListener(delegate { GameManager.I.ChooseGameMode(parameter); });
+                }else if (action.Equals("Play"))
+                {
+                    thisButton.onClick.AddListener(delegate { GameManager.I.OnPlayPressed(); });
+                }
+                else
+                {
+                    thisButton.onClick.AddListener(delegate { GameManager.I.LoadScene(gotoScene); });
+                }
             }
         }
         
