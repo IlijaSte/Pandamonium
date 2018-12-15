@@ -495,7 +495,7 @@ MonoBehaviour:
   playerState: 0
   ignoreMask: 0
   isDead: 0
-  difficulty: 1
+  difficulty: 3
   coinPrefab: {fileID: 0}
   dropPrefabs: []
   enemySpawnInterval: 10

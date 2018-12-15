@@ -24,8 +24,6 @@ public class Worm : Enemy {
 
     private Animator animator;
 
-    
-
     private Vector2 targetPos;
 
     public override void Start()
@@ -107,15 +105,15 @@ public class Worm : Enemy {
 
     }
 
-    private void Emerge()
+    public void Emerge()
     {
-
+        room.PlaceDetail(transform.position, destructedTile);
         GetComponent<BoxCollider2D>().enabled = true;
         GetComponentInChildren<Canvas>().enabled = true;
 
     }
 
-    private void Submerge()
+    public void Submerge()
     {
 
         GetComponent<BoxCollider2D>().enabled = false;
@@ -179,7 +177,7 @@ public class Worm : Enemy {
                         return;
                     }
 
-                    Emerge();
+                    //Emerge();
 
                     break;
 
@@ -187,8 +185,6 @@ public class Worm : Enemy {
 
                     nextAttackBG.SetActive(true);
                     targetPos = player.position;
-
-                    room.PlaceDetail(transform.position, destructedTile);
 
                     break;
 
@@ -201,7 +197,7 @@ public class Worm : Enemy {
 
                 case WormState.BURYING:
 
-                    Submerge();
+                    //Submerge();
                     transform.position = FindEmergePosition();
 
                     UpdateGraph();

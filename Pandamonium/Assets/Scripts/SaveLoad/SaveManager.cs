@@ -45,12 +45,25 @@ public class SaveManager : MonoBehaviour {
 
     }
 
-    public void SaveGame()
+    public void SaveGame(List<string> abilities = null)
     {
+
+        print("Saving progress...");
+
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(savePath);
         PlayerWithJoystick player = GameManager.I.playerInstance as PlayerWithJoystick;
-        GameState game = new GameState(GameManager.I.currentLevel, player.coins, player.abilityManager.GetAbilities());
+        GameState game = new GameState();
+
+        game.isRunStarted = GameManager.I.isRunStarted;
+        game.gameMode = GameManager.I.gameMode;
+        game.gameLevel = GameManager.I.currentLevel;
+        game.coins = GameManager.I.coins;
+
+        if (abilities == null)
+            game.abilities = player.abilityManager.GetAbilities();
+        else game.abilities = abilities;
+
         gameState = game;
         bf.Serialize(file, game);
         file.Close();
@@ -67,11 +80,6 @@ public class SaveManager : MonoBehaviour {
             gameState = game;
            // (GameManager.I.playerInstance as PlayerWithJoystick).coins = game.coins;
 
-            foreach(string ability in gameState.abilities)
-            {
-                print(ability);
-            }
-
             file.Close();
         }
         else
@@ -83,17 +91,16 @@ public class SaveManager : MonoBehaviour {
     [System.Serializable]
     public class GameState
     {
-
+        public bool isRunStarted;
+        public string gameMode;
         public int gameLevel;
         public int coins;
 
         public List<string> abilities;
 
-        public GameState(int gameLevel, int coins, List<string> abilities)
+        public GameState()
         {
-            this.gameLevel = gameLevel;
-            this.coins = coins;
-            this.abilities = abilities;
+
         }
 
     }

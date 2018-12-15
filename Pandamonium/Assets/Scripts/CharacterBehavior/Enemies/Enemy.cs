@@ -88,7 +88,8 @@ public class Enemy : AttackingCharacter {
 
     protected void DropCoins(int amount = 1)
     {
-        Instantiate(coinPrefab, transform.position, Quaternion.identity).GetComponent<Collectible>().SetDropDirection((transform.position - player.position).normalized);
+        if(coinPrefab != null)
+            Instantiate(coinPrefab, transform.position, Quaternion.identity).GetComponent<Collectible>().SetDropDirection((transform.position - player.position).normalized);
     }
 
     public void StopAttacking()
@@ -139,7 +140,8 @@ public class Enemy : AttackingCharacter {
                     {
                         CM.MoveToPosition(target.position);
                     }
-                    else if (LevelGeneration.I.GetRoomAtPos(target.position) != room)
+
+                    if (LevelGeneration.I.GetRoomAtPos(target.position) != room)
                     {
                         MoveToPosition(startPos);
                         detectedPlayer = false;
@@ -167,7 +169,7 @@ public class Enemy : AttackingCharacter {
                         StopAttacking();
                         Attack(tempTarget);
                     }
-                    else if (LevelGeneration.I.GetRoomAtPos(target.position) != room)
+                    if (LevelGeneration.I.GetRoomAtPos(target.position) != room)
                     {
                         MoveToPosition(startPos);
                         detectedPlayer = false;

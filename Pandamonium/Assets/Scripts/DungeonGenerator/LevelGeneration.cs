@@ -28,6 +28,7 @@ public class LevelGeneration : MonoBehaviour
     public TileBase corridorVertPrefab;
     public TileBase corridorBridgeHorizPrefab;
     public TileBase corridorBridgeVertPrefab;
+    public GameObject stairsPrefab;
 
     public TileBase groundPrefab;
     public Tilemap corridorTilemap;
@@ -49,6 +50,8 @@ public class LevelGeneration : MonoBehaviour
 
     private static readonly int ELITE_FROGOCID_INDEX = 3;
     private static readonly int FROGOCID_INDEX = 2;
+
+    private ArrayList obstaclePositions;
 
     public static LevelGeneration I
     {
@@ -100,8 +103,16 @@ public class LevelGeneration : MonoBehaviour
         Camera.main.GetComponent<CameraMovement>().SetBounds(new Vector2(-gridSizeX * roomWidth - roomWidth / 2, -gridSizeY * roomHeight - roomHeight / 2), new Vector2(gridSizeX * roomWidth + roomWidth / 2, gridSizeY * roomHeight + roomHeight / 2));
 
         AstarPath.active.Scan();
+
+        obstaclePositions = new ArrayList();
+
         InstantiateEnemies();
+
         InstantiateHealthPool();
+        if (GameManager.I.currentLevel >= 2)
+        {
+            InstantiateHealthPool();
+        }
     }
 
     protected void PositionPlayer()
@@ -150,6 +161,14 @@ public class LevelGeneration : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             if (enemy != null && enemy.transform != null && acidTilemap.WorldToCell(enemy.transform.position).Equals(tilePos))
+            {
+                return false;
+            }
+        }
+
+        foreach(Vector2 obstacle in obstaclePositions)
+        {
+            if(obstacle != null && acidTilemap.WorldToCell(obstacle).Equals(tilePos))
             {
                 return false;
             }
@@ -226,9 +245,15 @@ public class LevelGeneration : MonoBehaviour
         {
             spawnPos = room.GetRandomPos();
 
-        } while (!room.IsTileWalkable(room.groundTilemap, spawnPos) || !room.IsTileWalkable(room.groundTilemap, spawnPos + Vector2.right) || !IsTileFree(spawnPos) || !IsTileFree(spawnPos + Vector2.right));
+        } while (!room.IsTileWalkable(room.groundTilemap, spawnPos) ||
+                 !room.IsTileWalkable(room.groundTilemap, spawnPos + Vector2.right) ||
+                 !IsTileFree(spawnPos) ||
+                 !IsTileFree(spawnPos + Vector2.right));
 
         Instantiate(healthPoolPrefab, spawnPos, Quaternion.identity);
+
+        obstaclePositions.Add(spawnPos);
+        obstaclePositions.Add(spawnPos + Vector2.right);
     }
 
     protected virtual void InstantiateEnemies()
@@ -242,7 +267,12 @@ public class LevelGeneration : MonoBehaviour
                 continue;
 
             // broj neprijatelja u sobi zavisi od razdaljine sobe od pocetne sobe i multiplier-a
-            int totalDifficulty = Mathf.RoundToInt(Random.Range(room.distanceFromStart * enemyCountMultiplier, room.distanceFromStart * enemyCountMultiplier + 1.5f));
+
+            float levelDifficulty = 0;
+            if(GameManager.I.currentLevel > 2)
+                levelDifficulty = (GameManager.I.currentLevel - 2) * 0.5f;
+
+            int totalDifficulty = Mathf.RoundToInt(Random.Range(room.distanceFromStart * enemyCountMultiplier + levelDifficulty, room.distanceFromStart * enemyCountMultiplier + levelDifficulty + 1.5f));
 
             bool hasFrogocid = false;
 
@@ -262,19 +292,13 @@ public class LevelGeneration : MonoBehaviour
                 int prefabIndex = 0;
 
                 // da bi se u prve dve sobe stvarao samo prvi tip protivnika - verovatno menjati za sledece levele
-                if (room.distanceFromStart < 3)
-                {
-                    newPrefab = enemyPrefabs[0];
-                    prefabIndex = 0;
-                }
-                else
-                {
-                    do
-                    {
-                        newPrefab = enemyPrefabs[prefabIndex = Random.Range(0, enemyPrefabs.Length)];
 
-                    } while ((prefabIndex == ELITE_FROGOCID_INDEX && !hasFrogocid) || newPrefab.GetComponent<Enemy>().difficulty > totalDifficulty);
-                }
+
+                do
+                {
+                    newPrefab = enemyPrefabs[prefabIndex = Random.Range(0, enemyPrefabs.Length)];
+
+                } while ((prefabIndex == ELITE_FROGOCID_INDEX && !hasFrogocid) || newPrefab.GetComponent<Enemy>().difficulty > totalDifficulty);
 
                 newEnemy = Instantiate(newPrefab, spawnPos, Quaternion.identity, enemyParent);
 
