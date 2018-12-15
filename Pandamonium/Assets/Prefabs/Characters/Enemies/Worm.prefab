@@ -535,7 +535,7 @@ MonoBehaviour:
   ignoreMask: 0
   isDead: 0
   difficulty: 1
-  coinPrefab: {fileID: 1606118361087090, guid: ac91c914535a4d14a9dc3d1d0ea9e513, type: 2}
+  coinPrefab: {fileID: 1672314928492584, guid: 9054cd14c71cd36499cbbfd3ac98eaef, type: 2}
   dropPrefabs: []
   speed: 0.75
   projectilePrefab: {fileID: 1620057767749030, guid: b422b44fe3c6fc94aaed2421f58befda,
