@@ -847,7 +847,7 @@ MonoBehaviour:
   range: 1.876284
   timeToAttack: 1
   parent: {fileID: 114562331877149714}
-  cleaveAngle: 180
+  cleaveAngle: 90
   animator: {fileID: 114122206196855612}
 --- !u!114 &114930982135448756
 MonoBehaviour:
