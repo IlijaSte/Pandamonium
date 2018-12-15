@@ -23,6 +23,8 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public int coins = 0;
 
+    private float addedRotation = 0;
+
     public override void Awake()
     {
         if (!GameManager.joystick)
@@ -56,6 +58,11 @@ public class PlayerWithJoystick : AttackingCharacter {
             UIManager.I.coinsText.text = coins.ToString();
         }
 
+    }
+
+    public void AddRotation(float angle)
+    {
+        addedRotation += angle;
     }
 
     public void PickupBlueprint(Blueprint bp)
@@ -161,6 +168,8 @@ public class PlayerWithJoystick : AttackingCharacter {
 
                     if (rb.velocity.magnitude < normalSpeed)
                     {
+                        float a = (Vector2.SignedAngle(Vector2.right, wasdDirection) + addedRotation) * Mathf.Deg2Rad;
+                        wasdDirection = new Vector2(Mathf.Cos(a), Mathf.Sin(a));
                         rb.AddForce(wasdDirection * normalSpeed * 20, ForceMode2D.Force);
                         facingDirection = wasdDirection;
                     }

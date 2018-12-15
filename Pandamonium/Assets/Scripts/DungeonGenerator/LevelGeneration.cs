@@ -28,6 +28,7 @@ public class LevelGeneration : MonoBehaviour
     public TileBase corridorVertPrefab;
     public TileBase corridorBridgeHorizPrefab;
     public TileBase corridorBridgeVertPrefab;
+    public GameObject stairsPrefab;
 
     public TileBase groundPrefab;
     public Tilemap corridorTilemap;
