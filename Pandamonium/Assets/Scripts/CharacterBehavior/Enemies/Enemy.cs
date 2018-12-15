@@ -88,7 +88,8 @@ public class Enemy : AttackingCharacter {
 
     protected void DropCoins(int amount = 1)
     {
-        Instantiate(coinPrefab, transform.position, Quaternion.identity).GetComponent<Collectible>().SetDropDirection((transform.position - player.position).normalized);
+        if(coinPrefab != null)
+            Instantiate(coinPrefab, transform.position, Quaternion.identity).GetComponent<Collectible>().SetDropDirection((transform.position - player.position).normalized);
     }
 
     public void StopAttacking()

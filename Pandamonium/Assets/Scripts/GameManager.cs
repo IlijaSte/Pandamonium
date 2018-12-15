@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour {
     [HideInInspector]
     public int coins = 0;
 
+    private int tempCoins = 0;
+
     [HideInInspector]
     public List<string> abilities;
 
@@ -92,13 +94,15 @@ public class GameManager : MonoBehaviour {
 
     public void PickupCoins(int amount)
     {
-        coins += amount;
-        UIManager.I.coinsText.text = coins.ToString();
+        //coins += amount;
+        tempCoins += amount;
+        UIManager.I.coinsText.text = (coins + tempCoins).ToString();
     }
 
     public void OnDeath()
     {
-        coins = 0;
+        tempCoins = 0;
+        SaveManager.I.SaveGame();
     }
 
     public void GameOver()
@@ -121,15 +125,15 @@ public class GameManager : MonoBehaviour {
                 return;
             }
         }
-        
 
+        coins += tempCoins;
+        tempCoins = 0;
         SaveManager.I.SaveGame();
 
         // u build settings mora da bude game level za game levelom, redom
         string pathToScene = SceneUtility.GetScenePathByBuildIndex(FIRST_LEVEL_BUILD_INDEX + Mathf.Clamp(currentLevel, 0, NUM_OF_LEVELS - 1));
         string sceneName = System.IO.Path.GetFileNameWithoutExtension(pathToScene);
         LoadSceneLong(sceneName);
-        //print(SceneManager.GetSceneByBuildIndex(FIRST_LEVEL_BUILD_INDEX + currentLevel).name);
     }
 
     public void SetJoystick(bool joystick)
