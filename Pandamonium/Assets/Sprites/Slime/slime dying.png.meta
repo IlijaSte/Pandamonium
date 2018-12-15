@@ -1,7 +1,15 @@
 fileFormatVersion: 2
 guid: 933fe93b3c998e44f8d8843bc7a1080c
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: slime dying_0
+    21300002: slime dying_1
+    21300004: slime dying_2
+    21300006: slime dying_3
+    21300008: slime dying_4
+    21300010: slime dying_5
+    21300012: slime dying_6
+    21300014: slime dying_7
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -113,11 +121,171 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: slime dying_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 490
+        width: 541
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46035a6ade69d8a4da9e1104cd03116f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime dying_1
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 490
+        width: 541
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74aac0db52931724cb918316a3c21b77
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime dying_2
+      rect:
+        serializedVersion: 2
+        x: 1082
+        y: 490
+        width: 541
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b28e7299c396cd04d811f4f1a9f84146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime dying_3
+      rect:
+        serializedVersion: 2
+        x: 1623
+        y: 490
+        width: 541
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 936a1461b85e8ae469a78467bb197099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime dying_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 541
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3eaa8cc0d5a55714590709637073a855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime dying_5
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 0
+        width: 541
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad1fd5266b6798444aec815ba05ce2b1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime dying_6
+      rect:
+        serializedVersion: 2
+        x: 1082
+        y: 0
+        width: 541
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26e875a8ff6bcc440a9202283b1ff302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime dying_7
+      rect:
+        serializedVersion: 2
+        x: 1623
+        y: 0
+        width: 541
+        height: 490
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e24f08bd1ec3dd2409a38a0022466678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 15de940f5b837c3449dea9f7e2992662
     vertices: []
     indices: 
     edges: []

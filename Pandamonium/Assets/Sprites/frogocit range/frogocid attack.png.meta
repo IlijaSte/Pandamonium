@@ -1,12 +1,41 @@
 fileFormatVersion: 2
 guid: 8c7b5409e52d0a945be4c23a35268614
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: frogocid attack_0
+    21300002: frogocid attack_1
+    21300004: frogocid attack_2
+    21300006: frogocid attack_3
+    21300008: frogocid attack_4
+    21300010: frogocid attack_5
+    21300012: frogocid attack_6
+    21300014: frogocid attack_7
+    21300016: frogocid attack_8
+    21300018: frogocid attack_9
+    21300020: frogocid attack_10
+    21300022: frogocid attack_11
+    21300024: frogocid attack_12
+    21300026: frogocid attack_13
+    21300028: frogocid attack_14
+    21300030: frogocid attack_15
+    21300032: frogocid attack_16
+    21300034: frogocid attack_17
+    21300036: frogocid attack_18
+    21300038: frogocid attack_19
+    21300040: frogocid attack_20
+    21300042: frogocid attack_21
+    21300044: frogocid attack_22
+    21300046: frogocid attack_23
+    21300048: frogocid attack_24
+    21300050: frogocid attack_25
+    21300052: frogocid attack_26
+    21300054: frogocid attack_27
+    21300056: frogocid attack_28
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -30,15 +59,15 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: -1
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapU: -1
-    wrapV: -1
+    wrapU: 1
+    wrapV: 1
     wrapW: -1
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -47,9 +76,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
@@ -67,13 +96,637 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: frogocid attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3961
+        width: 1191
+        height: 990
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af41e73ec37ab954bab80d21498c06ce
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_1
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 3960.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44bfd1ee03738f64b9ed5ebbbcdd12cc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_2
+      rect:
+        serializedVersion: 2
+        x: 2382
+        y: 3960.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 529213cb10f0e3547b22c4175556f88c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_3
+      rect:
+        serializedVersion: 2
+        x: 3595
+        y: 3961
+        width: 1191
+        height: 990
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f10fb1c0096978a4591361e31c2639d1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_4
+      rect:
+        serializedVersion: 2
+        x: 4764
+        y: 3961
+        width: 1191
+        height: 990
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3cd05875b58a864e83fb5ea1766b177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_5
+      rect:
+        serializedVersion: 2
+        x: 5955
+        y: 3960.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6670a0520c128584799c5d76aa751c79
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2970.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0d2cd9949109894db23255aa6f09278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_7
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 2970.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43d61f7de7350ea4e992696284a68acf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_8
+      rect:
+        serializedVersion: 2
+        x: 2382
+        y: 2970.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 061074dd1577e774c801216d3126d90d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_9
+      rect:
+        serializedVersion: 2
+        x: 3573
+        y: 2970.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da694f568e6aebe439878cf41d63e9a4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_10
+      rect:
+        serializedVersion: 2
+        x: 4764
+        y: 2970.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86dc6fa4c5f298649b0c4fc4e0bdd4cb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_11
+      rect:
+        serializedVersion: 2
+        x: 5955
+        y: 2970.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fb96d5bfbccca74a96f699c7b0dda5c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1980.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 850afd19133bf9c49af15fcabcaab9a9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_13
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 1980.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e11339b1667adb439619dd2713f7ef1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_14
+      rect:
+        serializedVersion: 2
+        x: 2382
+        y: 1980.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65994e0451f0ab54eadb724292469373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_15
+      rect:
+        serializedVersion: 2
+        x: 3573
+        y: 1980.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6804fd0fd756ac47aea3a65710ea585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_16
+      rect:
+        serializedVersion: 2
+        x: 4764
+        y: 1980.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f848f0ffe10b574993d12d5ca0a5208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_17
+      rect:
+        serializedVersion: 2
+        x: 5955
+        y: 1980.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95f66920edafbbc418d2916bcdb2c8e9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 990.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adc26cd393c01d546818e5d702f6eb67
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_19
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 990.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5307ec8c5f651b249a3a8aa9df521e74
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_20
+      rect:
+        serializedVersion: 2
+        x: 2382
+        y: 990.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d380904657b7eea47b68f2544469d743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_21
+      rect:
+        serializedVersion: 2
+        x: 3573
+        y: 990.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cece3bbc65139f845ab939776f1a2d52
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_22
+      rect:
+        serializedVersion: 2
+        x: 4764
+        y: 990.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f532676b83a37e4f98d78441e09fcd6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_23
+      rect:
+        serializedVersion: 2
+        x: 5955
+        y: 990.8
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd81b1d380ba44f4dafee67454f3b014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_24
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 1
+        width: 1191
+        height: 990
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d36c3a187e2ad94e996c4b7a820ddbb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_25
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 0.7999878
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 044358c9db3e8064d9b22e5709d75add
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_26
+      rect:
+        serializedVersion: 2
+        x: 2382
+        y: 0.7999878
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1e626a457b5cfd4a994dc70e3c08524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_27
+      rect:
+        serializedVersion: 2
+        x: 3573
+        y: 0.7999878
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80715236953a9d64d9d87500addec298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frogocid attack_28
+      rect:
+        serializedVersion: 2
+        x: 4764
+        y: 0.7999878
+        width: 1191.1666
+        height: 990.2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5bc21a3fb6b09c43b9cd32ef387c867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: dc631becac3715f4688685d37e923853
     vertices: []
     indices: 
     edges: []

@@ -24,6 +24,7 @@ public class WeaponAnimation : AnimationMama {
 
     protected void Start()
     {
+
        // path = transform.parent.GetComponent<AIPath>();
         animator = GetComponent<Animator>();
         animator.SetFloat("SpeedMultiplayer", weapon.speed / 1);
