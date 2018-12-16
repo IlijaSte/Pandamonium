@@ -230,6 +230,21 @@ Prefab:
       objectReference: {fileID: 557880998}
     - target: {fileID: 114209893818532370, guid: fd205bd53487bcb48926eda464046561,
         type: 2}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1226328796}
+    - target: {fileID: 114209893818532370, guid: fd205bd53487bcb48926eda464046561,
+        type: 2}
+      propertyPath: energyBar
+      value: 
+      objectReference: {fileID: 251504391}
+    - target: {fileID: 114209893818532370, guid: fd205bd53487bcb48926eda464046561,
+        type: 2}
+      propertyPath: coinsText
+      value: 
+      objectReference: {fileID: 1978820608}
+    - target: {fileID: 114209893818532370, guid: fd205bd53487bcb48926eda464046561,
+        type: 2}
       propertyPath: attackButton
       value: 
       objectReference: {fileID: 1580872483}
@@ -248,26 +263,6 @@ Prefab:
       propertyPath: abilityButtonHolders.Array.data[2]
       value: 
       objectReference: {fileID: 1774434372}
-    - target: {fileID: 114209893818532370, guid: fd205bd53487bcb48926eda464046561,
-        type: 2}
-      propertyPath: coinsText
-      value: 
-      objectReference: {fileID: 1978820608}
-    - target: {fileID: 114209893818532370, guid: fd205bd53487bcb48926eda464046561,
-        type: 2}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 1226328796}
-    - target: {fileID: 114209893818532370, guid: fd205bd53487bcb48926eda464046561,
-        type: 2}
-      propertyPath: nextAttackBar
-      value: 
-      objectReference: {fileID: 251504391}
-    - target: {fileID: 114209893818532370, guid: fd205bd53487bcb48926eda464046561,
-        type: 2}
-      propertyPath: energyBar
-      value: 
-      objectReference: {fileID: 251504391}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd205bd53487bcb48926eda464046561, type: 2}
   m_IsPrefabParent: 0
@@ -547,6 +542,37 @@ Transform:
   m_PrefabParentObject: {fileID: 4977153911668172, guid: 1392b6a2fdbbbf947a35b798f7b82f44,
     type: 2}
   m_PrefabInternal: {fileID: 1276222491}
+--- !u!84 &468458964
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SpriteLightKit RT
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 558
+  m_Height: 314
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 0
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!223 &557880998 stripped
 Canvas:
   m_PrefabParentObject: {fileID: 223070633048683606, guid: 00711fc208cb88b40a06ba32e47bc6ae,
@@ -900,37 +926,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8024d784720c37147a60dee3802749fe, type: 2}
   m_IsPrefabParent: 0
---- !u!84 &1539992658
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: SpriteLightKit RT
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 558
-  m_Height: 314
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 0
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!114 &1580872483 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114227635135599222, guid: c41a7d346eef8414b96565b8583e45f4,
@@ -1128,7 +1123,7 @@ Prefab:
         type: 2}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 1539992658}
+      objectReference: {fileID: 468458964}
     - target: {fileID: 114519924169131814, guid: 183980faa4eecda4cb2f751ff77af8e4,
         type: 2}
       propertyPath: spriteLightRT

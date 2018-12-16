@@ -312,6 +312,8 @@ public class LevelGeneration : MonoBehaviour
                 totalDifficulty -= newEnemy.GetComponent<Enemy>().difficulty;
             }
         }
+
+        (enemies[Random.Range(0, enemies.Count)] as GameObject).GetComponent<Enemy>().holdsKey = true;
     }
 
     protected virtual int CreateIntroRooms()

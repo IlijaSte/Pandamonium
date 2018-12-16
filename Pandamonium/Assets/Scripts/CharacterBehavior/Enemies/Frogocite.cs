@@ -174,16 +174,26 @@ public class Frogocite : Enemy
         }
     }
 
-    public override void TakeDamage(float damage)
+    public override bool TakeDamage(float damage)
     {
-        if(!isJumping)
-            base.TakeDamage(damage);
+        if (!isJumping)
+        {
+            return base.TakeDamage(damage);
+        }
+        else
+        {
+            return false;
+        }
     }
 
-    public override void TakeDamageWithKnockback(float damage, Vector2 dir, float force)
+    public override bool TakeDamageWithKnockback(float damage, Vector2 dir, float force)
     {
 
         if(!isJumping)
-            base.TakeDamageWithKnockback(damage, dir, force);
+            return base.TakeDamageWithKnockback(damage, dir, force);
+        else
+        {
+            return false;
+        }
     }
 }

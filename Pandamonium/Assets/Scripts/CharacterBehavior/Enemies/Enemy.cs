@@ -14,7 +14,6 @@ public class Enemy : AttackingCharacter {
 
     public int difficulty = 1;
 
-    public GameObject coinPrefab;
     public GameObject[] dropPrefabs;
 
     protected Vector2 startPos;
@@ -24,6 +23,9 @@ public class Enemy : AttackingCharacter {
     protected bool detectedPlayer = false;
 
     protected Transform target = null;                                          // 2D objekat koji igrac napada/prati
+
+    [HideInInspector]
+    public bool holdsKey = false;
 
     public override void Start()
     {
@@ -80,6 +82,13 @@ public class Enemy : AttackingCharacter {
         weapons[equippedWeaponIndex].Stop();
     }
 
+    protected void DropKey()
+    {
+        GameObject keyPrefab = GameManager.I.prefabHolder.key;
+        if (holdsKey)
+            Instantiate(keyPrefab, transform.position, Quaternion.identity);
+    }
+
     protected void DropItem()
     {
         if(Random.Range(0, (float)1) >= 0.95f && dropPrefabs.Length > 0)
@@ -88,8 +97,8 @@ public class Enemy : AttackingCharacter {
 
     protected void DropCoins(int amount = 1)
     {
-        if(coinPrefab != null)
-            Instantiate(coinPrefab, transform.position, Quaternion.identity).GetComponent<Collectible>().SetDropDirection((transform.position - player.position).normalized);
+        GameObject coinPrefab = GameManager.I.prefabHolder.coin;
+        Instantiate(coinPrefab, transform.position, Quaternion.identity).GetComponent<Collectible>().SetDropDirection((transform.position - player.position).normalized);
     }
 
     public void StopAttacking()
@@ -223,15 +232,16 @@ public class Enemy : AttackingCharacter {
         }
     }
 
-    public override void TakeDamage(float damage)
+    public override bool TakeDamage(float damage)
     {
-        base.TakeDamage(damage);
+        bool takenDamage = base.TakeDamage(damage);
         healthBar.FillAmount( health / maxHealth);
 
         if(playerState != PlayerState.ATTACKING)
         {
             //Attack(GameManager.I.playerInstance.transform);
         }
+        return takenDamage;
     }
 
     protected override IEnumerator Death()
@@ -256,6 +266,11 @@ public class Enemy : AttackingCharacter {
     protected override void Die()
     {
         DropCoins();
+
+        if (holdsKey)
+        {
+            DropKey();
+        }
 
         numEnemies--;
         if (numEnemies == 0)

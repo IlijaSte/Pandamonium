@@ -23,6 +23,11 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     private float addedRotation = 0;
 
+    protected bool keyPickedUp = false;
+    public enum ActionChangeType { SWAP_TO_KEY, SWAP_TO_WEAPON }
+    public enum ActionType { WEAPON, KEY }
+    protected ActionType action = ActionType.WEAPON;
+
     public override void Awake()
     {
         if (!GameManager.joystick)
@@ -234,6 +239,25 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
     }
 
+    public void ActionChange(ActionChangeType actionChange)
+    {
+
+        switch (actionChange) {
+
+            case ActionChangeType.SWAP_TO_KEY:
+                action = ActionType.KEY;
+                UIManager.I.ButtonToAction();
+                break;
+
+            case ActionChangeType.SWAP_TO_WEAPON:
+                action = ActionType.WEAPON;
+                UIManager.I.ButtonToWeapon();
+                break;
+
+        }
+
+    }
+
     public override Vector2 GetFacingDirection()
     {
         return facingDirection;
@@ -254,12 +278,24 @@ public class PlayerWithJoystick : AttackingCharacter {
     public override void Attack()
     {
 
-        if (weapons[equippedWeaponIndex] is MeleeWeapon)
+        switch (action)
         {
-            int numHit = ((MeleeWeapon)weapons[equippedWeaponIndex]).AttackCleave();
-            IncreaseEnergy(numHit * weapons[equippedWeaponIndex].damage);
-           
+            case ActionType.WEAPON:
+
+                if (weapons[equippedWeaponIndex] is MeleeWeapon)
+                {
+                    int numHit = ((MeleeWeapon)weapons[equippedWeaponIndex]).AttackCleave();
+                    IncreaseEnergy(numHit * weapons[equippedWeaponIndex].damage);
+
+                }
+
+                break;
+
+            case ActionType.KEY:
+                // keyholder...
+                break;
         }
+        
 
     }
 
@@ -274,14 +310,17 @@ public class PlayerWithJoystick : AttackingCharacter {
         abilityManager.StopUsingAbility(abilityIndex);
     }
 
-    public override void TakeDamage(float damage)
+    public override bool TakeDamage(float damage)
     {
+        bool takenDamage = false;
         if (!isDead)
         {
-            base.TakeDamage(damage);
+            takenDamage = base.TakeDamage(damage);
 
             healthBar.FillAmount(health / maxHealth);
         }
+
+        return takenDamage;
     }
 
     public override void TakePoisonDamage(float damage)
@@ -293,6 +332,12 @@ public class PlayerWithJoystick : AttackingCharacter {
 
             healthBar.FillAmount(health / maxHealth);
         }
+    }
+
+    public void PickupKey()
+    {
+        keyPickedUp = true;
+        print("picked up key");
     }
 
     protected override void Die()

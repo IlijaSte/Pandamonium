@@ -88,6 +88,8 @@ public class Level1_1Generation : LevelGeneration {
                 totalDifficulty -= newEnemy.GetComponent<Enemy>().difficulty;
             }
         }
+
+        (enemies[Random.Range(0, enemies.Count)] as GameObject).GetComponent<Enemy>().holdsKey = true;
     }
 
 }

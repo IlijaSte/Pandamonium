@@ -12,9 +12,12 @@ public class UIManager : MonoBehaviour {
     public ChaosHealtBar healthBar;
     public Image energyBar;
     public Text coinsText;
+
     public Text combatTextPrefab;
 
     public Button attackButton;
+    public Sprite actionButtonSprite;
+
     public Transform[] abilityButtonHolders;
 
     private static UIManager instance;
@@ -38,6 +41,19 @@ public class UIManager : MonoBehaviour {
         {
             //joystickCanvas.enabled = false;
         }
+    }
+
+    private Sprite weaponSprite;
+
+    public void ButtonToAction()
+    {
+        weaponSprite = attackButton.image.sprite;
+        attackButton.image.sprite = actionButtonSprite;
+    }
+
+    public void ButtonToWeapon()
+    {
+        attackButton.image.sprite = weaponSprite;
     }
 
     public void ShowHitDamage(Canvas canvas, float yOffset, float damage, bool isPlayer = false)

@@ -20,16 +20,20 @@ public class MeleeWeapon : Weapon
         return false;
     }
 
-    protected void Damage(Transform target)
+    protected bool Damage(Transform target)
     {
+        bool takenDamage = false;
+
         if (knockback)
         {
-            target.GetComponent<AttackingCharacter>().TakeDamageWithKnockback(damage, (target.position - transform.position).normalized, knockbackForce);
+            takenDamage = target.GetComponent<AttackingCharacter>().TakeDamageWithKnockback(damage, (target.position - transform.position).normalized, knockbackForce);
         }
         else
         {
-            target.GetComponent<AttackingCharacter>().TakeDamage(damage);
+            takenDamage = target.GetComponent<AttackingCharacter>().TakeDamage(damage);
         }
+
+        return takenDamage;
     }
 
     public int AttackCleave()
@@ -68,14 +72,17 @@ public class MeleeWeapon : Weapon
 
         }
 
-        
+        int damagedTargets = 0;
         foreach(Transform target in visibleTargets)
         {
-            Damage(target);
+            if (Damage(target))
+            {
+                damagedTargets++;
+            }
         }
 
         timeToAttack = 1;
 
-        return visibleTargets.Count;
+        return damagedTargets;
     }
 }

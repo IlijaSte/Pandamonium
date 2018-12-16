@@ -55,9 +55,13 @@ MonoBehaviour:
   mainCanvas: {fileID: 0}
   joystickCanvas: {fileID: 0}
   minimapCanvas: {fileID: 0}
+  healthBar: {fileID: 0}
+  energyBar: {fileID: 0}
+  coinsText: {fileID: 0}
   combatTextPrefab: {fileID: 114324912091261364, guid: f314e89d31251ab41a1021f4224fb2c5,
     type: 2}
   attackButton: {fileID: 0}
+  actionButtonSprite: {fileID: 21300000, guid: e97bd408edd26f5459995a8140b974fc, type: 3}
   abilityButtonHolders:
   - {fileID: 0}
   - {fileID: 0}

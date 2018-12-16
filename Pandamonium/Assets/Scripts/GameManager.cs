@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour {
     [HideInInspector]
     public List<string> abilities;
 
+    [HideInInspector]
+    public PrefabHolder prefabHolder;
+
     public static GameManager I
     {
         get
@@ -65,6 +68,8 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
         SaveManager.I.LoadGame();
+
+        prefabHolder = GetComponent<PrefabHolder>();
 
     }
 

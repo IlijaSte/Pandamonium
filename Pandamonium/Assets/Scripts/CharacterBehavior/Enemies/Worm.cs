@@ -61,9 +61,9 @@ public class Worm : Enemy {
 
     }
 
-    public override void TakeDamageWithKnockback(float damage, Vector2 dir, float force)
+    public override bool TakeDamageWithKnockback(float damage, Vector2 dir, float force)
     {
-        TakeDamage(damage);
+        return TakeDamage(damage);
     }
 
     private Vector3 FindEmergePosition()
