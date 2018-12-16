@@ -24,9 +24,11 @@ public class PlayerWithJoystick : AttackingCharacter {
     private float addedRotation = 0;
 
     protected bool keyPickedUp = false;
-    public enum ActionChangeType { SWAP_TO_KEY, SWAP_TO_WEAPON }
-    public enum ActionType { WEAPON, KEY }
+    public enum ActionChangeType { SWAP_TO_PAW, SWAP_TO_KEY, SWAP_TO_WEAPON }
+    public enum ActionType { WEAPON, KEY, PAW }
+
     protected ActionType action = ActionType.WEAPON;
+    protected Transform actionObject;
 
     public override void Awake()
     {
@@ -49,13 +51,12 @@ public class PlayerWithJoystick : AttackingCharacter {
         base.Start();
         facingDirection = Vector2.down;
 
-        if(abilityManager == null)
+        if (abilityManager == null)
         {
             abilityManager = GetComponentInChildren<AbilityManager>();
         }
 
     }
-
     public void AddRotation(float angle)
     {
         addedRotation += angle;
@@ -88,6 +89,14 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
 
         energyBar.fillAmount = energy / maxEnergy;
+
+        if (SystemInfo.deviceType == DeviceType.Desktop)
+        {
+            if (Input.GetKeyUp(KeyCode.K))
+            {
+                keyPickedUp = true;
+            }
+        }
     }
 
     protected IEnumerator CaptureScreenshot()
@@ -239,17 +248,30 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
     }
 
-    public void ActionChange(ActionChangeType actionChange)
+    public void ActionChange(ActionChangeType actionChange, Transform source = null)
     {
 
         switch (actionChange) {
 
             case ActionChangeType.SWAP_TO_KEY:
+
                 action = ActionType.KEY;
+                if(keyPickedUp)
+                    UIManager.I.ButtonToAction(true);
+                else
+                    UIManager.I.ButtonToAction(false);
+                actionObject = source;
+                break;
+
+            case ActionChangeType.SWAP_TO_PAW:
+
+                action = ActionType.PAW;
                 UIManager.I.ButtonToAction();
+                actionObject = source;
                 break;
 
             case ActionChangeType.SWAP_TO_WEAPON:
+
                 action = ActionType.WEAPON;
                 UIManager.I.ButtonToWeapon();
                 break;
@@ -292,7 +314,16 @@ public class PlayerWithJoystick : AttackingCharacter {
                 break;
 
             case ActionType.KEY:
-                // keyholder...
+
+                if (keyPickedUp)
+                {
+                    actionObject.GetComponentInChildren<KeyHolder>().StartActivating();
+                }
+
+                break;
+
+            case ActionType.PAW:
+                actionObject.GetComponentInChildren<InteractableObject>().StartActivating();
                 break;
         }
         

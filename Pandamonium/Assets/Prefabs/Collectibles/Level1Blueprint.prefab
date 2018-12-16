@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61116522582040692}
   - component: {fileID: 50619253195573832}
   - component: {fileID: 212160864481117546}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Level1Blueprint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

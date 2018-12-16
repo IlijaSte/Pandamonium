@@ -2,30 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyHolder : MonoBehaviour {
+public class KeyHolder : InteractableObject {
 
-    public void Activate()
+    public GameObject rewardChest;
+
+    public override void Activate()
     {
         // spawn chest...
+        if(rewardChest)
+            rewardChest.SetActive(true);
+
+        base.Activate();
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        PlayerWithJoystick player = collision.GetComponent<PlayerWithJoystick>();
-
-        if (player)
-        {
-            player.ActionChange(PlayerWithJoystick.ActionChangeType.SWAP_TO_KEY);
-        }
-    }
-
-    public void OnTriggerExit2D(Collider2D collision)
-    {
-        PlayerWithJoystick player = collision.GetComponent<PlayerWithJoystick>();
-
-        if (player)
-        {
-            player.ActionChange(PlayerWithJoystick.ActionChangeType.SWAP_TO_WEAPON);
-        }
-    }
 }

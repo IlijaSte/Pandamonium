@@ -26,7 +26,7 @@ public class Level1_2Generation : LevelGeneration {
         {
             Room room = rooms[Mathf.RoundToInt(gridSizeX + pos.x), Mathf.RoundToInt(gridSizeY + pos.y)];
 
-            if (room.type == Room.RoomType.START || room.type == Room.RoomType.OBELISK)
+            if (room.type == Room.RoomType.START || room.type == Room.RoomType.OBELISK || room.type == Room.RoomType.KEY_HOLDER)
                 continue;
 
             int totalDifficulty;

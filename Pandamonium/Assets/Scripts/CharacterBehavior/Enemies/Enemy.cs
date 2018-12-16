@@ -267,7 +267,7 @@ public class Enemy : AttackingCharacter {
     {
         DropCoins();
 
-        if (holdsKey)
+        if (GameManager.I.currentLevel > 0 && holdsKey)
         {
             DropKey();
         }
