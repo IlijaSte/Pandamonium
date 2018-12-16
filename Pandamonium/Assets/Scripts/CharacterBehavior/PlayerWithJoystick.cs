@@ -23,6 +23,13 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     private float addedRotation = 0;
 
+    protected bool keyPickedUp = false;
+    public enum ActionChangeType { SWAP_TO_PAW, SWAP_TO_KEY, SWAP_TO_WEAPON }
+    public enum ActionType { WEAPON, KEY, PAW }
+
+    protected ActionType action = ActionType.WEAPON;
+    protected Transform actionObject;
+
     public override void Awake()
     {
         if (!GameManager.joystick)
@@ -45,13 +52,12 @@ public class PlayerWithJoystick : AttackingCharacter {
         base.Start();
         facingDirection = Vector2.down;
 
-        if(abilityManager == null)
+        if (abilityManager == null)
         {
             abilityManager = GetComponentInChildren<AbilityManager>();
         }
 
     }
-
     public void AddRotation(float angle)
     {
         addedRotation += angle;
@@ -84,6 +90,14 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
 
         energyBar.fillAmount = energy / maxEnergy;
+
+        if (SystemInfo.deviceType == DeviceType.Desktop)
+        {
+            if (Input.GetKeyUp(KeyCode.K))
+            {
+                keyPickedUp = true;
+            }
+        }
     }
 
     protected IEnumerator CaptureScreenshot()
@@ -235,6 +249,38 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
     }
 
+    public void ActionChange(ActionChangeType actionChange, Transform source = null)
+    {
+
+        switch (actionChange) {
+
+            case ActionChangeType.SWAP_TO_KEY:
+
+                action = ActionType.KEY;
+                if(keyPickedUp)
+                    UIManager.I.ButtonToAction(true);
+                else
+                    UIManager.I.ButtonToAction(false);
+                actionObject = source;
+                break;
+
+            case ActionChangeType.SWAP_TO_PAW:
+
+                action = ActionType.PAW;
+                UIManager.I.ButtonToAction();
+                actionObject = source;
+                break;
+
+            case ActionChangeType.SWAP_TO_WEAPON:
+
+                action = ActionType.WEAPON;
+                UIManager.I.ButtonToWeapon();
+                break;
+
+        }
+
+    }
+
     public override Vector2 GetFacingDirection()
     {
         return facingDirection;
@@ -255,12 +301,33 @@ public class PlayerWithJoystick : AttackingCharacter {
     public override void Attack()
     {
 
-        if (weapons[equippedWeaponIndex] is MeleeWeapon)
+        switch (action)
         {
-            int numHit = ((MeleeWeapon)weapons[equippedWeaponIndex]).AttackCleave();
-            IncreaseEnergy(numHit * weapons[equippedWeaponIndex].damage);
-           
+            case ActionType.WEAPON:
+
+                if (weapons[equippedWeaponIndex] is MeleeWeapon)
+                {
+                    int numHit = ((MeleeWeapon)weapons[equippedWeaponIndex]).AttackCleave();
+                    IncreaseEnergy(numHit * weapons[equippedWeaponIndex].damage);
+
+                }
+
+                break;
+
+            case ActionType.KEY:
+
+                if (keyPickedUp)
+                {
+                    actionObject.GetComponentInChildren<KeyHolder>().StartActivating();
+                }
+
+                break;
+
+            case ActionType.PAW:
+                actionObject.GetComponentInChildren<InteractableObject>().StartActivating();
+                break;
         }
+        
 
     }
 
@@ -275,14 +342,17 @@ public class PlayerWithJoystick : AttackingCharacter {
         abilityManager.StopUsingAbility(abilityIndex);
     }
 
-    public override void TakeDamage(float damage)
+    public override bool TakeDamage(float damage)
     {
+        bool takenDamage = false;
         if (!isDead)
         {
-            base.TakeDamage(damage);
+            takenDamage = base.TakeDamage(damage);
 
             healthBar.FillAmount(health / maxHealth);
         }
+
+        return takenDamage;
     }
 
     public override void TakePoisonDamage(float damage)
@@ -294,6 +364,12 @@ public class PlayerWithJoystick : AttackingCharacter {
 
             healthBar.FillAmount(health / maxHealth);
         }
+    }
+
+    public void PickupKey()
+    {
+        keyPickedUp = true;
+        print("picked up key");
     }
 
     protected override void Die()

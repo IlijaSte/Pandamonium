@@ -17,9 +17,12 @@ public class Collectible : MonoBehaviour {
 
     private Vector2 dropDirection = Vector2.zero;
 
+    private SpriteRenderer sprite;
+
 	protected virtual void Start () {
 
         rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
         Drop();
 	}
 
@@ -78,6 +81,8 @@ public class Collectible : MonoBehaviour {
 
         rb.AddForce(GetInitVelocity(dropPos), ForceMode2D.Impulse);
         dropping = true;
+
+        sprite.sortingOrder = -Mathf.RoundToInt(dropPos.y * 100);
     }
 
     protected virtual void FixedUpdate()
@@ -92,11 +97,17 @@ public class Collectible : MonoBehaviour {
             }
             else
             {
-                rb.bodyType = RigidbodyType2D.Kinematic;
+                //rb.bodyType = RigidbodyType2D.Kinematic;
+                rb.gravityScale = 0;
                 rb.velocity = Vector2.zero;
                 dropping = false;
+                rb.drag = 10;
+
+                gameObject.layer = LayerMask.NameToLayer("Default");       // !!!   da bi se collidovali sa chestom
+                sprite.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100);
             }
         }
+
     }
 
     protected virtual void OnPickup()

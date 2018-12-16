@@ -22,6 +22,8 @@ public class LevelGeneration : MonoBehaviour
     public GameObject firstRoom;
     public GameObject lastRoom;
 
+    public GameObject keyHolderRoom;
+
     public GameObject healthPoolPrefab;
 
     public TileBase corridorHorizPrefab;
@@ -235,9 +237,13 @@ public class LevelGeneration : MonoBehaviour
 
     protected virtual void InstantiateHealthPool()
     {
-        Vector2 pos = takenPositions[Random.Range(1, takenPositions.Count - 2)];
-
-        Room room = rooms[Mathf.RoundToInt(gridSizeX + pos.x), Mathf.RoundToInt(gridSizeY + pos.y)];
+        Vector2 pos;
+        Room room;
+        do
+        {
+            pos = takenPositions[Random.Range(1, takenPositions.Count - 2)];
+            room = rooms[Mathf.RoundToInt(gridSizeX + pos.x), Mathf.RoundToInt(gridSizeY + pos.y)];
+        } while (room.type == Room.RoomType.START || room.type == Room.RoomType.OBELISK || room.type == Room.RoomType.KEY_HOLDER);
 
         Vector2 spawnPos;
 
@@ -263,7 +269,7 @@ public class LevelGeneration : MonoBehaviour
         {
             Room room = rooms[Mathf.RoundToInt(gridSizeX + pos.x), Mathf.RoundToInt(gridSizeY + pos.y)];
 
-            if (room.type == Room.RoomType.START || room.type == Room.RoomType.OBELISK)
+            if (room.type == Room.RoomType.START || room.type == Room.RoomType.OBELISK || room.type == Room.RoomType.KEY_HOLDER)
                 continue;
 
             // broj neprijatelja u sobi zavisi od razdaljine sobe od pocetne sobe i multiplier-a
@@ -312,6 +318,8 @@ public class LevelGeneration : MonoBehaviour
                 totalDifficulty -= newEnemy.GetComponent<Enemy>().difficulty;
             }
         }
+
+        (enemies[Random.Range(0, enemies.Count)] as GameObject).GetComponent<Enemy>().holdsKey = true;
     }
 
     protected virtual int CreateIntroRooms()
@@ -328,6 +336,8 @@ public class LevelGeneration : MonoBehaviour
 
         Vector2Int obeliskCheckPos;
 
+        bool spawnKeyHolder = GameManager.I.currentLevel > 0;
+
         do
         {
             takenPositions.Clear();
@@ -336,6 +346,8 @@ public class LevelGeneration : MonoBehaviour
             takenPositions.Insert(0, Vector2.zero);
 
             int introRooms = CreateIntroRooms();
+
+            int keyHolderIndex = Random.Range(0, numberOfRooms - introRooms);
 
             Vector2Int checkPos = Vector2Int.zero;
             //magic numbers
@@ -361,7 +373,16 @@ public class LevelGeneration : MonoBehaviour
                         print("error: could not create with fewer neighbors than : " + NumberOfNeighbors(checkPos, takenPositions));
                 }
                 //finalize position
-                rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, Room.RoomType.DEFAULT);
+
+                if(spawnKeyHolder && i == keyHolderIndex)
+                {
+                    rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, Room.RoomType.KEY_HOLDER);
+                }
+                else
+                {
+                    rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, Room.RoomType.DEFAULT);
+                }
+                
                 takenPositions.Insert(0, checkPos);
             }
 
@@ -577,6 +598,9 @@ public class LevelGeneration : MonoBehaviour
                 case Room.RoomType.START:
                     room.Init(firstRoom, roomParent);
                     break;
+                case Room.RoomType.KEY_HOLDER:
+                    room.Init(keyHolderRoom, roomParent);
+                    break;
                 default:
                     room.Init(GetRandomPrefab(), roomParent);
                     break;
@@ -619,7 +643,7 @@ public class LevelGeneration : MonoBehaviour
                 }
                 else
                 {
-                    rooms[x, y].doorBot = (rooms[x, y - 1] != null && (rooms[x, y - 1].type == Room.RoomType.DEFAULT));
+                    rooms[x, y].doorBot = (rooms[x, y - 1] != null && (rooms[x, y - 1].type != Room.RoomType.START && rooms[x, y - 1].type != Room.RoomType.OBELISK));
 
                     if (rooms[x, y - 1] != null && rooms[x, y - 1].type == Room.RoomType.INTRO)
                             rooms[x, y].doorBot = rooms[x, y - 1].nextTo == rooms[x, y];
@@ -632,7 +656,7 @@ public class LevelGeneration : MonoBehaviour
                 }
                 else
                 {
-                    rooms[x, y].doorTop = (rooms[x, y + 1] != null && (rooms[x, y + 1].type == Room.RoomType.DEFAULT || rooms[x, y + 1].type == Room.RoomType.OBELISK));
+                    rooms[x, y].doorTop = (rooms[x, y + 1] != null && (rooms[x, y + 1].type != Room.RoomType.START || rooms[x, y + 1].type == Room.RoomType.OBELISK));
 
                     if (rooms[x, y + 1] != null && rooms[x, y + 1].type == Room.RoomType.INTRO)
                         rooms[x, y].doorTop = rooms[x, y + 1].nextTo == rooms[x, y];
@@ -644,7 +668,7 @@ public class LevelGeneration : MonoBehaviour
                 }
                 else
                 {
-                    rooms[x, y].doorLeft = (rooms[x - 1, y] != null && (rooms[x - 1, y].type == Room.RoomType.DEFAULT));
+                    rooms[x, y].doorLeft = (rooms[x - 1, y] != null && (rooms[x - 1, y].type != Room.RoomType.START && rooms[x - 1, y].type != Room.RoomType.OBELISK));
 
                     if (rooms[x - 1, y] != null && rooms[x - 1, y].type == Room.RoomType.INTRO)
                         rooms[x, y].doorLeft = rooms[x - 1, y].nextTo == rooms[x, y];
@@ -657,7 +681,7 @@ public class LevelGeneration : MonoBehaviour
                 }
                 else
                 {
-                    rooms[x, y].doorRight = (rooms[x + 1, y] != null && (rooms[x + 1, y].type == Room.RoomType.DEFAULT));
+                    rooms[x, y].doorRight = (rooms[x + 1, y] != null && (rooms[x + 1, y].type != Room.RoomType.START && (rooms[x + 1, y].type != Room.RoomType.OBELISK)));
 
                     if (rooms[x + 1, y] != null && rooms[x + 1, y].type == Room.RoomType.INTRO)
                         rooms[x, y].doorRight = rooms[x + 1, y].nextTo == rooms[x, y];

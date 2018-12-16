@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114001608548309130}
   - component: {fileID: 95920563826101412}
   - component: {fileID: 50567855644949802}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: PandaCoin
   m_TagString: Untagged
   m_Icon: {fileID: 0}

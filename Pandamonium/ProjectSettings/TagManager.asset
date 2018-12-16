@@ -30,8 +30,8 @@ TagManager:
   - RadialLighting
   - Obstacles
   - MinimapVisible
-  - 
-  - 
+  - InteractableObjects
+  - Collectibles
   - 
   - 
   - 

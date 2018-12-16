@@ -228,7 +228,7 @@ public abstract class AttackingCharacter : MonoBehaviour {
         }
     }
 
-    public virtual void TakeDamage(float damage)
+    public virtual bool TakeDamage(float damage)
     {
 
         if(GameManager.I.playerInstance == this)
@@ -249,6 +249,8 @@ public abstract class AttackingCharacter : MonoBehaviour {
         {
             StartCoroutine(ColorTransition(Color.red));
         }
+
+        return true;
     }
 
     public virtual void TakePoisonDamage(float damage)
@@ -302,15 +304,16 @@ public abstract class AttackingCharacter : MonoBehaviour {
         isKnockedBack = false;
     }
 
-    public virtual void TakeDamageWithKnockback(float damage, Vector2 dir, float force)
+    public virtual bool TakeDamageWithKnockback(float damage, Vector2 dir, float force)
     {
-        TakeDamage(damage);
+        bool takenDamage = TakeDamage(damage);
 
         if (playerState != PlayerState.DASHING && !isKnockedBack)
         {
             StartCoroutine(Knockback(dir, force));
         }
 
+        return takenDamage;
     }
 
     protected virtual IEnumerator DoT(Transform source, float damage, float interval, int times)

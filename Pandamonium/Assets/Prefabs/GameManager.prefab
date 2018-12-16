@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4374416534035650}
   - component: {fileID: 114622438205401858}
   - component: {fileID: 114845349572401252}
+  - component: {fileID: 114483662204351440}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -41,6 +42,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114483662204351440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1759324250561034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f43e81106ba102a49b6d4a5a0a6b02cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coin: {fileID: 1672314928492584, guid: 9054cd14c71cd36499cbbfd3ac98eaef, type: 2}
+  key: {fileID: 1584737393562760, guid: 8381205ab95a9b2489eac3ca8af12bce, type: 2}
 --- !u!114 &114622438205401858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -54,6 +68,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInstance: {fileID: 0}
   currentLevel: 0
+  gameMode: classic
+  isRunStarted: 0
+  coins: 0
+  abilities: []
   nextScene: 
 --- !u!114 &114845349572401252
 MonoBehaviour:
@@ -67,5 +85,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState:
+    isRunStarted: 0
+    gameMode: 
     gameLevel: 0
     coins: 0
+    abilities: []

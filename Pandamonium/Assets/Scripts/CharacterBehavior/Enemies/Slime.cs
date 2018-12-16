@@ -88,7 +88,7 @@ public class Slime : Enemy {
         }
     }
 
-    public override void TakeDamageWithKnockback(float damage, Vector2 dir, float force)
+    public override bool TakeDamageWithKnockback(float damage, Vector2 dir, float force)
     {
         if (isCharging)
         {
@@ -96,7 +96,7 @@ public class Slime : Enemy {
             playerState = PlayerState.IDLE;
         }
 
-        base.TakeDamageWithKnockback(damage, dir, force);
+        return base.TakeDamageWithKnockback(damage, dir, force);
 
     }
 
