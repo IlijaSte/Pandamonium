@@ -40,6 +40,7 @@ public class PlayerWithJoystick : AttackingCharacter {
 
         healthBar = UIManager.I.healthBar;
         energyBar = UIManager.I.energyBar;
+        //energyBar.buildHealtBar(10, false);
 
         base.Start();
         facingDirection = Vector2.down;
