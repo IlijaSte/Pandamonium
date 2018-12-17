@@ -54,6 +54,7 @@ public class PlayerWithJoystick : AttackingCharacter {
 
         healthBar = UIManager.I.healthBar;
         energyBar = UIManager.I.energyBar;
+        //energyBar.buildHealtBar(10, false);
 
         attributes = GameManager.I.attributes;
 

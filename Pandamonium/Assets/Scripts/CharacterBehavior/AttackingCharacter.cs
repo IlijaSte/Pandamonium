@@ -16,7 +16,7 @@ public abstract class AttackingCharacter : MonoBehaviour {
 
     public float normalSpeed = 6;
 
-    public ChaosHealtBar healthBar;
+    public ChaosHealthBar healthBar;
     public Image nextAttackBar;
 
     public CharacterVision vision;
@@ -83,11 +83,7 @@ public abstract class AttackingCharacter : MonoBehaviour {
             vision = transform.Find("Vision").GetComponent<CharacterVision>();
 
         health = maxHealth;
-        if (type.Equals(CharacterType.PLAYER))
-            healthBar.buildHealtBar(17, false);
-        else healthBar.buildHealtBar(13, true);
-        //healthBar.buildHealtBar(13);
-
+        healthBar.buildHealtBar(10, !type.Equals(CharacterType.PLAYER));
 
         nextAttackBG = nextAttackBar.transform.parent.gameObject;
 
@@ -162,7 +158,7 @@ public abstract class AttackingCharacter : MonoBehaviour {
     public virtual void Heal()
     {
         health = Mathf.Clamp(health + maxHealth / 2, 0, maxHealth);
-        healthBar.FillAmount(health / maxHealth);
+        healthBar.Heal(health / maxHealth);
 
         UIManager.I.ShowHeal(GetComponentInChildren<Canvas>(), 1);
     }
@@ -323,13 +319,16 @@ public abstract class AttackingCharacter : MonoBehaviour {
     protected virtual IEnumerator DoT(Transform source, float damage, float interval, int times)
     {
 
-        while(times-- > 0)
+       
+        float poisonDamage = (damage * times) / maxHealth;
+        healthBar.PoisonOn(poisonDamage, health / maxHealth);    
+        while (times-- > 0)
         {
             yield return new WaitForSeconds(interval);
             //TakeDamage(damage);
             TakePoisonDamage(damage);
-           
         }
+        healthBar.PoisonOff(poisonDamage, health / maxHealth);
 
         if (dotSources.Contains(source))
         {

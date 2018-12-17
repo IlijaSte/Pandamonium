@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChaosHealtBar : ChaosBar
+public class ChaosHealthBar : Image
 {
     enum BarType { HEALTH, POISIOM, ENERGY}
 
-    private ChaosHealtBar[] halfTriangles;
-    private ChaosHealtBar[] halfTrianglesBG;
-    private ChaosHealtBar[] prefabs;
+    private ChaosHealthBar[] halfTriangles;
+    private ChaosHealthBar[] halfTrianglesBG;
+    private ChaosHealthBar[] prefabs;
 
     private Transform foregroundParent;
     private Transform backgroundParent;
@@ -23,6 +23,9 @@ public class ChaosHealtBar : ChaosBar
 
     private bool isMini;
 
+    private float healthPeace = 1;
+    private float poisonPeace = 0;
+
     private void SetTriangleOriginDistances()
     { 
         if (isMini)
@@ -30,25 +33,39 @@ public class ChaosHealtBar : ChaosBar
         else triangleOriginDistances = new Vector2(11f, 2f);
     }
 
-    
-    private void SetColors(HealthBarHolder hbh)
+
+    private void SetColors()//HealthBarHolder hbh)
     {
+        /*
         colorsBackground = hbh.colorsBackground;
         colorsForeground = hbh.colorsForeground;
         colorsPoison = hbh.colorsPoison;
+        */
+        //float part = (1 - amount) * (halfTriangles.Length - 1);
+        float poisonFloatStart = Mathf.Round((healthPeace - poisonPeace) * (halfTriangles.Length));
+        //print("poisonFloatStart:" + poisonFloatStart);
 
-    /*
-    colorsForeground = new Color32[2];
-    colorsPoison = new Color32[2];
-    colorsBackground = new Color32[2];
-    colorsBackground[0] = colorsBackground[1] = new Color32(48, 19, 20, 255);
-    colorsForeground[0] = new Color32(130, 25, 34, 255);
-    colorsForeground[1] = new Color32(165, 30, 35, 255);
-    */
+        //healht
+        for (int i = 0; i < halfTriangles.Length; i += 2)
+        {
+            float triangleFloatPos = (i + 1);// * halfTriangles.Length;
+           // print("triangleFloatPos:" + triangleFloatPos);
+            Color32 color;
 
-    //posion color:
-}
-    
+            if (poisonPeace == 0 || triangleFloatPos < poisonFloatStart)
+                color = colorsForeground[(i / 2) % 2];
+            else color = colorsPoison[(i / 2) % 2];
+            //float part = (1 - amount) * (halfTriangles.Length - 1)
+
+            halfTriangles[i].color = color;
+
+            if (poisonPeace == 0 || triangleFloatPos + 1 < poisonFloatStart)
+                color = colorsForeground[(i / 2) % 2];
+            else color = colorsPoison[(i / 2) % 2];
+
+            halfTriangles[i + 1].color = color;
+        }
+    }
 
     public void buildHealtBar(int numTriangles, bool isMini)
     {
@@ -61,30 +78,33 @@ public class ChaosHealtBar : ChaosBar
         prefabs = hbh.halfTrianglesPrefabs;
         foregroundParent = hbh.foregroundParent;
         backgroundParent = hbh.backgroundParent;
+        colorsBackground = hbh.colorsBackground;
+        colorsForeground = hbh.colorsForeground;
+        colorsPoison = hbh.colorsPoison;
 
-        SetColors(hbh);
+        //SetColors();
 
 
-        halfTriangles = new ChaosHealtBar[numTriangles * 2];
-        halfTrianglesBG = new ChaosHealtBar[numTriangles * 2];
+        halfTriangles = new ChaosHealthBar[numTriangles * 2];
+        halfTrianglesBG = new ChaosHealthBar[numTriangles * 2];
 
         InstantiateTriangles(colorsBackground, triangleOriginDistances, halfTrianglesBG, backgroundParent);
         InstantiateTriangles(colorsForeground, triangleOriginDistances, halfTriangles, foregroundParent);
     }
-    private void InstantiateTriangles(Color[] colors, Vector2 distances, ChaosHealtBar[] halfTriangles, Transform parentObject)
+    private void InstantiateTriangles(Color[] colors, Vector2 distances, ChaosHealthBar[] halfTriangles, Transform parentObject)
     {
         Vector3 position = Vector3.zero;
         for (int i = 0; i < halfTriangles.Length; i += 2)
         {
             Color32 color = colors[(i / 2) % 2];
 
-            halfTriangles[i] = Instantiate(prefabs[i % 4], parentObject).GetComponent<ChaosHealtBar>();
+            halfTriangles[i] = Instantiate(prefabs[i % 4], parentObject).GetComponent<ChaosHealthBar>();
             halfTriangles[i].transform.localPosition = position;
             halfTriangles[i].color = color;
             
             position.x += distances[0];
 
-            halfTriangles[i + 1] = Instantiate(prefabs[(i + 1) % 4], parentObject).GetComponent<ChaosHealtBar>();
+            halfTriangles[i + 1] = Instantiate(prefabs[(i + 1) % 4], parentObject).GetComponent<ChaosHealthBar>();
             halfTriangles[i + 1].transform.localPosition = position;
             halfTriangles[i + 1].color = color; 
                                        
@@ -95,10 +115,12 @@ public class ChaosHealtBar : ChaosBar
 
     public void FillAmount(float amount)
     {
+        //healthPeace = amount; 
 
         //if it is not a regular healtbar
-        if(halfTriangles != null && halfTriangles.Length > 0)
+        if (halfTriangles != null && halfTriangles.Length > 0)
         {
+            SetColors();
             //full heal
             if(amount == 1)
             {
@@ -110,7 +132,7 @@ public class ChaosHealtBar : ChaosBar
 
                 int i = halfTriangles.Length - 1;
                 //part to lose
-                float part = (1 - amount) * (halfTriangles.Length - 1);
+                float part = (1 - amount) * (halfTriangles.Length - 1);//proveri ovaj - 1
                 while (part > 0 && i > 0)
                 {
                     while (part > 1 && i > 1)
@@ -126,11 +148,33 @@ public class ChaosHealtBar : ChaosBar
         else base.fillAmount = amount;
     }
 
-    private bool ColorON(ChaosHealtBar triangle)
+    private bool ColorON(ChaosHealthBar triangle)
     {
         return triangle.color.Equals(new Color(0, 0, 0, 0));
     }
    
+    public void PoisonOn(float poisonDamage, float currentHealth)
+    {
+        poisonPeace += poisonDamage;
+        healthPeace = currentHealth;
+        print(poisonPeace);
+    }
+
+    public void PoisonOff(float poisonDamage, float currentHealth)
+    {
+       // healthPeace = currentHealth;
+        poisonPeace -= poisonDamage;
+        print(poisonPeace);
+        SetColors();
+        
+    }
+
+    public void Heal(float amount)
+    {
+        FillAmount(amount);
+        healthPeace = amount;
+        poisonPeace = 0;
+    }
 
 }
 	
