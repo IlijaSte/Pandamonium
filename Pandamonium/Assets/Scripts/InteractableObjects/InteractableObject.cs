@@ -22,7 +22,7 @@ public class InteractableObject : MonoBehaviour {
 
     public virtual void StartActivating()
     {
-        //if(!activated)
+        if(!activated)
             GetComponent<Animator>().SetTrigger("Activate");
     }
 

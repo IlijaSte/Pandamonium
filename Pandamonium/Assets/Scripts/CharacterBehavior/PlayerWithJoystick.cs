@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class PlayerWithJoystick : AttackingCharacter {
 
+    public float baseHealth = 100;
     public float maxEnergy = 100;
+
+    public float baseDamage = 5;
 
     [HideInInspector]
     public float energy = 0;
@@ -30,6 +33,10 @@ public class PlayerWithJoystick : AttackingCharacter {
     protected ActionType action = ActionType.WEAPON;
     protected Transform actionObject;
 
+    public enum AttributeType { HEALTH, DAMAGE, CRIT_CHANCE, CRIT_DAMAGE, CASH_IN }
+
+    public int[] attributes;
+
     public override void Awake()
     {
         if (!GameManager.joystick)
@@ -47,6 +54,10 @@ public class PlayerWithJoystick : AttackingCharacter {
 
         healthBar = UIManager.I.healthBar;
         energyBar = UIManager.I.energyBar;
+
+        attributes = GameManager.I.attributes;
+
+        health = baseHealth + baseHealth *  GameManager.I.costHolder.GetStatAsMultiplier(AttributeType.HEALTH);
 
         base.Start();
         facingDirection = Vector2.down;
@@ -67,7 +78,7 @@ public class PlayerWithJoystick : AttackingCharacter {
         abilityManager.AddAbility(bp);
     }
 
-    public void PickupCoins(int amount)
+    public void PickupCoins(int amount = 1)
     {
         GameManager.I.PickupCoins(amount);
         
@@ -167,14 +178,37 @@ public class PlayerWithJoystick : AttackingCharacter {
                     normalSpeed = 6;
                 }
 
+                if (Input.GetKeyDown(KeyCode.C))
+                {
+                    PickupCoins(5000);
+                }
+
                 if (!wasdDirection.Equals(Vector2.zero))
                 {
                     wasdDirection = wasdDirection.normalized;
 
                     if (rb.velocity.magnitude < normalSpeed)
                     {
-                        float a = (Vector2.SignedAngle(Vector2.right, wasdDirection) + addedRotation) * Mathf.Deg2Rad;
-                        wasdDirection = new Vector2(Mathf.Cos(a), Mathf.Sin(a));
+                        if (addedRotation != 0)
+                        {
+                            if (wasdDirection.x < 0)
+                                wasdDirection = Vector2.left;
+                            else if(wasdDirection.x == 0)
+                            {
+                                if(wasdDirection.y > 0 && addedRotation > 0 || wasdDirection.y < 0 && addedRotation < 0)
+                                {
+                                    wasdDirection = Vector2.right;
+                                }
+                                else
+                                {
+                                    wasdDirection = Vector2.left;
+                                }
+                            }else
+                                wasdDirection = Vector2.right;
+
+                            float a = (Vector2.SignedAngle(Vector2.right, wasdDirection) + addedRotation) * Mathf.Deg2Rad;
+                            wasdDirection = new Vector2(Mathf.Cos(a), Mathf.Sin(a));
+                        }
                         rb.AddForce(wasdDirection * normalSpeed * 20, ForceMode2D.Force);
                         facingDirection = wasdDirection;
                     }
@@ -238,9 +272,20 @@ public class PlayerWithJoystick : AttackingCharacter {
                 {
                     facingDirection = controller.InputDirection.normalized;
 
+                    if(addedRotation != 0)
+                    {
+                        if (facingDirection.x < 0)
+                            facingDirection = Vector2.left;
+                        else
+                            facingDirection = Vector2.right;
+
+                        float a = (Vector2.SignedAngle(Vector2.right, facingDirection) + addedRotation) * Mathf.Deg2Rad;
+                        facingDirection = new Vector2(Mathf.Cos(a), Mathf.Sin(a));
+                    }
+
                     if (controller.InputDirection.magnitude > 0.33f)
                     {
-                        rb.AddForce(controller.InputDirection.normalized * normalSpeed * 20, ForceMode2D.Force);
+                        rb.AddForce(facingDirection.normalized * normalSpeed * 20, ForceMode2D.Force);
                     }
                 }
 
@@ -297,6 +342,26 @@ public class PlayerWithJoystick : AttackingCharacter {
         abilityManager.UpdateAbilityButtons();
     }
 
+    protected void HitWithWeapon()
+    {
+        bool crit = Random.value <= GameManager.I.costHolder.GetStatAsMultiplier(AttributeType.CRIT_CHANCE);
+
+        float damage = baseDamage + baseDamage * GameManager.I.costHolder.GetStatAsMultiplier(AttributeType.DAMAGE);
+
+        if (crit)
+        {
+            damage += baseDamage * GameManager.I.costHolder.GetStatAsMultiplier(AttributeType.CRIT_DAMAGE);
+        }
+
+        int roundDamage = Mathf.RoundToInt(damage);
+
+        if (weapons[equippedWeaponIndex] is MeleeWeapon)
+        {
+            int numHit = ((MeleeWeapon)weapons[equippedWeaponIndex]).AttackCleave(roundDamage);
+            IncreaseEnergy(numHit * (roundDamage + weapons[equippedWeaponIndex].damage));
+        }
+    }
+
     public override void Attack()
     {
 
@@ -304,12 +369,7 @@ public class PlayerWithJoystick : AttackingCharacter {
         {
             case ActionType.WEAPON:
 
-                if (weapons[equippedWeaponIndex] is MeleeWeapon)
-                {
-                    int numHit = ((MeleeWeapon)weapons[equippedWeaponIndex]).AttackCleave();
-                    IncreaseEnergy(numHit * weapons[equippedWeaponIndex].damage);
-
-                }
+                HitWithWeapon();
 
                 break;
 
@@ -323,6 +383,7 @@ public class PlayerWithJoystick : AttackingCharacter {
                 break;
 
             case ActionType.PAW:
+
                 actionObject.GetComponentInChildren<InteractableObject>().StartActivating();
                 break;
         }

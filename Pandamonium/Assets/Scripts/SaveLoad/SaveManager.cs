@@ -59,12 +59,12 @@ public class SaveManager : MonoBehaviour {
         game.gameMode = GameManager.I.gameMode;
         game.gameLevel = GameManager.I.currentLevel;
         game.coins = GameManager.I.coins;
+        game.attributes = GameManager.I.attributes;
 
         if (abilities == null)
             game.abilities = player.abilityManager.GetAbilities();
         else game.abilities = abilities;
 
-        gameState = game;
         bf.Serialize(file, game);
         file.Close();
     }
@@ -97,6 +97,8 @@ public class SaveManager : MonoBehaviour {
         public int coins;
 
         public List<string> abilities;
+
+        public int[] attributes;
 
         public GameState()
         {

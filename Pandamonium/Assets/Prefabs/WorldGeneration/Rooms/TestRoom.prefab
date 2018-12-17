@@ -348,7 +348,8 @@ MonoBehaviour:
   groundTilemap: {fileID: 8195094282835089672}
   corridorTilemap: {fileID: 8195094280011694032}
   obstacleTilemap: {fileID: 8195094279619968658}
-  detailTilemap: {fileID: 0}
+  detailTilemap: {fileID: 8195094282285951642}
+  foregroundTilemap: {fileID: 8195094281883134586}
   topEdge: {fileID: 4334075305925820}
   bottomEdge: {fileID: 4534097609113522}
   leftEdge: {fileID: 4395009650541092}

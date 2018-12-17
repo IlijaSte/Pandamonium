@@ -30,6 +30,9 @@ public class LevelGeneration : MonoBehaviour
     public TileBase corridorVertPrefab;
     public TileBase corridorBridgeHorizPrefab;
     public TileBase corridorBridgeVertPrefab;
+    public TileBase corridorHorizForegroundPrefab;
+    public TileBase corridorHorizForegroundLeftPrefab;
+    public TileBase corridorHorizForegroundRightPrefab;
     public GameObject stairsPrefab;
 
     public TileBase groundPrefab;
@@ -246,15 +249,27 @@ public class LevelGeneration : MonoBehaviour
         } while (room.type == Room.RoomType.START || room.type == Room.RoomType.OBELISK || room.type == Room.RoomType.KEY_HOLDER);
 
         Vector2 spawnPos;
-
+        Vector2 checkPos;
         do
         {
             spawnPos = room.GetRandomPos();
 
+            checkPos = new Vector2(Mathf.FloorToInt(spawnPos.x), Mathf.FloorToInt(spawnPos.y));
+
+            if (room.getRoomHolder().leftEdge.Equals(checkPos))
+            {
+
+            }
+
         } while (!room.IsTileWalkable(room.groundTilemap, spawnPos) ||
                  !room.IsTileWalkable(room.groundTilemap, spawnPos + Vector2.right) ||
                  !IsTileFree(spawnPos) ||
-                 !IsTileFree(spawnPos + Vector2.right));
+                 !IsTileFree(spawnPos + Vector2.right) ||
+                 room.getRoomHolder().leftEdge.position.Equals(checkPos) ||
+                 ((Vector2)room.getRoomHolder().rightEdge.position + Vector2.left).Equals(checkPos) ||
+                 ((Vector2)room.getRoomHolder().rightEdge.position + 2 * Vector2.left).Equals(checkPos) ||
+                 room.getRoomHolder().topEdge.position.Equals(checkPos) ||
+                 room.getRoomHolder().bottomEdge.position.Equals(checkPos));
 
         Instantiate(healthPoolPrefab, spawnPos, Quaternion.identity);
 

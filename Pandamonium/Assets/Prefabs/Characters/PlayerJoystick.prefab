@@ -763,13 +763,16 @@ MonoBehaviour:
   playerState: 0
   ignoreMask: 0
   isDead: 0
+  baseHealth: 100
   maxEnergy: 200
+  baseDamage: 5
   energy: 0
   lockAngle: 60
   energyBar: {fileID: 0}
   abilityManager: {fileID: 114038679715605228}
   controller: {fileID: 0}
   facingDirection: {x: 0, y: 0}
+  attributes: 
 --- !u!114 &114566688973802844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -839,7 +842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ff13f6b518d824aa56ebfaf6cde287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 5
   speed: 1
   knockback: 1
   knockbackForce: 5

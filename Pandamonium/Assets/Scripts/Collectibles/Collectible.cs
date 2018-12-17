@@ -19,6 +19,8 @@ public class Collectible : MonoBehaviour {
 
     private SpriteRenderer sprite;
 
+    protected bool canPickup = false;
+
 	protected virtual void Start () {
 
         rb = GetComponent<Rigidbody2D>();
@@ -70,6 +72,11 @@ public class Collectible : MonoBehaviour {
         return velocity;
     }
 
+    protected void CanPickup()
+    {
+        canPickup = true;
+    }
+
     public virtual void Drop()
     {
         startPos = transform.position;
@@ -82,7 +89,10 @@ public class Collectible : MonoBehaviour {
         rb.AddForce(GetInitVelocity(dropPos), ForceMode2D.Impulse);
         dropping = true;
 
+        Invoke("CanPickup", 0.5f);
+
         sprite.sortingOrder = -Mathf.RoundToInt(dropPos.y * 100);
+
     }
 
     protected virtual void FixedUpdate()
@@ -102,7 +112,7 @@ public class Collectible : MonoBehaviour {
                 rb.velocity = Vector2.zero;
                 dropping = false;
                 rb.drag = 10;
-
+                rb.mass = 0f;
                 gameObject.layer = LayerMask.NameToLayer("Default");       // !!!   da bi se collidovali sa chestom
                 sprite.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100);
             }
@@ -118,7 +128,16 @@ public class Collectible : MonoBehaviour {
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if(collision.transform.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
+        if(canPickup && collision.transform.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
+        {
+            OnPickup();
+        }
+    }
+
+    protected virtual void OnCollisionStay2D(Collision2D collision)
+    {
+
+        if (canPickup && collision.transform.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
         {
             OnPickup();
         }

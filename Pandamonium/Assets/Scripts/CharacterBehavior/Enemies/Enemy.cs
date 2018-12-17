@@ -95,10 +95,20 @@ public class Enemy : AttackingCharacter {
             Instantiate(dropPrefabs[Random.Range(0, dropPrefabs.Length)], transform.position, Quaternion.identity);
     }
 
-    protected void DropCoins(int amount = 1)
+    protected void DropCoins(int amount = 3)
     {
         GameObject coinPrefab = GameManager.I.prefabHolder.coin;
-        Instantiate(coinPrefab, transform.position, Quaternion.identity).GetComponent<Collectible>().SetDropDirection((transform.position - player.position).normalized);
+
+        for (int i = 0; i < amount; i++)
+        {
+            Vector2 direction = (transform.position - player.position).normalized;
+
+            float addedRotation = Random.Range(-45, 45);
+
+            float a = (Vector2.SignedAngle(Vector2.right, direction) + addedRotation) * Mathf.Deg2Rad;
+            direction = new Vector2(Mathf.Cos(a), Mathf.Sin(a));
+            Instantiate(coinPrefab, transform.position, Quaternion.identity).GetComponent<Collectible>().SetDropDirection(direction);
+        }
     }
 
     public void StopAttacking()

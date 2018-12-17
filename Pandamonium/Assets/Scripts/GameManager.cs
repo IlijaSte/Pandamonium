@@ -33,7 +33,15 @@ public class GameManager : MonoBehaviour {
     public List<string> abilities;
 
     [HideInInspector]
+    public int[] attributes;
+
+    [HideInInspector]
     public PrefabHolder prefabHolder;
+
+    [HideInInspector]
+    public UpgradeManager costHolder;
+
+    public static int NUM_UPGRADES = (int)PlayerWithJoystick.AttributeType.CASH_IN + 1;
 
     public static GameManager I
     {
@@ -69,12 +77,6 @@ public class GameManager : MonoBehaviour {
 
         SaveManager.I.LoadGame();
 
-        prefabHolder = GetComponent<PrefabHolder>();
-
-    }
-
-    private void Start()
-    {
         if (SaveManager.I.gameState != null)
         {
             isRunStarted = SaveManager.I.gameState.isRunStarted;
@@ -82,18 +84,56 @@ public class GameManager : MonoBehaviour {
             currentLevel = SaveManager.I.gameState.gameLevel;
             coins = SaveManager.I.gameState.coins;
             abilities = SaveManager.I.gameState.abilities;
+            attributes = SaveManager.I.gameState.attributes;
+
+            if (attributes == null || attributes.Length < NUM_UPGRADES)
+            {
+                attributes = new int[NUM_UPGRADES];
+            }
+        }
+
+        prefabHolder = GetComponent<PrefabHolder>();
+        costHolder = GetComponent<UpgradeManager>();
+
+    }
+
+    private void Start()
+    {
+        
+    }
+
+    private void SetupLevel()
+    {
+        //coins = SaveManager.I.gameState.coins;
+        if (UIManager.I != null)
+        {
+            UIManager.I.coinsText.text = coins.ToString();
+            (playerInstance as PlayerWithJoystick).attributes = attributes;
         }
     }
 
     private void OnLevelWasLoaded(int level)
     {
-        if(UIManager.I && UIManager.I.coinsText)
+        if(playerInstance != null)
         {
             if (SaveManager.I.gameState != null)
             {
-                coins = SaveManager.I.gameState.coins;
-                UIManager.I.coinsText.text = coins.ToString();
+                SetupLevel();
             }
+        }
+    }
+
+    public bool CanUpgrade(PlayerWithJoystick.AttributeType attribute)
+    {
+        return attributes[(int)attribute] < costHolder.maxLevels - 1 && coins >= costHolder.GetNextLevelCost(attribute);
+    }
+
+    public void Upgrade(PlayerWithJoystick.AttributeType attribute)
+    {
+        if(CanUpgrade(attribute))
+        {
+            coins -= costHolder.GetNextLevelCost(attribute);
+            attributes[(int)attribute] ++;
         }
     }
 
@@ -107,6 +147,8 @@ public class GameManager : MonoBehaviour {
     public void OnDeath()
     {
         tempCoins = 0;
+        isRunStarted = false;
+
         SaveManager.I.SaveGame();
     }
 
@@ -146,7 +188,7 @@ public class GameManager : MonoBehaviour {
         GameManager.joystick = joystick;
     }
 
-    public string nextScene;
+    private string nextScene;
 
     public void ChooseGameMode(string gameMode)
     {

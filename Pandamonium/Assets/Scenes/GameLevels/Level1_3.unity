@@ -113,37 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!84 &32383460
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: SpriteLightKit RT
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 556
-  m_Height: 313
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 0
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1001 &60006980
 Prefab:
   m_ObjectHideFlags: 0
@@ -232,7 +201,7 @@ Prefab:
         type: 2}
       propertyPath: coinsText
       value: 
-      objectReference: {fileID: 1690479450}
+      objectReference: {fileID: 858423318}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd205bd53487bcb48926eda464046561, type: 2}
   m_IsPrefabParent: 0
@@ -638,6 +607,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 600ebf9611649fc44ba45c75866d99ff, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &858423318 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114846908871357062, guid: 600ebf9611649fc44ba45c75866d99ff,
+    type: 2}
+  m_PrefabInternal: {fileID: 858423317}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &955453512
 Prefab:
   m_ObjectHideFlags: 0
@@ -966,10 +941,41 @@ Prefab:
         type: 2}
       propertyPath: coinText
       value: 
-      objectReference: {fileID: 1690479450}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a4a944a6b0dbeac488a74ec4dbd1b5bf, type: 2}
   m_IsPrefabParent: 0
+--- !u!84 &1306592422
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SpriteLightKit RT
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 558
+  m_Height: 314
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 0
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1839735485 &1308704128 stripped
 Tilemap:
   m_PrefabParentObject: {fileID: 8195094281207497108, guid: 2f12ed792073b0d42b9b173050dfe60c,
@@ -1048,12 +1054,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 257441336}
   m_Script: {fileID: 11500000, guid: 58a181be88e713e4984d7ff7e061b50f, type: 3}
---- !u!114 &1690479450 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114707111939248732, guid: 600ebf9611649fc44ba45c75866d99ff,
-    type: 2}
-  m_PrefabInternal: {fileID: 858423317}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!224 &1772816252 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224045791293219484, guid: c41a7d346eef8414b96565b8583e45f4,
@@ -1145,7 +1145,7 @@ Prefab:
         type: 2}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 32383460}
+      objectReference: {fileID: 1306592422}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 183980faa4eecda4cb2f751ff77af8e4, type: 2}
   m_IsPrefabParent: 0

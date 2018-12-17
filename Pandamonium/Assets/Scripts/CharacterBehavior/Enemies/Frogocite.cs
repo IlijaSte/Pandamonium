@@ -101,12 +101,17 @@ public class Frogocite : Enemy
 
     public void Jump(Vector2 target)
     {
+
+        this.jumpTarget = target;
+
+        Vector2 initVelocity = GetInitVelocity();
+        if (initVelocity.Equals(Vector2.zero))
+            return;
+
         timeToJump = 0;
         StopAttacking();
         playerState = PlayerState.IMMOBILE;
         isJumping = true;
-        
-        this.jumpTarget = target;
 
         path.enabled = false;
 
@@ -116,9 +121,9 @@ public class Frogocite : Enemy
         rb.drag = 0;
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 1;
-        rb.velocity = Vector2.zero; 
-        rb.AddForce(GetInitVelocity() * rb.mass, ForceMode2D.Impulse);
-        
+        rb.velocity = Vector2.zero;
+
+        rb.AddForce(initVelocity * rb.mass, ForceMode2D.Impulse);
 
         indicator = Instantiate(indicatorPrefab, jumpTarget, Quaternion.identity).transform;
 
@@ -140,6 +145,10 @@ public class Frogocite : Enemy
 
     public virtual void FixedUpdate()
     {
+
+        if (isDead)
+            return;
+
         if (isJumping && rb.velocity.y < 0 && transform.position.y <= jumpTarget.y)
         {
             playerState = PlayerState.CHASING_ENEMY;

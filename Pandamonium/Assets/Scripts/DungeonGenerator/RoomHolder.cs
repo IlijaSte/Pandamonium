@@ -9,6 +9,7 @@ public class RoomHolder : MonoBehaviour {
     public Tilemap corridorTilemap;
     public Tilemap obstacleTilemap;
     public Tilemap detailTilemap;
+    public Tilemap foregroundTilemap;
 
     public Transform topEdge;
     public Transform bottomEdge;
@@ -115,6 +116,8 @@ public class RoomHolder : MonoBehaviour {
 
         Vector3Int tilePos = new Vector3Int();
 
+        int i = 0;
+
         while (Mathf.Abs(start.x - transform.position.x) <= LevelGeneration.I.roomWidth / 2 &&
                 Mathf.Abs(start.y - transform.position.y) <= LevelGeneration.I.roomHeight / 2)
         {
@@ -138,6 +141,18 @@ public class RoomHolder : MonoBehaviour {
                     obstacleTilemap.SetTile(tilePos + new Vector3Int(0, -1, 0), LevelGeneration.I.acidPrefab);
                 }
 
+                // foreground
+
+                if(i == 0)
+                {
+                    if(direction.Equals(Vector2.left))
+                        foregroundTilemap.SetTile(tilePos, LevelGeneration.I.corridorHorizForegroundLeftPrefab);
+                    else
+                        foregroundTilemap.SetTile(tilePos, LevelGeneration.I.corridorHorizForegroundRightPrefab);
+                }
+                else if(i > 0)
+                    foregroundTilemap.SetTile(tilePos, LevelGeneration.I.corridorHorizForegroundPrefab);
+
             }
             else
             {
@@ -158,6 +173,7 @@ public class RoomHolder : MonoBehaviour {
             obstacleTilemap.SetTile(tilePos, null);
 
             start += direction;
+            i++;
         }
 
         positionEndOfCorridor = tilePos;
