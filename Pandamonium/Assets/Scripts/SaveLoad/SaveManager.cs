@@ -65,6 +65,8 @@ public class SaveManager : MonoBehaviour {
             game.abilities = player.abilityManager.GetAbilities();
         else game.abilities = abilities;
 
+        gameState = game;
+
         bf.Serialize(file, game);
         file.Close();
     }

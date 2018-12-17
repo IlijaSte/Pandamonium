@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour {
     public Canvas joystickCanvas;
     public Canvas minimapCanvas;
 
-    public ChaosHealtBar healthBar;
+    public ChaosHealthBar healthBar;
     public Image energyBar;
     public Text coinsText;
 

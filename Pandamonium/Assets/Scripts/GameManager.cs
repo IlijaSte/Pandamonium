@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour {
         {
             UIManager.I.coinsText.text = coins.ToString();
             (playerInstance as PlayerWithJoystick).attributes = attributes;
+
         }
     }
 
@@ -156,12 +157,14 @@ public class GameManager : MonoBehaviour {
     {
         isRunStarted = false;
         SaveManager.I.SaveGame();
-        LoadScene("MainMenu");
+        LoadScene("CharacterSelection");
     }
 
     public void LoadNextLevel()
     {
         currentLevel++;
+        coins += tempCoins;
+        tempCoins = 0;
 
         if (currentLevel >= NUM_OF_LEVELS) {
 
@@ -173,9 +176,9 @@ public class GameManager : MonoBehaviour {
             }
         }
 
-        coins += tempCoins;
-        tempCoins = 0;
-        SaveManager.I.SaveGame();
+        abilities = (playerInstance as PlayerWithJoystick).abilityManager.GetAbilities();
+
+        SaveManager.I.SaveGame(abilities);
 
         // u build settings mora da bude game level za game levelom, redom
         string pathToScene = SceneUtility.GetScenePathByBuildIndex(FIRST_LEVEL_BUILD_INDEX + Mathf.Clamp(currentLevel, 0, NUM_OF_LEVELS - 1));
