@@ -7,7 +7,7 @@ public class Level1_2Generation : LevelGeneration {
     protected override int CreateIntroRooms()
     {
 
-        Room newIntroRoom = rooms[gridSizeX, gridSizeY - 1] = new Room(new Vector2Int(0, -1), Room.RoomType.DEFAULT);
+        rooms[gridSizeX, gridSizeY - 1] = new Room(new Vector2Int(0, -1), Room.RoomType.DEFAULT);
         takenPositions.Insert(0, new Vector2Int(0, -1));
 
         /*Vector2Int checkPos = NewPosition();
@@ -56,20 +56,17 @@ public class Level1_2Generation : LevelGeneration {
                 GameObject newPrefab = null;
                 GameObject newEnemy;
 
-                int prefabIndex = 0;
-
                 // da bi se u prve dve sobe stvarao samo prvi tip protivnika - verovatno menjati za sledece levele
                 if (room.distanceFromStart == 1)
                 {
                     newPrefab = enemyPrefabs[2];
-                    prefabIndex = 0;
 
                 }
                 else
                 {
                     do
                     {
-                        newPrefab = enemyPrefabs[prefabIndex = Random.Range(0, enemyPrefabs.Length)];
+                        newPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
 
                     } while (newPrefab.GetComponent<Enemy>().difficulty > totalDifficulty);
                 }

@@ -58,24 +58,20 @@ public class Level1_1Generation : LevelGeneration {
                 GameObject newPrefab = null;
                 GameObject newEnemy;
 
-                int prefabIndex = 0;
-
                 // da bi se u prve dve sobe stvarao samo prvi tip protivnika - verovatno menjati za sledece levele
                 if (room.distanceFromStart == 1)
                 {
                     newPrefab = enemyPrefabs[0];
-                    prefabIndex = 0;
 
                 }else if(room.distanceFromStart == 2)
                 {
                     newPrefab = enemyPrefabs[1];
-                    prefabIndex = 1;
                 }
                 else
                 {
                     do
                     {
-                        newPrefab = enemyPrefabs[prefabIndex = Random.Range(0, enemyPrefabs.Length)];
+                        newPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
 
                     } while (newPrefab.GetComponent<Enemy>().difficulty > totalDifficulty);
                 }

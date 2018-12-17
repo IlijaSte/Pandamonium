@@ -8,7 +8,7 @@ public class Collectible : MonoBehaviour {
 
     protected Vector2 startPos;
 
-    private float minBounceVelocity = 0.05f;
+    //private float minBounceVelocity = 0.05f;
 
     private bool dropping = false;
     private int numBounces = 0;
@@ -38,8 +38,6 @@ public class Collectible : MonoBehaviour {
         float g = -Physics2D.gravity.y;
         float x = jumpTarget.x - transform.position.x;
         float y = jumpTarget.y - transform.position.y;
-
-        float distance = Vector2.Distance(transform.position, jumpTarget);
 
         float b;
         float discriminant;

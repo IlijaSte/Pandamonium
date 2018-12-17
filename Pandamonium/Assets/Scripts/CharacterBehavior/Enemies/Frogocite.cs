@@ -26,8 +26,6 @@ public class Frogocite : Enemy
     private float T;
     private float shadowT;
 
-    private float distance;
-
     private float oldDrag;
 
     public override void Start()
@@ -68,8 +66,6 @@ public class Frogocite : Enemy
         float g = -Physics2D.gravity.y;
         float x = jumpTarget.x - transform.position.x;
         float y = jumpTarget.y - transform.position.y;
-
-        distance = Vector2.Distance(transform.position, jumpTarget);
 
         float b;
         float discriminant;

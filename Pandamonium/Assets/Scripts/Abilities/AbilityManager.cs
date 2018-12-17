@@ -51,6 +51,8 @@ public class AbilityManager : MonoBehaviour {
             AddAbility(abilityPrefabs[1].GetComponent<Ability>());
         }
 
+        GameManager.I.abilities = GetAbilities();
+
         UpdateAbilityButtons();
 
         /*foreach (GameObject prefab in abilityPrefabs)

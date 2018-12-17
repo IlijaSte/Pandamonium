@@ -55,7 +55,7 @@ public class Room {
 
     public bool IsTileWalkable(Tilemap tilemap, Vector3 pos)
     {
-        pos += new Vector3(0.5f, 0.5f);
+        pos += new Vector3(0.45f, 0.45f);
         Vector3Int tilePos = tilemap.WorldToCell(pos); 
 
         if (tilemap.HasTile(tilePos) &&

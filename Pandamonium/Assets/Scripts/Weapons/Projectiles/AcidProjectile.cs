@@ -9,11 +9,13 @@ public class AcidProjectile : MonoBehaviour {
 
     public float speed = 50;
 
+    public bool knockback = false;
+    public float knockbackForce = 0;
+
     private Rigidbody2D rb;
     private new CircleCollider2D collider;
     private Worm worm;
     private Transform indicator;
-    private Animator animator;
 
     private float T = 0;
 
@@ -61,7 +63,6 @@ public class AcidProjectile : MonoBehaviour {
         this.indicator = indicator;
 
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         collider = GetComponent<CircleCollider2D>();
         collider.enabled = false;
 
@@ -104,7 +105,11 @@ public class AcidProjectile : MonoBehaviour {
 
         if (collision.transform == GameManager.I.playerInstance.transform)
         {
-            player.TakeDamage(damage);
+            if (knockback)
+            {
+                //player.TakeDamage(damage);
+                player.TakeDamageWithKnockback(damage, (player.transform.position - transform.position).normalized, knockbackForce);
+            }
 
             if (worm != null)
                 player.TakeDamageOverTime(damage, 1, 3, worm.transform);

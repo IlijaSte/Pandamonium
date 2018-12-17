@@ -59,8 +59,6 @@ public class EliteFrogocite : Frogocite {
 
                     checkPos = new Vector2(Mathf.Floor(checkPos.x), Mathf.Floor(checkPos.y));
 
-
-
                     if (room.IsTileWalkable(room.groundTilemap, checkPos))
                     {
                         maxDistance = i;

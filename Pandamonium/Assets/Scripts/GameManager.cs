@@ -75,6 +75,15 @@ public class GameManager : MonoBehaviour {
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
 
+        LoadGame();
+
+        prefabHolder = GetComponent<PrefabHolder>();
+        costHolder = GetComponent<UpgradeManager>();
+
+    }
+
+    protected void LoadGame()
+    {
         SaveManager.I.LoadGame();
 
         if (SaveManager.I.gameState != null)
@@ -90,38 +99,27 @@ public class GameManager : MonoBehaviour {
             {
                 attributes = new int[NUM_UPGRADES];
             }
+
+            if (abilities == null)
+            {
+                abilities = new List<string>();
+            }
         }
-
-        prefabHolder = GetComponent<PrefabHolder>();
-        costHolder = GetComponent<UpgradeManager>();
-
-    }
-
-    private void Start()
-    {
-        
     }
 
     private void SetupLevel()
     {
-        //coins = SaveManager.I.gameState.coins;
+        LoadGame();
+
         if (UIManager.I != null)
         {
-            UIManager.I.coinsText.text = SaveManager.I.gameState.coins.ToString();
-            (playerInstance as PlayerWithJoystick).attributes = attributes;
-
+            UIManager.I.coinsText.text = coins.ToString();
         }
     }
 
     private void OnLevelWasLoaded(int level)
     {
-        if(playerInstance != null)
-        {
-            if (SaveManager.I.gameState != null)
-            {
-                SetupLevel();
-            }
-        }
+        SetupLevel();
     }
 
     public bool CanUpgrade(PlayerWithJoystick.AttributeType attribute)

@@ -37,6 +37,9 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public int[] attributes;
 
+    [HideInInspector]
+    public float speed;
+
     public override void Awake()
     {
         if (!GameManager.joystick)
@@ -67,6 +70,8 @@ public class PlayerWithJoystick : AttackingCharacter {
         {
             abilityManager = GetComponentInChildren<AbilityManager>();
         }
+
+        speed = normalSpeed;
 
     }
     public void AddRotation(float angle)
@@ -171,12 +176,12 @@ public class PlayerWithJoystick : AttackingCharacter {
 
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
-                    normalSpeed = 30;
+                    speed = 30;
                 }
 
                 if (Input.GetKeyUp(KeyCode.LeftShift))
                 {
-                    normalSpeed = 6;
+                    speed = normalSpeed;
                 }
 
                 if (Input.GetKeyDown(KeyCode.C))
@@ -188,7 +193,7 @@ public class PlayerWithJoystick : AttackingCharacter {
                 {
                     wasdDirection = wasdDirection.normalized;
 
-                    if (rb.velocity.magnitude < normalSpeed)
+                    if (rb.velocity.magnitude < speed)
                     {
                         if (addedRotation != 0)
                         {
@@ -210,7 +215,7 @@ public class PlayerWithJoystick : AttackingCharacter {
                             float a = (Vector2.SignedAngle(Vector2.right, wasdDirection) + addedRotation) * Mathf.Deg2Rad;
                             wasdDirection = new Vector2(Mathf.Cos(a), Mathf.Sin(a));
                         }
-                        rb.AddForce(wasdDirection * normalSpeed * 20, ForceMode2D.Force);
+                        rb.AddForce(wasdDirection * speed * 20, ForceMode2D.Force);
                         facingDirection = wasdDirection;
                     }
                 }
@@ -269,7 +274,7 @@ public class PlayerWithJoystick : AttackingCharacter {
             if (!Mathf.Approximately(controller.InputDirection.x, 0) || !Mathf.Approximately(controller.InputDirection.y, 0))
             {
 
-                if (rb.velocity.magnitude < normalSpeed)
+                if (rb.velocity.magnitude < speed)
                 {
                     facingDirection = controller.InputDirection.normalized;
 
@@ -286,7 +291,7 @@ public class PlayerWithJoystick : AttackingCharacter {
 
                     if (controller.InputDirection.magnitude > 0.33f)
                     {
-                        rb.AddForce(facingDirection.normalized * normalSpeed * 20, ForceMode2D.Force);
+                        rb.AddForce(facingDirection.normalized * speed * 20, ForceMode2D.Force);
                     }
                 }
 

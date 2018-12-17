@@ -296,6 +296,11 @@ public class Enemy : AttackingCharacter {
 
         room.enemies.Remove(gameObject);
 
+        if(room.enemies.Count == 0)
+        {
+            InfoText.I.ShowMessage("Clear");
+        }
+
         base.Die();
     }
 

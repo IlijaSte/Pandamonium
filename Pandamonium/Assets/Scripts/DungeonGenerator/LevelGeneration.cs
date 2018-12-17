@@ -53,9 +53,6 @@ public class LevelGeneration : MonoBehaviour
 
     protected ArrayList enemyPositions = new ArrayList();
 
-    private static readonly int ELITE_FROGOCID_INDEX = 3;
-    private static readonly int FROGOCID_INDEX = 2;
-
     private ArrayList obstaclePositions;
 
     public static LevelGeneration I
@@ -161,6 +158,7 @@ public class LevelGeneration : MonoBehaviour
 
     public bool IsTileFree(Vector2 pos)
     {
+        pos += new Vector2(0.45f, 0.45f);
         Vector3Int tilePos = acidTilemap.WorldToCell(pos);
 
         foreach (GameObject enemy in enemies)
@@ -261,10 +259,10 @@ public class LevelGeneration : MonoBehaviour
 
             }
 
-        } while (!room.IsTileWalkable(room.groundTilemap, spawnPos) ||
-                 !room.IsTileWalkable(room.groundTilemap, spawnPos + Vector2.right) ||
-                 !IsTileFree(spawnPos) ||
-                 !IsTileFree(spawnPos + Vector2.right) ||
+        } while (!room.IsTileWalkable(room.groundTilemap, checkPos) ||
+                 !room.IsTileWalkable(room.groundTilemap, checkPos + Vector2.right) ||
+                 !IsTileFree(checkPos) ||
+                 !IsTileFree(checkPos + Vector2.right) ||
                  room.getRoomHolder().leftEdge.position.Equals(checkPos) ||
                  ((Vector2)room.getRoomHolder().rightEdge.position + Vector2.left).Equals(checkPos) ||
                  ((Vector2)room.getRoomHolder().rightEdge.position + 2 * Vector2.left).Equals(checkPos) ||
@@ -310,23 +308,21 @@ public class LevelGeneration : MonoBehaviour
                 GameObject newPrefab = null;
                 GameObject newEnemy;
 
-                int prefabIndex = 0;
-
                 // da bi se u prve dve sobe stvarao samo prvi tip protivnika - verovatno menjati za sledece levele
 
 
                 do
                 {
-                    newPrefab = enemyPrefabs[prefabIndex = Random.Range(0, enemyPrefabs.Length)];
+                    newPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
 
-                } while ((prefabIndex == ELITE_FROGOCID_INDEX && !hasFrogocid) || newPrefab.GetComponent<Enemy>().difficulty > totalDifficulty);
+                } while (((newPrefab.GetComponent<AttackingCharacter>() is EliteFrogocite) && !hasFrogocid) || newPrefab.GetComponent<Enemy>().difficulty > totalDifficulty);
 
                 newEnemy = Instantiate(newPrefab, spawnPos, Quaternion.identity, enemyParent);
 
                 enemies.Add(newEnemy);
                 room.PutEnemy(newEnemy);
                     
-                if(prefabIndex == FROGOCID_INDEX) { 
+                if(newPrefab.GetComponent<AttackingCharacter>() is Frogocite) { 
                     hasFrogocid = true;
                 }
 
@@ -603,7 +599,6 @@ public class LevelGeneration : MonoBehaviour
             {
                 continue; //skip where there is no room
             }
-            Vector2 drawPos = room.gridPos;
 
             switch (room.type)
             {
@@ -651,7 +646,6 @@ public class LevelGeneration : MonoBehaviour
                     continue;
                 }
 
-                Vector2 gridPosition = new Vector2(x, y);
                 if (y - 1 < 0)
                 { //check above
                     rooms[x, y].doorBot = false;
