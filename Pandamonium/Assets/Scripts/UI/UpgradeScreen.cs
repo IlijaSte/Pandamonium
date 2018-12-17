@@ -10,6 +10,22 @@ public class UpgradeScreen : MonoBehaviour {
     public UpgradeButton[] upgradeButtons;
     public ScrollSnapRect scrollRect;
 
+    public void ResetAllStats()
+    {
+        for(int i = 0; i < GameManager.I.attributes.Length; i++)
+        {
+            GameManager.I.attributes[i] = 0;
+        }
+
+        UpdateButtons();
+    }
+
+    public void AddCoins(int amount = 100)
+    {
+        GameManager.I.coins += amount;
+        UpdateButtons();
+    }
+
     private string[] classNames = { "Pandolina", "Marauder", "Arcanita" };
 
     private void Start()

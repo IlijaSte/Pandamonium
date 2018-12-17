@@ -38,7 +38,10 @@ public class UpgradeManager: MonoBehaviour {
 
     public int GetNextLevelCost(PlayerWithJoystick.AttributeType attribute)
     {
-        //return costsByUpgradeLevel[GameManager.I.attributes[(int)attribute] + 1];]
-        return 1;
+        if (GameManager.I.attributes[(int)attribute] + 1 >= costsByUpgradeLevel.Length)
+            return 0;
+        else
+            return costsByUpgradeLevel[GameManager.I.attributes[(int)attribute] + 1];
+        //return 1;
     }
 }

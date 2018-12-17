@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour {
         //coins = SaveManager.I.gameState.coins;
         if (UIManager.I != null)
         {
-            UIManager.I.coinsText.text = coins.ToString();
+            UIManager.I.coinsText.text = SaveManager.I.gameState.coins.ToString();
             (playerInstance as PlayerWithJoystick).attributes = attributes;
 
         }
@@ -156,6 +156,7 @@ public class GameManager : MonoBehaviour {
     public void GameOver()
     {
         isRunStarted = false;
+        tempCoins = 0;
         SaveManager.I.SaveGame();
         LoadScene("CharacterSelection");
     }

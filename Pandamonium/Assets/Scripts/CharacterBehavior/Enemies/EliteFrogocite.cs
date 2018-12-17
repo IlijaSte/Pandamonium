@@ -54,13 +54,19 @@ public class EliteFrogocite : Frogocite {
                         break;
                 }
 
-                checkPos = new Vector2(Mathf.Floor(checkPos.x), Mathf.Floor(checkPos.y));
-
-                if (room.IsTileWalkable(room.groundTilemap, checkPos))
+                if (j != 3 || maxDistance < 2)
                 {
-                    maxDistance = i;
-                    maxPos = checkPos;
-                    break;
+
+                    checkPos = new Vector2(Mathf.Floor(checkPos.x), Mathf.Floor(checkPos.y));
+
+
+
+                    if (room.IsTileWalkable(room.groundTilemap, checkPos))
+                    {
+                        maxDistance = i;
+                        maxPos = checkPos;
+                        break;
+                    }
                 }
 
                 i -= decrement;
@@ -121,6 +127,8 @@ public class EliteFrogocite : Frogocite {
 
     protected override void Update()
     {
+        if (isDead)
+            return;
 
         base.Update();
 

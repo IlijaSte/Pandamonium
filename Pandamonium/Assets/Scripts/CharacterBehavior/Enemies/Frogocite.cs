@@ -50,6 +50,9 @@ public class Frogocite : Enemy
 
     protected override void Update()
     {
+        if (isDead)
+            return;
+
         if (timeToJump < jumpCooldown)
         {
             timeToJump += Time.deltaTime;
