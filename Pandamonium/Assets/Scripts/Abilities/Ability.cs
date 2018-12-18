@@ -57,8 +57,6 @@ public class Ability : MonoBehaviour {
     protected virtual Transform GetFacingEnemy()
     {
 
-        List<Transform> visibleTargets = new List<Transform>();
-
         float lockRadius = range;
 
         float minDistance = Mathf.Infinity;

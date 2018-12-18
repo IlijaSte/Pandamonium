@@ -45,4 +45,27 @@ public class TrailCollider : HazardousArea<PlayerWithJoystick> {
 
         StartCoroutine(ColliderLifecycle(newCollider, time, minSize, maxSize));
     }
+
+    public override void DealDamage(float damage)
+    {
+        for (int i = 0; i < enemiesInArea.Count; i++)
+        {
+            PlayerWithJoystick enemy = enemiesInArea[i];
+
+            if (enemy && !enemy.isDead && enemy.IsAttackable())
+                enemy.TakePoisonDamage(damage);
+        }
+
+        lastDamage = Time.time;
+    }
+
+    protected override void OnCharacterEnter(PlayerWithJoystick character)
+    {
+        character.speed = character.normalSpeed * 0.5f;
+    }
+
+    protected override void OnCharacterExit(PlayerWithJoystick character)
+    {
+        character.speed = character.normalSpeed;
+    }
 }

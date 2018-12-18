@@ -20,23 +20,23 @@ public class MeleeWeapon : Weapon
         return false;
     }
 
-    protected bool Damage(Transform target)
+    protected bool Damage(Transform target, float damageAddition = 0)
     {
         bool takenDamage = false;
 
         if (knockback)
-        {
-            takenDamage = target.GetComponent<AttackingCharacter>().TakeDamageWithKnockback(damage, (target.position - transform.position).normalized, knockbackForce);
+        {  
+            takenDamage = target.GetComponent<AttackingCharacter>().TakeDamageWithKnockback(damage + damageAddition, (target.position - transform.position).normalized, knockbackForce);
         }
         else
         {
-            takenDamage = target.GetComponent<AttackingCharacter>().TakeDamage(damage);
+            takenDamage = target.GetComponent<AttackingCharacter>().TakeDamage(damage + damageAddition);
         }
 
         return takenDamage;
     }
 
-    public int AttackCleave()
+    public int AttackCleave(float damageAddition)
     {
 
         if (timeToAttack > 0)
@@ -75,7 +75,7 @@ public class MeleeWeapon : Weapon
         int damagedTargets = 0;
         foreach(Transform target in visibleTargets)
         {
-            if (Damage(target))
+            if (Damage(target, damageAddition))
             {
                 damagedTargets++;
             }

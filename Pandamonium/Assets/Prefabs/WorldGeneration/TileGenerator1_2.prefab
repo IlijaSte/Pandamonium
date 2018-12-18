@@ -81,6 +81,12 @@ MonoBehaviour:
     type: 2}
   corridorBridgeVertPrefab: {fileID: 11400000, guid: 0f0a5562cbf3ab049b451d646bf4e701,
     type: 2}
+  corridorHorizForegroundPrefab: {fileID: 11400000, guid: bf22483da5e804d4eaf378035015dcbb,
+    type: 2}
+  corridorHorizForegroundLeftPrefab: {fileID: 11400000, guid: 0da05de953485a0428b0946e516e185e,
+    type: 2}
+  corridorHorizForegroundRightPrefab: {fileID: 11400000, guid: bd8739456c78ea940af15352196859b3,
+    type: 2}
   stairsPrefab: {fileID: 1182997206340352, guid: 2d1a3f0207c32b34fb78aede03491ef4,
     type: 2}
   groundPrefab: {fileID: 11400000, guid: c13e41d562a578c42830b7745183d1b3, type: 2}

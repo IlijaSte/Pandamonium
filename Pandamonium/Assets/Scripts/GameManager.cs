@@ -33,7 +33,15 @@ public class GameManager : MonoBehaviour {
     public List<string> abilities;
 
     [HideInInspector]
+    public int[] attributes;
+
+    [HideInInspector]
     public PrefabHolder prefabHolder;
+
+    [HideInInspector]
+    public UpgradeManager costHolder;
+
+    public static int NUM_UPGRADES = (int)PlayerWithJoystick.AttributeType.CASH_IN + 1;
 
     public static GameManager I
     {
@@ -67,14 +75,17 @@ public class GameManager : MonoBehaviour {
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
 
-        SaveManager.I.LoadGame();
+        LoadGame();
 
         prefabHolder = GetComponent<PrefabHolder>();
+        costHolder = GetComponent<UpgradeManager>();
 
     }
 
-    private void Start()
+    protected void LoadGame()
     {
+        SaveManager.I.LoadGame();
+
         if (SaveManager.I.gameState != null)
         {
             isRunStarted = SaveManager.I.gameState.isRunStarted;
@@ -82,18 +93,46 @@ public class GameManager : MonoBehaviour {
             currentLevel = SaveManager.I.gameState.gameLevel;
             coins = SaveManager.I.gameState.coins;
             abilities = SaveManager.I.gameState.abilities;
+            attributes = SaveManager.I.gameState.attributes;
+
+            if (attributes == null || attributes.Length < NUM_UPGRADES)
+            {
+                attributes = new int[NUM_UPGRADES];
+            }
+
+            if (abilities == null)
+            {
+                abilities = new List<string>();
+            }
+        }
+    }
+
+    private void SetupLevel()
+    {
+        LoadGame();
+
+        if (UIManager.I != null)
+        {
+            UIManager.I.coinsText.text = coins.ToString();
         }
     }
 
     private void OnLevelWasLoaded(int level)
     {
-        if(UIManager.I && UIManager.I.coinsText)
+        SetupLevel();
+    }
+
+    public bool CanUpgrade(PlayerWithJoystick.AttributeType attribute)
+    {
+        return attributes[(int)attribute] < costHolder.maxLevels - 1 && coins >= costHolder.GetNextLevelCost(attribute);
+    }
+
+    public void Upgrade(PlayerWithJoystick.AttributeType attribute)
+    {
+        if(CanUpgrade(attribute))
         {
-            if (SaveManager.I.gameState != null)
-            {
-                coins = SaveManager.I.gameState.coins;
-                UIManager.I.coinsText.text = coins.ToString();
-            }
+            coins -= costHolder.GetNextLevelCost(attribute);
+            attributes[(int)attribute] ++;
         }
     }
 
@@ -107,19 +146,24 @@ public class GameManager : MonoBehaviour {
     public void OnDeath()
     {
         tempCoins = 0;
+        isRunStarted = false;
+
         SaveManager.I.SaveGame();
     }
 
     public void GameOver()
     {
         isRunStarted = false;
+        tempCoins = 0;
         SaveManager.I.SaveGame();
-        LoadScene("MainMenu");
+        LoadScene("CharacterSelection");
     }
 
     public void LoadNextLevel()
     {
         currentLevel++;
+        coins += tempCoins;
+        tempCoins = 0;
 
         if (currentLevel >= NUM_OF_LEVELS) {
 
@@ -131,9 +175,9 @@ public class GameManager : MonoBehaviour {
             }
         }
 
-        coins += tempCoins;
-        tempCoins = 0;
-        SaveManager.I.SaveGame();
+        abilities = (playerInstance as PlayerWithJoystick).abilityManager.GetAbilities();
+
+        SaveManager.I.SaveGame(abilities);
 
         // u build settings mora da bude game level za game levelom, redom
         string pathToScene = SceneUtility.GetScenePathByBuildIndex(FIRST_LEVEL_BUILD_INDEX + Mathf.Clamp(currentLevel, 0, NUM_OF_LEVELS - 1));
@@ -146,7 +190,7 @@ public class GameManager : MonoBehaviour {
         GameManager.joystick = joystick;
     }
 
-    public string nextScene;
+    private string nextScene;
 
     public void ChooseGameMode(string gameMode)
     {

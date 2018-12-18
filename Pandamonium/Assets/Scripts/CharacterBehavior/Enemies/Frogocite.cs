@@ -26,8 +26,6 @@ public class Frogocite : Enemy
     private float T;
     private float shadowT;
 
-    private float distance;
-
     private float oldDrag;
 
     public override void Start()
@@ -50,6 +48,9 @@ public class Frogocite : Enemy
 
     protected override void Update()
     {
+        if (isDead)
+            return;
+
         if (timeToJump < jumpCooldown)
         {
             timeToJump += Time.deltaTime;
@@ -65,8 +66,6 @@ public class Frogocite : Enemy
         float g = -Physics2D.gravity.y;
         float x = jumpTarget.x - transform.position.x;
         float y = jumpTarget.y - transform.position.y;
-
-        distance = Vector2.Distance(transform.position, jumpTarget);
 
         float b;
         float discriminant;
@@ -101,12 +100,17 @@ public class Frogocite : Enemy
 
     public void Jump(Vector2 target)
     {
+
+        this.jumpTarget = target;
+
+        Vector2 initVelocity = GetInitVelocity();
+        if (initVelocity.Equals(Vector2.zero))
+            return;
+
         timeToJump = 0;
         StopAttacking();
         playerState = PlayerState.IMMOBILE;
         isJumping = true;
-        
-        this.jumpTarget = target;
 
         path.enabled = false;
 
@@ -116,9 +120,9 @@ public class Frogocite : Enemy
         rb.drag = 0;
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 1;
-        rb.velocity = Vector2.zero; 
-        rb.AddForce(GetInitVelocity() * rb.mass, ForceMode2D.Impulse);
-        
+        rb.velocity = Vector2.zero;
+
+        rb.AddForce(initVelocity * rb.mass, ForceMode2D.Impulse);
 
         indicator = Instantiate(indicatorPrefab, jumpTarget, Quaternion.identity).transform;
 
@@ -140,6 +144,10 @@ public class Frogocite : Enemy
 
     public virtual void FixedUpdate()
     {
+
+        if (isDead)
+            return;
+
         if (isJumping && rb.velocity.y < 0 && transform.position.y <= jumpTarget.y)
         {
             playerState = PlayerState.CHASING_ENEMY;

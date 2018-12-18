@@ -11,7 +11,7 @@ public class ProjectileAnimation : AnimationMama {
     protected override void updateVector2()
     {
         vector3 = fireProjectile.direction;
-        Vector2 vector2D = new Vector2(vector3.x, vector3.y);
+        //Vector2 vector2D = new Vector2(vector3.x, vector3.y);
     }
 
     void Start ()

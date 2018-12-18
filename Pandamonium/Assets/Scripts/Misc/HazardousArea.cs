@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HazardousArea<T> : MonoBehaviour where T : AttackingCharacter  {
+public abstract class HazardousArea<T> : MonoBehaviour where T : AttackingCharacter  {
 
     protected float lastDamage;
 
-    private List<T> enemiesInArea = new List<T>();
+    protected List<T> enemiesInArea = new List<T>();
 
     public void OnEnable()
     {
@@ -19,27 +19,15 @@ public class HazardousArea<T> : MonoBehaviour where T : AttackingCharacter  {
         if((enemy = collision.gameObject.GetComponent<T>()) != null)
         {
             enemiesInArea.Add(enemy);
+            OnCharacterEnter(enemy);
         }
     }
 
-    /*private void OnTriggerStay2D(Collider2D collision)
-    {
+    protected abstract void OnCharacterEnter(T character);
 
-        if (Time.time - lastDamage >= interval)
-        {
+    protected abstract void OnCharacterExit(T character);
 
-            foreach (AttackingCharacter enemy in enemiesInArea)
-            {
-                if(enemy)
-                    enemy.TakeDamage(damage);
-
-            }
-
-            lastDamage = Time.time;
-        }
-    }*/
-
-    public void DealDamage(float damage)
+    public virtual void DealDamage(float damage)
     {
 
         for(int i = 0; i < enemiesInArea.Count; i++)
@@ -73,6 +61,7 @@ public class HazardousArea<T> : MonoBehaviour where T : AttackingCharacter  {
         if ((enemy = collision.gameObject.GetComponent<T>()) != null)
         {
             enemiesInArea.Remove(enemy);
+            OnCharacterExit(enemy);
         }
     }
 }

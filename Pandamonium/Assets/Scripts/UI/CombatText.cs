@@ -8,7 +8,6 @@ public class CombatText : MonoBehaviour {
 
     float amount;
     Color color;
-    float endY;
 
     float i = 0;
 
@@ -17,7 +16,6 @@ public class CombatText : MonoBehaviour {
     Vector2 startPos;
     Vector2 endPos;
     Vector2 oldPos;
-    Color startColor;
     Color endColor;
 
     RectTransform rect;
@@ -28,10 +26,8 @@ public class CombatText : MonoBehaviour {
         this.color = color;
         i = 0;
 
-        endY = 2;
-
         comp = GetComponent<Text>();
-
+        comp.color = color;
         comp.text = amount.ToString() + " damage";
     }
 
@@ -39,8 +35,6 @@ public class CombatText : MonoBehaviour {
     {
         this.color = color;
         i = 0;
-
-        endY = 2;
 
         comp = GetComponent<Text>();
 
@@ -52,8 +46,7 @@ public class CombatText : MonoBehaviour {
         
         comp.color = color;
 
-        Color startColor = new Color(comp.color.r, comp.color.g, comp.color.b);
-        Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0.5f);
+        endColor = new Color(color.r, color.g, color.b, 0f);
 
         rect = GetComponent<RectTransform>();
         rect.anchoredPosition = Vector2.zero;
@@ -65,7 +58,7 @@ public class CombatText : MonoBehaviour {
 
     private void Update()
     {
-
+        
         if (i < 1)
         {
             i += Time.deltaTime;
