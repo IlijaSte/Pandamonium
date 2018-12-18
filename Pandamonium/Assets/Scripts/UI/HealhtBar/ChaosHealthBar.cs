@@ -126,13 +126,12 @@ public class ChaosHealthBar : Image
             {
                 for (int i = 0; i < halfTriangles.Length; i++)
                     halfTriangles[i].fillAmount = 1;
-            }
-            else
+            }else
             {
-
+                
                 int i = halfTriangles.Length - 1;
                 //part to lose
-                float part = (1 - amount) * (halfTriangles.Length - 1);//proveri ovaj - 1
+                float part = (1 - amount) * (halfTriangles.Length);// - 1);//proveri ovaj - 1
                 while (part > 0 && i > 0)
                 {
                     while (part > 1 && i > 1)
@@ -143,10 +142,13 @@ public class ChaosHealthBar : Image
                     halfTriangles[i].fillAmount = 1 - part;
                     part = 0;
                 }
+
             }
         }
         else base.fillAmount = amount;
     }
+
+
 
     private bool ColorON(ChaosHealthBar triangle)
     {
@@ -171,7 +173,22 @@ public class ChaosHealthBar : Image
 
     public void Heal(float amount)
     {
-        FillAmount(amount);
+
+        int i = 0;
+        float part = amount * halfTriangles.Length;
+        while (part > 0)
+        {
+            while (part > 1)
+            {
+                halfTriangles[i++].fillAmount = 1;
+                part -= 1;
+            }
+
+            halfTriangles[i++].fillAmount = 1 - part;
+            part = 0;
+
+        }
+
         healthPeace = amount;
         poisonPeace = 0;
     }
