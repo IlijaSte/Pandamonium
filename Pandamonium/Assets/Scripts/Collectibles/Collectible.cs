@@ -101,7 +101,12 @@ public class Collectible : MonoBehaviour {
             if(numBounces < 5)
             {
                 numBounces++;
-                rb.AddForce(Vector2.up * -rb.velocity.y * 2, ForceMode2D.Impulse);
+                Vector2 newDropPos = (Vector2)transform.position + ((Vector2)transform.position - startPos).normalized * ((5f / numBounces) / 5f);
+                Vector2 newVelocity = GetInitVelocity(newDropPos);
+                startPos = transform.position;
+                dropPos = newDropPos;
+                rb.velocity = Vector2.zero;
+                rb.AddForce(newVelocity, ForceMode2D.Impulse);
             }
             else
             {
@@ -110,7 +115,7 @@ public class Collectible : MonoBehaviour {
                 rb.velocity = Vector2.zero;
                 dropping = false;
                 rb.drag = 10;
-                rb.mass = 0f;
+                rb.mass = 0.5f;
                 gameObject.layer = LayerMask.NameToLayer("Default");       // !!!   da bi se collidovali sa chestom
                 sprite.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100);
             }

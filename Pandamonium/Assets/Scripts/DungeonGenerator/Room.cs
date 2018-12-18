@@ -56,7 +56,9 @@ public class Room {
     public bool IsTileWalkable(Tilemap tilemap, Vector3 pos)
     {
         pos += new Vector3(0.45f, 0.45f);
-        Vector3Int tilePos = tilemap.WorldToCell(pos); 
+        Vector3Int tilePos = tilemap.WorldToCell(pos);
+
+        Vector2 checkPos = new Vector2(Mathf.FloorToInt(pos.x), Mathf.FloorToInt(pos.y));
 
         if (tilemap.HasTile(tilePos) &&
             tilemap.HasTile(tilePos + new Vector3Int(1, 0, 0)) &&
@@ -68,6 +70,22 @@ public class Room {
             tilemap.HasTile(tilePos + new Vector3Int(-1, 1, 0)) &&
             tilemap.HasTile(tilePos + new Vector3Int(1, -1, 0)) &&
             tilemap.HasTile(tilePos + new Vector3Int(1, 1, 0)))
+            return true;
+
+        return false;
+    }
+
+    public bool CanSpawnAtPos(Vector2 pos)
+    {
+        pos += new Vector2(0.45f, 0.45f);
+
+        Vector2 checkPos = new Vector2(Mathf.FloorToInt(pos.x), Mathf.FloorToInt(pos.y));
+
+        if (!roomHolder.leftEdge.position.Equals(checkPos) &&
+            !((Vector2)roomHolder.rightEdge.position + Vector2.left).Equals(checkPos) &&
+            !roomHolder.topEdge.position.Equals(checkPos) &&
+            !((Vector2)roomHolder.topEdge.position + Vector2.down).Equals(checkPos) &&
+            !roomHolder.bottomEdge.position.Equals(checkPos))
             return true;
 
         return false;

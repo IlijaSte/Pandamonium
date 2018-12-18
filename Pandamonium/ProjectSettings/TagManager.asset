@@ -32,7 +32,7 @@ TagManager:
   - MinimapVisible
   - InteractableObjects
   - Collectibles
-  - 
+  - OnlyMinimapVisible
   - 
   - 
   - 

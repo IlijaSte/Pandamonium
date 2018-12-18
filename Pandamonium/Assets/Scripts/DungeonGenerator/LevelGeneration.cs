@@ -6,10 +6,15 @@ using UnityEngine.Tilemaps;
 public class LevelGeneration : MonoBehaviour
 {
     public Vector2 worldSize = new Vector2(4, 4);
+
     protected Room[,] rooms;
-    protected List<Vector2> takenPositions = new List<Vector2>();
-    protected int gridSizeX, gridSizeY;
+    [HideInInspector]
+    public List<Vector2> takenPositions = new List<Vector2>();
+
+    [HideInInspector]
+    public int gridSizeX, gridSizeY;
     protected int numberOfRooms = 20;
+
     public IntRange roomNumberRange = new IntRange(6, 8);
 
     public int roomWidth;
@@ -263,11 +268,8 @@ public class LevelGeneration : MonoBehaviour
                  !room.IsTileWalkable(room.groundTilemap, checkPos + Vector2.right) ||
                  !IsTileFree(checkPos) ||
                  !IsTileFree(checkPos + Vector2.right) ||
-                 room.getRoomHolder().leftEdge.position.Equals(checkPos) ||
-                 ((Vector2)room.getRoomHolder().rightEdge.position + Vector2.left).Equals(checkPos) ||
-                 ((Vector2)room.getRoomHolder().rightEdge.position + 2 * Vector2.left).Equals(checkPos) ||
-                 room.getRoomHolder().topEdge.position.Equals(checkPos) ||
-                 room.getRoomHolder().bottomEdge.position.Equals(checkPos));
+                 ((Vector2)room.getRoomHolder().rightEdge.position + 2 * Vector2.left).Equals(checkPos) || 
+                 !room.CanSpawnAtPos(checkPos));
 
         Instantiate(healthPoolPrefab, spawnPos, Quaternion.identity);
 

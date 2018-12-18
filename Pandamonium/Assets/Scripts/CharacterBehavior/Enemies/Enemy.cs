@@ -107,6 +107,9 @@ public class Enemy : AttackingCharacter {
 
             float a = (Vector2.SignedAngle(Vector2.right, direction) + addedRotation) * Mathf.Deg2Rad;
             direction = new Vector2(Mathf.Cos(a), Mathf.Sin(a));
+
+            direction *= Random.Range(0.5f, 1);
+
             Instantiate(coinPrefab, transform.position, Quaternion.identity).GetComponent<Collectible>().SetDropDirection(direction);
         }
     }
@@ -259,7 +262,7 @@ public class Enemy : AttackingCharacter {
         StopAttacking();
 
         GetComponent<Collider2D>().enabled = false;
-        healthBar.transform.parent.gameObject.SetActive(false);
+        healthBar.gameObject.SetActive(false);
         nextAttackBar.transform.parent.gameObject.SetActive(false);
         sprite.gameObject.SetActive(false);
 

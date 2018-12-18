@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4512577923314722}
   - component: {fileID: 114696526391286408}
   - component: {fileID: 114209893818532370}
+  - component: {fileID: 114938798299953126}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -80,4 +81,18 @@ MonoBehaviour:
   pauseMenu: {fileID: 1700260222444396, guid: 66971591d1a919a48a5680d93b460688, type: 2}
   deathMenu: {fileID: 1855370371046284, guid: 1b1e86775836ce64d8bf293366862809, type: 2}
   gameEndMenu: {fileID: 1161247890817298, guid: d354c7e484310f245aad2b8415f5b4dd,
+    type: 2}
+--- !u!114 &114938798299953126
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1848565710162406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a45e394e1d904984fa9e39c2796e812c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minimapCanvas: {fileID: 0}
+  blackRectanglePrefab: {fileID: 1528762417485676, guid: 809c7fe5e76d34e4d89475e57ee72414,
     type: 2}

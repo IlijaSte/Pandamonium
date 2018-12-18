@@ -177,7 +177,7 @@ public class GameManager : MonoBehaviour {
 
         abilities = (playerInstance as PlayerWithJoystick).abilityManager.GetAbilities();
 
-        SaveManager.I.SaveGame(abilities);
+        SaveManager.I.SaveGame();
 
         // u build settings mora da bude game level za game levelom, redom
         string pathToScene = SceneUtility.GetScenePathByBuildIndex(FIRST_LEVEL_BUILD_INDEX + Mathf.Clamp(currentLevel, 0, NUM_OF_LEVELS - 1));
@@ -215,6 +215,10 @@ public class GameManager : MonoBehaviour {
         isRunStarted = true;
         currentLevel = level;
 
+        tempCoins = 0;
+
+        SaveManager.I.SaveGame();
+
         string pathToScene = SceneUtility.GetScenePathByBuildIndex(FIRST_LEVEL_BUILD_INDEX + Mathf.Clamp(currentLevel, 0, NUM_OF_LEVELS - 1));
         string sceneName = System.IO.Path.GetFileNameWithoutExtension(pathToScene);
         LoadSceneLong(sceneName);
@@ -248,14 +252,7 @@ public class GameManager : MonoBehaviour {
 
         if (SaveManager.I != null)
         {
-            if(playerInstance == null)
-            {
-                SaveManager.I.SaveGame(abilities);
-            }
-            else
-            {
-                SaveManager.I.SaveGame();
-            }
+            SaveManager.I.SaveGame();
         }
 
     }

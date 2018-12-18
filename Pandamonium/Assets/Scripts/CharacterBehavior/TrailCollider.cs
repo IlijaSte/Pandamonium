@@ -62,6 +62,7 @@ public class TrailCollider : HazardousArea<PlayerWithJoystick> {
     protected override void OnCharacterEnter(PlayerWithJoystick character)
     {
         character.speed = character.normalSpeed * 0.5f;
+        lastDamage = Time.time;
     }
 
     protected override void OnCharacterExit(PlayerWithJoystick character)

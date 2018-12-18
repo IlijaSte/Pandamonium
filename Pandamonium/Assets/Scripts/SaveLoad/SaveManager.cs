@@ -45,7 +45,7 @@ public class SaveManager : MonoBehaviour {
 
     }
 
-    public void SaveGame(List<string> abilities = null)
+    public void SaveGame()
     {
 
         print("Saving progress...");
@@ -60,10 +60,7 @@ public class SaveManager : MonoBehaviour {
         game.gameLevel = GameManager.I.currentLevel;
         game.coins = GameManager.I.coins;
         game.attributes = GameManager.I.attributes;
-
-        if (abilities == null)
-            game.abilities = player.abilityManager.GetAbilities();
-        else game.abilities = abilities;
+        game.abilities = GameManager.I.abilities;
 
         gameState = game;
 
