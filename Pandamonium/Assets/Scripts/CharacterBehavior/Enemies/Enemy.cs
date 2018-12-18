@@ -132,8 +132,6 @@ public class Enemy : AttackingCharacter {
     protected override void Update()
     {
 
-        base.Update();
-
         UpdateGraph();
 
         switch (playerState)
@@ -243,6 +241,8 @@ public class Enemy : AttackingCharacter {
                 }
 
         }
+
+        base.Update();
     }
 
     public override bool TakeDamage(float damage)

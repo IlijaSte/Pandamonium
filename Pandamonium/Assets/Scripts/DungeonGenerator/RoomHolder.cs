@@ -16,6 +16,8 @@ public class RoomHolder : MonoBehaviour {
     public Transform leftEdge;
     public Transform rightEdge;
 
+    public Transform[] spawnPoints;
+
     private Tilemap acidTilemap;
 
     private Room context;
@@ -78,6 +80,14 @@ public class RoomHolder : MonoBehaviour {
         }
 
         
+    }
+
+    public Vector2 GetFirstSpawnPoint()
+    {
+        if (spawnPoints.Length > 0)
+            return spawnPoints[0].position;
+        else
+            return Vector2.zero;
     }
 
     private void DrawCorridor(Vector2 start, Vector2 direction)
