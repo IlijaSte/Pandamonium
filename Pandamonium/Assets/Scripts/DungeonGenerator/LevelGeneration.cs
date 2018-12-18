@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using Pathfinding;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class LevelGeneration : MonoBehaviour
 {
+    [Header("General")]
     public Vector2 worldSize = new Vector2(4, 4);
 
     protected Room[,] rooms;
@@ -20,14 +22,24 @@ public class LevelGeneration : MonoBehaviour
     public int roomWidth;
     public int roomHeight;
 
+    [Header("Enemies")]
+
     public float enemyCountMultiplier = 1f;
+    public GameObject[] enemyPrefabs;
+
+    [Header("Rooms")]
 
     public GameObject[] roomPrefabs;
 
     public GameObject firstRoom;
     public GameObject lastRoom;
 
+    public GameObject bossRoom;
+    public Vector2 bossRoomSize = new Vector2(30, 30);
+
     public GameObject keyHolderRoom;
+
+    [Header("Prefabs")]
 
     public GameObject healthPoolPrefab;
 
@@ -41,16 +53,20 @@ public class LevelGeneration : MonoBehaviour
     public GameObject stairsPrefab;
 
     public TileBase groundPrefab;
+    public TileBase acidPrefab;
+
+    [Header("Other")]
+
     public Tilemap corridorTilemap;
 
     public Tilemap acidTilemap;
-    public TileBase acidPrefab;
+    
 
     private Transform roomParent;
 
     public Transform ground;
 
-    public GameObject[] enemyPrefabs;
+    
     protected ArrayList enemies;
 
     private static LevelGeneration instance;
@@ -59,6 +75,9 @@ public class LevelGeneration : MonoBehaviour
     protected ArrayList enemyPositions = new ArrayList();
 
     private ArrayList obstaclePositions;
+
+    [HideInInspector]
+    public Vector2 bossRoomSpawn;
 
     public static LevelGeneration I
     {
@@ -108,6 +127,12 @@ public class LevelGeneration : MonoBehaviour
         ground.localScale = new Vector2(gridSizeX * roomWidth * 2 + roomWidth / 2, gridSizeY * roomHeight * 2 + roomHeight / 2);
 
         Camera.main.GetComponent<CameraMovement>().SetBounds(new Vector2(-gridSizeX * roomWidth - roomWidth / 2, -gridSizeY * roomHeight - roomHeight / 2), new Vector2(gridSizeX * roomWidth + roomWidth / 2, gridSizeY * roomHeight + roomHeight / 2));
+
+        if (GameManager.I.currentLevel > 0)         // boss soba
+        {
+            (AstarPath.active.graphs[1] as GridGraph).center = (Vector2)BossRoomPosition();
+            (AstarPath.active.graphs[1] as GridGraph).SetDimensions(Mathf.RoundToInt(bossRoomSize.x / nodeSize), Mathf.RoundToInt(bossRoomSize.y / nodeSize), nodeSize);
+        }
 
         AstarPath.active.Scan();
 
@@ -421,6 +446,19 @@ public class LevelGeneration : MonoBehaviour
         rooms[(int)obeliskCheckPos.x + gridSizeX, (int)obeliskCheckPos.y + gridSizeY] = new Room(obeliskCheckPos, Room.RoomType.OBELISK);
         takenPositions.Insert(0, obeliskCheckPos);
 
+        // Boss Room
+        if(GameManager.I.currentLevel > 0)
+        {
+
+
+
+        }
+
+    }
+
+    protected Vector2Int BossRoomPosition()
+    {
+        return new Vector2Int(gridSizeX * roomWidth * 4, 0);
     }
 
     protected Vector2Int NewPosition()
@@ -612,6 +650,10 @@ public class LevelGeneration : MonoBehaviour
                     break;
                 case Room.RoomType.KEY_HOLDER:
                     room.Init(keyHolderRoom, roomParent);
+                    break;
+                case Room.RoomType.BOSS:
+                    room.Init(bossRoom, roomParent);
+                    bossRoomSpawn = room.GetSpawnPoint();
                     break;
                 default:
                     room.Init(GetRandomPrefab(), roomParent);

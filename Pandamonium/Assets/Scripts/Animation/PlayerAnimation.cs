@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerAnimation : CharacterAnimation
 {
-
+    public PlayerWithJoystick player;
 
     protected override void updateVector2()
     {

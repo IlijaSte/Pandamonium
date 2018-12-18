@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class Room {
     public Vector2Int gridPos;
 
-    public enum RoomType {DEFAULT, START, OBELISK, INTRO, KEY_HOLDER }
+    public enum RoomType {DEFAULT, START, OBELISK, INTRO, KEY_HOLDER, BOSS }
     public RoomType type;
 
 	//public int type;
@@ -89,6 +89,11 @@ public class Room {
             return true;
 
         return false;
+    }
+
+    public Vector2 GetSpawnPoint()
+    {
+        return roomHolder.GetFirstSpawnPoint();
     }
 
     public void PutEnemy(GameObject enemy)
