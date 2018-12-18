@@ -90,6 +90,11 @@ public class PlayerWithJoystick : AttackingCharacter {
         
     }
 
+    public void Teleport(Vector2 pos)
+    {
+        transform.position = pos;
+    }
+
     protected override void Update()
     {
         sprite.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100);

@@ -52,12 +52,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldSize: {x: 3, y: 3}
+  takenPositions: []
+  gridSizeX: 0
+  gridSizeY: 0
   roomNumberRange:
     m_Min: 4
     m_Max: 6
   roomWidth: 28
   roomHeight: 28
   enemyCountMultiplier: 1.5
+  enemyPrefabs:
+  - {fileID: 1628753790980070, guid: 75c84e6b6e1cac542a790e6e97eb2d12, type: 2}
+  - {fileID: 1994364961457230, guid: d6fddc9afdfce6d40a9c8f40754187dc, type: 2}
   roomPrefabs:
   - {fileID: 1062512608064458, guid: 424b3ed87e137dc4eb52f05f0051eab9, type: 2}
   - {fileID: 1504740648159990, guid: d131534f2f7f6db4ab1672127fd9ddea, type: 2}
@@ -70,6 +76,7 @@ MonoBehaviour:
   - {fileID: 1160568486293258, guid: e27121bbdc763374ebaed67cb53a0c84, type: 2}
   firstRoom: {fileID: 1021458116984078, guid: c5605b4466c9d1149b4f85722e6bb48c, type: 2}
   lastRoom: {fileID: 1647094732337640, guid: a597b96c5464f334ba66c2448d5f71ce, type: 2}
+  bossRoom: {fileID: 1008203414328258, guid: 3853c0de20e2ac740869a57f7aa35a0c, type: 2}
   keyHolderRoom: {fileID: 1546495575275046, guid: c7762849c97d400428bd7df944bf4421,
     type: 2}
   healthPoolPrefab: {fileID: 1459476336166136, guid: d0391d70682586d4182ba2e26c55987d,
@@ -90,10 +97,8 @@ MonoBehaviour:
   stairsPrefab: {fileID: 1182997206340352, guid: 2d1a3f0207c32b34fb78aede03491ef4,
     type: 2}
   groundPrefab: {fileID: 11400000, guid: c13e41d562a578c42830b7745183d1b3, type: 2}
+  acidPrefab: {fileID: 11400000, guid: 069acdcf805605f4191aefbbbb14ede6, type: 2}
   corridorTilemap: {fileID: 0}
   acidTilemap: {fileID: 0}
-  acidPrefab: {fileID: 11400000, guid: 069acdcf805605f4191aefbbbb14ede6, type: 2}
   ground: {fileID: 0}
-  enemyPrefabs:
-  - {fileID: 1628753790980070, guid: 75c84e6b6e1cac542a790e6e97eb2d12, type: 2}
-  - {fileID: 1994364961457230, guid: d6fddc9afdfce6d40a9c8f40754187dc, type: 2}
+  bossRoomSpawn: {x: 0, y: 0}
