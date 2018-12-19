@@ -540,11 +540,6 @@ Prefab:
       propertyPath: ground
       value: 
       objectReference: {fileID: 456452622}
-    - target: {fileID: 114842846616315500, guid: 811292a9bafcc3e4cacf7f28f5e16f5d,
-        type: 2}
-      propertyPath: bossRoomPosition.x
-      value: 10.97
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 811292a9bafcc3e4cacf7f28f5e16f5d, type: 2}
   m_IsPrefabParent: 0
@@ -563,6 +558,37 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224580454021334258, guid: c41a7d346eef8414b96565b8583e45f4,
     type: 2}
   m_PrefabInternal: {fileID: 257441336}
+--- !u!84 &713384405
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SpriteLightKit RT
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 558
+  m_Height: 314
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 0
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!114 &849400013 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114562331877149714, guid: a4a944a6b0dbeac488a74ec4dbd1b5bf,
@@ -845,53 +871,6 @@ Tilemap:
   m_PrefabParentObject: {fileID: 8195094281207497108, guid: 2f12ed792073b0d42b9b173050dfe60c,
     type: 2}
   m_PrefabInternal: {fileID: 1086419496}
---- !u!1001 &1332927997
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4576904865612624, guid: 4e69fb5e7badad94799d70c72152588f, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4576904865612624, guid: 4e69fb5e7badad94799d70c72152588f, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.2999997
-      objectReference: {fileID: 0}
-    - target: {fileID: 4576904865612624, guid: 4e69fb5e7badad94799d70c72152588f, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4576904865612624, guid: 4e69fb5e7badad94799d70c72152588f, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4576904865612624, guid: 4e69fb5e7badad94799d70c72152588f, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4576904865612624, guid: 4e69fb5e7badad94799d70c72152588f, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4576904865612624, guid: 4e69fb5e7badad94799d70c72152588f, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4576904865612624, guid: 4e69fb5e7badad94799d70c72152588f, type: 2}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 114431785733883378, guid: 4e69fb5e7badad94799d70c72152588f,
-        type: 2}
-      propertyPath: m_Follow
-      value: 
-      objectReference: {fileID: 143602737}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 4e69fb5e7badad94799d70c72152588f, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &1463035735
 Prefab:
   m_ObjectHideFlags: 0
@@ -1055,37 +1034,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1704756277}
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
---- !u!84 &1740400429
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: SpriteLightKit RT
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 558
-  m_Height: 314
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 0
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!224 &1772816252 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224045791293219484, guid: c41a7d346eef8414b96565b8583e45f4,
@@ -1168,6 +1116,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114389799003270524, guid: 183980faa4eecda4cb2f751ff77af8e4,
+        type: 2}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 143602737}
     - target: {fileID: 114519924169131814, guid: 183980faa4eecda4cb2f751ff77af8e4,
         type: 2}
       propertyPath: spriteLightRT
@@ -1177,7 +1130,7 @@ Prefab:
         type: 2}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 1740400429}
+      objectReference: {fileID: 713384405}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 183980faa4eecda4cb2f751ff77af8e4, type: 2}
   m_IsPrefabParent: 0

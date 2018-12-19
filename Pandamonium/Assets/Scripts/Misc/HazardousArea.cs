@@ -16,7 +16,7 @@ public abstract class HazardousArea<T> : MonoBehaviour where T : AttackingCharac
     private void OnTriggerEnter2D(Collider2D collision)
     {
         T enemy = null;
-        if((enemy = collision.gameObject.GetComponent<T>()) != null)
+        if((enemy = collision.gameObject.GetComponent<T>()) != null && !enemiesInArea.Contains(enemy))
         {
             enemiesInArea.Add(enemy);
             OnCharacterEnter(enemy);

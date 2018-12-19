@@ -85,7 +85,9 @@ public class Room {
             !((Vector2)roomHolder.rightEdge.position + Vector2.left).Equals(checkPos) &&
             !roomHolder.topEdge.position.Equals(checkPos) &&
             !((Vector2)roomHolder.topEdge.position + Vector2.down).Equals(checkPos) &&
-            !roomHolder.bottomEdge.position.Equals(checkPos))
+            !roomHolder.bottomEdge.position.Equals(checkPos) && 
+            !((Vector2)roomHolder.leftEdge.position + Vector2.up).Equals(checkPos) && 
+            !((Vector2)roomHolder.rightEdge.position + Vector2.up).Equals(checkPos))
             return true;
 
         return false;

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour {
 
+    public float playerPullDistance = 1f;
+
     protected Rigidbody2D rb;
 
     protected Vector2 startPos;
@@ -93,8 +95,28 @@ public class Collectible : MonoBehaviour {
 
     }
 
+    protected virtual IEnumerator GravitateTowardsPlayer()
+    {
+
+        while (true)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, GameManager.I.playerInstance.transform.position, Time.deltaTime);
+            yield return null;
+        }
+
+    }
+
     protected virtual void FixedUpdate()
     {
+
+        if(canPickup && Vector2.Distance(transform.position, GameManager.I.playerInstance.transform.position) <= playerPullDistance)
+        {
+            dropping = false;
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.velocity = Vector2.zero;
+            GetComponent<Collider2D>().isTrigger = true;
+            StartCoroutine(GravitateTowardsPlayer());
+        }
 
         if(dropping && rb.velocity.y < 0 && transform.position.y <= dropPos.y)
         {
@@ -134,6 +156,7 @@ public class Collectible : MonoBehaviour {
         if(canPickup && collision.transform.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
         {
             OnPickup();
+            print("collision");
         }
     }
 
@@ -143,6 +166,28 @@ public class Collectible : MonoBehaviour {
         if (canPickup && collision.transform.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
         {
             OnPickup();
+            print("collision");
         }
     }
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (canPickup && collision.transform.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
+        {
+            OnPickup();
+            print("trigger");
+        }
+    }
+
+    protected virtual void OnTriggerStay2D(Collider2D collision)
+    {
+
+        if (canPickup && collision.transform.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
+        {
+            OnPickup();
+            print("trigger");
+        }
+    }
+
 }

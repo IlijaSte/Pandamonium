@@ -5,7 +5,7 @@ using UnityEngine;
 public class TrailCollider : HazardousArea<PlayerWithJoystick> {
 
     public float damageInterval;
-    public float damage = 2;
+    public float damage = 5;
 
     private void Update()
     {
@@ -53,7 +53,10 @@ public class TrailCollider : HazardousArea<PlayerWithJoystick> {
             PlayerWithJoystick enemy = enemiesInArea[i];
 
             if (enemy && !enemy.isDead && enemy.IsAttackable())
-                enemy.TakePoisonDamage(damage);
+            {
+                //enemy.TakePoisonDamage(damage);
+                enemy.TakeDamageOverTime(damage, 1, 1);
+            }
         }
 
         lastDamage = Time.time;

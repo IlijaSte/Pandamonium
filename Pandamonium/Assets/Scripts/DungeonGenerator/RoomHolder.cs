@@ -37,6 +37,17 @@ public class RoomHolder : MonoBehaviour {
 
     private void Start()
     {
+        if (context.type == Room.RoomType.OBELISK) {
+            if (GameManager.I.IsBossLevel())
+            {
+                GetComponentInChildren<PortalTrigger>().type = PortalTrigger.PortalType.TO_BOSS;
+            }
+            else
+            {
+                GetComponentInChildren<PortalTrigger>().type = PortalTrigger.PortalType.END_OF_LEVEL;
+            }
+        }
+
         stairsPositions = new List<Vector2>();
         DrawCorridors(context.doorTop, context.doorBot, context.doorLeft, context.doorRight);
 
@@ -122,6 +133,10 @@ public class RoomHolder : MonoBehaviour {
             start.y += 1;
             Vector3Int pos = obstacleTilemap.WorldToCell(start);
             obstacleTilemap.SetTile(pos, null);
+        }
+        else
+        {
+            Instantiate(LevelGeneration.I.stairsVertPrefab, start + new Vector2(0.5f, 0), Quaternion.identity, transform);
         }
 
         Vector3Int tilePos = new Vector3Int();

@@ -31,10 +31,10 @@ public class LevelGeneration : MonoBehaviour
 
     public GameObject[] roomPrefabs;
 
-    public GameObject firstRoom;
-    public GameObject lastRoom;
+    public GameObject firstRoomPrefab;
+    public GameObject lastRoomPrefab;
 
-    public GameObject bossRoom;
+    public GameObject bossRoomPrefab;
     public Vector2 bossRoomSize = new Vector2(30, 30);
 
     public GameObject keyHolderRoom;
@@ -51,6 +51,7 @@ public class LevelGeneration : MonoBehaviour
     public TileBase corridorHorizForegroundLeftPrefab;
     public TileBase corridorHorizForegroundRightPrefab;
     public GameObject stairsPrefab;
+    public GameObject stairsVertPrefab;
 
     public TileBase groundPrefab;
     public TileBase acidPrefab;
@@ -78,6 +79,8 @@ public class LevelGeneration : MonoBehaviour
 
     [HideInInspector]
     public Vector2 bossRoomSpawn;
+
+    protected Room bossRoom;
 
     public static LevelGeneration I
     {
@@ -128,10 +131,11 @@ public class LevelGeneration : MonoBehaviour
 
         Camera.main.GetComponent<CameraMovement>().SetBounds(new Vector2(-gridSizeX * roomWidth - roomWidth / 2, -gridSizeY * roomHeight - roomHeight / 2), new Vector2(gridSizeX * roomWidth + roomWidth / 2, gridSizeY * roomHeight + roomHeight / 2));
 
-        if (GameManager.I.currentLevel > 0)         // boss soba
+        if (GameManager.I.IsBossLevel())         // boss soba
         {
             (AstarPath.active.graphs[1] as GridGraph).center = (Vector2)BossRoomPosition();
             (AstarPath.active.graphs[1] as GridGraph).SetDimensions(Mathf.RoundToInt(bossRoomSize.x / nodeSize), Mathf.RoundToInt(bossRoomSize.y / nodeSize), nodeSize);
+
         }
 
         AstarPath.active.Scan();
@@ -174,10 +178,18 @@ public class LevelGeneration : MonoBehaviour
     public void FillAcid()
     {
         BoxFill(acidTilemap, acidPrefab, new Vector3Int(-gridSizeX * roomWidth - roomWidth / 2, -gridSizeY * roomHeight - roomHeight / 2, 0), new Vector3Int(gridSizeX * roomWidth + roomWidth / 2, gridSizeY * roomHeight + roomHeight / 2, 0));
+
+        if (GameManager.I.IsBossLevel())
+        {
+            BoxFill(acidTilemap, acidPrefab, new Vector3Int(BossRoomPosition().x - roomWidth, BossRoomPosition().y - roomHeight, 0), new Vector3Int(BossRoomPosition().x + roomWidth, BossRoomPosition().y + roomHeight, 0));
+        }
     }
 
     public Room GetRoomAtPos(Vector2 pos)
     {
+        if (gridSizeX + Mathf.RoundToInt(pos.x / roomWidth) > gridSizeX * 2 || gridSizeY + Mathf.RoundToInt(pos.y / roomHeight) > gridSizeY * 2)
+            return null;
+
         return rooms[gridSizeX + Mathf.RoundToInt(pos.x / roomWidth), gridSizeY + Mathf.RoundToInt(pos.y / roomHeight)];
     }
 
@@ -294,7 +306,13 @@ public class LevelGeneration : MonoBehaviour
                  !IsTileFree(checkPos) ||
                  !IsTileFree(checkPos + Vector2.right) ||
                  ((Vector2)room.getRoomHolder().rightEdge.position + 2 * Vector2.left).Equals(checkPos) || 
-                 !room.CanSpawnAtPos(checkPos));
+                 !room.CanSpawnAtPos(checkPos) ||
+                 !room.CanSpawnAtPos(checkPos + Vector2.left) ||
+                 !room.CanSpawnAtPos(checkPos + Vector2.right) || 
+                 !room.CanSpawnAtPos(checkPos + Vector2.up) || 
+                 
+                 ((Vector2)room.getRoomHolder().rightEdge.position + 2 * Vector2.left + Vector2.up).Equals(checkPos)
+                 );
 
         Instantiate(healthPoolPrefab, spawnPos, Quaternion.identity);
 
@@ -447,11 +465,10 @@ public class LevelGeneration : MonoBehaviour
         takenPositions.Insert(0, obeliskCheckPos);
 
         // Boss Room
-        if(GameManager.I.currentLevel > 0)
+        if(GameManager.I.IsBossLevel())
         {
-
-
-
+            Vector2Int bossRoomPos = new Vector2Int(Mathf.RoundToInt(BossRoomPosition().x / (float)roomWidth), Mathf.RoundToInt(BossRoomPosition().y / (float)roomHeight));
+            bossRoom = new Room(bossRoomPos, Room.RoomType.BOSS);
         }
 
     }
@@ -643,17 +660,13 @@ public class LevelGeneration : MonoBehaviour
             switch (room.type)
             {
                 case Room.RoomType.OBELISK:
-                    room.Init(lastRoom, roomParent);
+                    room.Init(lastRoomPrefab, roomParent);
                     break;
                 case Room.RoomType.START:
-                    room.Init(firstRoom, roomParent);
+                    room.Init(firstRoomPrefab, roomParent);
                     break;
                 case Room.RoomType.KEY_HOLDER:
                     room.Init(keyHolderRoom, roomParent);
-                    break;
-                case Room.RoomType.BOSS:
-                    room.Init(bossRoom, roomParent);
-                    bossRoomSpawn = room.GetSpawnPoint();
                     break;
                 default:
                     room.Init(GetRandomPrefab(), roomParent);
@@ -661,6 +674,13 @@ public class LevelGeneration : MonoBehaviour
             }
 
 
+        }
+
+        if (GameManager.I.IsBossLevel())
+        {
+            bossRoom.Init(bossRoomPrefab, roomParent);
+            bossRoomSpawn = bossRoom.GetSpawnPoint();
+            print(bossRoomSpawn);
         }
     }
 

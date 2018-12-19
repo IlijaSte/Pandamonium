@@ -195,6 +195,7 @@ public class GameManager : MonoBehaviour {
     public void ChooseGameMode(string gameMode)
     {
         this.gameMode = gameMode;
+        SaveManager.I.SaveGame();
         LoadScene("CharacterSelection");
     }
 
@@ -222,6 +223,11 @@ public class GameManager : MonoBehaviour {
         string pathToScene = SceneUtility.GetScenePathByBuildIndex(FIRST_LEVEL_BUILD_INDEX + Mathf.Clamp(currentLevel, 0, NUM_OF_LEVELS - 1));
         string sceneName = System.IO.Path.GetFileNameWithoutExtension(pathToScene);
         LoadSceneLong(sceneName);
+    }
+
+    public bool IsBossLevel()
+    {
+        return (currentLevel + 1) % 3 == 0;
     }
 
     // ovo nadalje smestiti u scene manager neki

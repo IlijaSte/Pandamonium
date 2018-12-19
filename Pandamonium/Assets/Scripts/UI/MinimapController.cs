@@ -90,10 +90,10 @@ public class MinimapController : MonoBehaviour {
 
     private void Update()
     {
-        
-        if(roomsToExplore.Contains((GameManager.I.playerInstance as PlayerWithJoystick).GetRoom()))
+        Room playerRoom = (GameManager.I.playerInstance as PlayerWithJoystick).GetRoom();
+        if (playerRoom != null && roomsToExplore.Contains(playerRoom))
         {
-            StartCoroutine(RevealRoom((GameManager.I.playerInstance as PlayerWithJoystick).GetRoom()));
+            StartCoroutine(RevealRoom(playerRoom));
             //rectangles
         }
 

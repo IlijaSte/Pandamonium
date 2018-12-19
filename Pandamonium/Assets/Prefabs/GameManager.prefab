@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1759324250561034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 246.93161, y: 199.08327, z: -4.362728}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bce3525f5e901943becce0fa420f5e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxLevels: 7
   healthValues: 0000000014000000280000003c0000006400000096000000c8000000
   damageValues: 0000000014000000280000003c0000006400000096000000c8000000
   critChanceValues: 050000000a0000000f000000140000001e0000002800000032000000
@@ -85,8 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInstance: {fileID: 0}
-  maxUpgrades: 7
-  currentLevel: 0
+  currentLevel: 1
   gameMode: classic
   isRunStarted: 0
   coins: 0

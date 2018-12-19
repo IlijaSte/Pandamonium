@@ -74,9 +74,13 @@ MonoBehaviour:
   - {fileID: 1788723741195938, guid: 869173eff6dd9c740800996d2aaf8657, type: 2}
   - {fileID: 1966675948856250, guid: d963c51a60776484b9c04d6ef9e5d35f, type: 2}
   - {fileID: 1160568486293258, guid: e27121bbdc763374ebaed67cb53a0c84, type: 2}
-  firstRoom: {fileID: 1021458116984078, guid: c5605b4466c9d1149b4f85722e6bb48c, type: 2}
-  lastRoom: {fileID: 1647094732337640, guid: a597b96c5464f334ba66c2448d5f71ce, type: 2}
-  bossRoom: {fileID: 1008203414328258, guid: 3853c0de20e2ac740869a57f7aa35a0c, type: 2}
+  firstRoomPrefab: {fileID: 1021458116984078, guid: c5605b4466c9d1149b4f85722e6bb48c,
+    type: 2}
+  lastRoomPrefab: {fileID: 1647094732337640, guid: a597b96c5464f334ba66c2448d5f71ce,
+    type: 2}
+  bossRoomPrefab: {fileID: 1008203414328258, guid: 3853c0de20e2ac740869a57f7aa35a0c,
+    type: 2}
+  bossRoomSize: {x: 30, y: 30}
   keyHolderRoom: {fileID: 1546495575275046, guid: c7762849c97d400428bd7df944bf4421,
     type: 2}
   healthPoolPrefab: {fileID: 1459476336166136, guid: d0391d70682586d4182ba2e26c55987d,
@@ -88,13 +92,15 @@ MonoBehaviour:
     type: 2}
   corridorBridgeVertPrefab: {fileID: 11400000, guid: 0f0a5562cbf3ab049b451d646bf4e701,
     type: 2}
-  corridorHorizForegroundPrefab: {fileID: 11400000, guid: bf22483da5e804d4eaf378035015dcbb,
+  corridorHorizForegroundPrefab: {fileID: 11400000, guid: 9127e32b4c6ac564195abdf20ba52f92,
     type: 2}
   corridorHorizForegroundLeftPrefab: {fileID: 11400000, guid: 0da05de953485a0428b0946e516e185e,
     type: 2}
   corridorHorizForegroundRightPrefab: {fileID: 11400000, guid: bd8739456c78ea940af15352196859b3,
     type: 2}
   stairsPrefab: {fileID: 1182997206340352, guid: 2d1a3f0207c32b34fb78aede03491ef4,
+    type: 2}
+  stairsVertPrefab: {fileID: 1253678088043098, guid: c1cbddbf1d2b70b42964bcdee02c135f,
     type: 2}
   groundPrefab: {fileID: 11400000, guid: c13e41d562a578c42830b7745183d1b3, type: 2}
   acidPrefab: {fileID: 11400000, guid: 069acdcf805605f4191aefbbbb14ede6, type: 2}

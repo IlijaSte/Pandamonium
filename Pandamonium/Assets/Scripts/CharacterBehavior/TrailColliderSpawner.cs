@@ -70,7 +70,7 @@ public class TrailColliderSpawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-        if(parent && parent.isDead)
+        if((parent && parent.isDead))
         {
             parent = null;
             transform.SetParent(childObj.transform);
