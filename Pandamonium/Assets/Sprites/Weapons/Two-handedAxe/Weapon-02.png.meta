@@ -43,7 +43,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 2600
+  spritePixelsToUnits: 5000
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -118,9 +118,9 @@ TextureImporter:
     physicsShape: []
     bones:
     - name: root
-      position: {x: 1091.2412, y: 399.82587, z: 0}
-      rotation: {x: 0, y: 0, z: 0.7053006, w: 0.7089083}
-      length: 5538.887
+      position: {x: 1106.4187, y: 3076.0098, z: 0}
+      rotation: {x: 0, y: 0, z: 0.70526224, w: 0.7089465}
+      length: 3029.0146
       parentId: -1
     spriteID: 36c4891b7726bf04bb22895b32bab67b
     vertices:
@@ -176,7 +176,7 @@ TextureImporter:
     - {x: 962.61926, y: 3145.1396}
     - {x: 1128.6459, y: 568.60767}
     - {x: 1093.6127, y: 5392.5786}
-    - {x: 524.8299, y: 5449.039}
+    - {x: 608.2756, y: 5457.3843}
     - {x: 1689.0996, y: 5378.078}
     - {x: 1851.4062, y: 6072.0405}
     - {x: 962.61926, y: 2332.0305}
