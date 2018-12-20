@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 61133381025590982}
   - component: {fileID: 50176549523694390}
   m_Layer: 15
-  m_Name: EliteFrogocite
+  m_Name: RangedFrogocite
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -701,6 +701,7 @@ MonoBehaviour:
   playerState: 0
   ignoreMask: 0
   isDead: 0
+  enemyName: RangedFrogocid
   difficulty: 2
   dropPrefabs: []
   holdsKey: 0

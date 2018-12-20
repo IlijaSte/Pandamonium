@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9358e09a8fd3ebc4c98552eff7e4f9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPullDistance: 2
 --- !u!212 &212586197223493280
 SpriteRenderer:
   m_ObjectHideFlags: 1

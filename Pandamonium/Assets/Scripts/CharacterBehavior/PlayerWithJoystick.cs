@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerWithJoystick : AttackingCharacter {
@@ -40,6 +42,12 @@ public class PlayerWithJoystick : AttackingCharacter {
     [HideInInspector]
     public float speed;
 
+    [HideInInspector]
+    public Action<string> onEnemySlain;
+
+    [HideInInspector]
+    public Action onCoinCollected;
+
     public override void Awake()
     {
         if (!GameManager.joystick)
@@ -50,6 +58,8 @@ public class PlayerWithJoystick : AttackingCharacter {
         else{
             GameManager.I.playerInstance = this;
         }
+
+        QuestManager.I.SetupPlayerDelegates();
     }
 
     public override void Start()
@@ -87,7 +97,8 @@ public class PlayerWithJoystick : AttackingCharacter {
     public void PickupCoins(int amount = 1)
     {
         GameManager.I.PickupCoins(amount);
-        
+        if(onCoinCollected != null)
+            onCoinCollected();
     }
 
     public void Teleport(Vector2 pos)
@@ -355,7 +366,7 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     protected void HitWithWeapon()
     {
-        bool crit = Random.value <= GameManager.I.costHolder.GetStatAsMultiplier(AttributeType.CRIT_CHANCE);
+        bool crit = UnityEngine.Random.value <= GameManager.I.costHolder.GetStatAsMultiplier(AttributeType.CRIT_CHANCE);
 
         float damage = baseDamage + baseDamage * GameManager.I.costHolder.GetStatAsMultiplier(AttributeType.DAMAGE);
 

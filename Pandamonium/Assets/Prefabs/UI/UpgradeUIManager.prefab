@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4707670352586046}
   - component: {fileID: 114265323198651046}
   - component: {fileID: 114243651893767394}
+  - component: {fileID: 114817962106295600}
   m_Layer: 0
   m_Name: UpgradeUIManager
   m_TagString: Untagged
@@ -61,6 +62,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   scrollRect: {fileID: 0}
+  upgradeCanvas: {fileID: 0}
 --- !u!114 &114265323198651046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -75,4 +77,19 @@ MonoBehaviour:
   pauseMenu: {fileID: 1700260222444396, guid: 66971591d1a919a48a5680d93b460688, type: 2}
   deathMenu: {fileID: 1855370371046284, guid: 1b1e86775836ce64d8bf293366862809, type: 2}
   gameEndMenu: {fileID: 1161247890817298, guid: d354c7e484310f245aad2b8415f5b4dd,
+    type: 2}
+--- !u!114 &114817962106295600
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1330720447547884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02fee291c95cbd54a8cc317185c8de0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questCanvas: {fileID: 0}
+  questList: {fileID: 0}
+  questViewPrefab: {fileID: 1532308617527222, guid: a3271e87de4eb904788c03939234d578,
     type: 2}

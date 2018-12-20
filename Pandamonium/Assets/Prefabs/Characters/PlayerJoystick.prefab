@@ -295,7 +295,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4017765627769762
 Transform:
   m_ObjectHideFlags: 1
@@ -848,7 +848,7 @@ MonoBehaviour:
   speed: 1
   knockback: 1
   knockbackForce: 5
-  range: 1
+  range: 1.8
   timeToAttack: 1
   parent: {fileID: 114562331877149714}
   cleaveAngle: 90

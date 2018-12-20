@@ -12,6 +12,8 @@ public class Enemy : AttackingCharacter {
     public static int numEnemies = 0;
     public static bool areAllEnemiesDead = false;
 
+    public string enemyName;
+
     public int difficulty = 1;
 
     public GameObject[] dropPrefabs;
@@ -288,6 +290,8 @@ public class Enemy : AttackingCharacter {
         numEnemies--;
         if (numEnemies == 0)
             areAllEnemiesDead = true;
+
+        player.GetComponent<PlayerWithJoystick>().onEnemySlain(enemyName);
 
         /*GraphUpdateObject guo = new GraphUpdateObject(currBounds)
         {

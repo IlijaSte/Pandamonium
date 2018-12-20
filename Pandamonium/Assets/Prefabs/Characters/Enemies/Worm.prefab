@@ -534,6 +534,7 @@ MonoBehaviour:
   playerState: 0
   ignoreMask: 0
   isDead: 0
+  enemyName: Worm
   difficulty: 1
   dropPrefabs: []
   holdsKey: 0

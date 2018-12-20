@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EliteFrogocite : Frogocite {
+public class RangedFrogocite : Frogocite {
 
     public float jumpTriggerDistance = 3f;
 
@@ -114,7 +114,7 @@ public class EliteFrogocite : Frogocite {
     {
         foreach(GameObject enemy in room.enemies)
         {
-            if(enemy && enemy.GetComponent<Frogocite>() != null && enemy.GetComponent<EliteFrogocite>() == null)
+            if(enemy && enemy.GetComponent<Frogocite>() != null && enemy.GetComponent<RangedFrogocite>() == null)
             {
                 return true;
             }

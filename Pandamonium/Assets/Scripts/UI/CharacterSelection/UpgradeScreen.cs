@@ -10,6 +10,8 @@ public class UpgradeScreen : MonoBehaviour {
     public UpgradeButton[] upgradeButtons;
     public ScrollSnapRect scrollRect;
 
+    public Canvas upgradeCanvas;
+
     public void ResetAllStats()
     {
         for(int i = 0; i < GameManager.I.attributes.Length; i++)
@@ -46,6 +48,11 @@ public class UpgradeScreen : MonoBehaviour {
     private void Update()
     {
         classNameText.text = classNames[scrollRect.GetNearestPage()];
+    }
+
+    public void ChangeScreen(Toggle toggle)
+    {
+        upgradeCanvas.enabled = toggle.isOn;
     }
 
 }

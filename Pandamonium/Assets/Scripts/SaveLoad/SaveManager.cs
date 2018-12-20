@@ -61,6 +61,7 @@ public class SaveManager : MonoBehaviour {
         game.coins = GameManager.I.coins;
         game.attributes = GameManager.I.attributes;
         game.abilities = GameManager.I.abilities;
+        game.activeQuests = QuestManager.I.GetQuestInfos();
 
         gameState = game;
 
@@ -98,6 +99,8 @@ public class SaveManager : MonoBehaviour {
         public List<string> abilities;
 
         public int[] attributes;
+
+        public List<QuestManager.QuestInfo> activeQuests;
 
         public GameState()
         {

@@ -775,6 +775,7 @@ MonoBehaviour:
   playerState: 0
   ignoreMask: 0
   isDead: 0
+  enemyName: Slime
   difficulty: 1
   dropPrefabs:
   - {fileID: 1597709171064980, guid: 936e67524d0a86645b38d0abbb56d0e6, type: 2}

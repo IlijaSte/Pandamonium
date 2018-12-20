@@ -104,6 +104,9 @@ public class GameManager : MonoBehaviour {
             {
                 abilities = new List<string>();
             }
+
+            if(QuestManager.I != null)
+                QuestManager.I.LoadQuestInfos(SaveManager.I.gameState.activeQuests);
         }
     }
 

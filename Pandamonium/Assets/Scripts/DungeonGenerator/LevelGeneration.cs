@@ -360,7 +360,7 @@ public class LevelGeneration : MonoBehaviour
                 {
                     newPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
 
-                } while (((newPrefab.GetComponent<AttackingCharacter>() is EliteFrogocite) && !hasFrogocid) || newPrefab.GetComponent<Enemy>().difficulty > totalDifficulty);
+                } while (((newPrefab.GetComponent<AttackingCharacter>() is RangedFrogocite) && !hasFrogocid) || newPrefab.GetComponent<Enemy>().difficulty > totalDifficulty);
 
                 newEnemy = Instantiate(newPrefab, spawnPos, Quaternion.identity, enemyParent);
 
@@ -795,5 +795,24 @@ public class LevelGeneration : MonoBehaviour
         secondRoom.doorLeft = secondRoom.doorLeft || firstRoom.doorRight;
         secondRoom.doorRight = secondRoom.doorRight || firstRoom.doorLeft;
 
+    }
+
+    public int GetNumberOfEnemies(string name)
+    {
+
+        int num = 0;
+
+        foreach(GameObject enemy in enemies)
+        {
+            if (enemy != null)
+            {
+                if (enemy.GetComponent<Enemy>().enemyName.Equals(name))
+                {
+                    num++;
+                }
+            }
+        }
+
+        return num;
     }
 }

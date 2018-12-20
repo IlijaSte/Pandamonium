@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 114929150002174336}
   - component: {fileID: 114990744928558336}
   m_Layer: 5
-  m_Name: CharSelection
+  m_Name: CharacterScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3487,7 +3487,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -306.5, y: 174}
+  m_AnchoredPosition: {x: -318, y: 186.3}
   m_SizeDelta: {x: 137, y: 34.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224188360969032910
@@ -3581,8 +3581,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -125, y: 9.4}
-  m_SizeDelta: {x: 160, y: 51.2}
+  m_AnchoredPosition: {x: -105.57, y: 9.4}
+  m_SizeDelta: {x: 121.15, y: 51.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224242483458526584
 RectTransform:
@@ -4150,8 +4150,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -125, y: -14.999992}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -105.6, y: -14.999992}
+  m_SizeDelta: {x: 121.1, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224882918939591738
 RectTransform:

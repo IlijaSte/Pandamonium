@@ -373,8 +373,8 @@ MonoBehaviour:
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
     m_RawSignal: {fileID: 11400000, guid: 74a714fd3c2680541b188c34f833fe93, type: 2}
-    m_AmplitudeGain: 2
-    m_FrequencyGain: 2
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
     m_RepeatMode: 0
     m_Randomize: 1
     m_TimeEnvelope:
@@ -398,14 +398,14 @@ MonoBehaviour:
     m_ImpactRadius: 3
     m_DirectionMode: 0
     m_DissipationMode: 2
-    m_DissipationDistance: 1000
+    m_DissipationDistance: 3
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 32768
   m_IgnoreTag: 
   m_UseImpactDirection: 0
   m_ScaleImpactWithMass: 0
-  m_ScaleImpactWithSpeed: 0
+  m_ScaleImpactWithSpeed: 1
 --- !u!212 &212339404656735284
 SpriteRenderer:
   m_ObjectHideFlags: 1

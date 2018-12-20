@@ -526,6 +526,7 @@ MonoBehaviour:
   playerState: 0
   ignoreMask: 0
   isDead: 0
+  enemyName: Frogocid
   difficulty: 2
   dropPrefabs: []
   holdsKey: 0

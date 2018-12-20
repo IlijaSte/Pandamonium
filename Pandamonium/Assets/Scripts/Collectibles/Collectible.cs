@@ -150,7 +150,7 @@ public class Collectible : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    /*protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
 
         if(canPickup && collision.transform.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
@@ -168,7 +168,7 @@ public class Collectible : MonoBehaviour {
             OnPickup();
             print("collision");
         }
-    }
+    }*/
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
