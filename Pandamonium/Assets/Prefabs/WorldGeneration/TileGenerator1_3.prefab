@@ -68,6 +68,7 @@ MonoBehaviour:
   - {fileID: 1628753790980070, guid: 20fff9fe07f5ae54d8f3ddf84af7f1b8, type: 2}
   elitePool:
   - {fileID: 1628753790980070, guid: 87eaa6d11a9678f489c891c3340b6eb4, type: 2}
+  bossPrefab: {fileID: 1628753790980070, guid: 7a45879b3f23cec4caa0b77ee4c18b69, type: 2}
   roomPrefabs:
   - {fileID: 1062512608064458, guid: 424b3ed87e137dc4eb52f05f0051eab9, type: 2}
   - {fileID: 1504740648159990, guid: d131534f2f7f6db4ab1672127fd9ddea, type: 2}

@@ -99,9 +99,12 @@ public class QuestManager : MonoBehaviour {
 
     protected void OnQuestCompleted(Quest q)
     {
-        print(activeQuests.Remove(q));
+        GameManager.I.PickupCoinReward(q.rewardCoins);
+
         Destroy(q);
         SaveManager.I.SaveGame();
+        InfoText.I.ShowMessage("quest complete");
+
     }
 
     public void LoadQuestInfos(List<QuestInfo> infos)

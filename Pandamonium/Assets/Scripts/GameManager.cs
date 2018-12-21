@@ -139,6 +139,12 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void PickupCoinReward(int amount)
+    {
+        coins += amount;
+        UIManager.I.coinsText.text = (coins + tempCoins).ToString();
+    }
+
     public void PickupCoins(int amount)
     {
         //coins += amount;
