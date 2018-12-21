@@ -2,8 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Frogocite : StandardEnemy
+public class HeavyFrogo : Enemy
 {
+    public float aoeRange = 1;
+    public float aoeDamage = 50;
+    public float secondaryAoeRange = 3;
+    public float secondaryAoeDamage = 25;
+
+    public float primaryStunDuration = 1.5f;
+    public float secondaryStunDuration = 0.5f;
+
+    public float selfStunDuration = 4;
+    public int selfStunJumps = 3;
+    public int selfStunsToEnrage = 3;
+
+    private int numOfSelfStuns = 0;
+
+    private int numOfJumps = 0;
+
+    private bool isStunned = false;
 
     public float jumpSpeed = 5;
     private Vector2 jumpTarget;
@@ -57,7 +74,7 @@ public class Frogocite : StandardEnemy
         }
 
         DoJump();
-      
+
         base.Update();
     }
 
@@ -133,13 +150,7 @@ public class Frogocite : StandardEnemy
         attackable = false;
 
         shadowT = 0;
-       // timeToJump = 0;
-    }
-
-    protected virtual void OnLand()
-    {
-        if (weapons[equippedWeaponIndex].IsInRange(player))
-            player.GetComponent<AttackingCharacter>().TakeDamage(weapons[equippedWeaponIndex].damage);
+        // timeToJump = 0;
     }
 
     public virtual void FixedUpdate()
@@ -196,12 +207,67 @@ public class Frogocite : StandardEnemy
 
     public override bool TakeDamageWithKnockback(float damage, Vector2 dir, float force)
     {
-
-        if(!isJumping)
-            return base.TakeDamageWithKnockback(damage, dir, force);
+        if (!isJumping)
+            //return base.TakeDamageWithKnockback(damage, dir, force);
+            return base.TakeDamage(damage);
         else
         {
             return false;
         }
+    }
+
+    protected void Enrage()
+    {
+        weapons[equippedWeaponIndex].damage *= 2;
+        aoeDamage *= 2;
+        secondaryAoeDamage *= 2;
+    }
+
+    protected IEnumerator SelfStun()
+    {
+        numOfSelfStuns++;
+
+        isStunned = true;
+
+        playerState = PlayerState.IMMOBILE;
+
+        yield return new WaitForSeconds(selfStunDuration);
+
+        playerState = PlayerState.IDLE;
+
+        isStunned = false;
+
+        if(numOfSelfStuns == selfStunsToEnrage)
+        {
+            Enrage();
+        }
+    }
+
+    protected void OnLand()
+    {
+        //Transform player = GameManager.I.playerInstance.transform;
+
+        float distance = Vector2.Distance(transform.position, player.position);
+        if (distance <= aoeRange)
+        {
+            player.GetComponent<AttackingCharacter>().TakeDamage(aoeDamage);
+            player.GetComponent<PlayerWithJoystick>().Stun(primaryStunDuration);
+        }
+        else if(distance <= secondaryAoeRange)
+        {
+            player.GetComponent<AttackingCharacter>().TakeDamage(secondaryAoeDamage);
+            player.GetComponent<PlayerWithJoystick>().Stun(secondaryStunDuration);
+        }
+
+        if (++numOfJumps == selfStunJumps)
+        {
+            numOfJumps = 0;
+            StartCoroutine(SelfStun());
+        }
+    }
+
+    protected override void Die()
+    {
+        base.Die();
     }
 }

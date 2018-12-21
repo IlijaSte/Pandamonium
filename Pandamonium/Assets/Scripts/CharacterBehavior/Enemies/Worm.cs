@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Worm : Enemy {
+public class Worm : StandardEnemy {
 
     private static int NUM_STATES = 4;
 

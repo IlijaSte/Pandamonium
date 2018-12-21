@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class Room {
     public Vector2Int gridPos;
 
-    public enum RoomType {DEFAULT, START, OBELISK, INTRO, KEY_HOLDER, BOSS }
+    public enum RoomType {DEFAULT, START, OBELISK, INTRO, KEY_HOLDER, BOSS, ELITE }
     public RoomType type;
 
 	//public int type;

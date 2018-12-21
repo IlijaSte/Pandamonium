@@ -29,6 +29,20 @@ public class Level1_2Generation : LevelGeneration {
             if (room.type == Room.RoomType.START || room.type == Room.RoomType.OBELISK || room.type == Room.RoomType.KEY_HOLDER)
                 continue;
 
+            // elite
+
+            if (room.type == Room.RoomType.ELITE)
+            {
+                //Vector2 spawnPos = room.GetSpawnPoint();
+                Vector2 spawnPos = room.getRoomHolder().transform.position;
+
+                GameObject newEnemy = Instantiate(elitePool[Random.Range(0, elitePool.Length)], spawnPos, Quaternion.identity, enemyParent);
+
+                //enemies.Add(newEnemy);            // !!!
+                room.PutEnemy(newEnemy);
+                continue;
+            }
+
             int totalDifficulty;
 
             switch (room.distanceFromStart){

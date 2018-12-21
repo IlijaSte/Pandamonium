@@ -48,6 +48,8 @@ public class PlayerWithJoystick : AttackingCharacter {
     [HideInInspector]
     public Action onCoinCollected;
 
+    private bool canMove = true;
+
     public override void Awake()
     {
         if (!GameManager.joystick)
@@ -132,6 +134,20 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
     }
 
+    private IEnumerator Stunned(float duration)
+    {
+        canMove = false;
+
+        yield return new WaitForSeconds(duration);
+
+        canMove = true;
+    }
+
+    public void Stun(float duration)
+    {
+        StartCoroutine(Stunned(duration));
+    }
+
     protected IEnumerator CaptureScreenshot()
     {
         UIManager.I.mainCanvas.GetComponent<CanvasGroup>().alpha = 0;
@@ -205,7 +221,7 @@ public class PlayerWithJoystick : AttackingCharacter {
                     PickupCoins(5000);
                 }
 
-                if (!wasdDirection.Equals(Vector2.zero))
+                if (canMove && !wasdDirection.Equals(Vector2.zero))
                 {
                     wasdDirection = wasdDirection.normalized;
 
@@ -287,7 +303,7 @@ public class PlayerWithJoystick : AttackingCharacter {
         else
         {
 
-            if (!Mathf.Approximately(controller.InputDirection.x, 0) || !Mathf.Approximately(controller.InputDirection.y, 0))
+            if (canMove && (!Mathf.Approximately(controller.InputDirection.x, 0) || !Mathf.Approximately(controller.InputDirection.y, 0)))
             {
 
                 if (rb.velocity.magnitude < speed)

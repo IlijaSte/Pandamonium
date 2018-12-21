@@ -280,33 +280,12 @@ public class Enemy : AttackingCharacter {
 
     protected override void Die()
     {
-        DropCoins();
-
-        if (GameManager.I.currentLevel > 0 && holdsKey)
-        {
-            DropKey();
-        }
 
         numEnemies--;
         if (numEnemies == 0)
             areAllEnemiesDead = true;
 
-        player.GetComponent<PlayerWithJoystick>().onEnemySlain(enemyName);
-
-        /*GraphUpdateObject guo = new GraphUpdateObject(currBounds)
-        {
-            updatePhysics = true,
-            modifyTag = true,
-            setTag = 0
-        };
-        AstarPath.active.UpdateGraphs(guo);*/
-
-        room.enemies.Remove(gameObject);
-
-        if(room.enemies.Count == 0)
-        {
-            InfoText.I.ShowMessage("Clear");
-        }
+        player.GetComponent<PlayerWithJoystick>().onEnemySlain(enemyName);      // u StandardEnemy?
 
         base.Die();
     }

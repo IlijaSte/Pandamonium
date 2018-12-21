@@ -10,7 +10,8 @@ public class Level1_1Generation : LevelGeneration {
         Room newIntroRoom = rooms[gridSizeX, gridSizeY - 1] = new Room(new Vector2Int(0, -1), Room.RoomType.INTRO);
         takenPositions.Insert(0, new Vector2Int(0, -1));
 
-        Vector2Int checkPos = NewPosition();
+        Room nextTo;
+        Vector2Int checkPos = NewPosition(out nextTo);
 
         rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, Room.RoomType.DEFAULT);
         takenPositions.Insert(0, checkPos);
@@ -26,7 +27,7 @@ public class Level1_1Generation : LevelGeneration {
         {
             Room room = rooms[Mathf.RoundToInt(gridSizeX + pos.x), Mathf.RoundToInt(gridSizeY + pos.y)];
 
-            if (room.type == Room.RoomType.START || room.type == Room.RoomType.OBELISK || room.type == Room.RoomType.KEY_HOLDER)
+            if (room.type == Room.RoomType.START || room.type == Room.RoomType.OBELISK || room.type == Room.RoomType.KEY_HOLDER || room.type == Room.RoomType.ELITE)
                 continue;
 
             int totalDifficulty;

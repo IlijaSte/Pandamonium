@@ -97,6 +97,13 @@ public class QuestManager : MonoBehaviour {
 
     }
 
+    protected void OnQuestCompleted(Quest q)
+    {
+        print(activeQuests.Remove(q));
+        Destroy(q);
+        SaveManager.I.SaveGame();
+    }
+
     public void LoadQuestInfos(List<QuestInfo> infos)
     {
         if (infos == null || infos.Count == 0)
@@ -142,6 +149,8 @@ public class QuestManager : MonoBehaviour {
 
                 newQuest.type = newQ.type;
 
+                newQuest.onCompleted += OnQuestCompleted;
+
                 usedQuests.Add(newQ);
                 activeQuests.Add(newQuest);
             }
@@ -177,6 +186,7 @@ public class QuestManager : MonoBehaviour {
                 newQuest.goalTemp = qInfo.goal;
                 newQuest.rewardCoins = qInfo.rewardCoins;
                 newQuest.type = qInfo.type;
+                newQuest.onCompleted += OnQuestCompleted;
                 activeQuests.Add(newQuest);
             }
         }

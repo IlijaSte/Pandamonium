@@ -10,7 +10,7 @@ public class FrogAnimation : CharacterAnimation
     protected override void Start()
     {
         base.Start();
-        state = transform.parent.GetComponent<Frogocite>().playerState;
+        state = transform.parent.GetComponent<Enemy>().playerState;
     }
 
     void Update()

@@ -176,7 +176,6 @@ public class Collectible : MonoBehaviour {
         if (canPickup && collision.transform.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
         {
             OnPickup();
-            print("trigger");
         }
     }
 
@@ -186,7 +185,6 @@ public class Collectible : MonoBehaviour {
         if (canPickup && collision.transform.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
         {
             OnPickup();
-            print("trigger");
         }
     }
 
