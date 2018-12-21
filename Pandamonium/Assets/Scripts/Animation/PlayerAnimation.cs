@@ -19,6 +19,23 @@ public class PlayerAnimation : CharacterAnimation
         animation360();
     }
 
-  
+    protected override void animation360()
+    {
+        updateVector2();
+
+        bool isIdle = Mathf.Approximately(vector2.x, Vector2.zero.x) && Mathf.Approximately(vector2.y, Vector2.zero.y);
+
+        if (isIdle)
+            animator.SetLayerWeight(1, 0);
+
+        else
+        {
+            animator.SetLayerWeight(1, 1);
+            updateAngleTo360();
+            animator.SetFloat("Angle", angle);
+        }
+    }
+
+
 }
 
