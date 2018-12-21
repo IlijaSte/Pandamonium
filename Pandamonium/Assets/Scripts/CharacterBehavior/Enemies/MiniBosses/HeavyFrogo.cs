@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -241,6 +242,25 @@ public class HeavyFrogo : Enemy
         {
             Enrage();
         }
+
+        timeToJump = 0;
+    }
+
+    public override void StopAttacking()
+    {
+        target = null;
+        playerState = PlayerState.IDLE;
+
+        if (equippedWeaponIndex < weapons.Length)
+            weapons[equippedWeaponIndex].Pause();
+    }
+
+    protected override void StartAttacking(Transform target)
+    {
+        weapons[equippedWeaponIndex].ContinueAttacking(target);                  // krece da napada oruzjem
+        playerState = PlayerState.ATTACKING;
+
+        CM.StopMoving();
     }
 
     protected void OnLand()
@@ -264,6 +284,8 @@ public class HeavyFrogo : Enemy
             numOfJumps = 0;
             StartCoroutine(SelfStun());
         }
+
+        GetComponent<CinemachineImpulseSource>().GenerateImpulse((transform.position - player.position).normalized);
     }
 
     protected override void Die()

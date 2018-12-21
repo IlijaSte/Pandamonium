@@ -33,6 +33,21 @@ public abstract class Weapon : MonoBehaviour {
         }
     }
 
+    virtual public void ContinueAttacking(Transform target)
+    {
+        if (!attacking)
+        {
+            attacking = true;
+            //timeToAttack = 1f;
+            this.target = target;
+        }
+    }
+
+    virtual public void Pause()
+    {
+        attacking = false;
+    }
+
     virtual public void Stop()
     {
         attacking = false;

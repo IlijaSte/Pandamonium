@@ -402,6 +402,8 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public override void Attack()
     {
+        if (!canMove)
+            return;
 
         switch (action)
         {

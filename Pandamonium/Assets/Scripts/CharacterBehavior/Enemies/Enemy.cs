@@ -81,7 +81,7 @@ public class Enemy : AttackingCharacter {
         CM.MoveToPosition(target.position);
 
         playerState = PlayerState.CHASING_ENEMY;
-        weapons[equippedWeaponIndex].Stop();
+        weapons[equippedWeaponIndex].Pause();
     }
 
     protected void DropKey()
@@ -116,7 +116,7 @@ public class Enemy : AttackingCharacter {
         }
     }
 
-    public void StopAttacking()
+    public virtual void StopAttacking()
     {
 
         target = null;
@@ -128,6 +128,14 @@ public class Enemy : AttackingCharacter {
 
     public void StopMoving()
     {
+        CM.StopMoving();
+    }
+
+    protected virtual void StartAttacking(Transform target)
+    {
+        weapons[equippedWeaponIndex].StartAttacking(target);                  // krece da napada oruzjem
+        playerState = PlayerState.ATTACKING;
+
         CM.StopMoving();
     }
 
@@ -152,11 +160,7 @@ public class Enemy : AttackingCharacter {
 
                     if (CanSee(target))
                     {
-
-                        weapons[equippedWeaponIndex].StartAttacking(target);                  // krece da napada oruzjem
-                        playerState = PlayerState.ATTACKING;
-
-                        CM.StopMoving();
+                        StartAttacking(target);
                     }
                     else if (!CM.destination.Equals(target.position))          // ako se protivnik u medjuvremenu pomerio
                     {
