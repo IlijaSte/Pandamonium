@@ -29,6 +29,8 @@ public class LevelGeneration : MonoBehaviour
 
     public GameObject[] elitePool;
 
+    public GameObject bossPrefab;
+
     [Header("Rooms")]
 
     public GameObject[] roomPrefabs;
@@ -145,6 +147,8 @@ public class LevelGeneration : MonoBehaviour
         obstaclePositions = new ArrayList();
 
         InstantiateEnemies();
+
+        InstantiateBoss();
 
         InstantiateHealthPool();
         if (GameManager.I.currentLevel >= 2)
@@ -392,6 +396,15 @@ public class LevelGeneration : MonoBehaviour
         }
 
         (enemies[Random.Range(0, enemies.Count)] as GameObject).GetComponent<Enemy>().holdsKey = true;
+    }
+
+    protected virtual void InstantiateBoss()
+    {
+        if (GameManager.I.IsBossLevel())
+        {
+            Vector2 bossSpawnPos = bossRoom.getRoomHolder().transform.position;
+            Instantiate(bossPrefab, bossSpawnPos, Quaternion.identity, enemyParent);
+        }
     }
 
     protected virtual int CreateIntroRooms()
@@ -736,7 +749,6 @@ public class LevelGeneration : MonoBehaviour
         {
             bossRoom.Init(bossRoomPrefab, roomParent);
             bossRoomSpawn = bossRoom.GetSpawnPoint();
-            print(bossRoomSpawn);
         }
     }
 

@@ -47,10 +47,6 @@ public abstract class Quest : MonoBehaviour {
 
     protected virtual void OnCompleted()
     {
-        GameManager.I.coins += rewardCoins;
-
-        InfoText.I.ShowMessage("Quest Complete");
-
         onCompleted(this);
 
         //Destroy(this);

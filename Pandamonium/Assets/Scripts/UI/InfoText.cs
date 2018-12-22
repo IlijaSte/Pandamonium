@@ -32,7 +32,7 @@ public class InfoText : MonoBehaviour {
 
         text = GetComponent<Text>();
 
-        ShowMessage("Level " + (GameManager.I.currentLevel + 1).ToString());
+        ShowMessage("level " + (GameManager.I.currentLevel + 1).ToString());
 
 	}
 	

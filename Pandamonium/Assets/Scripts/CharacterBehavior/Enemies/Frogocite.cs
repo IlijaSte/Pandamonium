@@ -198,7 +198,7 @@ public class Frogocite : StandardEnemy
     {
 
         if(!isJumping)
-            return base.TakeDamageWithKnockback(damage, dir, force);
+            return base.TakeDamage(damage);
         else
         {
             return false;
