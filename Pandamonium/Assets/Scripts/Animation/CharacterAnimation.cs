@@ -17,12 +17,17 @@ public class CharacterAnimation : AnimationMama {
 
     protected override void updateVector2()
     {
-        //  vector2Before = vector2;
+        //vector2Before = vector2;
+        /* 
         if (path)
         {
             Vector3 vector3D = path.desiredVelocity;
             vector2 = vector3D;
         }
+        */
+        vector2 = transform.parent.GetComponent<Enemy>().GetFacingDirection();
+
+        //print(vector2);
 
     }
     protected override void FlipAnimation()
@@ -45,7 +50,9 @@ public class CharacterAnimation : AnimationMama {
             animator.SetLayerWeight(1, 1);
             updateAngleTo360();
             animator.SetFloat("Angle", angle);
+
         }
+
     }
 
 

@@ -8,8 +8,9 @@ public class EnemyAnimation : CharacterAnimation
 
     void Update ()
     {
-
+       
         FlipAnimation();
- 
+        print(vector2);
+
     }
 }

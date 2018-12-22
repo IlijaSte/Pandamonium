@@ -447,7 +447,7 @@ public class PlayerWithJoystick : AttackingCharacter {
         {
             takenDamage = base.TakeDamage(damage);
 
-            healthBar.FillAmount(health / maxHealth);
+            StartCoroutine(healthBar.FillAmount(health / maxHealth, false));
         }
 
         return takenDamage;
@@ -460,7 +460,7 @@ public class PlayerWithJoystick : AttackingCharacter {
         {
             base.TakePoisonDamage(damage);
 
-            healthBar.FillAmount(health / maxHealth);
+            StartCoroutine(healthBar.FillAmount(health / maxHealth, false));
         }
     }
 

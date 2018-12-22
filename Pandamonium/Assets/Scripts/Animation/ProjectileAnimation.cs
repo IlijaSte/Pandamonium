@@ -11,15 +11,13 @@ public class ProjectileAnimation : AnimationMama {
     protected override void updateVector2()
     {
         vector3 = fireProjectile.direction;
-        //Vector2 vector2D = new Vector2(vector3.x, vector3.y);
+        vector2 = new Vector2(vector3.x, vector3.y);
     }
 
     void Start ()
     {
-        
         fireProjectile = GetComponent<FireProjectile>();
-        animator = GetComponent<Animator>();
-   
+        animator = GetComponent<Animator>(); 
     }
 
     void Update () {

@@ -1,10 +1,10 @@
-﻿using Pathfinding;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FrogAnimation : CharacterAnimation
+public class FrogocidRangeAnimation : CharacterAnimation
 {
+
     AttackingCharacter.PlayerState state;
 
     protected override void Start()
@@ -13,18 +13,32 @@ public class FrogAnimation : CharacterAnimation
         state = transform.parent.GetComponent<Enemy>().playerState;
     }
 
+    protected override void FlipAnimation()
+    {
+        updateVector2();
+
+        angle = Vector2.Angle(vector2, new Vector2(1, 0));
+
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+
+        //if ((angle > 0 && angle < 90))
+
+        if (vector2.x < 0)
+            sr.flipX = true;
+        else if (vector2.x > 0) sr.flipX = false;
+    }
+
     void Update()
     {
-        animation360();
-      
-        /*
+        //animation360();
+
         FlipAnimation();
 
-        
+
         AttackingCharacter.PlayerState currentState = transform.parent.GetComponent<Frogocite>().playerState;
-        if(!currentState.Equals(state))
+        if (!currentState.Equals(state))
         {
-            switch(state)
+            switch (state)
             {
                 case AttackingCharacter.PlayerState.WALKING:
                 case AttackingCharacter.PlayerState.CHASING_ENEMY:
@@ -96,5 +110,4 @@ public class FrogAnimation : CharacterAnimation
                     */
 
     }
-
 }

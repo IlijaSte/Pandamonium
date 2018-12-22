@@ -250,7 +250,7 @@ public class Enemy : AttackingCharacter {
     public override bool TakeDamage(float damage)
     {
         bool takenDamage = base.TakeDamage(damage);
-        healthBar.FillAmount( health / maxHealth);
+        StartCoroutine(healthBar.FillAmount( health / maxHealth, true));
 
         if(playerState != PlayerState.ATTACKING)
         {
@@ -288,6 +288,11 @@ public class Enemy : AttackingCharacter {
         player.GetComponent<PlayerWithJoystick>().onEnemySlain(enemyName);      // u StandardEnemy?
 
         base.Die();
+    }
+
+    public override Vector2 GetFacingDirection()
+    {
+        return path.velocity;
     }
 
 }
