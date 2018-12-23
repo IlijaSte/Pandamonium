@@ -233,7 +233,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4446852320589226}
-  - component: {fileID: 114298731515323964}
+  - component: {fileID: 114914630610244544}
   - component: {fileID: 114827865454664310}
   - component: {fileID: 114733104367778590}
   - component: {fileID: 114079399296506460}
@@ -639,8 +639,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 2
-  radius: 1
-  height: 2
+  radius: 3
+  height: 1
   repathRate: 0.5
   canSearch: 1
   canMove: 1
@@ -693,7 +693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79d0180b41341143b6b230c263bebfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 114298731515323964}
+  character: {fileID: 0}
 --- !u!114 &114221844865228056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -725,38 +725,6 @@ MonoBehaviour:
   updateError: 1
   checkTime: 0.2
   objectTag: 2
---- !u!114 &114298731515323964
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1628753790980070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0017982b729cb7045a7761d773122e83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 114121749672228834}
-  equippedWeaponIndex: 0
-  maxHealth: 25
-  type: 1
-  normalSpeed: 0.5
-  healthBar: {fileID: 114830820382727566}
-  nextAttackBar: {fileID: 114631011764471838}
-  vision: {fileID: 114214034657156396}
-  playerState: 0
-  ignoreMask: 0
-  isDead: 0
-  enemyName: Slime
-  difficulty: 1
-  dropPrefabs:
-  - {fileID: 1597709171064980, guid: 936e67524d0a86645b38d0abbb56d0e6, type: 2}
-  holdsKey: 0
-  dashCastTime: 1
-  dashCooldown: 6
-  dashSpeed: 8
-  maxDashRange: 2.5
 --- !u!114 &114542684223825712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -920,6 +888,33 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114914630610244544
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1628753790980070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36c1ef63171aa1f418bb406ba6f0ec45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 114121749672228834}
+  equippedWeaponIndex: 0
+  maxHealth: 600
+  type: 1
+  normalSpeed: 3
+  healthBar: {fileID: 114830820382727566}
+  nextAttackBar: {fileID: 114631011764471838}
+  vision: {fileID: 114214034657156396}
+  playerState: 0
+  ignoreMask: 0
+  isDead: 0
+  enemyName: HeavyStoneDude
+  difficulty: 6
+  dropPrefabs: []
+  holdsKey: 0
 --- !u!114 &114963434698511256
 MonoBehaviour:
   m_ObjectHideFlags: 1

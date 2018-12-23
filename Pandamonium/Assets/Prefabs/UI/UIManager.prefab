@@ -67,6 +67,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  keyImage: {fileID: 0}
 --- !u!114 &114696526391286408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -93,6 +94,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45e394e1d904984fa9e39c2796e812c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimapCanvas: {fileID: 0}
   blackRectanglePrefab: {fileID: 1528762417485676, guid: 809c7fe5e76d34e4d89475e57ee72414,
     type: 2}

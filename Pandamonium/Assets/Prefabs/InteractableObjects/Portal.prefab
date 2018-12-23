@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 61987774866953036}
   - component: {fileID: 61639749653003198}
   - component: {fileID: 114475588069911688}
+  - component: {fileID: 114350298723744694}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -112,6 +113,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114350298723744694
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1775842081115110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbcf4fd27672b14f84ae1a93fe6cece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stories:
+  - where am i?
+  - well, better start exploring
 --- !u!114 &114475588069911688
 MonoBehaviour:
   m_ObjectHideFlags: 1

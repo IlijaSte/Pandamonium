@@ -20,10 +20,17 @@ public class InteractableObject : MonoBehaviour {
         activated = true;
     }
 
-    public virtual void StartActivating()
+    public virtual bool StartActivating()
     {
-        if(!activated)
+        if (!activated)
+        {
             GetComponent<Animator>().SetTrigger("Activate");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
