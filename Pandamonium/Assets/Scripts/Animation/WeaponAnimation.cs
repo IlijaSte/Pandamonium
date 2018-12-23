@@ -18,12 +18,13 @@ public class WeaponAnimation : AnimationMama {
         rotation = Quaternion.Euler(rotationVector);
         cursorIndicator.transform.rotation = rotation;
         parentWeapon.transform.rotation = rotation;
-
         
     }
 
     protected void Start()
     {
+
+
 
        // path = transform.parent.GetComponent<AIPath>();
         animator = GetComponent<Animator>();
