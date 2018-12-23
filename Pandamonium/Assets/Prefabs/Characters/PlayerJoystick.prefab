@@ -616,6 +616,7 @@ MonoBehaviour:
   - {fileID: 1903469109095692, guid: 7c852484e13400649bb9296a6248e244, type: 2}
   - {fileID: 1779642358091622, guid: d5e218ab773d86149a1bc724528eee88, type: 2}
   - {fileID: 1657346493881052, guid: ed157ce01ec166c498164ddb861b9cdd, type: 2}
+  - {fileID: 1114731285113550, guid: da061df1e586eb34d933b5fdbd6b3e34, type: 2}
   parent: {fileID: 114562331877149714}
 --- !u!114 &114076633458484650
 MonoBehaviour:
@@ -762,6 +763,7 @@ MonoBehaviour:
   vision: {fileID: 114898562783967118}
   playerState: 0
   ignoreMask: 0
+  sprite: {fileID: 0}
   isDead: 0
   baseHealth: 100
   maxEnergy: 200
@@ -774,6 +776,7 @@ MonoBehaviour:
   facingDirection: {x: 0, y: 0}
   attributes: 
   speed: 0
+  canMove: 1
 --- !u!114 &114566688973802844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -820,7 +823,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a144e792cc1c8ef409f3f2213402286d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &114898562783967118
 MonoBehaviour:
   m_ObjectHideFlags: 1

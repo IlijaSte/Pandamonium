@@ -152,11 +152,7 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     protected IEnumerator CaptureScreenshotWOUI()
     {
-        UIManager.I.mainCanvas.GetComponent<CanvasGroup>().alpha = 0;
-        UIManager.I.joystickCanvas.GetComponent<CanvasGroup>().alpha = 0;
-        UIManager.I.minimapCanvas.GetComponent<CanvasGroup>().alpha = 0;
-
-        Camera.main.cullingMask &= ~(1 << LayerMask.NameToLayer("UI"));
+        UIManager.I.HideUI();
 
         for (int i = 0; i <= 100; i++)
         {
@@ -181,11 +177,7 @@ public class PlayerWithJoystick : AttackingCharacter {
 
         yield return new WaitForSeconds(0.25f);
 
-        Camera.main.cullingMask |= (1 << LayerMask.NameToLayer("UI"));
-
-        UIManager.I.minimapCanvas.GetComponent<CanvasGroup>().alpha = 1;
-        UIManager.I.mainCanvas.GetComponent<CanvasGroup>().alpha = 1;
-        UIManager.I.joystickCanvas.GetComponent<CanvasGroup>().alpha = 1;
+        UIManager.I.ShowUI();
     }
 
     protected void CaptureScreenshot()
@@ -215,7 +207,7 @@ public class PlayerWithJoystick : AttackingCharacter {
     protected void FixedUpdate()
     {
 
-        /*if (SystemInfo.deviceType == DeviceType.Desktop)
+        if (SystemInfo.deviceType == DeviceType.Desktop)
         {
 
             if (playerState != PlayerState.DASHING)
@@ -340,9 +332,9 @@ public class PlayerWithJoystick : AttackingCharacter {
             {
                 CaptureScreenshot();
             }
-        }*/
-        //else
-        //{
+        }
+        else
+        {
 
             if (canMove && (!Mathf.Approximately(controller.InputDirection.x, 0) || !Mathf.Approximately(controller.InputDirection.y, 0)))
             {
@@ -363,17 +355,17 @@ public class PlayerWithJoystick : AttackingCharacter {
                     }
 
                     if (controller.InputDirection.magnitude >= 0.5f)
-                        {
-                            rb.AddForce(facingDirection.normalized * speed * 20, ForceMode2D.Force);
-                        }
-                        else
-                        {
-                            rb.AddForce(facingDirection.normalized * controller.InputDirection.magnitude * speed * 20, ForceMode2D.Force);
-                        }
+                    {
+                        rb.AddForce(facingDirection.normalized * speed * 20, ForceMode2D.Force);
                     }
+                    else
+                    {
+                        rb.AddForce(facingDirection.normalized * controller.InputDirection.magnitude * speed * 20, ForceMode2D.Force);
+                    }
+                }
 
             }
-        //}
+        }
     }
 
     public void ActionChange(ActionChangeType actionChange, Transform source = null)

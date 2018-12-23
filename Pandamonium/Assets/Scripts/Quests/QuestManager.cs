@@ -104,7 +104,7 @@ public class QuestManager : MonoBehaviour {
         SaveManager.I.SaveGame();
         activeQuests.Remove(q);
         Destroy(q);
-        InfoText.I.ShowMessage("quest complete");
+        //InfoText.I.ShowMessage("quest complete");
         
 
     }

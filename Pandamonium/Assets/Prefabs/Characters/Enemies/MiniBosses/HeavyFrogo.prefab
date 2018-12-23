@@ -751,7 +751,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 114121749672228834}
   equippedWeaponIndex: 0
-  maxHealth: 600
+  maxHealth: 400
   type: 1
   normalSpeed: 1
   healthBar: {fileID: 114586030310269660}
@@ -759,6 +759,7 @@ MonoBehaviour:
   vision: {fileID: 114214034657156396}
   playerState: 0
   ignoreMask: 0
+  sprite: {fileID: 0}
   isDead: 0
   enemyName: HeavyFrogo
   difficulty: 4

@@ -9,7 +9,7 @@ public class Worm : StandardEnemy {
 
     private float timeToStateChange = 1;
 
-    public float speed = 1;
+    //public new float speed = 1;
 
     public GameObject projectilePrefab;
     public GameObject indicatorPrefab;

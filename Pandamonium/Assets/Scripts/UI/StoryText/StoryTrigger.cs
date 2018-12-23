@@ -7,10 +7,25 @@ public class StoryTrigger : MonoBehaviour {
 
     public string[] stories;
 
+    public int level;
+
+    [HideInInspector]
+    public bool activated = false;
+
+    protected virtual void Activate()
+    {
+        StoryBoxManager.I.ShowStory(stories);
+        activated = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<PlayerWithJoystick>() != null)
-            StoryBoxManager.I.ShowStory(stories);
+        if (collision.GetComponent<PlayerWithJoystick>() != null)
+        {
+            if(GameManager.I.currentLevel + 1 == level)
+                Activate();
+        }
+            
     }
 
 }

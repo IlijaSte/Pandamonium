@@ -743,7 +743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfbc4db2558e1d24b94741064fb4c49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 5
   damageTick: 1
   colliderSize: 1
   parent: {fileID: 0}
@@ -785,6 +785,7 @@ MonoBehaviour:
   vision: {fileID: 114214034657156396}
   playerState: 0
   ignoreMask: 0
+  sprite: {fileID: 0}
   isDead: 0
   enemyName: Slime
   difficulty: 1

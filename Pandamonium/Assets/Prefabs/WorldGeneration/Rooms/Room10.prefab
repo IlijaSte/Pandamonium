@@ -60,6 +60,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1257579576972630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4052386231803080}
+  m_Layer: 0
+  m_Name: ChestSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1364669851216254
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,6 +203,19 @@ Transform:
   m_Father: {fileID: 4893724882305230}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4052386231803080
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1257579576972630}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7, y: -6.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4893724882305230}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4151947746837456
 Transform:
   m_ObjectHideFlags: 1
@@ -273,7 +301,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1160568486293258}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -26.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4984237878268820}
@@ -285,6 +313,7 @@ Transform:
   - {fileID: 4214422279833042}
   - {fileID: 4354240129012320}
   - {fileID: 4049539672248130}
+  - {fileID: 4052386231803080}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -354,6 +383,8 @@ MonoBehaviour:
   bottomEdge: {fileID: 4151947746837456}
   leftEdge: {fileID: 4214422279833042}
   rightEdge: {fileID: 4354240129012320}
+  spawnPoints: []
+  chestSpawnPoint: {fileID: 4052386231803080}
   positionEndOfCorridor: {x: 0, y: 0, z: 0}
 --- !u!19719996 &2113883504196133634
 TilemapCollider2D:

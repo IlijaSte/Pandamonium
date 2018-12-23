@@ -25,11 +25,15 @@ public class SlayQuest : Quest {
         if (enemy.Equals(enemyName))
         {
             progress++;
-
-            if(progress == goal)
+            QuestText.I.ShowMessage("Slay " + goal.ToString() + " " + enemyName + "s", progress, goal);
+            if (progress == goal)
             {
                 (GameManager.I.playerInstance as PlayerWithJoystick).onEnemySlain -= OnEnemySlain;
                 OnCompleted();
+            }
+            else
+            {
+                //QuestText.I.ShowMessage("Slay " + goal.ToString() + " " + enemyName + "s", progress, goal);
             }
         }
     }

@@ -65,7 +65,8 @@ public class LevelGeneration : MonoBehaviour
     public Tilemap corridorTilemap;
 
     public Tilemap acidTilemap;
-    
+
+    public GameObject chestPrefab;
 
     private Transform roomParent;
 
@@ -402,8 +403,8 @@ public class LevelGeneration : MonoBehaviour
     {
         if (GameManager.I.IsBossLevel())
         {
-            Vector2 bossSpawnPos = bossRoom.getRoomHolder().transform.position;
-            Instantiate(bossPrefab, bossSpawnPos, Quaternion.identity, enemyParent);
+            //Vector2 bossSpawnPos = bossRoom.getRoomHolder().transform.position;
+            //Instantiate(bossPrefab, bossSpawnPos, Quaternion.identity, enemyParent);
         }
     }
 

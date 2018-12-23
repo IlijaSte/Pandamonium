@@ -175,6 +175,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1997916979191418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4330548326244266}
+  m_Layer: 0
+  m_Name: ChestSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4083115873701320
 Transform:
   m_ObjectHideFlags: 1
@@ -182,7 +197,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1966675948856250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -18, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4896095512921548}
@@ -194,6 +209,7 @@ Transform:
   - {fileID: 4947408586689576}
   - {fileID: 4259676574905896}
   - {fileID: 4928888845138820}
+  - {fileID: 4330548326244266}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -209,6 +225,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4083115873701320}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4330548326244266
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1997916979191418}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4, y: 7.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4083115873701320}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4332499463597038
 Transform:
@@ -354,6 +383,8 @@ MonoBehaviour:
   bottomEdge: {fileID: 4660444347823712}
   leftEdge: {fileID: 4947408586689576}
   rightEdge: {fileID: 4259676574905896}
+  spawnPoints: []
+  chestSpawnPoint: {fileID: 4330548326244266}
   positionEndOfCorridor: {x: 0, y: 0, z: 0}
 --- !u!19719996 &2113883504489872540
 TilemapCollider2D:

@@ -126,6 +126,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1651309374685000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4056249151268830}
+  m_Layer: 0
+  m_Name: ChestSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1765944348464850
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,6 +190,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4056249151268830
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1651309374685000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4330290622826936}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4056284980711392
 Transform:
   m_ObjectHideFlags: 1
@@ -221,7 +249,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1504740648159990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -12.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4137465611199374}
@@ -233,6 +261,7 @@ Transform:
   - {fileID: 4532686341184940}
   - {fileID: 4056284980711392}
   - {fileID: 4270505944396852}
+  - {fileID: 4056249151268830}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -354,7 +383,10 @@ MonoBehaviour:
   bottomEdge: {fileID: 4964496106456792}
   leftEdge: {fileID: 4532686341184940}
   rightEdge: {fileID: 4056284980711392}
+  spawnPoints: []
+  chestSpawnPoint: {fileID: 4056249151268830}
   positionEndOfCorridor: {x: 0, y: 0, z: 0}
+  chest: {fileID: 0}
 --- !u!19719996 &2113883506822812722
 TilemapCollider2D:
   m_ObjectHideFlags: 1

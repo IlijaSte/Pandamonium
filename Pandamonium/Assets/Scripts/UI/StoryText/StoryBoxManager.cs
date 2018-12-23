@@ -76,13 +76,22 @@ public class StoryBoxManager : MonoBehaviour {
             if (activeCoroutine != null)
                 StopCoroutine(activeCoroutine);
             activeCoroutine = StartCoroutine(DoWrite(stories[currStory++]));
+            if(currStory >= stories.Length)
+            {
+                nextButton.GetComponentInChildren<Text>().text = "close";
+            }
         }
         else
         {
             //Time.timeScale = 1;
             (GameManager.I.playerInstance as PlayerWithJoystick).canMove = true;
+
+            if (activeCoroutine != null)
+                StopCoroutine(activeCoroutine);
+
             activeCoroutine = StartCoroutine(HidePanel());
             nextButton.interactable = false;
+            UIManager.I.ShowUI();
         }
     }
 
@@ -98,11 +107,14 @@ public class StoryBoxManager : MonoBehaviour {
         //Time.timeScale = 0;
         (GameManager.I.playerInstance as PlayerWithJoystick).canMove = false;
         nextButton.interactable = false;
+        nextButton.GetComponentInChildren<Text>().text = "next";
 
         isShown = true;
 
         ShowCanvas();
         StartCoroutine(ShowPanel());
+
+        UIManager.I.HideUI();
     }
 
     private IEnumerator DoWrite(string txt)

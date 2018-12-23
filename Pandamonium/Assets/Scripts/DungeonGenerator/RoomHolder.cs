@@ -18,6 +18,8 @@ public class RoomHolder : MonoBehaviour {
 
     public Transform[] spawnPoints;
 
+    public Transform chestSpawnPoint;
+
     private Tilemap acidTilemap;
 
     private Room context;
@@ -25,6 +27,9 @@ public class RoomHolder : MonoBehaviour {
     public Vector3Int positionEndOfCorridor;
 
     private List<Vector2> stairsPositions;
+
+    [HideInInspector]
+    public GameObject chest;
 
     //public void Init(bool doorTop, bool doorBot, bool doorLeft, bool doorRight)
     public void Init(Room context)
@@ -90,7 +95,21 @@ public class RoomHolder : MonoBehaviour {
             }
         }
 
-        
+        if(context.type == Room.RoomType.DEFAULT || context.type == Room.RoomType.ELITE)
+        {
+            CreateChest();
+        }
+
+    }
+
+    public void CreateChest()
+    {
+        if (chestSpawnPoint == null)
+            return;
+
+        chest = Instantiate(LevelGeneration.I.chestPrefab, chestSpawnPoint.position, Quaternion.identity, transform);
+        chest.GetComponentInChildren<Chest>().locked = true;
+        chest.GetComponentInChildren<Chest>().additionalCoins = Random.Range(0, context.distanceFromStart);
     }
 
     public Vector2 GetFirstSpawnPoint()

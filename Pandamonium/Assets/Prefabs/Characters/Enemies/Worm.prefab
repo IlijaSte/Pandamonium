@@ -527,12 +527,13 @@ MonoBehaviour:
   equippedWeaponIndex: 0
   maxHealth: 25
   type: 1
-  normalSpeed: 6
+  normalSpeed: 1
   healthBar: {fileID: 114946352627019972}
   nextAttackBar: {fileID: 114220975770498124}
   vision: {fileID: 114249692666320324}
   playerState: 0
   ignoreMask: 0
+  sprite: {fileID: 0}
   isDead: 0
   enemyName: Worm
   difficulty: 1

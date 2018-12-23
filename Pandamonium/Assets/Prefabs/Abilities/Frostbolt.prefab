@@ -9,62 +9,58 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1101482272903950}
+  m_RootGameObject: {fileID: 1114731285113550}
   m_IsPrefabParent: 1
---- !u!1 &1101482272903950
+--- !u!1 &1114731285113550
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4746091802535876}
-  - component: {fileID: 114603290473833028}
+  - component: {fileID: 4516247228391924}
+  - component: {fileID: 114284379095957298}
   m_Layer: 0
-  m_Name: QuestManager
+  m_Name: Frostbolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4746091802535876
+--- !u!4 &4516247228391924
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1101482272903950}
+  m_GameObject: {fileID: 1114731285113550}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.554549, y: 4.485958, z: -0.10201848}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114603290473833028
+--- !u!114 &114284379095957298
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1101482272903950}
+  m_GameObject: {fileID: 1114731285113550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d1accd640f9b8c4095a2f44804e5bd6, type: 3}
+  m_Script: {fileID: 11500000, guid: db3416ce42f0ab64fb91ed979e20cc7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNumOfDailies: 3
-  questPool:
-  - type: 0
-    parameter: Slime
-    goal: 12
-    progress: 0
-    rewardCoins: 100
-  - type: 0
-    parameter: RangedFrogocid
-    goal: 2
-    progress: 0
-    rewardCoins: 200
-  - type: 1
-    parameter: 
-    goal: 50
-    progress: 0
-    rewardCoins: 150
+  abilityName: frostbolt
+  cooldown: 0.5
+  range: 7
+  damage: 5
+  manaCost: 5
+  knockback: 0
+  knockbackForce: 1
+  buttonSprite: {fileID: 21300000, guid: cac1d946af6d000409c242abce796483, type: 3}
+  bgSprite: {fileID: 21300000, guid: a4be0568e32caef4f8139cd4f2222f6c, type: 3}
+  am: {fileID: 0}
+  projectileSpeed: 7
+  frostboltPrefab: {fileID: 1754326600118894, guid: f0a059ebe6994f24a8d06b038817f911,
+    type: 2}

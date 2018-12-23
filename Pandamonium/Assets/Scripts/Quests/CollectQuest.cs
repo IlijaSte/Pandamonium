@@ -8,15 +8,24 @@ public class CollectQuest : Quest {
 
     private int coinsCollected = 0;
 
+    private int lastUIUpdate = 0;
+
     protected override void Start()
     {
         base.Start();
         type = QuestType.COLLECT;
+        lastUIUpdate = progress - (progress % 10);
     }
 
     private void OnCollected()
     {
         progress++;
+
+        if(progress - lastUIUpdate >= 10)
+        {
+            lastUIUpdate = progress;
+            QuestText.I.ShowMessage("Collect " + goal.ToString() + " PandaCoins", progress, goal);
+        }
 
         if(progress >= goal)
         {
