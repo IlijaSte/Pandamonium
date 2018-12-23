@@ -59,6 +59,7 @@ public class Slime : StandardEnemy {
 
     protected IEnumerator Dash(Transform at)
     {
+        timeToDash = 0;
         if (playerState != PlayerState.IMMOBILE)
         {
             yield return StartCoroutine(Dash(at.position + (transform.position - at.position) * 0.4f));
@@ -70,7 +71,7 @@ public class Slime : StandardEnemy {
 
     protected IEnumerator StartDashing()
     {
-
+        
         Vector2 targetPos = player.position;
 
         StopAttacking();
@@ -106,6 +107,8 @@ public class Slime : StandardEnemy {
         {
             StartCoroutine(StartDashing());
         }
+
+        timeToDash += Time.deltaTime;
 
         base.Update();
 

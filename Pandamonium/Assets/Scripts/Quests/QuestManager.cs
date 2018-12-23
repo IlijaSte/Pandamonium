@@ -101,9 +101,11 @@ public class QuestManager : MonoBehaviour {
     {
         GameManager.I.PickupCoinReward(q.rewardCoins);
 
-        Destroy(q);
         SaveManager.I.SaveGame();
+        activeQuests.Remove(q);
+        Destroy(q);
         InfoText.I.ShowMessage("quest complete");
+        
 
     }
 

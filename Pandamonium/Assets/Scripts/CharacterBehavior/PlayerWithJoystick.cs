@@ -48,7 +48,8 @@ public class PlayerWithJoystick : AttackingCharacter {
     [HideInInspector]
     public Action onCoinCollected;
 
-    private bool canMove = true;
+    [HideInInspector]
+    public bool canMove = true;
 
     public override void Awake()
     {
@@ -148,7 +149,7 @@ public class PlayerWithJoystick : AttackingCharacter {
         StartCoroutine(Stunned(duration));
     }
 
-    protected IEnumerator CaptureScreenshot()
+    protected IEnumerator CaptureScreenshotWOUI()
     {
         UIManager.I.mainCanvas.GetComponent<CanvasGroup>().alpha = 0;
         UIManager.I.joystickCanvas.GetComponent<CanvasGroup>().alpha = 0;
@@ -158,9 +159,20 @@ public class PlayerWithJoystick : AttackingCharacter {
 
         for (int i = 0; i <= 100; i++)
         {
-            if (!System.IO.File.Exists(Application.persistentDataPath + "\\capture" + i + ".png"))
+
+            if (!System.IO.Directory.Exists(Application.persistentDataPath + "/Screenshots"))
             {
-                ScreenCapture.CaptureScreenshot(Application.persistentDataPath + "\\capture" + i + ".png", 2);
+                System.IO.Directory.CreateDirectory(Application.persistentDataPath + "/Screenshots");
+            }
+
+            if (!System.IO.File.Exists(Application.persistentDataPath + "/Screenshots/Without UI"))
+            {
+                System.IO.Directory.CreateDirectory(Application.persistentDataPath + "/Screenshots/Without UI");
+            }
+
+            if (!System.IO.File.Exists(Application.persistentDataPath + "/Screenshots/Without UI/capture" + i + ".png"))
+            {
+                ScreenCapture.CaptureScreenshot(Application.persistentDataPath + "/Screenshots/Without UI/capture" + i + ".png", 4);
                 break;
             }
         }
@@ -175,10 +187,34 @@ public class PlayerWithJoystick : AttackingCharacter {
         UIManager.I.joystickCanvas.GetComponent<CanvasGroup>().alpha = 1;
     }
 
+    protected void CaptureScreenshot()
+    {
+
+        for (int i = 0; i <= 100; i++)
+        {
+            if (!System.IO.Directory.Exists(Application.persistentDataPath + "/Screenshots"))
+            {
+                System.IO.Directory.CreateDirectory(Application.persistentDataPath + "/Screenshots");
+            }
+
+            if (!System.IO.File.Exists(Application.persistentDataPath + "/Screenshots/With UI"))
+            {
+                System.IO.Directory.CreateDirectory(Application.persistentDataPath + "/Screenshots/With UI");
+            }
+
+            if (!System.IO.File.Exists(Application.persistentDataPath + "/Screenshots/With UI/capture" + i + ".png"))
+            {
+                ScreenCapture.CaptureScreenshot(Application.persistentDataPath + "/Screenshots/With UI/capture" + i + ".png", 4);
+                break;
+            }
+        }
+
+    }
+
     protected void FixedUpdate()
     {
 
-        if (SystemInfo.deviceType == DeviceType.Desktop)
+        /*if (SystemInfo.deviceType == DeviceType.Desktop)
         {
 
             if (playerState != PlayerState.DASHING)
@@ -296,12 +332,16 @@ public class PlayerWithJoystick : AttackingCharacter {
 
             if (Input.GetKeyUp(KeyCode.E))
             {
-                StartCoroutine(CaptureScreenshot());
-                
+                StartCoroutine(CaptureScreenshotWOUI());
             }
-        }
-        else
-        {
+
+            if (Input.GetKeyUp(KeyCode.R))
+            {
+                CaptureScreenshot();
+            }
+        }*/
+        //else
+        //{
 
             if (canMove && (!Mathf.Approximately(controller.InputDirection.x, 0) || !Mathf.Approximately(controller.InputDirection.y, 0)))
             {
@@ -321,14 +361,18 @@ public class PlayerWithJoystick : AttackingCharacter {
                         facingDirection = new Vector2(Mathf.Cos(a), Mathf.Sin(a));
                     }
 
-                    if (controller.InputDirection.magnitude > 0.33f)
-                    {
-                        rb.AddForce(facingDirection.normalized * speed * 20, ForceMode2D.Force);
+                    if (controller.InputDirection.magnitude >= 0.5f)
+                        {
+                            rb.AddForce(facingDirection.normalized * speed * 20, ForceMode2D.Force);
+                        }
+                        else
+                        {
+                            rb.AddForce(facingDirection.normalized * controller.InputDirection.magnitude * speed * 20, ForceMode2D.Force);
+                        }
                     }
-                }
 
             }
-        }
+        //}
     }
 
     public void ActionChange(ActionChangeType actionChange, Transform source = null)
@@ -417,7 +461,10 @@ public class PlayerWithJoystick : AttackingCharacter {
 
                 if (keyPickedUp)
                 {
-                    actionObject.GetComponentInChildren<KeyHolder>().StartActivating();
+                    if (actionObject.GetComponentInChildren<KeyHolder>().StartActivating())
+                    {
+                        UIManager.I.HideKey();
+                    }
                 }
 
                 break;
@@ -469,7 +516,7 @@ public class PlayerWithJoystick : AttackingCharacter {
     public void PickupKey()
     {
         keyPickedUp = true;
-        print("picked up key");
+        UIManager.I.ShowKey();
     }
 
     protected override void Die()

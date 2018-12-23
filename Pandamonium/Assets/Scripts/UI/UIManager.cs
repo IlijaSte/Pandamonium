@@ -20,6 +20,8 @@ public class UIManager : MonoBehaviour {
 
     public Transform[] abilityButtonHolders;
 
+    public Image keyImage;
+
     private static UIManager instance;
 
     public static UIManager I
@@ -122,5 +124,15 @@ public class UIManager : MonoBehaviour {
     public void EnableAbilityButton(int index)
     {
         abilityButtonHolders[index].GetChild(1).GetComponent<Image>().enabled = true;
+    }
+
+    public void ShowKey()
+    {
+        keyImage.enabled = true;
+    }
+
+    public void HideKey()
+    {
+        keyImage.enabled = false;
     }
 }

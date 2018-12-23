@@ -18,7 +18,7 @@ public class CollectQuest : Quest {
     {
         progress++;
 
-        if(progress == goal)
+        if(progress >= goal)
         {
             (GameManager.I.playerInstance as PlayerWithJoystick).onCoinCollected -= OnCollected;
             OnCompleted();
