@@ -15,9 +15,9 @@ public class FrogAnimation : CharacterAnimation
 
     void Update()
     {
-        animation360();
+        //animation360();
       
-        /*
+        
         FlipAnimation();
 
         
@@ -96,5 +96,18 @@ public class FrogAnimation : CharacterAnimation
                     */
 
     }
+    protected override void FlipAnimation()
+    {
+        updateVector2();
 
+        angle = Vector2.Angle(vector2, new Vector2(1, 0));
+
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+
+        //if ((angle > 0 && angle < 90))
+
+        if (vector2.x < 0)
+            sr.flipX = true;
+        else if (vector2.x > 0) sr.flipX = false;
+    }
 }

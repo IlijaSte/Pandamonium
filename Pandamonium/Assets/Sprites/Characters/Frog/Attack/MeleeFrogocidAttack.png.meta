@@ -1,12 +1,36 @@
 fileFormatVersion: 2
 guid: 45f2cae197ec03c43bf1cb98f919dfd2
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: MeleeFrogocidAttack_0
+    21300002: MeleeFrogocidAttack_1
+    21300004: MeleeFrogocidAttack_2
+    21300006: MeleeFrogocidAttack_3
+    21300008: MeleeFrogocidAttack_4
+    21300010: MeleeFrogocidAttack_5
+    21300012: MeleeFrogocidAttack_6
+    21300014: MeleeFrogocidAttack_7
+    21300016: MeleeFrogocidAttack_8
+    21300018: MeleeFrogocidAttack_9
+    21300020: MeleeFrogocidAttack_10
+    21300022: MeleeFrogocidAttack_11
+    21300024: MeleeFrogocidAttack_12
+    21300026: MeleeFrogocidAttack_13
+    21300028: MeleeFrogocidAttack_14
+    21300030: MeleeFrogocidAttack_15
+    21300032: MeleeFrogocidAttack_16
+    21300034: MeleeFrogocidAttack_17
+    21300036: MeleeFrogocidAttack_18
+    21300038: MeleeFrogocidAttack_19
+    21300040: MeleeFrogocidAttack_20
+    21300042: MeleeFrogocidAttack_21
+    21300044: MeleeFrogocidAttack_22
+    21300046: MeleeFrogocidAttack_23
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -32,24 +56,24 @@ TextureImporter:
     filterMode: -1
     aniso: -1
     mipBias: -1
-    wrapU: -1
-    wrapV: -1
+    wrapU: 1
+    wrapV: 1
     wrapW: -1
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 45
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
@@ -67,13 +91,537 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 321.3333
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7e696c26c8d18a4f970cee984ebb455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_1
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 321.3333
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b28fa8bb96b670c479a10955f2877b51
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_2
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 321.3333
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec16dfc00afe64048b684c5838cff825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_3
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 321.3333
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56304c8757e9acb4483d766d90bb3a6e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_4
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 321
+        width: 255
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6801058a8c04d24a858d1cfa1ebf614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_5
+      rect:
+        serializedVersion: 2
+        x: 1275
+        y: 321.3333
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77ce9edad871fb94887e3ab3928dbc13
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_6
+      rect:
+        serializedVersion: 2
+        x: 1530
+        y: 321.3333
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58d7277aa614d7f43b9064492ffe39ee
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_7
+      rect:
+        serializedVersion: 2
+        x: 1785
+        y: 321.3333
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a30ecfd2b2c8f14488150423cc9ed01
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 161.33333
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eebe8fd5d2d77704a9ba7dd2b807e528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_9
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 161.33333
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ae61a766858f4943aa8f4db6c611c07
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_10
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 161.33333
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc3f260904c1f2240ad0718321990b00
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_11
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 161.33333
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75d39b58ab0517644a545ad966b46a24
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_12
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 161.33333
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ec931497cb263b49bad155f460106ac
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_13
+      rect:
+        serializedVersion: 2
+        x: 1275
+        y: 161.33333
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae206ae2e7e5d434683b1634060b2dda
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_14
+      rect:
+        serializedVersion: 2
+        x: 1530
+        y: 161.33333
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20ed6186eff0ed44ba482537476c342b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_15
+      rect:
+        serializedVersion: 2
+        x: 1785
+        y: 161.33333
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c01c99667b26034e83af80c6f6a126f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1.3333282
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5df4162c9dd5a9242b6a9fd450283cda
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_17
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 1.3333282
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3aec4f9e1f87d14e976834d155e6c80
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_18
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 1.3333282
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea7a02f9d48a04742bd3af2378a5f48d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_19
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 1.3333282
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: def3667b64dd9ae4898fd45b2485a82d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_20
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 1.3333282
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a63dc95d9ffd2b148aecf1fe1013ab16
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_21
+      rect:
+        serializedVersion: 2
+        x: 1275
+        y: 1.3333282
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d89e5d2ade4f0fd40ba72344f38d18f2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_22
+      rect:
+        serializedVersion: 2
+        x: 1530
+        y: 1.3333282
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 460a6d26c4f8d934ab5ca7a1aaa5a8c7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidAttack_23
+      rect:
+        serializedVersion: 2
+        x: 1785
+        y: 1.3333282
+        width: 255.125
+        height: 160.66667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93cb54f5f9249f04ba0b04c421f8dc78
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d2ef55de50980404aabb188ce53955b6
     vertices: []
     indices: 
     edges: []
