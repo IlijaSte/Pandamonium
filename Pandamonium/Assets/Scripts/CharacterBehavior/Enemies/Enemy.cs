@@ -29,6 +29,9 @@ public class Enemy : AttackingCharacter {
     [HideInInspector]
     public bool holdsKey = false;
 
+    [HideInInspector]
+    public float speed;
+
     public override void Start()
     {
         numEnemies ++;
@@ -43,6 +46,7 @@ public class Enemy : AttackingCharacter {
         if (path)
         {
             path.maxSpeed = normalSpeed;
+            speed = normalSpeed;
         }
 
         /*approxPosition = new Vector2(Mathf.Floor(transform.position.x), Mathf.Floor(transform.position.y)) + new Vector2(0.5f, 0.5f);

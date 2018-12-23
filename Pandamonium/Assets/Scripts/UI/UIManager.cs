@@ -135,4 +135,22 @@ public class UIManager : MonoBehaviour {
     {
         keyImage.enabled = false;
     }
+
+    public void HideUI()
+    {
+        mainCanvas.GetComponent<CanvasGroup>().alpha = 0;
+        joystickCanvas.GetComponent<CanvasGroup>().alpha = 0;
+        minimapCanvas.GetComponent<CanvasGroup>().alpha = 0;
+
+        Camera.main.cullingMask &= ~(1 << LayerMask.NameToLayer("UI"));
+    }
+
+    public void ShowUI()
+    {
+        Camera.main.cullingMask |= (1 << LayerMask.NameToLayer("UI"));
+
+        minimapCanvas.GetComponent<CanvasGroup>().alpha = 1;
+        mainCanvas.GetComponent<CanvasGroup>().alpha = 1;
+        joystickCanvas.GetComponent<CanvasGroup>().alpha = 1;
+    }
 }

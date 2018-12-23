@@ -6,6 +6,11 @@ public class Chest : InteractableObject {
 
     public int coinsToDrop = 5;
 
+    [System.NonSerialized]
+    public int additionalCoins;
+
+    public bool locked = false;
+
     public override void Activate()
     {
         DropCoins();
@@ -13,11 +18,24 @@ public class Chest : InteractableObject {
         // spawn coins
     }
 
+    public override bool StartActivating()
+    {
+        if (!locked && !activated)
+        {
+            GetComponent<Animator>().SetTrigger("Activate");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public void DropCoins()
     {
         GameObject coinPrefab = GameManager.I.prefabHolder.coin;
 
-        for (int i = 0; i < coinsToDrop; i++)
+        for (int i = 0; i < coinsToDrop + additionalCoins; i++)
         {
             Vector2 direction = Vector2.down;
 

@@ -588,7 +588,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   action: 0
-  coinsToDrop: 5
+  coinsToDrop: 20
+  locked: 0
 --- !u!114 &114799706170338516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -622,7 +623,10 @@ MonoBehaviour:
   bottomEdge: {fileID: 4116455357592792}
   leftEdge: {fileID: 4989889964890238}
   rightEdge: {fileID: 4702357089864614}
+  spawnPoints: []
+  chestSpawnPoint: {fileID: 0}
   positionEndOfCorridor: {x: 0, y: 0, z: 0}
+  chest: {fileID: 0}
 --- !u!212 &212008621739898914
 SpriteRenderer:
   m_ObjectHideFlags: 1

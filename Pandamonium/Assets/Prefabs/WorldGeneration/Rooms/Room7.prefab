@@ -128,6 +128,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1585271642867870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4518217019359572}
+  m_Layer: 0
+  m_Name: ChestSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1633454340352580
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,6 +235,7 @@ Transform:
   - {fileID: 4332322107584340}
   - {fileID: 4861174498710544}
   - {fileID: 4162896677745100}
+  - {fileID: 4518217019359572}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -274,6 +290,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4299496717900858}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4518217019359572
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1585271642867870}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5, y: 7.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4299496717900858}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4662620375819614
 Transform:
@@ -354,6 +383,8 @@ MonoBehaviour:
   bottomEdge: {fileID: 4458239318595894}
   leftEdge: {fileID: 4332322107584340}
   rightEdge: {fileID: 4861174498710544}
+  spawnPoints: []
+  chestSpawnPoint: {fileID: 4518217019359572}
   positionEndOfCorridor: {x: 0, y: 0, z: 0}
 --- !u!19719996 &2113883506148783088
 TilemapCollider2D:

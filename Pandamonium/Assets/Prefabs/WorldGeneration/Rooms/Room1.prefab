@@ -107,7 +107,6 @@ GameObject:
   - component: {fileID: 61553256338525286}
   - component: {fileID: 61097116654379268}
   - component: {fileID: 114970153069734992}
-  - component: {fileID: 114470372408761644}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -124,6 +123,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4653646940970876}
   - component: {fileID: 212166168556519732}
+  - component: {fileID: 61949798757862604}
+  - component: {fileID: 114615747360178600}
+  - component: {fileID: 58185812813277194}
+  - component: {fileID: 114634639933547666}
   m_Layer: 0
   m_Name: Totem-10
   m_TagString: Untagged
@@ -175,6 +178,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4168410132083596}
   - component: {fileID: 212837017950551542}
+  - component: {fileID: 61850842695470420}
+  - component: {fileID: 114773723729609486}
+  - component: {fileID: 58169675500996890}
+  - component: {fileID: 114910737156590242}
   m_Layer: 0
   m_Name: Totem-09
   m_TagString: Untagged
@@ -249,7 +256,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1562335126926208}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5, y: -2.12, z: 0}
+  m_LocalPosition: {x: -1.5, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4382350136318410}
@@ -378,7 +385,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1357228539470964}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5, y: -2.11, z: 0}
+  m_LocalPosition: {x: 2.5, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4382350136318410}
@@ -430,6 +437,36 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &58169675500996890
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1562335126926208}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.25
+--- !u!58 &58185812813277194
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1357228539470964}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.25
 --- !u!61 &61097116654379268
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -480,6 +517,56 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.7315197, y: 1.3841972}
   m_EdgeRadius: 0
+--- !u!61 &61850842695470420
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1562335126926208}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.3}
+    oldSize: {x: 1.015625, y: 1.765625}
+    newSize: {x: 1.015625, y: 1.765625}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.015625, y: 0.9950228}
+  m_EdgeRadius: 0
+--- !u!61 &61949798757862604
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1357228539470964}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.3}
+    oldSize: {x: 1.015625, y: 1.765625}
+    newSize: {x: 1.015625, y: 1.765625}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.015625, y: 0.9950218}
+  m_EdgeRadius: 0
 --- !u!66 &66789703426311682
 CompositeCollider2D:
   m_ObjectHideFlags: 1
@@ -520,20 +607,59 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114470372408761644
+--- !u!114 &114615747360178600
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1298383693246340}
+  m_GameObject: {fileID: 1357228539470964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cbcf4fd27672b14f84ae1a93fe6cece, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ecd035cfa1c6e548a536587013a9482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stories:
-  - where am i?
-  - well, better start exploring.
+  - This ancient writing is hard to decipher - it mentions the beginning of the universe,
+    how everything came to be...
+  - '...an enormous black egg floating in the void for untold ages... A seed that
+    formed - the Axis Mundi...'
+  level: 1
+  activated: 0
+  linkedTo: {fileID: 114773723729609486}
+  hasFirstText: 0
+  isFirstActivated: 0
+--- !u!114 &114634639933547666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1357228539470964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 500e834ed361a8641bce0f6809b560a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114773723729609486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1562335126926208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecd035cfa1c6e548a536587013a9482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stories:
+  - This must be a totem... old Gherman was always telling his crazy stories about
+    these totems.
+  - They should tell a story or guide me... something like this. I should have listened
+    more carefully...
+  level: 1
+  activated: 0
+  linkedTo: {fileID: 114615747360178600}
+  hasFirstText: 1
+  isFirstActivated: 0
 --- !u!114 &114890691220799856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -556,6 +682,17 @@ MonoBehaviour:
   rightEdge: {fileID: 4177750773568402}
   spawnPoints: []
   positionEndOfCorridor: {x: 0, y: 0, z: 0}
+--- !u!114 &114910737156590242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1562335126926208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 500e834ed361a8641bce0f6809b560a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114970153069734992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -600,9 +737,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -183264855
-  m_SortingLayer: 1
-  m_SortingOrder: 5
+  m_SortingLayerID: -2025459693
+  m_SortingLayer: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 20a91c375b74436439b6201290dee2da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

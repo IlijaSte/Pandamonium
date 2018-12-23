@@ -111,5 +111,7 @@ MonoBehaviour:
   acidPrefab: {fileID: 11400000, guid: 069acdcf805605f4191aefbbbb14ede6, type: 2}
   corridorTilemap: {fileID: 0}
   acidTilemap: {fileID: 0}
+  chestPrefab: {fileID: 1722286289344758, guid: bab75800351aa8746b6111887108aa1d,
+    type: 2}
   ground: {fileID: 0}
   bossRoomSpawn: {x: 0, y: 0}

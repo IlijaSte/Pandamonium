@@ -11,7 +11,7 @@ public class InfoText : MonoBehaviour {
 
     Color endColor;
 
-    Stack<string> messagesToShow = new Stack<string>();
+    Queue<string> messagesToShow = new Queue<string>();
 
     private static InfoText instance;
 
@@ -38,7 +38,7 @@ public class InfoText : MonoBehaviour {
 	
     public void ShowMessage(string message)
     {
-        messagesToShow.Push(message);
+        messagesToShow.Enqueue(message);
 
         if(!text.enabled && messagesToShow.Count == 1)
         {
@@ -51,7 +51,7 @@ public class InfoText : MonoBehaviour {
         if (messagesToShow.Count == 0)
             return;
 
-        StartCoroutine(Lifetime(messagesToShow.Pop()));
+        StartCoroutine(Lifetime(messagesToShow.Dequeue()));
     }
 
 	private IEnumerator Lifetime(string message)
