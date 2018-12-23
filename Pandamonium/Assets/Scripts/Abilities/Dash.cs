@@ -23,6 +23,7 @@ public class Dash : Ability {
 
     void DoDash()
     {
+        am.parent.sprite.GetComponent<Animator>().SetTrigger("Dash");
         rb.AddForce(am.parent.GetFacingDirection() * maxDashRange * rb.drag, ForceMode2D.Impulse);
     }
 
