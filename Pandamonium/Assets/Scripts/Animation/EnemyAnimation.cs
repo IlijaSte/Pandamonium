@@ -10,7 +10,7 @@ public class EnemyAnimation : CharacterAnimation
     {
        
         FlipAnimation();
-        print(vector2);
+       // print(vector2);
 
     }
 }

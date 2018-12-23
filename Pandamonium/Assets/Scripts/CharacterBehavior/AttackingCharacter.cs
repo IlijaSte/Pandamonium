@@ -47,7 +47,8 @@ public abstract class AttackingCharacter : MonoBehaviour {
 
     protected Rigidbody2D rb;
 
-    protected SpriteRenderer sprite;
+    [HideInInspector]
+    public SpriteRenderer sprite;
 
     [HideInInspector]
     public bool isDead = false;
