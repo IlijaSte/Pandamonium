@@ -22,9 +22,10 @@ public abstract class AnimationMama : MonoBehaviour {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
 
         //if ((angle > 0 && angle < 90))
+ 
         if(vector2.x < 0)
-            sr.flipX = true;
-        else sr.flipX = false;
+            sr.flipX = false;
+        else if (vector2.x > 0) sr.flipX = true;
     }
     protected virtual void updateAngleTo360()
     {

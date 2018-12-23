@@ -16,10 +16,11 @@ public class FrogAnimation : CharacterAnimation
     void Update()
     {
         animation360();
+      
         /*
         FlipAnimation();
 
-        /*
+        
         AttackingCharacter.PlayerState currentState = transform.parent.GetComponent<Frogocite>().playerState;
         if(!currentState.Equals(state))
         {

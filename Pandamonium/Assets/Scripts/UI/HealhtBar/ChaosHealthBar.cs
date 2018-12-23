@@ -67,9 +67,16 @@ public class ChaosHealthBar : Image
         }
     }
 
-    public void buildHealtBar(int numTriangles, bool isMini)
+    private int GetNumTriangles(float maxHealth)
+    {
+        return 15;// (int) maxHealth / 20;
+    }
+
+    public void BuildHealtBar(float maxHealth, bool isMini)
     {
         this.isMini = isMini;
+
+        int numTriangles = GetNumTriangles(maxHealth);
 
         SetTriangleOriginDistances();
         //SetColors();
@@ -90,6 +97,8 @@ public class ChaosHealthBar : Image
 
         InstantiateTriangles(colorsBackground, triangleOriginDistances, halfTrianglesBG, backgroundParent);
         InstantiateTriangles(colorsForeground, triangleOriginDistances, halfTriangles, foregroundParent);
+
+        gameObject.SetActive(!isMini);
     }
     private void InstantiateTriangles(Color[] colors, Vector2 distances, ChaosHealthBar[] halfTriangles, Transform parentObject)
     {
@@ -113,9 +122,12 @@ public class ChaosHealthBar : Image
     }
 
 
-    public void FillAmount(float amount)
+    public IEnumerator FillAmount(float amount, bool toEnable)
     {
         //healthPeace = amount; 
+
+        if (toEnable)
+            gameObject.SetActive(true); 
 
         //if it is not a regular healtbar
         if (halfTriangles != null && halfTriangles.Length > 0)
@@ -134,7 +146,7 @@ public class ChaosHealthBar : Image
                 float part = (1 - amount) * (halfTriangles.Length);// - 1);//proveri ovaj - 1
                 while (part > 0 && i > 0)
                 {
-                    while (part > 1 && i > 1)
+                    while (part > 1 && i > 0)
                     {
                        halfTriangles[i--].fillAmount = 0;
                        part -= 1 ;
@@ -146,6 +158,12 @@ public class ChaosHealthBar : Image
             }
         }
         else base.fillAmount = amount;
+
+        if (toEnable)
+        {
+            if(halfTriangles[0].fillAmount > 0) yield return new WaitForSeconds(1f);
+            gameObject.SetActive(false); 
+        }
     }
 
 
@@ -173,20 +191,27 @@ public class ChaosHealthBar : Image
 
     public void Heal(float amount)
     {
-
-        int i = 0;
-        float part = amount * halfTriangles.Length;
-        while (part > 0)
+        if (amount == 1)
         {
-            while (part > 1)
+            for (int i = 0; i < halfTriangles.Length; i++)
+                halfTriangles[i].fillAmount = 1;
+        }
+        else
+        {
+            int i = 0;
+            float part = amount * halfTriangles.Length;
+            while (part > 0)
             {
-                halfTriangles[i++].fillAmount = 1;
-                part -= 1;
+                while (part > 1)
+                {
+                    halfTriangles[i++].fillAmount = 1;
+                    part -= 1;
+                }
+
+                halfTriangles[i++].fillAmount = 1 - part;
+                part = 0;
+
             }
-
-            halfTriangles[i++].fillAmount = 1 - part;
-            part = 0;
-
         }
 
         healthPeace = amount;

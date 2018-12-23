@@ -47,7 +47,8 @@ public abstract class AttackingCharacter : MonoBehaviour {
 
     protected Rigidbody2D rb;
 
-    protected SpriteRenderer sprite;
+    [HideInInspector]
+    public SpriteRenderer sprite;
 
     [HideInInspector]
     public bool isDead = false;
@@ -83,7 +84,7 @@ public abstract class AttackingCharacter : MonoBehaviour {
             vision = transform.Find("Vision").GetComponent<CharacterVision>();
 
         health = maxHealth;
-        healthBar.buildHealtBar(10, !type.Equals(CharacterType.PLAYER));
+        healthBar.BuildHealtBar(maxHealth, !type.Equals(CharacterType.PLAYER));
 
         nextAttackBG = nextAttackBar.transform.parent.gameObject;
 
