@@ -20,7 +20,7 @@ public class StoryTrigger : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerWithJoystick>() != null)
+        if (!activated && collision.GetComponent<PlayerWithJoystick>() != null)
         {
             if(GameManager.I.currentLevel + 1 == level)
                 Activate();

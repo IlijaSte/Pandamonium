@@ -109,6 +109,7 @@ public class RoomHolder : MonoBehaviour {
 
         chest = Instantiate(LevelGeneration.I.chestPrefab, chestSpawnPoint.position, Quaternion.identity, transform);
         chest.GetComponentInChildren<Chest>().locked = true;
+        chest.GetComponentInChildren<InteractableObject>().interactable = false;
         chest.GetComponentInChildren<Chest>().additionalCoins = Random.Range(0, context.distanceFromStart);
     }
 

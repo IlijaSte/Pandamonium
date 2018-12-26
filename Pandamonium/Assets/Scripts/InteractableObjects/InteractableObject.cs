@@ -7,24 +7,29 @@ public class InteractableObject : MonoBehaviour {
 
     public PlayerWithJoystick.ActionChangeType action;
 
+    [HideInInspector]
+    public bool interactable = true;
+
     protected bool activated = false;
 
     protected virtual void Start()
     {
-        GetComponent<SpriteRenderer>().sortingOrder = -Mathf.RoundToInt(transform.parent.position.y * 100);
+        GetComponentInChildren<SpriteRenderer>().sortingOrder = -Mathf.RoundToInt(transform.parent.position.y * 100);
     }
 
     public virtual void Activate()
     {
         // action at the end of animation
         activated = true;
+        interactable = false;
+        (GameManager.I.playerInstance as PlayerWithJoystick).ActionChange(PlayerWithJoystick.ActionChangeType.SWAP_TO_WEAPON, transform);
     }
 
     public virtual bool StartActivating()
     {
         if (!activated)
         {
-            GetComponent<Animator>().SetTrigger("Activate");
+            GetComponentInChildren<Animator>().SetTrigger("Activate");
             return true;
         }
         else
@@ -37,7 +42,7 @@ public class InteractableObject : MonoBehaviour {
     {
         PlayerWithJoystick player = collision.GetComponent<PlayerWithJoystick>();
 
-        if (player)
+        if (interactable && player)
         {
             player.ActionChange(action, transform);
         }
@@ -47,7 +52,7 @@ public class InteractableObject : MonoBehaviour {
     {
         PlayerWithJoystick player = collision.GetComponent<PlayerWithJoystick>();
 
-        if (player)
+        if (interactable && player)
         {
             player.ActionChange(PlayerWithJoystick.ActionChangeType.SWAP_TO_WEAPON, transform);
         }

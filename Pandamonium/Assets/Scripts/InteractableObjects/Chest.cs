@@ -31,6 +31,12 @@ public class Chest : InteractableObject {
         }
     }
 
+    public void Unlock()
+    {
+        locked = false;
+        interactable = true;
+    }
+
     public void DropCoins()
     {
         GameObject coinPrefab = GameManager.I.prefabHolder.coin;

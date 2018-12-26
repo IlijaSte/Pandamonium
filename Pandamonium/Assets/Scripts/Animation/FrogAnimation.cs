@@ -21,7 +21,7 @@ public class FrogAnimation : CharacterAnimation
         FlipAnimation();
 
         
-        AttackingCharacter.PlayerState currentState = transform.parent.GetComponent<Frogocite>().playerState;
+        AttackingCharacter.PlayerState currentState = transform.parent.GetComponent<Enemy>().playerState;
         if(!currentState.Equals(state))
         {
             switch(state)
@@ -48,7 +48,7 @@ public class FrogAnimation : CharacterAnimation
                     animator.SetBool("Attacking", true);
                     break;
                 case AttackingCharacter.PlayerState.IMMOBILE:
-                    if (transform.parent.GetComponent<Frogocite>().isJumping)
+                    if (transform.parent && transform.parent.GetComponent<Frogocite>().isJumping)
                     {
                         animator.SetBool("Jumping", true);
                     }

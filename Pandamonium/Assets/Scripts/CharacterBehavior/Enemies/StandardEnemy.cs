@@ -52,8 +52,8 @@ public class StandardEnemy : Enemy {
         {
             InfoText.I.ShowMessage("clear");
 
-            if(room.getRoomHolder().chest != null)
-                room.getRoomHolder().chest.GetComponentInChildren<Chest>().locked = false;
+            if (room.getRoomHolder().chest != null)
+                room.getRoomHolder().chest.GetComponentInChildren<Chest>().Unlock();
         }
     }
 }

@@ -234,11 +234,9 @@ public class Enemy : AttackingCharacter {
                 {
                     if (!detectedPlayer)
                     {
-                        Transform closest;
-
-                        if ((closest = vision.GetClosest()) != null && LevelGeneration.I.GetRoomAtPos(closest.position) == room)
+                        if(room == player.GetComponent<PlayerWithJoystick>().GetRoom())
                         {
-                            Attack(closest);
+                            Attack(player);
                             detectedPlayer = true;
                         }
                     }
@@ -293,7 +291,8 @@ public class Enemy : AttackingCharacter {
         if (numEnemies == 0)
             areAllEnemiesDead = true;
 
-        player.GetComponent<PlayerWithJoystick>().onEnemySlain(enemyName);      // u StandardEnemy?
+        if(player.GetComponent<PlayerWithJoystick>().onEnemySlain != null)
+            player.GetComponent<PlayerWithJoystick>().onEnemySlain(enemyName);      // u StandardEnemy?
 
         base.Die();
     }

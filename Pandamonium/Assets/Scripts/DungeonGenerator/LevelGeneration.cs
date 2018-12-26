@@ -327,6 +327,54 @@ public class LevelGeneration : MonoBehaviour
         obstaclePositions.Add(spawnPos + Vector2.right);
     }
 
+    public virtual void InstantiateEnemiesInRoom(Room room)
+    {
+        // broj neprijatelja u sobi zavisi od razdaljine sobe od pocetne sobe i multiplier-a
+
+        float levelDifficulty = 0;
+        if (GameManager.I.currentLevel > 2)
+            levelDifficulty = (GameManager.I.currentLevel - 2) * 0.5f;
+
+        int totalDifficulty = Mathf.RoundToInt(Random.Range(room.distanceFromStart * enemyCountMultiplier + levelDifficulty, room.distanceFromStart * enemyCountMultiplier + levelDifficulty + 1.5f));
+
+        bool hasFrogocid = false;
+
+        while (totalDifficulty > 0)
+        {
+            Vector2 spawnPos;
+            do
+            {
+                spawnPos = room.GetRandomPos();
+            } while (enemyPositions.Contains(spawnPos));
+
+            enemyPositions.Add(spawnPos);
+
+            GameObject newPrefab = null;
+            GameObject newEnemy;
+
+            // da bi se u prve dve sobe stvarao samo prvi tip protivnika - verovatno menjati za sledece levele
+
+
+            do
+            {
+                newPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+
+            } while (((newPrefab.GetComponent<AttackingCharacter>() is RangedFrogocite) && !hasFrogocid) || newPrefab.GetComponent<Enemy>().difficulty > totalDifficulty);
+
+            newEnemy = Instantiate(newPrefab, spawnPos, Quaternion.identity, enemyParent);
+
+            enemies.Add(newEnemy);
+            room.PutEnemy(newEnemy);
+
+            if (newPrefab.GetComponent<AttackingCharacter>() is Frogocite)
+            {
+                hasFrogocid = true;
+            }
+
+            totalDifficulty -= newEnemy.GetComponent<Enemy>().difficulty;
+        }
+    }
+
     protected virtual void InstantiateEnemies()
     {
 
@@ -339,7 +387,7 @@ public class LevelGeneration : MonoBehaviour
 
             // elite
 
-            if(room.type == Room.RoomType.ELITE)
+            if (room.type == Room.RoomType.ELITE)
             {
                 //Vector2 spawnPos = room.GetSpawnPoint();
                 Vector2 spawnPos = room.getRoomHolder().transform.position;
@@ -351,49 +399,8 @@ public class LevelGeneration : MonoBehaviour
                 continue;
             }
 
-            // broj neprijatelja u sobi zavisi od razdaljine sobe od pocetne sobe i multiplier-a
+            InstantiateEnemiesInRoom(room);
 
-            float levelDifficulty = 0;
-            if(GameManager.I.currentLevel > 2)
-                levelDifficulty = (GameManager.I.currentLevel - 2) * 0.5f;
-
-            int totalDifficulty = Mathf.RoundToInt(Random.Range(room.distanceFromStart * enemyCountMultiplier + levelDifficulty, room.distanceFromStart * enemyCountMultiplier + levelDifficulty + 1.5f));
-
-            bool hasFrogocid = false;
-
-            while (totalDifficulty > 0)
-            {
-                Vector2 spawnPos;
-                do
-                {
-                    spawnPos = room.GetRandomPos();
-                } while (enemyPositions.Contains(spawnPos));
-
-                enemyPositions.Add(spawnPos);
-
-                GameObject newPrefab = null;
-                GameObject newEnemy;
-
-                // da bi se u prve dve sobe stvarao samo prvi tip protivnika - verovatno menjati za sledece levele
-
-
-                do
-                {
-                    newPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-
-                } while (((newPrefab.GetComponent<AttackingCharacter>() is RangedFrogocite) && !hasFrogocid) || newPrefab.GetComponent<Enemy>().difficulty > totalDifficulty);
-
-                newEnemy = Instantiate(newPrefab, spawnPos, Quaternion.identity, enemyParent);
-
-                enemies.Add(newEnemy);
-                room.PutEnemy(newEnemy);
-                    
-                if(newPrefab.GetComponent<AttackingCharacter>() is Frogocite) { 
-                    hasFrogocid = true;
-                }
-
-                totalDifficulty -= newEnemy.GetComponent<Enemy>().difficulty;
-            }
         }
 
         (enemies[Random.Range(0, enemies.Count)] as GameObject).GetComponent<Enemy>().holdsKey = true;

@@ -6,14 +6,14 @@ public class Stairs : MonoBehaviour {
 
     public bool right = true;
 
-
+    private float angle = 0;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerWithJoystick player = collision.GetComponent<PlayerWithJoystick>();
         if (player != null)
         {
-            player.AddRotation(right ? 60 : -60);
+            player.AddRotation(right ? angle : -angle);
         }
     }
 
@@ -22,7 +22,7 @@ public class Stairs : MonoBehaviour {
         PlayerWithJoystick player = collision.GetComponent<PlayerWithJoystick>();
         if (player != null)
         {
-            player.AddRotation(right ? -60 : 60);
+            player.AddRotation(right ? -angle : angle);
         }
     }
 }

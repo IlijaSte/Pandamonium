@@ -404,15 +404,19 @@ public class PlayerWithJoystick : AttackingCharacter {
         return facingDirection;
     }
 
-    protected void IncreaseEnergy(float amount)
+    public void IncreaseEnergy(float amount, bool percent = false)
     {
-        energy = Mathf.Clamp(energy + amount, 0, maxEnergy);
+        float newEnergy = (percent ? energy + maxEnergy * (amount / 100f) : energy + amount);
+
+        energy = Mathf.Clamp(newEnergy, 0, maxEnergy);
         abilityManager.UpdateAbilityButtons();
     }
 
-    public void DecreaseEnergy(float amount)
+    public void DecreaseEnergy(float amount, bool percent = false)
     {
-        energy = Mathf.Clamp(energy - amount, 0, maxEnergy);
+        float newEnergy = (percent ? energy - maxEnergy * (amount / 100f) : energy - amount);
+
+        energy = Mathf.Clamp(newEnergy, 0, maxEnergy);
         abilityManager.UpdateAbilityButtons();
     }
 
@@ -453,7 +457,7 @@ public class PlayerWithJoystick : AttackingCharacter {
 
                 if (keyPickedUp)
                 {
-                    if (actionObject.GetComponentInChildren<KeyHolder>().StartActivating())
+                    if (actionObject.GetComponentInChildren<EventShrine>().StartActivating())
                     {
                         UIManager.I.HideKey();
                     }

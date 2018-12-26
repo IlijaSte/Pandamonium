@@ -590,7 +590,7 @@ TrailRenderer:
   m_SortingLayerID: -183264855
   m_SortingLayer: 1
   m_SortingOrder: 4
-  m_Time: 45
+  m_Time: 20
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1
@@ -792,6 +792,7 @@ MonoBehaviour:
   dropPrefabs:
   - {fileID: 1597709171064980, guid: 936e67524d0a86645b38d0abbb56d0e6, type: 2}
   holdsKey: 0
+  speed: 0
   dashCastTime: 1
   dashCooldown: 6
   dashSpeed: 8

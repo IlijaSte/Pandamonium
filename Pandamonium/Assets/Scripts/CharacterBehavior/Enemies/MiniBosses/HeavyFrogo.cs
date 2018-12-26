@@ -30,8 +30,10 @@ public class HeavyFrogo : Enemy
     private BoxCollider2D boxCollider2D;
     //private Rigidbody2D rb;
     private new CircleCollider2D collider;
-    public GameObject indicatorPrefab;
-    private Transform indicator;
+    public GameObject primaryIndicatorPrefab;
+    public GameObject secondaryIndicatorPrefab;
+    private Transform primaryIndicator;
+    private Transform secondaryIndicator;
     private Animator animator;
 
     public bool isJumping = false;
@@ -142,7 +144,11 @@ public class HeavyFrogo : Enemy
 
         rb.AddForce(initVelocity * rb.mass, ForceMode2D.Impulse);
 
-        indicator = Instantiate(indicatorPrefab, jumpTarget, Quaternion.identity).transform;
+        primaryIndicator = Instantiate(primaryIndicatorPrefab, jumpTarget, Quaternion.identity).transform;
+        secondaryIndicator = Instantiate(secondaryIndicatorPrefab, jumpTarget, Quaternion.identity).transform;
+
+        primaryIndicator.localScale = new Vector2(aoeRange, aoeRange);
+        secondaryIndicator.localScale = new Vector2(secondaryAoeRange, secondaryAoeRange);
 
         oldShadowRelativePos = shadow.localPosition;
         shadow.SetParent(null);
@@ -166,7 +172,8 @@ public class HeavyFrogo : Enemy
 
             isJumping = false;
 
-            Destroy(indicator.gameObject);
+            Destroy(primaryIndicator.gameObject);
+            Destroy(secondaryIndicator.gameObject);
 
             path.enabled = true;
 

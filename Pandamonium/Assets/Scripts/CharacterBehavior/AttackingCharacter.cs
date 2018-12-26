@@ -156,9 +156,12 @@ public abstract class AttackingCharacter : MonoBehaviour {
 
     }
 
-    public virtual void Heal()
+    public virtual void Heal(float amount = 200, bool percent = false)
     {
-        health = Mathf.Clamp(health + maxHealth / 2, 0, maxHealth);
+
+        float newHealth = (percent ? health + maxHealth * (amount / 100f) : health + amount);
+
+        health = Mathf.Clamp(newHealth, 0, maxHealth);
         healthBar.Heal(health / maxHealth);
 
         UIManager.I.ShowHeal(GetComponentInChildren<Canvas>(), 1);

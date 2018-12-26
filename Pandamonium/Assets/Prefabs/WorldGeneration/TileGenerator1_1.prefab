@@ -64,6 +64,8 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 1628753790980070, guid: 75c84e6b6e1cac542a790e6e97eb2d12, type: 2}
   - {fileID: 1994364961457230, guid: d6fddc9afdfce6d40a9c8f40754187dc, type: 2}
+  elitePool: []
+  bossPrefab: {fileID: 0}
   roomPrefabs:
   - {fileID: 1062512608064458, guid: 424b3ed87e137dc4eb52f05f0051eab9, type: 2}
   - {fileID: 1504740648159990, guid: d131534f2f7f6db4ab1672127fd9ddea, type: 2}
@@ -106,5 +108,7 @@ MonoBehaviour:
   acidPrefab: {fileID: 11400000, guid: 069acdcf805605f4191aefbbbb14ede6, type: 2}
   corridorTilemap: {fileID: 0}
   acidTilemap: {fileID: 0}
+  chestPrefab: {fileID: 1722286289344758, guid: bab75800351aa8746b6111887108aa1d,
+    type: 2}
   ground: {fileID: 0}
   bossRoomSpawn: {x: 0, y: 0}
