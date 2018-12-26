@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class Room {
     public Vector2Int gridPos;
 
-    public enum RoomType {DEFAULT, START, OBELISK, INTRO, KEY_HOLDER, BOSS, ELITE }
+    public enum RoomType {DEFAULT, START, OBELISK, INTRO, KEY_HOLDER, BOSS, ELITE, LANTERN_CHOICE, END, GAUNTLET }
     public RoomType type;
 
 	//public int type;
@@ -145,16 +145,6 @@ public class Room {
 
         pos = new Vector2(Mathf.Floor(pos.x) + 0.5f, Mathf.Floor(pos.y) + 0.5f);
         return pos;
-    }
-
-    public void LiftCorridors()
-    {
-        //corridorTilemap.SetTile()
-    }
-
-    public void LowerCorridors()
-    {
-
     }
     
     public RoomHolder getRoomHolder()

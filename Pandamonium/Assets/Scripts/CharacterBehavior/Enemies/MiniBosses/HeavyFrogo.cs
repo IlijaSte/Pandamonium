@@ -57,7 +57,7 @@ public class HeavyFrogo : Enemy
 
         shadow = sprite.transform.GetChild(0);
 
-        healthBar = UIManager.I.bossHealthBar;
+        //healthBar = UIManager.I.bossHealthBar;
 
     }
 
@@ -260,7 +260,7 @@ public class HeavyFrogo : Enemy
     {
         base.Attack(target);
 
-        UIManager.I.bossHealthBar.BuildHealtBar(maxHealth, false);
+        //UIManager.I.bossHealthBar.BuildHealtBar(maxHealth, false);
     }
 
     public override void StopAttacking()

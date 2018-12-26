@@ -19,7 +19,7 @@ public class SceneChangeButton : MonoBehaviour {
 
         if (isStarter)
         {
-            thisButton.onClick.AddListener(delegate { GameManager.I.StartGame(0); });
+            thisButton.onClick.AddListener(delegate { GameManager.I.StartGame(-1); });
         }
         else
         {

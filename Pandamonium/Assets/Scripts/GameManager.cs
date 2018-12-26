@@ -15,9 +15,9 @@ public class GameManager : MonoBehaviour {
     public AttackingCharacter playerInstance;
 
     private static int NUM_OF_LEVELS = 3;
-    private static int FIRST_LEVEL_BUILD_INDEX = 4;
+    private static int FIRST_LEVEL_BUILD_INDEX = 5;
 
-    public int currentLevel = 0;
+    public int currentLevel = -1;
 
     [HideInInspector]
     public string gameMode = "classic";
@@ -242,7 +242,7 @@ public class GameManager : MonoBehaviour {
 
         SaveManager.I.SaveGame();
 
-        string pathToScene = SceneUtility.GetScenePathByBuildIndex(FIRST_LEVEL_BUILD_INDEX + Mathf.Clamp(currentLevel, 0, NUM_OF_LEVELS - 1));
+        string pathToScene = SceneUtility.GetScenePathByBuildIndex(FIRST_LEVEL_BUILD_INDEX + Mathf.Clamp(currentLevel, -1, NUM_OF_LEVELS - 1));
         string sceneName = System.IO.Path.GetFileNameWithoutExtension(pathToScene);
         LoadSceneLong(sceneName);
     }

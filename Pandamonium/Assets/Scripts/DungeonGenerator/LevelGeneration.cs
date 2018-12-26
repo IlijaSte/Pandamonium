@@ -68,7 +68,7 @@ public class LevelGeneration : MonoBehaviour
 
     public GameObject chestPrefab;
 
-    private Transform roomParent;
+    protected Transform roomParent;
 
     public Transform ground;
 
@@ -80,7 +80,7 @@ public class LevelGeneration : MonoBehaviour
 
     protected ArrayList enemyPositions = new ArrayList();
 
-    private ArrayList obstaclePositions;
+    protected ArrayList obstaclePositions;
 
     [HideInInspector]
     public Vector2 bossRoomSpawn;
@@ -724,7 +724,7 @@ public class LevelGeneration : MonoBehaviour
         return ret;
     }
 
-    void DrawMap()
+    protected virtual void DrawMap()
     {
 
         foreach (Room room in rooms)
@@ -760,7 +760,7 @@ public class LevelGeneration : MonoBehaviour
         }
     }
 
-    private GameObject GetRandomPrefab()
+    protected GameObject GetRandomPrefab()
     {
         return roomPrefabs[Random.Range(0, roomPrefabs.Length)];
     }

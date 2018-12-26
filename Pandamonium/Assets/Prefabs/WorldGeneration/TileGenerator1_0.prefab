@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1365729486634004}
+  m_IsPrefabParent: 1
+--- !u!1 &1365729486634004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4905516962537290}
+  - component: {fileID: 114438446693845296}
+  m_Layer: 0
+  m_Name: TileGenerator1_0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4905516962537290
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365729486634004}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114438446693845296
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365729486634004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f024e6af52c7f84887954dd032e1405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldSize: {x: 3, y: 3}
+  takenPositions: []
+  gridSizeX: 0
+  gridSizeY: 0
+  roomNumberRange:
+    m_Min: 4
+    m_Max: 4
+  roomWidth: 28
+  roomHeight: 28
+  enemyCountMultiplier: 1
+  enemyPrefabs:
+  - {fileID: 1628753790980070, guid: 75c84e6b6e1cac542a790e6e97eb2d12, type: 2}
+  - {fileID: 1994364961457230, guid: d6fddc9afdfce6d40a9c8f40754187dc, type: 2}
+  - {fileID: 1628753790980070, guid: dae1712fa54cac3428679f41d39436ec, type: 2}
+  - {fileID: 1628753790980070, guid: 20fff9fe07f5ae54d8f3ddf84af7f1b8, type: 2}
+  elitePool:
+  - {fileID: 1628753790980070, guid: 87eaa6d11a9678f489c891c3340b6eb4, type: 2}
+  bossPrefab: {fileID: 0}
+  roomPrefabs:
+  - {fileID: 1062512608064458, guid: 424b3ed87e137dc4eb52f05f0051eab9, type: 2}
+  firstRoomPrefab: {fileID: 1021458116984078, guid: c5605b4466c9d1149b4f85722e6bb48c,
+    type: 2}
+  lastRoomPrefab: {fileID: 0}
+  bossRoomPrefab: {fileID: 0}
+  bossRoomSize: {x: 30, y: 30}
+  keyHolderRoom: {fileID: 0}
+  healthPoolPrefab: {fileID: 1459476336166136, guid: d0391d70682586d4182ba2e26c55987d,
+    type: 2}
+  corridorHorizPrefab: {fileID: 11400000, guid: ccb467220ec57864b93694e5b9c07034,
+    type: 2}
+  corridorVertPrefab: {fileID: 11400000, guid: 6a7badba3559a4d4eb7c45b5130e5ce0, type: 2}
+  corridorBridgeHorizPrefab: {fileID: 11400000, guid: 3cd6a6afda712c747ae400a48e2d7d36,
+    type: 2}
+  corridorBridgeVertPrefab: {fileID: 11400000, guid: 0f0a5562cbf3ab049b451d646bf4e701,
+    type: 2}
+  corridorHorizForegroundPrefab: {fileID: 11400000, guid: 9127e32b4c6ac564195abdf20ba52f92,
+    type: 2}
+  corridorHorizForegroundLeftPrefab: {fileID: 11400000, guid: 0da05de953485a0428b0946e516e185e,
+    type: 2}
+  corridorHorizForegroundRightPrefab: {fileID: 11400000, guid: bd8739456c78ea940af15352196859b3,
+    type: 2}
+  stairsPrefab: {fileID: 1182997206340352, guid: 2d1a3f0207c32b34fb78aede03491ef4,
+    type: 2}
+  stairsVertPrefab: {fileID: 1253678088043098, guid: c1cbddbf1d2b70b42964bcdee02c135f,
+    type: 2}
+  groundPrefab: {fileID: 11400000, guid: c13e41d562a578c42830b7745183d1b3, type: 2}
+  acidPrefab: {fileID: 11400000, guid: 069acdcf805605f4191aefbbbb14ede6, type: 2}
+  corridorTilemap: {fileID: 0}
+  acidTilemap: {fileID: 0}
+  chestPrefab: {fileID: 1722286289344758, guid: bab75800351aa8746b6111887108aa1d,
+    type: 2}
+  ground: {fileID: 0}
+  bossRoomSpawn: {x: 0, y: 0}
+  lanternChoiceRoom: {fileID: 1062512608064458, guid: 6f6cb511ac811894190755bb53b3430d,
+    type: 2}
+  endRoom: {fileID: 1021458116984078, guid: 8aedf9ec4934cf9418eb214ddc6322de, type: 2}
+  gauntletRoom: {fileID: 1008203414328258, guid: b0b644f855c1fbc47895e093f6211b4c,
+    type: 2}

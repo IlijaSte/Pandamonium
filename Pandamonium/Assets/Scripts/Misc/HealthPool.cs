@@ -8,17 +8,21 @@ public class HealthPool : MonoBehaviour {
 
     public Sprite emptySprite;
 
+    [HideInInspector]
+    public bool canReactivate = false;
+
     private bool healed = false;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (healed) return;
+        if (!canReactivate && healed) return;
 
         if(collision.transform.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
         {
             GameManager.I.playerInstance.Heal(50, true);
-            GetComponent<SpriteRenderer>().sprite = emptySprite;
+            if(!canReactivate)
+                GetComponent<SpriteRenderer>().sprite = emptySprite;
 
             healed = true;
         }

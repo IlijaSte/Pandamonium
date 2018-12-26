@@ -542,4 +542,35 @@ public class PlayerWithJoystick : AttackingCharacter {
     {
         GameManager.I.abilities = abilityManager.GetAbilities();
     }
+
+    private void OnGUI()
+    {
+        if (!(GetRoom().type == Room.RoomType.GAUNTLET))
+            return;
+
+        if (GUI.Button(new Rect(10, 70, 100, 30), "Spawn 3 Slimes"))
+        {
+            StartCoroutine((LevelGeneration.I as Level1_0Generation).SpawnEnemiesInRoom(GetRoom(), LevelGeneration.I.enemyPrefabs[0], 3));
+        }
+
+        if (GUI.Button(new Rect(10, 110, 100, 30), "Spawn 3 Worms"))
+        {
+            StartCoroutine((LevelGeneration.I as Level1_0Generation).SpawnEnemiesInRoom(GetRoom(), LevelGeneration.I.enemyPrefabs[1], 3));
+        }
+
+        if (GUI.Button(new Rect(10, 150, 100, 30), "Spawn 3 Frogocids"))
+        {
+            StartCoroutine((LevelGeneration.I as Level1_0Generation).SpawnEnemiesInRoom(GetRoom(), LevelGeneration.I.enemyPrefabs[2], 3));
+        }
+
+        if (GUI.Button(new Rect(10, 190, 100, 30), "Spawn 3 Ranged Frogocids"))
+        {
+            StartCoroutine((LevelGeneration.I as Level1_0Generation).SpawnEnemiesInRoom(GetRoom(), LevelGeneration.I.enemyPrefabs[3], 3));
+        }
+
+        if (GUI.Button(new Rect(10, 230, 100, 30), "Spawn Heavy Frogo"))
+        {
+            StartCoroutine((LevelGeneration.I as Level1_0Generation).SpawnEnemiesInRoom(GetRoom(), LevelGeneration.I.elitePool[0], 1));
+        }
+    }
 }
