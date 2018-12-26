@@ -13,4 +13,9 @@ public class ShrineEvent : MonoBehaviour {
     {
 
     }
+
+    protected virtual void Complete()
+    {
+
+    }
 }

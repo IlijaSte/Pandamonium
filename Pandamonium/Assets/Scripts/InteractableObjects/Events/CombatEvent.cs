@@ -12,4 +12,9 @@ public class CombatEvent : ShrineEvent {
         LevelGeneration.I.InstantiateEnemiesInRoom(LevelGeneration.I.GetRoomAtPos(transform.position));
     }
 
+    protected override void Complete()
+    {
+        base.Complete();
+    }
+
 }

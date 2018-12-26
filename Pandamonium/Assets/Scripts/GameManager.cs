@@ -152,6 +152,19 @@ public class GameManager : MonoBehaviour {
         UIManager.I.coinsText.text = (coins + tempCoins).ToString();
     }
 
+    public void LoseCoins(int amount, bool percent = false)
+    {
+
+        tempCoins = (percent ? tempCoins - Mathf.RoundToInt((coins + tempCoins) * (amount / 100f)) : tempCoins - amount);
+
+        UIManager.I.coinsText.text = (coins + tempCoins).ToString();
+    }
+
+    public int GetTotalCoins()
+    {
+        return coins + tempCoins;
+    }
+
     public void OnDeath()
     {
         tempCoins = 0;

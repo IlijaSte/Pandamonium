@@ -525,11 +525,13 @@ MonoBehaviour:
   vision: {fileID: 114214034657156396}
   playerState: 0
   ignoreMask: 0
+  sprite: {fileID: 0}
   isDead: 0
   enemyName: Frogocid
   difficulty: 2
   dropPrefabs: []
   holdsKey: 0
+  speed: 0
   jumpSpeed: 0
   maxJumpRange: 4
   indicatorPrefab: {fileID: 1677782040419512, guid: d354f95f8310c1f418e1347aa9aa7874,

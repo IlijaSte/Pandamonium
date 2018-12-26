@@ -11,7 +11,19 @@ public class InfoText : MonoBehaviour {
 
     Color endColor;
 
-    Queue<string> messagesToShow = new Queue<string>();
+    private struct InfoMessage
+    {
+        public string message;
+        public Color color;
+
+        public InfoMessage(string message, Color color)
+        {
+            this.message = message;
+            this.color = color;
+        }
+    }
+
+    Queue<InfoMessage> messagesToShow = new Queue<InfoMessage>();
 
     private static InfoText instance;
 
@@ -38,9 +50,21 @@ public class InfoText : MonoBehaviour {
 	
     public void ShowMessage(string message)
     {
-        messagesToShow.Enqueue(message);
+        InfoMessage newMessage = new InfoMessage(message, color);
+        messagesToShow.Enqueue(newMessage);
 
         if(!text.enabled && messagesToShow.Count == 1)
+        {
+            ShowMessageFromStack();
+        }
+    }
+
+    public void ShowFailedMessage(string message)
+    {
+        InfoMessage newMessage = new InfoMessage(message, Color.red);
+        messagesToShow.Enqueue(newMessage);
+
+        if (!text.enabled && messagesToShow.Count == 1)
         {
             ShowMessageFromStack();
         }
@@ -54,19 +78,19 @@ public class InfoText : MonoBehaviour {
         StartCoroutine(Lifetime(messagesToShow.Dequeue()));
     }
 
-	private IEnumerator Lifetime(string message)
+	private IEnumerator Lifetime(InfoMessage message)
     {
         text.enabled = true;
-        text.text = message;
+        text.text = message.message;
 
-        text.color = new Color(color.r, color.g, color.b, 0);
+        text.color = new Color(message.color.r, message.color.g, message.color.b, 0);
 
         float i = 0;
 
         while (i < 0.25f)
         {
             i += Time.deltaTime;
-            text.color = Color.Lerp(text.color, color, i * 4);
+            text.color = Color.Lerp(text.color, message.color, i * 4);
             yield return null;
         }
 

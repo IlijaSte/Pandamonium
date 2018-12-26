@@ -18,7 +18,7 @@ public class PlayerWithJoystick : AttackingCharacter {
     public float lockAngle = 60;
 
     [HideInInspector]
-    public ChaosHealthBar energyBar;
+    public Image energyBar;
 
     public AbilityManager abilityManager;
     public JoystickController controller;
@@ -70,7 +70,7 @@ public class PlayerWithJoystick : AttackingCharacter {
 
         healthBar = UIManager.I.healthBar;
         energyBar = UIManager.I.energyBar;
-        energyBar.BuildHealtBar(0, !type.Equals(CharacterType.PLAYER));
+        //energyBar.BuildHealtBar(0, !type.Equals(CharacterType.PLAYER));
         //energyBar.buildHealtBar(10, false);
 
         attributes = GameManager.I.attributes;
@@ -125,7 +125,7 @@ public class PlayerWithJoystick : AttackingCharacter {
             nextAttackBG.SetActive(true);
         }
 
-        energyBar.FillAmount(energy / maxEnergy, false);
+        //energyBar.FillAmount(energy / maxEnergy, false);
 
         if (SystemInfo.deviceType == DeviceType.Desktop)
         {
@@ -411,6 +411,8 @@ public class PlayerWithJoystick : AttackingCharacter {
 
         energy = Mathf.Clamp(newEnergy, 0, maxEnergy);
         abilityManager.UpdateAbilityButtons();
+
+        energyBar.fillAmount = energy / maxEnergy;
     }
 
     public void DecreaseEnergy(float amount, bool percent = false)
@@ -419,6 +421,8 @@ public class PlayerWithJoystick : AttackingCharacter {
 
         energy = Mathf.Clamp(newEnergy, 0, maxEnergy);
         abilityManager.UpdateAbilityButtons();
+
+        energyBar.fillAmount = energy / maxEnergy;
     }
 
     protected void HitWithWeapon()

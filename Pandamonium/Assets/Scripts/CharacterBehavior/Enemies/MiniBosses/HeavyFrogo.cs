@@ -56,6 +56,9 @@ public class HeavyFrogo : Enemy
         boxCollider2D = GetComponent<BoxCollider2D>();
 
         shadow = sprite.transform.GetChild(0);
+
+        healthBar = UIManager.I.bossHealthBar;
+
     }
 
     protected virtual void DoJump()
@@ -251,6 +254,13 @@ public class HeavyFrogo : Enemy
         }
 
         timeToJump = 0;
+    }
+
+    public override void Attack(Transform target)
+    {
+        base.Attack(target);
+
+        UIManager.I.bossHealthBar.BuildHealtBar(maxHealth, false);
     }
 
     public override void StopAttacking()

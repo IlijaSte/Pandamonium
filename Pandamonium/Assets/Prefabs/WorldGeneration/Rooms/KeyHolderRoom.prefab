@@ -471,7 +471,10 @@ MonoBehaviour:
   goodEvents:
   - {fileID: 114122083550898632, guid: 03d833b7399be874bac35e27689239c5, type: 2}
   - {fileID: 114433632957344068, guid: f0a9ae6f1749c4e469c6114b0af9958c, type: 2}
+  - {fileID: 114530931377262312, guid: c6f340d01160bfa47a2b91079c43fcf9, type: 2}
   badEvents:
+  - {fileID: 114844778928288192, guid: 37267109cfebb04499fbf7cc42430179, type: 2}
+  - {fileID: 114690270701478254, guid: 9a6db7a1e07ba614f9e284486409ba1f, type: 2}
   - {fileID: 114049833558663464, guid: e846c10411f5eb440b5d9a4a400a5dbb, type: 2}
 --- !u!114 &114877642547922518
 MonoBehaviour:

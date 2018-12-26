@@ -10,6 +10,14 @@ public class HealthUpEvent : ShrineEvent {
     {
         base.Activate();
 
+        Complete();
+    }
+
+    protected override void Complete()
+    {
+        base.Complete();
+
+        InfoText.I.ShowMessage("health up");
         (GameManager.I.playerInstance as PlayerWithJoystick).Heal(healPercent, true);
     }
 

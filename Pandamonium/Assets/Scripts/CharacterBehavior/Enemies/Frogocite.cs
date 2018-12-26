@@ -125,6 +125,7 @@ public class Frogocite : StandardEnemy
         rb.AddForce(initVelocity * rb.mass, ForceMode2D.Impulse);
 
         indicator = Instantiate(indicatorPrefab, jumpTarget, Quaternion.identity).transform;
+        indicator.localScale = new Vector2(weapons[equippedWeaponIndex].range, weapons[equippedWeaponIndex].range);
 
         oldShadowRelativePos = shadow.localPosition;
         shadow.SetParent(null);

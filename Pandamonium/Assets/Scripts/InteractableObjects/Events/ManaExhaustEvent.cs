@@ -10,6 +10,14 @@ public class ManaExhaustEvent : ShrineEvent {
     {
         base.Activate();
 
+        Complete();
+    }
+
+    protected override void Complete()
+    {
+        base.Complete();
         (GameManager.I.playerInstance as PlayerWithJoystick).DecreaseEnergy(exhaustPercent, true);
+
+        InfoText.I.ShowFailedMessage("mana exhausted");
     }
 }

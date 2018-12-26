@@ -9,11 +9,11 @@ public class EventShrine : InteractableObject {
 
     public override void Activate()
     {
-        base.Activate();
+        //base.Activate();
 
         ShrineEvent newEvent = null;
 
-        if(Random.value >= 0.5f)
+        if(Random.value >= 0.5f)          // !!!
         {
             newEvent = goodEvents[Random.Range(0, goodEvents.Length)];
         }
