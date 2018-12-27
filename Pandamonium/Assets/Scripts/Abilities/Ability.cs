@@ -19,7 +19,8 @@ public class Ability : MonoBehaviour {
     public Sprite buttonSprite;
     public Sprite bgSprite;
 
-    protected float cdProgress = 0;
+    [HideInInspector]
+    public float cdProgress = 0;
 
     public AbilityManager am;
 
@@ -36,12 +37,12 @@ public class Ability : MonoBehaviour {
 
     public virtual bool CanCast()
     {
-        return (cdProgress >= cooldown);
+        return (cdProgress >= cooldown && am.globalCDProgress >= am.globalCooldown);
     }
 
 	public virtual bool TryCast(Vector2 fromPosition, Vector2 direction)
     {
-        if(cdProgress >= cooldown)
+        if(CanCast())
         {
             am.autolock.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, direction));
             Cast(fromPosition, direction);
@@ -56,7 +57,18 @@ public class Ability : MonoBehaviour {
         if(cdProgress < cooldown)
         {
             cdProgress += Time.deltaTime;
+            //am.UpdateAbilityCooldown(this, cdProgress / cooldown);
             am.UpdateAbilityCooldown(this, cdProgress / cooldown);
+        }
+
+        if(am.globalCDProgress <= am.globalCooldown && am.globalCDProgress / am.globalCooldown < cdProgress / cooldown)
+        {
+            am.UpdateAbilityCooldown(this, am.globalCDProgress / am.globalCooldown);
+        }
+
+        if(cdProgress >= cooldown && am.globalCDProgress >= am.globalCooldown)
+        {
+            am.UpdateAbilityCooldown(this, 1);
         }
     }
 

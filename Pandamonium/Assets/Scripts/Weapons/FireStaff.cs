@@ -10,7 +10,7 @@ public class FireStaff : RangedWeapon
 
     public override bool Attack(Transform target)
     {
-        if (timeToAttack <= 0)
+        if (timeToAttack <= 0 && (am == null || am.globalCDProgress >= am.globalCooldown))
         {
             // kreiranje projektila na mestu nosioca
             GameObject projectile = Instantiate(firePrefab);
@@ -29,7 +29,7 @@ public class FireStaff : RangedWeapon
     public override bool AttackInDirection(Vector2 direction)
     {
         
-        if (timeToAttack <= 0)
+        if (timeToAttack <= 0 && (am == null || am.globalCDProgress >= am.globalCooldown))
         {
 
             // kreiranje projektila na mestu nosioca

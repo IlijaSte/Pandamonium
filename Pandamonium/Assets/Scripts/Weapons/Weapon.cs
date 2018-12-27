@@ -24,6 +24,8 @@ public abstract class Weapon : MonoBehaviour {
     public AttackingCharacter parent;
     public AutolockTracker autolock;
 
+    protected AbilityManager am;
+
     virtual public void StartAttacking(Transform target)
     {
         if (!attacking)
@@ -68,6 +70,8 @@ public abstract class Weapon : MonoBehaviour {
         {
             autolock = transform.parent.GetComponentInChildren<AutolockTracker>();
         }
+
+        am = (parent is PlayerWithJoystick ? (parent as PlayerWithJoystick).abilityManager : null);
     }
 
     virtual public void Update()
@@ -77,7 +81,15 @@ public abstract class Weapon : MonoBehaviour {
         {
             timeToAttack -= speed * Time.deltaTime;
 
-            UIManager.I.UpdateAttackCooldown(1 - timeToAttack);
+            if(am != null && 1 - timeToAttack > am.globalCDProgress / am.globalCooldown)
+            {
+                UIManager.I.UpdateAttackCooldown(am.globalCDProgress / am.globalCooldown);
+            }
+            else
+            {
+                UIManager.I.UpdateAttackCooldown(1 - timeToAttack);
+            }
+
         }else if (attacking)
         {
             timeToAttack -= speed * Time.deltaTime;
@@ -96,11 +108,16 @@ public abstract class Weapon : MonoBehaviour {
 
     public virtual bool Attack(Transform target)
     {
-        if (timeToAttack <= 0)
+        if (timeToAttack <= 0 && (am == null || am.globalCDProgress >= am.globalCooldown))
         {
             timeToAttack = 1;
             if(parent)
                 parent.OnWeaponAttack();
+
+            if (am != null)
+            {
+                StartCoroutine(am.GlobalCooldown());
+            }
 
             return true;
         }
@@ -109,9 +126,15 @@ public abstract class Weapon : MonoBehaviour {
 
     public virtual bool AttackInDirection(Vector2 direction)
     {
-        if (timeToAttack <= 0)
+        if (timeToAttack <= 0 && (am == null || am.globalCDProgress >= am.globalCooldown))
         {
             timeToAttack = 1;
+
+            if (am != null)
+            {
+                StartCoroutine(am.GlobalCooldown());
+            }
+
             return true;
         }
         return false;

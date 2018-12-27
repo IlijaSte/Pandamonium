@@ -13,12 +13,19 @@ public class AbilityManager : MonoBehaviour {
 
     public AutolockTracker autolock;
 
+    public float globalCooldown = 0.5f;
+
+    [HideInInspector]
+    public float globalCDProgress;
+
     void Start()
     {
         if(parent == null)
         {
             parent = transform.parent.GetComponent<AttackingCharacter>();
         }
+
+        globalCDProgress = globalCooldown;
 
         abilities = new List<Ability>();
 
@@ -147,7 +154,10 @@ public class AbilityManager : MonoBehaviour {
                         if (abilities[index] is Dash)
                         {
                             if (abilities[index].TryCast(parent.transform.position, parent.GetFacingDirection()))
+                            {
                                 (parent as PlayerWithJoystick).DecreaseEnergy(abilities[index].manaCost);
+                                StartCoroutine(GlobalCooldown());
+                            }
                         }
                         else
                         {
@@ -170,6 +180,26 @@ public class AbilityManager : MonoBehaviour {
         }
     }
 
+    public IEnumerator GlobalCooldown()
+    {
+        globalCDProgress = 0;
+
+        while (globalCDProgress <= globalCooldown)
+        {
+            globalCDProgress += Time.deltaTime;
+
+            /*foreach (Ability ability in abilities)
+            {
+                if (ability != null)
+                {
+                    //UIManager.I.UpdateAbilityCooldown(abilities.IndexOf(ability), globalCDProgress / globalCooldown < ability.cdProgress / ability.cooldown ? globalCDProgress / globalCooldown : ability.cdProgress / ability.cooldown);
+                }
+            }*/
+
+            yield return null;
+        }
+    }
+
     public void StopUsingAbility(int abilityIndex)
     {
         if (abilities.Count - 1 < abilityIndex)
@@ -187,7 +217,10 @@ public class AbilityManager : MonoBehaviour {
             //joystickGroup.blocksRaycasts = false;
 
             if (abilities[abilityIndex].TryCast(parent.transform.position, joystickGroup.GetComponentInChildren<JoystickController>().lastInputDirection.normalized))
+            {
                 (parent as PlayerWithJoystick).DecreaseEnergy(abilities[abilityIndex].manaCost);
+                StartCoroutine(GlobalCooldown());
+            }
         }
     }
 

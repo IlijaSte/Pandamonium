@@ -9,7 +9,7 @@ public class MeleeWeapon : Weapon
 
     override public bool Attack(Transform target)
     {
-        if (timeToAttack <= 0)
+        if (timeToAttack <= 0 && (am == null || am.globalCDProgress >= am.globalCooldown))
         {
             Damage(target);
 
@@ -39,11 +39,16 @@ public class MeleeWeapon : Weapon
     public int AttackCleave(float damageAddition)
     {
 
-        if (timeToAttack > 0)
+        if (timeToAttack > 0 || (am != null && am.globalCDProgress < am.globalCooldown))
             return 0;
 
         if(animator)
             animator.WeaponStrike();
+
+        if(am != null)
+        {
+            StartCoroutine(am.GlobalCooldown());
+        }
 
         /*List<Transform> visibleTargets = new List<Transform>();
 
