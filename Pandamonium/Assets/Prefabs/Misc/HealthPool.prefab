@@ -37,7 +37,8 @@ GameObject:
   - component: {fileID: 212006352671850550}
   - component: {fileID: 61463732961321462}
   - component: {fileID: 114558007996957448}
-  m_Layer: 0
+  - component: {fileID: 58980392729030608}
+  m_Layer: 17
   m_Name: Pool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1459476336166136}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -6.41, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4942934680324030}
@@ -71,6 +72,21 @@ Transform:
   m_Father: {fileID: 4104415050663904}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &58980392729030608
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1996943338649758}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.49}
+  serializedVersion: 2
+  m_Radius: 1.62
 --- !u!61 &61463732961321462
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -107,6 +123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c96137b1cf8c4418e6dd975da827f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  action: 0
+  interactable: 1
+  canReactivate: 0
   healAmount: 100
   emptySprite: {fileID: 21300000, guid: fc8fc34a2dadfc14b9e918ef45870f2d, type: 3}
 --- !u!212 &212006352671850550

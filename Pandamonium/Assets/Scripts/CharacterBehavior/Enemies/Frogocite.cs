@@ -9,6 +9,8 @@ public class Frogocite : StandardEnemy
     private Vector2 jumpTarget;
     public float maxJumpRange = 2;
 
+    public float landDamageRadius = 1f;
+
     private BoxCollider2D boxCollider2D;
     //private Rigidbody2D rb;
     private new CircleCollider2D collider;
@@ -125,7 +127,7 @@ public class Frogocite : StandardEnemy
         rb.AddForce(initVelocity * rb.mass, ForceMode2D.Impulse);
 
         indicator = Instantiate(indicatorPrefab, jumpTarget, Quaternion.identity).transform;
-        indicator.localScale = new Vector2(weapons[equippedWeaponIndex].range, weapons[equippedWeaponIndex].range);
+        indicator.localScale = new Vector2(landDamageRadius, landDamageRadius);
 
         oldShadowRelativePos = shadow.localPosition;
         shadow.SetParent(null);
@@ -139,7 +141,7 @@ public class Frogocite : StandardEnemy
 
     protected virtual void OnLand()
     {
-        if (weapons[equippedWeaponIndex].IsInRange(player))
+        if (Vector2.Distance(transform.position, player.position) <= landDamageRadius)
             player.GetComponent<AttackingCharacter>().TakeDamage(weapons[equippedWeaponIndex].damage);
     }
 

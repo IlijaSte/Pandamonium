@@ -707,6 +707,7 @@ MonoBehaviour:
   range: 1.5
   timeToAttack: 1
   parent: {fileID: 0}
+  autolock: {fileID: 0}
   cleaveAngle: 90
   animator: {fileID: 0}
 --- !u!114 &114135310921016932
@@ -744,8 +745,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  damageTick: 1
+  damageTick: 0.5
   colliderSize: 1
+  dmgStreakMultiplier: 0
   parent: {fileID: 0}
 --- !u!114 &114296518519994400
 MonoBehaviour:

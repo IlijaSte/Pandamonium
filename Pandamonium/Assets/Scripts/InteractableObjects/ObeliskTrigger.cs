@@ -20,6 +20,8 @@ public class ObeliskTrigger : MonoBehaviour {
             Camera.main.GetComponent<CameraMovement>().PeekAt(transform.parent.GetComponentInChildren<CinemachineVirtualCamera>());
             Camera.main.GetComponent<CameraMovement>().PeekAt(exitPortal.GetComponentInChildren<CinemachineVirtualCamera>());
             activated = true;
+
+            Instantiate(GameManager.I.prefabHolder.blueprint, transform.position, Quaternion.identity);
         }
     }
 }

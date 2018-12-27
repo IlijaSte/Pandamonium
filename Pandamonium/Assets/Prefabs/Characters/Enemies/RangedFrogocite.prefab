@@ -251,7 +251,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1628753790980070}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 37.09, y: 0.5, z: 1}
+  m_LocalPosition: {x: 37.09, y: -2.1, z: 1}
   m_LocalScale: {x: 0.5, y: 0.50000024, z: 1}
   m_Children:
   - {fileID: 224439984083567830}
@@ -322,8 +322,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1548557022160412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.02, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalPosition: {x: 0, y: 1.32, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4426844956101872}
   m_Father: {fileID: 4446852320589226}
@@ -417,7 +417,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1478142, y: 1.063034}
+  m_Size: {x: 2, y: 1.8}
   m_EdgeRadius: 0
 --- !u!95 &95701175880768276
 Animator:
@@ -455,6 +455,7 @@ MonoBehaviour:
   range: 4
   timeToAttack: 1
   parent: {fileID: 114842749471232120}
+  autolock: {fileID: 0}
   projectileSpeed: 5
   firePrefab: {fileID: 1886280186401388, guid: f25eae8681c02344dbb6f532873aa117, type: 2}
 --- !u!114 &114079399296506460
@@ -689,14 +690,16 @@ MonoBehaviour:
   vision: {fileID: 114214034657156396}
   playerState: 0
   ignoreMask: 0
+  sprite: {fileID: 0}
   isDead: 0
   enemyName: RangedFrogocid
   difficulty: 2
   dropPrefabs: []
   holdsKey: 0
+  speed: 0
   jumpSpeed: 0
   maxJumpRange: 3.5
-  indicatorPrefab: {fileID: 1677782040419512, guid: d354f95f8310c1f418e1347aa9aa7874,
+  indicatorPrefab: {fileID: 1677782040419512, guid: 69c40a4bbbe3a62419f4a7b779e7c74b,
     type: 2}
   isJumping: 0
   jumpCooldown: 4

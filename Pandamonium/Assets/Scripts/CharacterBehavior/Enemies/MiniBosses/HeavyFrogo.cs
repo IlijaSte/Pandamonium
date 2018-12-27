@@ -21,7 +21,8 @@ public class HeavyFrogo : Enemy
 
     private int numOfJumps = 0;
 
-    private bool isStunned = false;
+    [HideInInspector]
+    public bool isStunned = false;
 
     public float jumpSpeed = 5;
     private Vector2 jumpTarget;

@@ -1,12 +1,31 @@
 fileFormatVersion: 2
 guid: 816ad95f11b1c1649b96b25c21c21de8
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: HeavyFrogocidAttackOverhead_0
+    21300002: HeavyFrogocidAttackOverhead_1
+    21300004: HeavyFrogocidAttackOverhead_2
+    21300006: HeavyFrogocidAttackOverhead_3
+    21300008: HeavyFrogocidAttackOverhead_4
+    21300010: HeavyFrogocidAttackOverhead_5
+    21300012: HeavyFrogocidAttackOverhead_6
+    21300014: HeavyFrogocidAttackOverhead_7
+    21300016: HeavyFrogocidAttackOverhead_8
+    21300018: HeavyFrogocidAttackOverhead_9
+    21300020: HeavyFrogocidAttackOverhead_10
+    21300022: HeavyFrogocidAttackOverhead_11
+    21300024: HeavyFrogocidAttackOverhead_12
+    21300026: HeavyFrogocidAttackOverhead_13
+    21300028: HeavyFrogocidAttackOverhead_14
+    21300030: HeavyFrogocidAttackOverhead_15
+    21300032: HeavyFrogocidAttackOverhead_16
+    21300034: HeavyFrogocidAttackOverhead_17
+    21300036: HeavyFrogocidAttackOverhead_18
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -32,24 +51,24 @@ TextureImporter:
     filterMode: -1
     aniso: -1
     mipBias: -1
-    wrapU: -1
-    wrapV: -1
+    wrapU: 1
+    wrapV: 1
     wrapW: -1
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 204
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
@@ -67,13 +86,426 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 212.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ce2fd20e0f07a84b8d0f620f32e31e4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_1
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 212.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95f22feed1d70ca4c8ddd9ae8e117820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_2
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 212.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 853e7e40addd4304ea8b3d2989fbef4d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_3
+      rect:
+        serializedVersion: 2
+        x: 1029
+        y: 212.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a55b72403aff38943af74f7404b8a8af
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_4
+      rect:
+        serializedVersion: 2
+        x: 1372
+        y: 212.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c22506f7448b0c449a8a47f5842a18ca
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_5
+      rect:
+        serializedVersion: 2
+        x: 1715
+        y: 212.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b3f1c4d5848ee342898a5b1115e2103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_6
+      rect:
+        serializedVersion: 2
+        x: 2058
+        y: 212.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e41e07a3a87336c4ca50c1a795a8b02b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_7
+      rect:
+        serializedVersion: 2
+        x: 2401
+        y: 212.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e842e86336650147adf333bc4c51b4c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_8
+      rect:
+        serializedVersion: 2
+        x: 2744
+        y: 212.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea0c139c267bf774a9e5e7d4b4e89eba
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_9
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 212.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7f1a2ee9eafe2d4891d3e53356b7a32
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26f268f88ef4672478350a2fa5c22b96
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_11
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 0.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19233bd72cbb4f841a0da197a6ce6b3e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_12
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 0.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5325fd3edbcf964e8ff8bbcab3d9819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_13
+      rect:
+        serializedVersion: 2
+        x: 1029
+        y: 0.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f6b90a8a9d995348905ac48d9b1e8e9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_14
+      rect:
+        serializedVersion: 2
+        x: 1372
+        y: 0.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 135994b2f0cf0e04e8ca3e4a0237620d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_15
+      rect:
+        serializedVersion: 2
+        x: 1715
+        y: 0.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2123e09b3c8ea448bc6bcb673b133f6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_16
+      rect:
+        serializedVersion: 2
+        x: 2058
+        y: 0.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a28284d6c3edd464db5c01c91d1bd687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_17
+      rect:
+        serializedVersion: 2
+        x: 2401
+        y: 0.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd9626ce9644c9f4aa317d516f924d9c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeavyFrogocidAttackOverhead_18
+      rect:
+        serializedVersion: 2
+        x: 2744
+        y: 0.5
+        width: 343.1
+        height: 212.5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c75e0e9c8c021a419eb6882f75af96c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b2758a13929f8204894b75a200e658f2
     vertices: []
     indices: 
     edges: []

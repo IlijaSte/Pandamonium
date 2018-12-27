@@ -6,4 +6,6 @@ public class PrefabHolder : MonoBehaviour {
 
     public GameObject coin;
     public GameObject key;
+
+    public GameObject blueprint;
 }

@@ -7,6 +7,8 @@ public class FrogAnimation : CharacterAnimation
 {
     AttackingCharacter.PlayerState state;
 
+    public bool isElite = false;
+
     protected override void Start()
     {
         base.Start();
@@ -48,16 +50,32 @@ public class FrogAnimation : CharacterAnimation
                     animator.SetBool("Attacking", true);
                     break;
                 case AttackingCharacter.PlayerState.IMMOBILE:
-                    if (transform.parent && transform.parent.GetComponent<Frogocite>().isJumping)
+                    if (transform.parent && ((!isElite && transform.parent.GetComponent<Frogocite>().isJumping) || (isElite && transform.parent.GetComponent<HeavyFrogo>().isJumping)))
                     {
                         animator.SetBool("Jumping", true);
                     }
-                    if (transform.parent.GetComponent<Frogocite>().isDead)
+                    else
+                    {
+                        animator.SetBool("Jumping", false);
+                    }
+                    if (transform.parent.GetComponent<Enemy>().isDead)
                     {
                         animator.SetBool("Dying", true);
                     }
                     break;
 
+            }
+        }
+        else
+        {
+            switch (state)
+            {
+                case AttackingCharacter.PlayerState.IMMOBILE:
+                    if (isElite && transform.parent && transform.parent.GetComponent<HeavyFrogo>().isStunned)
+                    {
+                        animator.SetBool("Jumping", false);
+                    }
+                    break;
             }
         }
 

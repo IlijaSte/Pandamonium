@@ -2,29 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPool : MonoBehaviour {
+public class HealthPool : InteractableObject {
 
     public float healAmount = 100;
 
     public Sprite emptySprite;
 
-    [HideInInspector]
-    public bool canReactivate = false;
-
     private bool healed = false;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public override void Activate()
     {
 
-        if (!canReactivate && healed) return;
+        GameManager.I.playerInstance.Heal(50, true);
+        if (!canReactivate)
+            GetComponent<SpriteRenderer>().sprite = emptySprite;
 
-        if(collision.transform.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
-        {
-            GameManager.I.playerInstance.Heal(50, true);
-            if(!canReactivate)
-                GetComponent<SpriteRenderer>().sprite = emptySprite;
+        base.Activate();
 
-            healed = true;
-        }
     }
 }

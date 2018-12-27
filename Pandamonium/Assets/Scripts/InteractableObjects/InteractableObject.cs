@@ -12,6 +12,9 @@ public class InteractableObject : MonoBehaviour {
 
     protected bool activated = false;
 
+    [HideInInspector]
+    public bool canReactivate = false;
+
     protected virtual void Start()
     {
         GetComponentInChildren<SpriteRenderer>().sortingOrder = -Mathf.RoundToInt(transform.parent.position.y * 100);
@@ -22,14 +25,19 @@ public class InteractableObject : MonoBehaviour {
         // action at the end of animation
         activated = true;
         interactable = false;
-        (GameManager.I.playerInstance as PlayerWithJoystick).ActionChange(PlayerWithJoystick.ActionChangeType.SWAP_TO_WEAPON, transform);
+
+        if(!canReactivate)
+            (GameManager.I.playerInstance as PlayerWithJoystick).ActionChange(PlayerWithJoystick.ActionChangeType.SWAP_TO_WEAPON, transform);
     }
 
     public virtual bool StartActivating()
     {
-        if (!activated)
+        if (!activated || canReactivate)
         {
-            GetComponentInChildren<Animator>().SetTrigger("Activate");
+            if (GetComponentInChildren<Animator>())
+                GetComponentInChildren<Animator>().SetTrigger("Activate");
+            else
+                Activate();
             return true;
         }
         else
@@ -42,7 +50,7 @@ public class InteractableObject : MonoBehaviour {
     {
         PlayerWithJoystick player = collision.GetComponent<PlayerWithJoystick>();
 
-        if (interactable && player)
+        if (player && (interactable || canReactivate))
         {
             player.ActionChange(action, transform);
         }
@@ -52,7 +60,7 @@ public class InteractableObject : MonoBehaviour {
     {
         PlayerWithJoystick player = collision.GetComponent<PlayerWithJoystick>();
 
-        if (interactable && player)
+        if (player && (interactable || canReactivate))
         {
             player.ActionChange(PlayerWithJoystick.ActionChangeType.SWAP_TO_WEAPON, transform);
         }
