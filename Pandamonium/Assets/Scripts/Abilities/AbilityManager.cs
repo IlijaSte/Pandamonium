@@ -159,19 +159,30 @@ public class AbilityManager : MonoBehaviour {
                                 StartCoroutine(GlobalCooldown());
                             }
                         }
-                        else
+                        /*else
                         {
                             CanvasGroup joystickGroup = UIManager.I.abilityButtonHolders[index].GetComponentInChildren<CanvasGroup>();
 
                             joystickGroup.alpha = 1;
-                        }
+                        }*/
 
                     }
                 }
                 else
                 {
                     (abilities[index] as ChannelingAbility).StartChanneling();
+                    //CanvasGroup joystickGroup = UIManager.I.abilityButtonHolders[index].GetComponentInChildren<CanvasGroup>();
+
+                    //joystickGroup.alpha = 1;
                 }
+            }
+
+            if (!(abilities[index] is Dash))
+            {
+
+                CanvasGroup joystickGroup = UIManager.I.abilityButtonHolders[index].GetComponentInChildren<CanvasGroup>();
+
+                joystickGroup.alpha = 1;
             }
         }
         else
@@ -205,15 +216,20 @@ public class AbilityManager : MonoBehaviour {
         if (abilities.Count - 1 < abilityIndex)
             return;
 
+        CanvasGroup joystickGroup = UIManager.I.abilityButtonHolders[abilityIndex].GetComponentInChildren<CanvasGroup>();
+
         if (abilities[abilityIndex] is ChannelingAbility)
         {
             (abilities[abilityIndex] as ChannelingAbility).StopChanneling();
+            //CanvasGroup joystickGroup = UIManager.I.abilityButtonHolders[abilityIndex].GetComponentInChildren<CanvasGroup>();
+
+            //joystickGroup.alpha = 0;
         }
         else if (!(abilities[abilityIndex] is Dash))
         {
-            CanvasGroup joystickGroup = UIManager.I.abilityButtonHolders[abilityIndex].GetComponentInChildren<CanvasGroup>();
+            //CanvasGroup joystickGroup = UIManager.I.abilityButtonHolders[abilityIndex].GetComponentInChildren<CanvasGroup>();
 
-            joystickGroup.alpha = 0;
+            //joystickGroup.alpha = 0;
             //joystickGroup.blocksRaycasts = false;
 
             if (abilities[abilityIndex].TryCast(parent.transform.position, joystickGroup.GetComponentInChildren<JoystickController>().lastInputDirection.normalized))
@@ -222,15 +238,23 @@ public class AbilityManager : MonoBehaviour {
                 StartCoroutine(GlobalCooldown());
             }
         }
+
+        //CanvasGroup joystickGroup = UIManager.I.abilityButtonHolders[abilityIndex].GetComponentInChildren<CanvasGroup>();
+
+        joystickGroup.alpha = 0;
     }
 
     public void DragAbility(int index)
     {
-        print("drag");
         CanvasGroup joystickGroup = UIManager.I.abilityButtonHolders[index].GetComponentInChildren<CanvasGroup>();
 
-
         autolock.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, joystickGroup.GetComponentInChildren<JoystickController>().InputDirection.normalized));
+        
+        if(abilities[index] is ChannelingAbility)
+        {
+            (abilities[index] as ChannelingAbility).RotateChannel(joystickGroup.GetComponentInChildren<JoystickController>().InputDirection.normalized);
+        }
+
     }
 
     public void UpdateAbilityCooldown(Ability ability, float progress)

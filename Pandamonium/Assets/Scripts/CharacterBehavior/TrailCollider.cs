@@ -7,16 +7,22 @@ public class TrailCollider : HazardousArea<PlayerWithJoystick> {
     public float damageInterval;
     public float damage = 5;
 
+    [HideInInspector]
+    public float streakMultiplier = 5f;
+
     private bool inside = false;
+
+    private int dmgStreak = 0;
 
     private void Update()
     {
         if(Time.time - lastDamage >= damageInterval)
         {
-            DealDamage(damage);
+            DealDamage(damage + dmgStreak * streakMultiplier);
+            dmgStreak++;
+            lastDamage = Time.time;
         }
     }
-
 
     IEnumerator ColliderLifecycle(BoxCollider2D collider, float time, float minSize, float maxSize)
     {
@@ -61,7 +67,6 @@ public class TrailCollider : HazardousArea<PlayerWithJoystick> {
             }
         }
 
-        lastDamage = Time.time;
     }
 
     protected override void OnCharacterEnter(PlayerWithJoystick character)
@@ -71,12 +76,17 @@ public class TrailCollider : HazardousArea<PlayerWithJoystick> {
             character.speed = character.normalSpeed * 0.5f;
             lastDamage = Time.time;
             inside = true;
+            dmgStreak = 0;
         }
     }
 
     protected override void OnCharacterExit(PlayerWithJoystick character)
     {
-        character.speed = character.normalSpeed;
-        inside = false;
+        if (inside)
+        {
+            character.speed = character.normalSpeed;
+            inside = false;
+            dmgStreak = 0;
+        }
     }
 }

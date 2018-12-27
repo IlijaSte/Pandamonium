@@ -9,7 +9,7 @@ public class EventShrine : InteractableObject {
 
     public override void Activate()
     {
-        //base.Activate();
+        base.Activate();
 
         ShrineEvent newEvent = null;
 
@@ -25,6 +25,5 @@ public class EventShrine : InteractableObject {
         if(newEvent != null)
             Instantiate(newEvent, transform);
 
-        //interactable = false;
     }
 }

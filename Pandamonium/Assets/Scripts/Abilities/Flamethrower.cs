@@ -9,6 +9,8 @@ public class Flamethrower : ChannelingAbility {
 
     public float flameArcAngle = 60;
 
+    private Vector2 direction;
+
     protected override void Start()
     {
         base.Start();
@@ -33,6 +35,18 @@ public class Flamethrower : ChannelingAbility {
         //}
     }
 
+    public override void RotateChannel(Vector2 direction)
+    {
+        base.RotateChannel(direction);
+
+        Quaternion rot = Quaternion.LookRotation(Vector3.forward, direction);
+        area.transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90 - flameArcAngle / 2);
+
+        ParticleSystem.ShapeModule shape = ps.shape;
+        shape.rotation = new Vector3(0, 0, rot.eulerAngles.z + 90 - flameArcAngle / 2);
+
+    }
+
     protected override void DoTick()
     {
         base.DoTick();
@@ -50,11 +64,11 @@ public class Flamethrower : ChannelingAbility {
     protected override void Update()
     {
 
-        Quaternion rot = Quaternion.LookRotation(Vector3.forward, am.parent.GetFacingDirection());
+        /*Quaternion rot = Quaternion.LookRotation(Vector3.forward, am.parent.GetFacingDirection());
         area.transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90 - flameArcAngle / 2);
 
         ParticleSystem.ShapeModule shape = ps.shape;
-        shape.rotation = new Vector3(0, 0, rot.eulerAngles.z + 90 - flameArcAngle / 2);
+        shape.rotation = new Vector3(0, 0, rot.eulerAngles.z + 90 - flameArcAngle / 2);*/
 
         base.Update();
     }

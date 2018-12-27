@@ -17,7 +17,8 @@ public class StoryBoxManager : MonoBehaviour {
 
     public float endY;
 
-    private bool isShown = false;
+    [HideInInspector]
+    public bool isShown = false;
 
     private Canvas canvas;
 

@@ -21,6 +21,11 @@ public class ChannelingAbility : Ability {
         isChanneling = false;
     }
 
+    public virtual void RotateChannel(Vector2 direction)
+    {
+
+    }
+
     protected override void Update()
     {
         if (isChanneling)

@@ -167,12 +167,6 @@ Prefab:
       propertyPath: controller
       value: 
       objectReference: {fileID: 257441337}
-    - target: {fileID: 114038679715605228, guid: a4a944a6b0dbeac488a74ec4dbd1b5bf,
-        type: 2}
-      propertyPath: abilityPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 1114731285113550, guid: da061df1e586eb34d933b5fdbd6b3e34,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a4a944a6b0dbeac488a74ec4dbd1b5bf, type: 2}
   m_IsPrefabParent: 0
@@ -825,7 +819,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 60006980}
   m_Script: {fileID: 11500000, guid: 191a3998705aa6049809f47b12800b65, type: 3}
---- !u!84 &1021280779
+--- !u!84 &1041354271
 RenderTexture:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1454,7 +1448,7 @@ Prefab:
         type: 2}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 1021280779}
+      objectReference: {fileID: 1041354271}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 183980faa4eecda4cb2f751ff77af8e4, type: 2}
   m_IsPrefabParent: 0

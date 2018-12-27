@@ -8,6 +8,8 @@ public class TrailColliderSpawner : MonoBehaviour {
     public float damageTick = 1;
     public float colliderSize;
 
+    public float dmgStreakMultiplier = 5;
+
     public AttackingCharacter parent;
 
     private float time;
@@ -55,6 +57,7 @@ public class TrailColliderSpawner : MonoBehaviour {
         tc = childObj.AddComponent<TrailCollider>();
         tc.damage = damage;
         tc.damageInterval = damageTick;
+        tc.streakMultiplier = dmgStreakMultiplier;
 
         if(parent == null)
         {

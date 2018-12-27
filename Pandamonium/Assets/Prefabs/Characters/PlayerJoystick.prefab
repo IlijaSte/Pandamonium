@@ -774,11 +774,12 @@ MonoBehaviour:
   abilityPrefabs:
   - {fileID: 1191792085917580, guid: 3c8c5ccc723a01c41938cea664b642e0, type: 2}
   - {fileID: 1114731285113550, guid: da061df1e586eb34d933b5fdbd6b3e34, type: 2}
-  - {fileID: 1779642358091622, guid: d5e218ab773d86149a1bc724528eee88, type: 2}
   - {fileID: 1657346493881052, guid: ed157ce01ec166c498164ddb861b9cdd, type: 2}
-  - {fileID: 1114731285113550, guid: da061df1e586eb34d933b5fdbd6b3e34, type: 2}
+  - {fileID: 1779642358091622, guid: d5e218ab773d86149a1bc724528eee88, type: 2}
   parent: {fileID: 114562331877149714}
   autolock: {fileID: 114263618082645028}
+  globalCooldown: 0.5
+  globalCDProgress: 0
 --- !u!114 &114076633458484650
 MonoBehaviour:
   m_ObjectHideFlags: 1

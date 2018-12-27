@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1597709171064980}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.494, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -86,7 +86,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &114383437774127304
 MonoBehaviour:
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97fdafe12197cf4ba21c7033cdf2123, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPullDistance: 1
   abilities:
   - {fileID: 114787831140699932, guid: 7c852484e13400649bb9296a6248e244, type: 2}
   - {fileID: 114420880157988960, guid: ed157ce01ec166c498164ddb861b9cdd, type: 2}
