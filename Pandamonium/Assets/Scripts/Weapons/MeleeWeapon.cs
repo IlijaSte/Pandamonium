@@ -45,7 +45,7 @@ public class MeleeWeapon : Weapon
         if(animator)
             animator.WeaponStrike();
 
-        List<Transform> visibleTargets = new List<Transform>();
+        /*List<Transform> visibleTargets = new List<Transform>();
 
         float lockRadius = range;
 
@@ -70,18 +70,36 @@ public class MeleeWeapon : Weapon
                 }
             }
 
-        }
+        }*/
+
+        print("in autolock range: " + autolock.enemiesInRange.Count);
+        print("in weapon range: " + enemiesInRange.Count);
 
         int damagedTargets = 0;
-        foreach(Transform target in visibleTargets)
+        /*for(int i = 0; i < autolock.enemiesInRange.Count; i++)
         {
-            if (Damage(target, damageAddition))
+            target = autolock.enemiesInRange;
+            if (target != null && IsInRange(target) && Damage(target, damageAddition))
+            {
+                damagedTargets++;
+            }
+        }*/
+
+        Transform[] inRange = new Transform[autolock.enemiesInRange.Count];
+
+        autolock.enemiesInRange.CopyTo(inRange);
+
+        foreach(Transform target in inRange)
+        {
+            if (target != null && IsInRange(target) && Damage(target, damageAddition))
             {
                 damagedTargets++;
             }
         }
 
         timeToAttack = 1;
+
+        print("damaged: " + damagedTargets.ToString());
 
         return damagedTargets;
     }

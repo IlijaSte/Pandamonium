@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class AbilityManager : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class AbilityManager : MonoBehaviour {
     protected List<Ability> abilities;
 
     public AttackingCharacter parent;
+
+    public AutolockTracker autolock;
 
     void Start()
     {
@@ -138,8 +141,22 @@ public class AbilityManager : MonoBehaviour {
             if ((parent as PlayerWithJoystick).energy >= abilities[index].manaCost)
             {
                 if (!(abilities[index] is ChannelingAbility)) {
-                    if(abilities[index].TryCast(parent.transform.position, parent.GetFacingDirection()))
-                        (parent as PlayerWithJoystick).DecreaseEnergy(abilities[index].manaCost);
+
+                    if (abilities[index].CanCast())
+                    {
+                        if (abilities[index] is Dash)
+                        {
+                            if (abilities[index].TryCast(parent.transform.position, parent.GetFacingDirection()))
+                                (parent as PlayerWithJoystick).DecreaseEnergy(abilities[index].manaCost);
+                        }
+                        else
+                        {
+                            CanvasGroup joystickGroup = UIManager.I.abilityButtonHolders[index].GetComponentInChildren<CanvasGroup>();
+
+                            joystickGroup.alpha = 1;
+                        }
+
+                    }
                 }
                 else
                 {
@@ -162,6 +179,25 @@ public class AbilityManager : MonoBehaviour {
         {
             (abilities[abilityIndex] as ChannelingAbility).StopChanneling();
         }
+        else if (!(abilities[abilityIndex] is Dash))
+        {
+            CanvasGroup joystickGroup = UIManager.I.abilityButtonHolders[abilityIndex].GetComponentInChildren<CanvasGroup>();
+
+            joystickGroup.alpha = 0;
+            //joystickGroup.blocksRaycasts = false;
+
+            if (abilities[abilityIndex].TryCast(parent.transform.position, joystickGroup.GetComponentInChildren<JoystickController>().lastInputDirection.normalized))
+                (parent as PlayerWithJoystick).DecreaseEnergy(abilities[abilityIndex].manaCost);
+        }
+    }
+
+    public void DragAbility(int index)
+    {
+        print("drag");
+        CanvasGroup joystickGroup = UIManager.I.abilityButtonHolders[index].GetComponentInChildren<CanvasGroup>();
+
+
+        autolock.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, joystickGroup.GetComponentInChildren<JoystickController>().InputDirection.normalized));
     }
 
     public void UpdateAbilityCooldown(Ability ability, float progress)

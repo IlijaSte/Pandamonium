@@ -22,6 +22,7 @@ public abstract class Weapon : MonoBehaviour {
     protected ArrayList enemiesInRange = new ArrayList();                                                                                                                     //DZO JE SERONJA!!! 09.18.2018. Djole :)
 
     public AttackingCharacter parent;
+    public AutolockTracker autolock;
 
     virtual public void StartAttacking(Transform target)
     {
@@ -61,6 +62,11 @@ public abstract class Weapon : MonoBehaviour {
         if(parent == null)
         {
             parent = transform.parent.parent.GetComponent<AttackingCharacter>();
+        }
+
+        if(autolock == null)
+        {
+            autolock = transform.parent.GetComponentInChildren<AutolockTracker>();
         }
     }
 

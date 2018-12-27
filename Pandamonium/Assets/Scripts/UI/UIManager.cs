@@ -121,11 +121,13 @@ public class UIManager : MonoBehaviour {
     public void DisableAbilityButton(int index)
     {
         abilityButtonHolders[index].GetChild(1).GetComponent<Image>().enabled = false;
+        abilityButtonHolders[index].GetComponentInChildren<CanvasGroup>().blocksRaycasts = false;
     }
 
     public void EnableAbilityButton(int index)
     {
         abilityButtonHolders[index].GetChild(1).GetComponent<Image>().enabled = true;
+        abilityButtonHolders[index].GetComponentInChildren<CanvasGroup>().blocksRaycasts = true;
     }
 
     public void ShowKey()

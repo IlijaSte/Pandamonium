@@ -353,6 +353,96 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Attack
       objectReference: {fileID: 0}
+    - target: {fileID: 114937437175497400, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1286636351}
+    - target: {fileID: 114937437175497400, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 114937437175497400, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1286636351}
+    - target: {fileID: 114937437175497400, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StopUsingAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 114937437175497400, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1286636351}
+    - target: {fileID: 114937437175497400, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DragAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 114229428921060244, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1286636351}
+    - target: {fileID: 114229428921060244, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 114229428921060244, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1286636351}
+    - target: {fileID: 114229428921060244, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StopUsingAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 114229428921060244, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1286636351}
+    - target: {fileID: 114229428921060244, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DragAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 114675617495912854, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1286636351}
+    - target: {fileID: 114675617495912854, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 114675617495912854, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1286636351}
+    - target: {fileID: 114675617495912854, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StopUsingAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 114675617495912854, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1286636351}
+    - target: {fileID: 114675617495912854, guid: c41a7d346eef8414b96565b8583e45f4,
+        type: 2}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DragAbility
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c41a7d346eef8414b96565b8583e45f4, type: 2}
   m_IsPrefabParent: 0
@@ -1200,7 +1290,7 @@ Prefab:
         type: 2}
       propertyPath: controller
       value: 
-      objectReference: {fileID: 1639711125}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a4a944a6b0dbeac488a74ec4dbd1b5bf, type: 2}
   m_IsPrefabParent: 0
@@ -1209,6 +1299,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4505154834509626, guid: a4a944a6b0dbeac488a74ec4dbd1b5bf,
     type: 2}
   m_PrefabInternal: {fileID: 1286636349}
+--- !u!114 &1286636351 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114038679715605228, guid: a4a944a6b0dbeac488a74ec4dbd1b5bf,
+    type: 2}
+  m_PrefabInternal: {fileID: 1286636349}
+  m_Script: {fileID: 11500000, guid: 5ffe92918d67e0a4e8040576941d78c6, type: 3}
 --- !u!1839735485 &1308704128 stripped
 Tilemap:
   m_PrefabParentObject: {fileID: 8195094281207497108, guid: 2f12ed792073b0d42b9b173050dfe60c,
@@ -1281,12 +1377,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 257441336}
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
---- !u!114 &1639711125 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114893526365741162, guid: c41a7d346eef8414b96565b8583e45f4,
-    type: 2}
-  m_PrefabInternal: {fileID: 257441336}
-  m_Script: {fileID: 11500000, guid: 58a181be88e713e4984d7ff7e061b50f, type: 3}
 --- !u!224 &1772816252 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224045791293219484, guid: c41a7d346eef8414b96565b8583e45f4,
@@ -1297,37 +1387,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224575240444845324, guid: c41a7d346eef8414b96565b8583e45f4,
     type: 2}
   m_PrefabInternal: {fileID: 257441336}
---- !u!84 &1838090417
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: SpriteLightKit RT
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 580
-  m_Height: 326
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 0
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1908060201
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,7 +1463,7 @@ Prefab:
         type: 2}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 1838090417}
+      objectReference: {fileID: 1981738037}
     - target: {fileID: 114519924169131814, guid: 183980faa4eecda4cb2f751ff77af8e4,
         type: 2}
       propertyPath: spriteLightRT
@@ -1418,3 +1477,34 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 183980faa4eecda4cb2f751ff77af8e4, type: 2}
   m_IsPrefabParent: 0
+--- !u!84 &1981738037
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SpriteLightKit RT
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 580
+  m_Height: 326
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 0
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1

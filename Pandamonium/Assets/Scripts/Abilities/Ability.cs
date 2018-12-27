@@ -34,10 +34,16 @@ public class Ability : MonoBehaviour {
         cdProgress = 0;
     }
 
+    public virtual bool CanCast()
+    {
+        return (cdProgress >= cooldown);
+    }
+
 	public virtual bool TryCast(Vector2 fromPosition, Vector2 direction)
     {
         if(cdProgress >= cooldown)
         {
+            am.autolock.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, direction));
             Cast(fromPosition, direction);
             return true;
         }
@@ -57,7 +63,9 @@ public class Ability : MonoBehaviour {
     protected virtual Transform GetFacingEnemy()
     {
 
-        float lockRadius = range;
+        return am.autolock.GetClosest();
+
+        /*float lockRadius = range;
 
         float minDistance = Mathf.Infinity;
         Transform closestTarget = null;
@@ -85,6 +93,6 @@ public class Ability : MonoBehaviour {
 
         }
 
-        return closestTarget;
+        return closestTarget;*/
     }
 }

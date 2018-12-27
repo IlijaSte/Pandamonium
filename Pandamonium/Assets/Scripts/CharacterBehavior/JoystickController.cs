@@ -9,6 +9,8 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerUpHandler
     public Image bgImg, jsImg;
     public Vector2 InputDirection { set; get; }
 
+    public Vector2 lastInputDirection { set; get; }
+
     private void Start()
     {
         bgImg = GetComponent<Image>();
@@ -45,6 +47,7 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerUpHandler
     }
     public virtual void OnPointerUp(PointerEventData ped)
     {
+        lastInputDirection = InputDirection;
         InputDirection = Vector3.zero;
         jsImg.rectTransform.anchoredPosition = Vector3.zero;
     }
