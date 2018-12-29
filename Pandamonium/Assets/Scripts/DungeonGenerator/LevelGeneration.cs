@@ -85,7 +85,8 @@ public class LevelGeneration : MonoBehaviour
     [HideInInspector]
     public Vector2 bossRoomSpawn;
 
-    protected Room bossRoom;
+    [HideInInspector]
+    public Room bossRoom;
 
     public static LevelGeneration I
     {
@@ -410,8 +411,10 @@ public class LevelGeneration : MonoBehaviour
     {
         if (GameManager.I.IsBossLevel())
         {
-            //Vector2 bossSpawnPos = bossRoom.getRoomHolder().transform.position;
-            //Instantiate(bossPrefab, bossSpawnPos, Quaternion.identity, enemyParent);
+            Vector2 bossSpawnPos = bossRoom.getRoomHolder().transform.position;
+            GameObject boss = Instantiate(bossPrefab, bossSpawnPos, Quaternion.identity, enemyParent);
+
+            boss.GetComponent<Boss>().room = bossRoom;
         }
     }
 

@@ -20,7 +20,8 @@ public class Enemy : AttackingCharacter {
 
     protected Vector2 startPos;
 
-    protected Room room;
+    [HideInInspector]
+    public Room room = null;
 
     protected bool detectedPlayer = false;
 
@@ -40,7 +41,9 @@ public class Enemy : AttackingCharacter {
 
         type = CharacterType.ENEMY;
 
-        room = LevelGeneration.I.GetRoomAtPos(transform.position);
+        if(room == null)
+            room = LevelGeneration.I.GetRoomAtPos(transform.position);
+
         startPos = transform.position;
 
         if (path)
@@ -171,7 +174,7 @@ public class Enemy : AttackingCharacter {
                         CM.MoveToPosition(target.position);
                     }
 
-                    if (LevelGeneration.I.GetRoomAtPos(target.position) != room)
+                    if (transform.GetComponent<AttackingCharacter>().GetRoom() != room)
                     {
                         MoveToPosition(startPos);
                         detectedPlayer = false;
@@ -199,7 +202,7 @@ public class Enemy : AttackingCharacter {
                         StopAttacking();
                         Attack(tempTarget);
                     }
-                    if (LevelGeneration.I.GetRoomAtPos(target.position) != room)
+                    if (transform.GetComponent<AttackingCharacter>().GetRoom() != room)
                     {
                         MoveToPosition(startPos);
                         detectedPlayer = false;
@@ -214,6 +217,7 @@ public class Enemy : AttackingCharacter {
                     if (!path.pathPending && (path.reachedEndOfPath || !path.hasPath))      // ako je stigao do destinacije
                     {
                         playerState = PlayerState.IDLE;
+                        OnReachedDestination();
                     }else
 
                     if (((Vector2)path.destination).Equals(startPos))      // ako se vraca na mesto
@@ -253,6 +257,11 @@ public class Enemy : AttackingCharacter {
         base.Update();
     }
 
+    protected virtual void OnReachedDestination()
+    {
+
+    }
+
     public override bool TakeDamage(float damage)
     {
         bool takenDamage = base.TakeDamage(damage);
@@ -276,6 +285,9 @@ public class Enemy : AttackingCharacter {
 
         if (path)
             path.enabled = false;
+
+        if (rb)
+            rb.velocity = Vector2.zero;
 
         playerState = PlayerState.IMMOBILE;
 

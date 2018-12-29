@@ -26,18 +26,24 @@ public class InteractableObject : MonoBehaviour {
         activated = true;
         interactable = false;
 
-        if(!canReactivate)
-            (GameManager.I.playerInstance as PlayerWithJoystick).ActionChange(PlayerWithJoystick.ActionChangeType.SWAP_TO_WEAPON, transform);
     }
 
     public virtual bool StartActivating()
     {
         if (!activated || canReactivate)
         {
+
+            if (!canReactivate)
+                (GameManager.I.playerInstance as PlayerWithJoystick).ActionChange(PlayerWithJoystick.ActionChangeType.SWAP_TO_WEAPON, transform);
+
+            activated = true;
+            interactable = false;
+
             if (GetComponentInChildren<Animator>())
                 GetComponentInChildren<Animator>().SetTrigger("Activate");
             else
                 Activate();
+
             return true;
         }
         else

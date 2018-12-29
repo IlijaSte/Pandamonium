@@ -50,7 +50,7 @@ public class FrogAnimation : CharacterAnimation
                     animator.SetBool("Attacking", true);
                     break;
                 case AttackingCharacter.PlayerState.IMMOBILE:
-                    if (transform.parent && ((!isElite && transform.parent.GetComponent<Frogocite>().isJumping) || (isElite && transform.parent.GetComponent<HeavyFrogo>().isJumping)))
+                    if (transform.parent && ((!isElite && transform.parent.GetComponent<Frogocite>() && transform.parent.GetComponent<Frogocite>().isJumping) || (isElite && transform.parent.GetComponent<HeavyFrogo>().isJumping)))
                     {
                         animator.SetBool("Jumping", true);
                     }
@@ -71,7 +71,7 @@ public class FrogAnimation : CharacterAnimation
             switch (state)
             {
                 case AttackingCharacter.PlayerState.IMMOBILE:
-                    if (isElite && transform.parent && transform.parent.GetComponent<HeavyFrogo>().isStunned)
+                    if (isElite && transform.parent && (transform.parent.GetComponent<HeavyFrogo>() == null || transform.parent.GetComponent<HeavyFrogo>().isStunned))
                     {
                         animator.SetBool("Jumping", false);
                     }

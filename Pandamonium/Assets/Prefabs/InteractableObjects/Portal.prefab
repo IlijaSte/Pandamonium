@@ -127,6 +127,8 @@ MonoBehaviour:
   stories:
   - where am i?
   - well, better start exploring
+  level: 0
+  activated: 0
 --- !u!114 &114475588069911688
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,6 +140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec8c52aa6dcd96f4091999ea867f1c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  action: 0
+  interactable: 1
+  canReactivate: 0
   type: 2
 --- !u!212 &212915716204458174
 SpriteRenderer:
@@ -171,8 +176,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -183264855
-  m_SortingLayer: 1
+  m_SortingLayerID: -2025459693
+  m_SortingLayer: 2
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 582674bf7b33e9a47b288ac2f49c60d8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

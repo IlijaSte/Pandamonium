@@ -614,6 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe7d1e00eeea364e929bf29388eb4cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isElite: 1
 --- !u!114 &114733104367778590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -776,6 +777,7 @@ MonoBehaviour:
   selfStunDuration: 4
   selfStunJumps: 3
   selfStunsToEnrage: 3
+  isStunned: 0
   jumpSpeed: 0
   maxJumpRange: 4
   primaryIndicatorPrefab: {fileID: 1677782040419512, guid: d354f95f8310c1f418e1347aa9aa7874,

@@ -249,7 +249,7 @@ public class GameManager : MonoBehaviour {
 
     public bool IsBossLevel()
     {
-        return (currentLevel + 1) % 3 == 0;
+        return currentLevel > 0 && (currentLevel + 1) % 3 == 0;
     }
 
     // ovo nadalje smestiti u scene manager neki

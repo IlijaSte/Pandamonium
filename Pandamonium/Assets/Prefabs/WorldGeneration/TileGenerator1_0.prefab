@@ -71,7 +71,7 @@ MonoBehaviour:
   bossPrefab: {fileID: 0}
   roomPrefabs:
   - {fileID: 1062512608064458, guid: 424b3ed87e137dc4eb52f05f0051eab9, type: 2}
-  firstRoomPrefab: {fileID: 1021458116984078, guid: c5605b4466c9d1149b4f85722e6bb48c,
+  firstRoomPrefab: {fileID: 1021458116984078, guid: 81d2576723bce3f40a769b8cef47e49e,
     type: 2}
   lastRoomPrefab: {fileID: 0}
   bossRoomPrefab: {fileID: 0}

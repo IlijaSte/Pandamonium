@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class PortalTrigger : MonoBehaviour {
+public class PortalTrigger : InteractableObject {
 
     public enum PortalType { ENTRY, TO_BOSS, END_OF_LEVEL}
 
@@ -11,25 +11,33 @@ public class PortalTrigger : MonoBehaviour {
 
     private Animator animator;
 
-    private bool activated = false;
-
-    private void Start()
+    protected override void Start()
     {
-        animator = GetComponent<Animator>();
 
-        if(type == PortalType.ENTRY)
+        base.Start();
+
+        GetComponentInChildren<SpriteRenderer>().sortingOrder = -Mathf.RoundToInt((transform.position.y - 2) * 100);
+
+        //animator = GetComponent<Animator>();
+
+        animator = GetComponentInChildren<Animator>();
+
+        if (type == PortalType.ENTRY)
         {
             animator.SetTrigger("Activate");
+            interactable = false;
         }
 
-        activated = false;
+        //activated = false;
     }
 
-    public void OnActivated()
+    public override void Activate()
     {
-        if(animator.speed > 0)      // aktivirao se
+        base.Activate();
+
+        if (animator.speed > 0)      // aktivirao se
         {
-            activated = true;
+            //activated = true;
 
             switch (type)
             {
@@ -37,20 +45,21 @@ public class PortalTrigger : MonoBehaviour {
                 case PortalType.TO_BOSS:
 
                     (GameManager.I.playerInstance as PlayerWithJoystick).Teleport(LevelGeneration.I.bossRoomSpawn);
+
                     break;
 
                 case PortalType.END_OF_LEVEL:
                     MenuManager.I.ShowMenu(MenuManager.I.gameEndMenu);
-                    activated = false;                                  // !!!
+                    //activated = false;                                  // !!!
                     break;
             }
 
         }
-
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
+        base.OnTriggerEnter2D(collision);
 
         if(collision.GetComponent<AttackingCharacter>() == GameManager.I.playerInstance)
         {
@@ -62,15 +71,6 @@ public class PortalTrigger : MonoBehaviour {
                     animator.SetTrigger("Deactivate");
                     break;
 
-                case PortalType.TO_BOSS:
-                    animator.SetTrigger("Activate");
-                    //player.Teleport(LevelGeneration.I.bossRoomSpawn);
-                    break;
-
-                case PortalType.END_OF_LEVEL:
-                    animator.SetTrigger("Activate");
-                    //MenuManager.I.ShowMenu(MenuManager.I.gameEndMenu);
-                    break;
             }
 
             

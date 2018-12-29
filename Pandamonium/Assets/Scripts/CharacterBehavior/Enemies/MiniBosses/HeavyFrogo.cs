@@ -17,6 +17,8 @@ public class HeavyFrogo : Enemy
     public int selfStunJumps = 3;
     public int selfStunsToEnrage = 3;
 
+    public float enragedSpeed = 4;
+
     private int numOfSelfStuns = 0;
 
     private int numOfJumps = 0;
@@ -233,6 +235,9 @@ public class HeavyFrogo : Enemy
         weapons[equippedWeaponIndex].damage *= 2;
         aoeDamage *= 2;
         secondaryAoeDamage *= 2;
+
+        speed = enragedSpeed;
+        path.maxSpeed = enragedSpeed;
     }
 
     protected IEnumerator SelfStun()
