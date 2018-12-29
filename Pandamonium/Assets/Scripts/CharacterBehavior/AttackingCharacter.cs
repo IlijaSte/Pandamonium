@@ -259,6 +259,7 @@ public abstract class AttackingCharacter : MonoBehaviour {
 
     public virtual void TakePoisonDamage(float damage)
     {
+
         if (GameManager.I.playerInstance == this)
         {
             UIManager.I.ShowPoisonDamage(GetComponentInChildren<Canvas>(), 1, damage);

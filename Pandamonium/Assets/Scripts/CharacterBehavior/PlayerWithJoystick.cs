@@ -51,6 +51,8 @@ public class PlayerWithJoystick : AttackingCharacter {
     [HideInInspector]
     public bool canMove = true;
 
+    private SoundController soundController;
+
     public override void Awake()
     {
         if (!GameManager.joystick)
@@ -86,6 +88,8 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
 
         speed = normalSpeed;
+
+        soundController = GetComponent<SoundController>();
 
     }
     public void AddRotation(float angle)
@@ -450,6 +454,8 @@ public class PlayerWithJoystick : AttackingCharacter {
         if (!canMove)
             return;
 
+        if(soundController) soundController.PlaySoundByName("Attack");
+
         switch (action)
         {
             case ActionType.WEAPON:
@@ -498,6 +504,7 @@ public class PlayerWithJoystick : AttackingCharacter {
             takenDamage = base.TakeDamage(damage);
 
             StartCoroutine(healthBar.FillAmount(health / maxHealth, false));
+            soundController.PlaySoundByName("TakeDamage");
         }
 
         return takenDamage;
@@ -511,6 +518,8 @@ public class PlayerWithJoystick : AttackingCharacter {
             base.TakePoisonDamage(damage);
 
             StartCoroutine(healthBar.FillAmount(health / maxHealth, false));
+
+            soundController.PlaySoundByName("TakePoisonDamage");
         }
     }
 

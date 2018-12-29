@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: 212933398877342650}
   - component: {fileID: 95701175880768276}
   - component: {fileID: 114135310921016932}
+  - component: {fileID: 114982890898609986}
   m_Layer: 15
   m_Name: EnemySprite
   m_TagString: Untagged
@@ -974,6 +975,24 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114982890898609986
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1548557022160412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f345fe921a947da41bb3ca8859e91291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - audioClip: {fileID: 8300000, guid: 8dca91d136a850d45bc77392e456eede, type: 3}
+    audioSource: {fileID: 0}
+    name: Dashing
+  - audioClip: {fileID: 8300000, guid: e59ec3801eac2304785d642ae39767b7, type: 3}
+    audioSource: {fileID: 0}
+    name: Walking
 --- !u!114 &114987825729212746
 MonoBehaviour:
   m_ObjectHideFlags: 1

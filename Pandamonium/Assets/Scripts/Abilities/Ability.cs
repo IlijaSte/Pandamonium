@@ -24,10 +24,13 @@ public class Ability : MonoBehaviour {
 
     public AbilityManager am;
 
+    private AudioSource audioSource;
+
     protected virtual void Start()
     {
         am = transform.parent.GetComponent<AbilityManager>();
         cdProgress = cooldown;
+        audioSource = GetComponent<AudioSource>();
     }
 
     protected virtual void Cast(Vector2 fromPosition, Vector2 direction)
@@ -46,6 +49,8 @@ public class Ability : MonoBehaviour {
         {
             am.autolock.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, direction));
             Cast(fromPosition, direction);
+            if (audioSource)
+                audioSource.Play();
             return true;
         }
 
