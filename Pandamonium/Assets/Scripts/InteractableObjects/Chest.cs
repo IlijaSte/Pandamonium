@@ -20,8 +20,18 @@ public class Chest : InteractableObject {
 
     public override bool StartActivating()
     {
+
+
+
         if (!locked && !activated)
         {
+
+            if (!canReactivate)
+                (GameManager.I.playerInstance as PlayerWithJoystick).ActionChange(PlayerWithJoystick.ActionChangeType.SWAP_TO_WEAPON, transform);
+
+            activated = true;
+            interactable = false;
+
             GetComponent<Animator>().SetTrigger("Activate");
             return true;
         }

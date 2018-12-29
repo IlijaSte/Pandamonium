@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class StandardEnemy : Enemy {
 
-    protected IEnumerator Frozen(float duration)
+    private volatile float freezeDuration = 0;
+
+    private Coroutine freezeCoroutine;
+
+    protected IEnumerator Frozen()
     {
         speed /= 2;
         if(path)
@@ -12,15 +16,14 @@ public class StandardEnemy : Enemy {
 
         float dur = 0;
 
-        while(dur < duration)
+        while(dur < freezeDuration)
         {
             if (isDead)
                 yield break;
 
-            ColorTransition(Color.blue);
-            yield return new WaitForSeconds(0.5f);
-            dur += 0.5f;
-            print("tick");
+            StartCoroutine(ColorTransition(Color.blue));
+            yield return new WaitForSeconds(1f);
+            dur += 1f;
         }
         
 
@@ -28,11 +31,19 @@ public class StandardEnemy : Enemy {
 
         if (path)
             path.maxSpeed *= 2;
+
+        freezeDuration = 0;
     }
 
     public void Freeze(float duration)
     {
-        StartCoroutine(Frozen(duration));
+
+        freezeDuration += duration;
+
+        if (freezeCoroutine == null)
+        {
+            freezeCoroutine = StartCoroutine(Frozen());
+        }
     }
 
     protected override void Die()
@@ -48,7 +59,7 @@ public class StandardEnemy : Enemy {
 
         room.enemies.Remove(gameObject);
 
-        if (room.enemies.Count == 0)
+        if (room != LevelGeneration.I.bossRoom && room.enemies.Count == 0)
         {
             InfoText.I.ShowMessage("clear");
 

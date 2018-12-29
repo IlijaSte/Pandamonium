@@ -554,7 +554,7 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     private void OnGUI()
     {
-        if (!(GetRoom().type == Room.RoomType.GAUNTLET))
+        if (GetRoom() == null || !(GetRoom().type == Room.RoomType.GAUNTLET))
             return;
 
         if (GUI.Button(new Rect(10, 70, 100, 30), "Spawn 3 Slimes"))

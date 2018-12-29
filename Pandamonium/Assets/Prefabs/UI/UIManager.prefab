@@ -62,11 +62,13 @@ MonoBehaviour:
   combatTextPrefab: {fileID: 114324912091261364, guid: f314e89d31251ab41a1021f4224fb2c5,
     type: 2}
   attackButton: {fileID: 0}
+  weaponSprite: {fileID: 21300000, guid: b929cd0eb211797498516d59d320737e, type: 3}
   actionButtonSprite: {fileID: 21300000, guid: e97bd408edd26f5459995a8140b974fc, type: 3}
   abilityButtonHolders:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  bossHealthBar: {fileID: 0}
   keyImage: {fileID: 0}
 --- !u!114 &114696526391286408
 MonoBehaviour:

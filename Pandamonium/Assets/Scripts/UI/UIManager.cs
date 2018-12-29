@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour {
     public Text combatTextPrefab;
 
     public Button attackButton;
+    public Sprite weaponSprite;
     public Sprite actionButtonSprite;
 
     public Transform[] abilityButtonHolders;
@@ -45,13 +46,11 @@ public class UIManager : MonoBehaviour {
         {
             //joystickCanvas.enabled = false;
         }
-    }
 
-    private Sprite weaponSprite;
+    }
 
     public void ButtonToAction(bool active = true)
     {
-        weaponSprite = attackButton.image.sprite;
         attackButton.image.sprite = actionButtonSprite;
 
         if (!active)

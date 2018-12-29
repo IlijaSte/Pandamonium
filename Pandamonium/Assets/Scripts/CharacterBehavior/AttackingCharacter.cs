@@ -107,7 +107,15 @@ public abstract class AttackingCharacter : MonoBehaviour {
 
     public Room GetRoom()
     {
-        return LevelGeneration.I.GetRoomAtPos(transform.position);
+
+        Room ret = LevelGeneration.I.GetRoomAtPos(transform.position);
+
+        if(ret == null)
+        {
+            ret = LevelGeneration.I.bossRoom;           // ???
+        }
+
+        return ret;
     }
 
     public virtual Vector2 GetFacingDirection()
