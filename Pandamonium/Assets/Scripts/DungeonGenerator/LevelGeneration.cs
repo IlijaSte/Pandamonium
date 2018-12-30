@@ -43,6 +43,8 @@ public class LevelGeneration : MonoBehaviour
 
     public GameObject keyHolderRoom;
 
+    public GameObject[] puzzleRoomPool;
+
     [Header("Prefabs")]
 
     public GameObject healthPoolPrefab;
@@ -294,7 +296,7 @@ public class LevelGeneration : MonoBehaviour
         {
             pos = takenPositions[Random.Range(1, takenPositions.Count - 2)];
             room = rooms[Mathf.RoundToInt(gridSizeX + pos.x), Mathf.RoundToInt(gridSizeY + pos.y)];
-        } while (room.type == Room.RoomType.START || room.type == Room.RoomType.OBELISK || room.type == Room.RoomType.KEY_HOLDER);
+        } while (room.type == Room.RoomType.START || room.type == Room.RoomType.OBELISK || room.type == Room.RoomType.KEY_HOLDER || room.type == Room.RoomType.PUZZLE);
 
         Vector2 spawnPos;
         Vector2 checkPos;
@@ -383,7 +385,7 @@ public class LevelGeneration : MonoBehaviour
         {
             Room room = rooms[Mathf.RoundToInt(gridSizeX + pos.x), Mathf.RoundToInt(gridSizeY + pos.y)];
 
-            if (room.type == Room.RoomType.START || room.type == Room.RoomType.OBELISK || room.type == Room.RoomType.KEY_HOLDER)
+            if (room.type == Room.RoomType.START || room.type == Room.RoomType.OBELISK || room.type == Room.RoomType.KEY_HOLDER || room.type == Room.RoomType.PUZZLE)
                 continue;
 
             // elite
@@ -505,6 +507,21 @@ public class LevelGeneration : MonoBehaviour
                 eliteRoom.nextTo = nextTo;
             }
 
+
+            // puzzle soba
+
+            if (GameManager.I.currentLevel > 0)
+            {
+                Vector2Int puzzlePos;
+
+                puzzlePos = NewPosition(out nextTo);
+
+                rooms[puzzlePos.x + gridSizeX, puzzlePos.y + gridSizeY] = new Room(puzzlePos, Room.RoomType.PUZZLE);
+                rooms[puzzlePos.x + gridSizeX, puzzlePos.y + gridSizeY].nextTo = nextTo;
+
+                takenPositions.Insert(0, puzzlePos);
+            }
+
             // obelisk soba
 
             valid = ObeliskPosition(out obeliskCheckPos, eliteRoom);
@@ -520,6 +537,7 @@ public class LevelGeneration : MonoBehaviour
                 if (obeliskIterations >= 50)
                     print("error: could not create obelisk room with fewer neighbors than : " + NumberOfNeighbors(obeliskCheckPos, takenPositions));
             }
+
 
         } while (obeliskIterations >= 100);
 
@@ -748,6 +766,9 @@ public class LevelGeneration : MonoBehaviour
                 case Room.RoomType.KEY_HOLDER:
                     room.Init(keyHolderRoom, roomParent);
                     break;
+                case Room.RoomType.PUZZLE:
+                    room.Init(puzzleRoomPool[Random.Range(0, puzzleRoomPool.Length)], roomParent);
+                    break;
                 default:
                     room.Init(GetRandomPrefab(), roomParent);
                     break;
@@ -797,7 +818,7 @@ public class LevelGeneration : MonoBehaviour
                 {
                     rooms[x, y].doorBot = (rooms[x, y - 1] != null && (rooms[x, y - 1].type != Room.RoomType.START && rooms[x, y - 1].type != Room.RoomType.OBELISK));
 
-                    if (rooms[x, y - 1] != null && (rooms[x, y - 1].type == Room.RoomType.INTRO || rooms[x, y - 1].type == Room.RoomType.ELITE))
+                    if (rooms[x, y - 1] != null && (rooms[x, y - 1].type == Room.RoomType.INTRO || rooms[x, y - 1].type == Room.RoomType.ELITE || rooms[x, y - 1].type == Room.RoomType.PUZZLE))
                             rooms[x, y].doorBot = rooms[x, y - 1].nextTo == rooms[x, y];
 
 
@@ -810,7 +831,7 @@ public class LevelGeneration : MonoBehaviour
                 {
                     rooms[x, y].doorTop = (rooms[x, y + 1] != null && (rooms[x, y + 1].type != Room.RoomType.START || rooms[x, y + 1].type == Room.RoomType.OBELISK));
 
-                    if (rooms[x, y + 1] != null && (rooms[x, y + 1].type == Room.RoomType.INTRO || rooms[x, y + 1].type == Room.RoomType.ELITE))
+                    if (rooms[x, y + 1] != null && (rooms[x, y + 1].type == Room.RoomType.INTRO || rooms[x, y + 1].type == Room.RoomType.ELITE || rooms[x, y + 1].type == Room.RoomType.PUZZLE))
                         rooms[x, y].doorTop = rooms[x, y + 1].nextTo == rooms[x, y];
                 }
                 if (x - 1 < 0)
@@ -822,7 +843,7 @@ public class LevelGeneration : MonoBehaviour
                 {
                     rooms[x, y].doorLeft = (rooms[x - 1, y] != null && (rooms[x - 1, y].type != Room.RoomType.START && rooms[x - 1, y].type != Room.RoomType.OBELISK));
 
-                    if (rooms[x - 1, y] != null && (rooms[x - 1, y].type == Room.RoomType.INTRO || rooms[x - 1, y].type == Room.RoomType.ELITE))
+                    if (rooms[x - 1, y] != null && (rooms[x - 1, y].type == Room.RoomType.INTRO || rooms[x - 1, y].type == Room.RoomType.ELITE || rooms[x - 1, y].type == Room.RoomType.PUZZLE))
                         rooms[x, y].doorLeft = rooms[x - 1, y].nextTo == rooms[x, y];
 
                 }
@@ -835,11 +856,11 @@ public class LevelGeneration : MonoBehaviour
                 {
                     rooms[x, y].doorRight = (rooms[x + 1, y] != null && (rooms[x + 1, y].type != Room.RoomType.START && (rooms[x + 1, y].type != Room.RoomType.OBELISK)));
 
-                    if (rooms[x + 1, y] != null && (rooms[x + 1, y].type == Room.RoomType.INTRO || rooms[x + 1, y].type == Room.RoomType.ELITE))
+                    if (rooms[x + 1, y] != null && (rooms[x + 1, y].type == Room.RoomType.INTRO || rooms[x + 1, y].type == Room.RoomType.ELITE || rooms[x + 1, y].type == Room.RoomType.PUZZLE))
                         rooms[x, y].doorRight = rooms[x + 1, y].nextTo == rooms[x, y];
                 }
 
-                if (rooms[x, y].type == Room.RoomType.INTRO || rooms[x, y].type == Room.RoomType.ELITE)
+                if (rooms[x, y].type == Room.RoomType.INTRO || rooms[x, y].type == Room.RoomType.ELITE || rooms[x, y].type == Room.RoomType.PUZZLE)
                 {
                     rooms[x, y].doorBot = false;
                     rooms[x, y].doorTop = false;

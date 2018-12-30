@@ -420,6 +420,7 @@ MonoBehaviour:
   nextButton: {fileID: 114130169499397434}
   text: {fileID: 114131059840042982}
   endY: 68
+  isShown: 0
 --- !u!114 &114787954089380506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -504,7 +505,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 90763a6f4a9ada54abe43e001fe3f018, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bfba285658b1b684b9dcbfc521414046, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -748,5 +749,5 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 54.700012, y: -21}
-  m_SizeDelta: {x: 100, y: 123.8}
+  m_SizeDelta: {x: 75, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}

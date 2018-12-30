@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneDudeRock : MonoBehaviour {
+public class StoneDudeRock : AttackableObject {
 
     public float damageRadius = 0.5f;
     public float damage = 10;
@@ -19,8 +19,11 @@ public class StoneDudeRock : MonoBehaviour {
 
     private GameObject indicator;
 
-    private void Start()
+    protected override void Start()
     {
+
+        base.Start();
+
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         col.enabled = false;

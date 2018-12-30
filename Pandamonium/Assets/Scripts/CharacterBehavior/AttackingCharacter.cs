@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Pathfinding;
 
-public abstract class AttackingCharacter : MonoBehaviour {
+public abstract class AttackingCharacter : MonoBehaviour, IAttackable {
 
     public Weapon[] weapons;
     public int equippedWeaponIndex;                                               // opremljeno oruzje igraca

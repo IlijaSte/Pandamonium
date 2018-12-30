@@ -159,7 +159,7 @@ public abstract class Weapon : MonoBehaviour {
     {
         AttackingCharacter enemy = collision.GetComponent<AttackingCharacter>();
 
-        if (enemy)
+        if (enemy || collision.GetComponent<AttackableObject>())
         {
             enemiesInRange.Add(collision.transform);
         }
@@ -170,7 +170,7 @@ public abstract class Weapon : MonoBehaviour {
 
         AttackingCharacter enemy = collision.GetComponent<AttackingCharacter>();
 
-        if (enemy)
+        if (enemy || collision.GetComponent<AttackableObject>())
         {
             enemiesInRange.Remove(collision.transform);
         }
@@ -181,7 +181,7 @@ public abstract class Weapon : MonoBehaviour {
     {
         AttackingCharacter enemy = collision.GetComponent<AttackingCharacter>();
 
-        if (enemy && !enemiesInRange.Contains(collision.transform))
+        if ((enemy || collision.GetComponent<AttackableObject>()) && !enemiesInRange.Contains(collision.transform))
         {
             enemiesInRange.Add(collision.transform);
         }

@@ -87,6 +87,8 @@ MonoBehaviour:
   bossRoomSize: {x: 30, y: 30}
   keyHolderRoom: {fileID: 1546495575275046, guid: c7762849c97d400428bd7df944bf4421,
     type: 2}
+  puzzleRoomPool:
+  - {fileID: 1863346389747766, guid: ad7d697495d48f34a9b899838498c0dd, type: 2}
   healthPoolPrefab: {fileID: 1459476336166136, guid: d0391d70682586d4182ba2e26c55987d,
     type: 2}
   corridorHorizPrefab: {fileID: 11400000, guid: ccb467220ec57864b93694e5b9c07034,

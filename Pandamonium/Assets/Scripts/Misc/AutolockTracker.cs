@@ -19,7 +19,7 @@ public class AutolockTracker : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<Enemy>() != null)
+        if((collision.GetComponent<AttackingCharacter>() != null || collision.GetComponent<AttackableObject>() != null) && collision.GetComponent<IAttackable>() != GameManager.I.playerInstance as IAttackable)
         {
             if (!enemiesInRange.Contains(collision.transform))
             {
@@ -36,7 +36,7 @@ public class AutolockTracker : MonoBehaviour {
         foreach(Transform enemy in enemiesInRange)
         {
             float distance;
-            if(enemy != null && !enemy.GetComponent<Enemy>().isDead && (distance = Vector2.Distance(transform.position, enemy.position)) < minDistance)
+            if(enemy != null && (distance = Vector2.Distance(transform.position, enemy.position)) < minDistance)
             {
                 closest = enemy;
                 minDistance = distance;
@@ -55,7 +55,7 @@ public class AutolockTracker : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<Enemy>() != null)
+        if (collision.GetComponent<AttackingCharacter>() != null || collision.GetComponent<AttackableObject>() != null)
         {
             enemiesInRange.Remove(collision.transform);
         }
