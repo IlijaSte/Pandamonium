@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 50608750452462778}
   - component: {fileID: 114357103239029832}
   - component: {fileID: 58937281963073672}
+  - component: {fileID: 114590780755097004}
   m_Layer: 15
   m_Name: PlayerJoystick
   m_TagString: Player
@@ -973,6 +974,27 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114590780755097004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1587600068571070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f345fe921a947da41bb3ca8859e91291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - audioClip: {fileID: 8300000, guid: 0ffcedeafbf83d84d8b9212fadbc59e6, type: 3}
+    audioSource: {fileID: 0}
+    name: TakePoisonDamage
+  - audioClip: {fileID: 8300000, guid: ff24f9bfd9c6fc7489865dfa0a63c640, type: 3}
+    audioSource: {fileID: 0}
+    name: TakeDamage
+  - audioClip: {fileID: 8300000, guid: ee18117b20ccec445ba969f4574b8eae, type: 3}
+    audioSource: {fileID: 0}
+    name: Attack
 --- !u!114 &114610508999203224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -985,8 +1007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RootBone: {fileID: 4586568441857388}
-  m_BoneTransforms:
-  - {fileID: 4586568441857388}
+  m_BoneTransforms: []
 --- !u!114 &114645111146012328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1103,7 +1124,7 @@ SpriteRenderer:
   m_Size: {x: 11.82, y: 11.82}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!212 &212216636682819208
 SpriteRenderer:

@@ -455,6 +455,7 @@ public class PlayerWithJoystick : AttackingCharacter {
             return;
 
         if(soundController) soundController.PlaySoundByName("Attack");
+        Debug.LogError("nema sound controllera");
 
         switch (action)
         {
@@ -504,7 +505,9 @@ public class PlayerWithJoystick : AttackingCharacter {
             takenDamage = base.TakeDamage(damage);
 
             StartCoroutine(healthBar.FillAmount(health / maxHealth, false));
-            soundController.PlaySoundByName("TakeDamage");
+
+            if (soundController) soundController.PlaySoundByName("TakeDamage");
+            else Debug.LogError("nema soundcontrollera");
         }
 
         return takenDamage;
@@ -519,7 +522,8 @@ public class PlayerWithJoystick : AttackingCharacter {
 
             StartCoroutine(healthBar.FillAmount(health / maxHealth, false));
 
-            soundController.PlaySoundByName("TakePoisonDamage");
+            if (soundController) soundController.PlaySoundByName("TakePoisonDamage");
+            else Debug.LogError("nema soundcontrollera");
         }
     }
 
