@@ -68,8 +68,6 @@ public class LevelGeneration : MonoBehaviour
 
     public Tilemap acidTilemap;
 
-    public GameObject chestPrefab;
-
     protected Transform roomParent;
 
     public Transform ground;
@@ -155,6 +153,7 @@ public class LevelGeneration : MonoBehaviour
         InstantiateBoss();
 
         InstantiateHealthPool();
+
         if (GameManager.I.currentLevel >= 2)
         {
             InstantiateHealthPool();
@@ -304,24 +303,20 @@ public class LevelGeneration : MonoBehaviour
         {
             spawnPos = room.GetRandomPos();
 
-            checkPos = new Vector2(Mathf.FloorToInt(spawnPos.x), Mathf.FloorToInt(spawnPos.y));
-
-            if (room.getRoomHolder().leftEdge.Equals(checkPos))
-            {
-
-            }
+            checkPos = spawnPos;
 
         } while (!room.IsTileWalkable(room.groundTilemap, checkPos) ||
                  !room.IsTileWalkable(room.groundTilemap, checkPos + Vector2.right) ||
                  !IsTileFree(checkPos) ||
                  !IsTileFree(checkPos + Vector2.right) ||
-                 ((Vector2)room.getRoomHolder().rightEdge.position + 2 * Vector2.left).Equals(checkPos) || 
+                 ((Vector2)room.getRoomHolder().rightEdge.position + 2 * Vector2.left == checkPos) || 
                  !room.CanSpawnAtPos(checkPos) ||
+                 !room.CanSpawnAtPos(checkPos + Vector2.down) ||
                  !room.CanSpawnAtPos(checkPos + Vector2.left) ||
                  !room.CanSpawnAtPos(checkPos + Vector2.right) || 
                  !room.CanSpawnAtPos(checkPos + Vector2.up) || 
                  
-                 ((Vector2)room.getRoomHolder().rightEdge.position + 2 * Vector2.left + Vector2.up).Equals(checkPos)
+                 ((Vector2)room.getRoomHolder().rightEdge.position + 2 * Vector2.left + Vector2.up == checkPos)
                  );
 
         Instantiate(healthPoolPrefab, spawnPos, Quaternion.identity);
@@ -600,7 +595,7 @@ public class LevelGeneration : MonoBehaviour
                 }
             }
             checkingPos = new Vector2Int(x, y);
-        } while (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || (takenPositions.Count > 1 && neighborPos.Equals(Vector2.zero)) || (takenPositions.Count > 2 && neighborRoom.type == Room.RoomType.INTRO)); //make sure the position is valid
+        } while (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || (takenPositions.Count > 1 && neighborPos.Equals(Vector2.zero)) || (takenPositions.Count > 2 && (neighborRoom.type == Room.RoomType.INTRO || neighborRoom.type == Room.RoomType.PUZZLE))); //make sure the position is valid
 
         nextTo = neighborRoom;
 
@@ -649,7 +644,13 @@ public class LevelGeneration : MonoBehaviour
             checkingPos = new Vector2Int(x, y);
 
             i++;
-        } while (i < 100 && (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || neighborPos.Equals(Vector2.zero)) || (takenPositions.Count > 2 && neighborRoom.type == Room.RoomType.INTRO));
+        } while (i < 100 && (takenPositions.Contains(checkingPos) ||
+                 x >= gridSizeX ||
+                 x < -gridSizeX ||
+                 y >= gridSizeY ||
+                 y < -gridSizeY ||
+                 neighborPos.Equals(Vector2.zero)) ||
+                 (takenPositions.Count > 2 && (neighborRoom.type == Room.RoomType.INTRO || neighborRoom.type == Room.RoomType.PUZZLE)));
         if (inc >= 100)
         { // break loop if it takes too long: this loop isnt garuanteed to find solution, which is fine for this
             print("Error: could not find position with only one neighbor");
@@ -712,7 +713,7 @@ public class LevelGeneration : MonoBehaviour
                 }
             }
             checkingPos = new Vector2Int(x, y);
-        } while (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || (takenPositions.Count > 1 && neighborPos.Equals(Vector2.zero)) || (takenPositions.Count > 2 && neighborRoom.type == Room.RoomType.INTRO));
+        } while (takenPositions.Contains(checkingPos) || x >= gridSizeX || x < -gridSizeX || y >= gridSizeY || y < -gridSizeY || (takenPositions.Count > 1 && neighborPos.Equals(Vector2.zero)) || (takenPositions.Count > 2 && (neighborRoom.type == Room.RoomType.INTRO || neighborRoom.type == Room.RoomType.PUZZLE)));
         if (inc >= 100)
         { // break loop if it takes too long: this loop isnt garuanteed to find solution, which is fine for this
             print("Error: could not find position with only one neighbor");

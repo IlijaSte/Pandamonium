@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeavyFrogo : Enemy
+public class HeavyFrogo : MiniBoss
 {
     public float aoeRange = 1;
     public float aoeDamage = 50;

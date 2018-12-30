@@ -67,6 +67,54 @@ public class PlayerWithJoystick : AttackingCharacter {
         QuestManager.I.SetupPlayerDelegates();
     }
 
+    protected IEnumerator Moving(PortalTrigger portal = null)
+    {
+        playerState = PlayerState.WALKING;
+
+        yield return null;
+
+        while (true)
+        {
+            if (path.reachedEndOfPath)      // ako je stigao do destinacije
+            {
+                break;
+            }
+
+            yield return null;
+        }
+
+        if(portal)
+            portal.DoFunction();
+
+        playerState = PlayerState.IDLE;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        path.enabled = false;
+    }
+
+    public void MoveToPosition(Vector2 pos)
+    {
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.velocity = Vector2.zero;
+
+        path.enabled = true;
+
+        path.destination = pos;
+
+        StartCoroutine(Moving());
+    }
+
+    public void MoveToPortal(PortalTrigger portal, Vector2 pos)
+    {
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.velocity = Vector2.zero;
+
+        path.enabled = true;
+
+        path.destination = pos;
+
+        StartCoroutine(Moving(portal));
+    }
+
     public override void Start()
     {
 
@@ -91,6 +139,9 @@ public class PlayerWithJoystick : AttackingCharacter {
 
         soundController = GetComponent<SoundController>();
 
+        path = GetComponent<Pathfinding.AIPath>();
+
+        MoveToPosition((Vector2)transform.position + Vector2.down * 3);
     }
     public void AddRotation(float angle)
     {
@@ -406,6 +457,11 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     public override Vector2 GetFacingDirection()
     {
+        if(playerState == PlayerState.WALKING)
+        {
+            return path.desiredVelocity;
+        }
+
         return facingDirection;
     }
 

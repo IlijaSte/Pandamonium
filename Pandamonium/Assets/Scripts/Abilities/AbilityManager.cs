@@ -250,7 +250,7 @@ public class AbilityManager : MonoBehaviour {
 
         autolock.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, joystickGroup.GetComponentInChildren<JoystickController>().InputDirection.normalized));
         
-        if(abilities[index] is ChannelingAbility)
+        if(abilities[index] != null && abilities[index] is ChannelingAbility)
         {
             (abilities[index] as ChannelingAbility).RotateChannel(joystickGroup.GetComponentInChildren<JoystickController>().InputDirection.normalized);
         }

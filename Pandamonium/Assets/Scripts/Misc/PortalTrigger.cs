@@ -37,23 +37,27 @@ public class PortalTrigger : InteractableObject {
 
         if (animator.speed > 0)      // aktivirao se
         {
-            //activated = true;
+            if(type != PortalType.ENTRY)
+                (GameManager.I.playerInstance as PlayerWithJoystick).MoveToPortal(this, (Vector2)transform.position + Vector2.down * 2);
 
-            switch (type)
-            {
+        }
+    }
 
-                case PortalType.TO_BOSS:
+    public void DoFunction()
+    {
+        switch (type)
+        {
 
-                    (GameManager.I.playerInstance as PlayerWithJoystick).Teleport(LevelGeneration.I.bossRoomSpawn);
+            case PortalType.TO_BOSS:
 
-                    break;
+                (GameManager.I.playerInstance as PlayerWithJoystick).Teleport(LevelGeneration.I.bossRoomSpawn);
 
-                case PortalType.END_OF_LEVEL:
-                    MenuManager.I.ShowMenu(MenuManager.I.gameEndMenu);
-                    //activated = false;                                  // !!!
-                    break;
-            }
+                break;
 
+            case PortalType.END_OF_LEVEL:
+                MenuManager.I.ShowMenu(MenuManager.I.gameEndMenu);
+                //activated = false;                                  // !!!
+                break;
         }
     }
 

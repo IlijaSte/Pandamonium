@@ -46,8 +46,20 @@ public class StandardEnemy : Enemy {
         }
     }
 
+    public override bool TakeDamage(float damage)
+    {
+        
+        bool ret = base.TakeDamage(damage);
+        StartCoroutine(healthBar.FillAmount(health / maxHealth, true));
+
+        return ret;
+    }
+
     protected override void Die()
     {
+        if (isDead)
+            return;
+
         base.Die();
 
         DropCoins();

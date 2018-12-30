@@ -77,17 +77,19 @@ public class Room {
 
     public bool CanSpawnAtPos(Vector2 pos)
     {
-        pos += new Vector2(0.45f, 0.45f);
+        Vector2 checkPos;
 
-        Vector2 checkPos = new Vector2(Mathf.FloorToInt(pos.x), Mathf.FloorToInt(pos.y));
+        //pos += new Vector2(0.45f, 0.45f);
 
-        if (!roomHolder.leftEdge.position.Equals(checkPos) &&
-            !((Vector2)roomHolder.rightEdge.position + Vector2.left).Equals(checkPos) &&
-            !roomHolder.topEdge.position.Equals(checkPos) &&
-            !((Vector2)roomHolder.topEdge.position + Vector2.down).Equals(checkPos) &&
-            !roomHolder.bottomEdge.position.Equals(checkPos) && 
-            !((Vector2)roomHolder.leftEdge.position + Vector2.up).Equals(checkPos) && 
-            !((Vector2)roomHolder.rightEdge.position + Vector2.up).Equals(checkPos))
+        checkPos = new Vector2(Mathf.Floor(pos.x), Mathf.Floor(pos.y));
+
+        if (!((Vector2)roomHolder.leftEdge.position == checkPos) &&
+            !((Vector2)roomHolder.rightEdge.position + Vector2.left == checkPos) &&
+            !((Vector2)roomHolder.topEdge.position == checkPos) &&
+            !((Vector2)roomHolder.topEdge.position + Vector2.down == checkPos) &&
+            !((Vector2)roomHolder.bottomEdge.position == checkPos) && 
+            !((Vector2)roomHolder.leftEdge.position + Vector2.up == checkPos) && 
+            !((Vector2)roomHolder.rightEdge.position + Vector2.up == checkPos))
             return true;
 
         return false;
