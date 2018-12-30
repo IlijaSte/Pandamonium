@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 212602623631793378}
   - component: {fileID: 95130699427380852}
   - component: {fileID: 114717487326087432}
+  - component: {fileID: 114136092414904808}
   m_Layer: 15
   m_Name: EnemySprite
   m_TagString: Untagged
@@ -359,6 +360,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114136092414904808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1553444078596818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f345fe921a947da41bb3ca8859e91291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - audioClip: {fileID: 8300000, guid: 2e381b9b16c190d40a4b155fdc533954, type: 3}
+    audioSource: {fileID: 0}
+    name: Emerging
+  - audioClip: {fileID: 8300000, guid: 7296a8116d518ce4a9cc2e68cd2b4f40, type: 3}
+    audioSource: {fileID: 0}
+    name: Submerging
+  - audioClip: {fileID: 8300000, guid: 4c92347f167f1fa4488cc4d7a60db49a, type: 3}
+    audioSource: {fileID: 0}
+    name: Attacking
 --- !u!114 &114198825388657396
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 212933398877342650}
   - component: {fileID: 95701175880768276}
   - component: {fileID: 114915195369454120}
+  - component: {fileID: 114883302976680008}
   m_Layer: 0
   m_Name: EnemySprite
   m_TagString: Untagged
@@ -699,12 +700,34 @@ MonoBehaviour:
   speed: 0
   jumpSpeed: 0
   maxJumpRange: 3.5
+  landDamageRadius: 1
   indicatorPrefab: {fileID: 1677782040419512, guid: 69c40a4bbbe3a62419f4a7b779e7c74b,
     type: 2}
   isJumping: 0
   jumpCooldown: 4
   jumpTriggerDistance: 3
   fleeing: 0
+--- !u!114 &114883302976680008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1548557022160412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f345fe921a947da41bb3ca8859e91291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - audioClip: {fileID: 8300000, guid: 6436de91041689f4798a7b4052770f31, type: 3}
+    audioSource: {fileID: 0}
+    name: Dying
+  - audioClip: {fileID: 8300000, guid: 48c6cfd85dbf41949a9c38ea81d0f9e4, type: 3}
+    audioSource: {fileID: 0}
+    name: Jumping
+  - audioClip: {fileID: 8300000, guid: 621be8f587153af4ca26c4a811ffede8, type: 3}
+    audioSource: {fileID: 0}
+    name: Walking
 --- !u!114 &114915195369454120
 MonoBehaviour:
   m_ObjectHideFlags: 1

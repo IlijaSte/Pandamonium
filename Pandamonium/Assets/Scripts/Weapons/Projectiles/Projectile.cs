@@ -22,6 +22,14 @@ public class Projectile : MonoBehaviour {
     protected bool knockback;
     protected float kbForce;
 
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+
     public virtual void Shoot(Transform parent, Transform target, float damage, float range, float speed, bool knockback = false, float kbForce = 0)
     {
         this.target = target;
@@ -93,8 +101,25 @@ public class Projectile : MonoBehaviour {
         }
     }
 
+    private IEnumerator PlaySound()
+    {
+        if (audioSource)
+        {
+            print("pustaj taj film");
+            if (!audioSource.clip)
+                print("nema zvuk");
+            audioSource.Play();
+
+        }
+        else print("nije nasao projectile audio");
+
+        yield return new WaitUntil(() => !audioSource.isPlaying);
+    }
+
     protected virtual void OnHitEnemy(AttackingCharacter enemyHit)
     {
+        StartCoroutine(PlaySound());
+
         if (knockback)
         {
             enemyHit.TakeDamageWithKnockback(damage, (enemyHit.transform.position - transform.position).normalized, kbForce);
@@ -103,6 +128,9 @@ public class Projectile : MonoBehaviour {
         {
             enemyHit.TakeDamage(damage);
         }
+
+       
+
     }
 
     public void OnTriggerEnter2D(Collider2D other)
