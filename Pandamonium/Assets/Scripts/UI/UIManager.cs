@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour {
     public Canvas minimapCanvas;
 
     public ChaosHealthBar healthBar;
-    public Image energyBar;
+    public ChaosHealthBar energyBar;
     public Text coinsText;
 
     public Text combatTextPrefab;
