@@ -132,30 +132,40 @@ public class ChaosHealthBar : Image
         //if it is not a regular healtbar
         if (halfTriangles != null && halfTriangles.Length > 0)
         {
-            SetColors();
+            
             //full heal
-            if(amount == 1)
+            if(amount == 1 || amount == 0)
             {
                 for (int i = 0; i < halfTriangles.Length; i++)
-                    halfTriangles[i].fillAmount = 1;
+                    halfTriangles[i].fillAmount = amount;
+
+                print("svaki ovoliko: " + amount);
             }else
             {
                 
                 int i = halfTriangles.Length - 1;
                 //part to lose
-                float part = (1 - amount) * (halfTriangles.Length);// - 1);//proveri ovaj - 1
-                while (part > 0 && i > 0)
+                float part = (1 - amount) * (halfTriangles.Length);//proveri ovaj - 1
+
+                //while (part > 0 && i > 0)
+                //{
+                while (part > 1 && i > 0)
                 {
-                    while (part > 1 && i > 0)
-                    {
-                       halfTriangles[i--].fillAmount = 0;
-                       part -= 1 ;
-                    }
-                    halfTriangles[i].fillAmount = 1 - part;
-                    part = 0;
+                       //print("halftriangle" + i + "0");
+                    halfTriangles[i--].fillAmount = 0;
+                    part -= 1 ;
                 }
+                if (part == 1) halfTriangles[i--].fillAmount = 0;
+                else halfTriangles[i--].fillAmount = 1 - part;
+
+                part = 0;
+                while (i >= 0)
+                    halfTriangles[i--].fillAmount = 1;
+                //}
 
             }
+
+            SetColors();
         }
         else base.fillAmount = amount;
 

@@ -18,7 +18,7 @@ public class PlayerWithJoystick : AttackingCharacter {
     public float lockAngle = 60;
 
     [HideInInspector]
-    public Image energyBar;
+    public ChaosHealthBar energyBar;
 
     public AbilityManager abilityManager;
     public JoystickController controller;
@@ -72,8 +72,7 @@ public class PlayerWithJoystick : AttackingCharacter {
 
         healthBar = UIManager.I.healthBar;
         energyBar = UIManager.I.energyBar;
-        //energyBar.BuildHealtBar(0, !type.Equals(CharacterType.PLAYER));
-        //energyBar.buildHealtBar(10, false);
+       
 
         attributes = GameManager.I.attributes;
 
@@ -90,6 +89,9 @@ public class PlayerWithJoystick : AttackingCharacter {
         speed = normalSpeed;
 
         soundController = GetComponent<SoundController>();
+
+        energyBar.BuildHealtBar(maxEnergy, false);
+        StartCoroutine(energyBar.FillAmount(energy / maxEnergy, false));
 
     }
     public void AddRotation(float angle)
@@ -129,7 +131,7 @@ public class PlayerWithJoystick : AttackingCharacter {
             nextAttackBG.SetActive(true);
         }
 
-        //energyBar.FillAmount(energy / maxEnergy, false);
+        //StartCoroutine(energyBar.FillAmount(energy / maxEnergy, false));
 
         if (SystemInfo.deviceType == DeviceType.Desktop)
         {
@@ -416,7 +418,7 @@ public class PlayerWithJoystick : AttackingCharacter {
         energy = Mathf.Clamp(newEnergy, 0, maxEnergy);
         abilityManager.UpdateAbilityButtons();
 
-        energyBar.fillAmount = energy / maxEnergy;
+        StartCoroutine(energyBar.FillAmount(energy / maxEnergy, false));
     }
 
     public void DecreaseEnergy(float amount, bool percent = false)
@@ -426,7 +428,9 @@ public class PlayerWithJoystick : AttackingCharacter {
         energy = Mathf.Clamp(newEnergy, 0, maxEnergy);
         abilityManager.UpdateAbilityButtons();
 
-        energyBar.fillAmount = energy / maxEnergy;
+        print(energy);
+
+        StartCoroutine(energyBar.FillAmount(energy / maxEnergy, false));
     }
 
     protected void HitWithWeapon()
@@ -455,7 +459,7 @@ public class PlayerWithJoystick : AttackingCharacter {
             return;
 
         if(soundController) soundController.PlaySoundByName("Attack");
-        Debug.LogError("nema sound controllera");
+        else Debug.LogError("nema sound controllera");
 
         switch (action)
         {
