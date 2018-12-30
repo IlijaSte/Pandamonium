@@ -176,7 +176,7 @@ Prefab:
         type: 2}
       propertyPath: energyBar
       value: 
-      objectReference: {fileID: 484899399}
+      objectReference: {fileID: 262084148}
     - target: {fileID: 114209893818532370, guid: fd205bd53487bcb48926eda464046561,
         type: 2}
       propertyPath: coinsText
@@ -457,6 +457,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 257441336}
   m_Script: {fileID: 11500000, guid: 58a181be88e713e4984d7ff7e061b50f, type: 3}
+--- !u!114 &262084148 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114054966258426636, guid: 600ebf9611649fc44ba45c75866d99ff,
+    type: 2}
+  m_PrefabInternal: {fileID: 858423317}
+  m_Script: {fileID: 11500000, guid: 7ef2fb4d3c6d729458f415a03ae5d913, type: 3}
 --- !u!1 &296605545
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,37 +530,6 @@ Tilemap:
   m_PrefabParentObject: {fileID: 8195094280472329606, guid: 2f12ed792073b0d42b9b173050dfe60c,
     type: 2}
   m_PrefabInternal: {fileID: 1086419496}
---- !u!84 &361164972
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: SpriteLightKit RT
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 580
-  m_Height: 326
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 0
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1001 &431242384
 Prefab:
   m_ObjectHideFlags: 0
@@ -617,12 +592,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4977153911668172, guid: 1392b6a2fdbbbf947a35b798f7b82f44,
     type: 2}
   m_PrefabInternal: {fileID: 1276222491}
---- !u!114 &484899399 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114717150677585192, guid: 600ebf9611649fc44ba45c75866d99ff,
-    type: 2}
-  m_PrefabInternal: {fileID: 858423317}
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!223 &557880998 stripped
 Canvas:
   m_PrefabParentObject: {fileID: 223070633048683606, guid: 00711fc208cb88b40a06ba32e47bc6ae,
@@ -765,101 +734,6 @@ Prefab:
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224322562910468208, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224322562910468208, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224322562910468208, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224322562910468208, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224968802225512444, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224968802225512444, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224968802225512444, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224968802225512444, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224222679372461082, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224222679372461082, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224222679372461082, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224222679372461082, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224401123740170932, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224401123740170932, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224401123740170932, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224401123740170932, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 225526863627151810, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_Alpha
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224968207103608792, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -95.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224968207103608792, guid: 600ebf9611649fc44ba45c75866d99ff,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: -120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 600ebf9611649fc44ba45c75866d99ff, type: 2}
@@ -1254,7 +1128,7 @@ Prefab:
         type: 2}
       propertyPath: energyBar
       value: 
-      objectReference: {fileID: 484899399}
+      objectReference: {fileID: 0}
     - target: {fileID: 114562331877149714, guid: a4a944a6b0dbeac488a74ec4dbd1b5bf,
         type: 2}
       propertyPath: controller
@@ -1305,6 +1179,37 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f12ed792073b0d42b9b173050dfe60c, type: 2}
   m_IsPrefabParent: 0
+--- !u!84 &1213227008
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SpriteLightKit RT
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 491
+  m_Height: 276
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 0
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1001 &1276222491
 Prefab:
   m_ObjectHideFlags: 0
@@ -1414,37 +1319,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8024d784720c37147a60dee3802749fe, type: 2}
   m_IsPrefabParent: 0
---- !u!84 &1559770195
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: SpriteLightKit RT
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 580
-  m_Height: 326
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 0
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!114 &1580872483 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114227635135599222, guid: c41a7d346eef8414b96565b8583e45f4,
@@ -1537,7 +1411,7 @@ Prefab:
         type: 2}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 361164972}
+      objectReference: {fileID: 1213227008}
     - target: {fileID: 114519924169131814, guid: 183980faa4eecda4cb2f751ff77af8e4,
         type: 2}
       propertyPath: spriteLightRT
