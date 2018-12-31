@@ -12,7 +12,7 @@ public class PlayerAnimation : CharacterAnimation
         if (GameManager.joystick)
         {
             player = GameManager.I.playerInstance as PlayerWithJoystick;
-            vector2 = player.facingDirection;
+            vector2 = player.GetFacingDirection();
         }
         else base.updateVector2();
     }

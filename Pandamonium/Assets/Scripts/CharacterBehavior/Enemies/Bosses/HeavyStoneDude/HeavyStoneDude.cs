@@ -42,25 +42,25 @@ public class HeavyStoneDude : Boss {
         state = StoneDudeState.GOING_TO_POOL;
     }
 
-    private IEnumerator SpawningSlimes()
+    private IEnumerator SpawningSlimes(Vector2 poolPos)
     {
         playerState = PlayerState.IMMOBILE;
         state = StoneDudeState.SPAWNING_SLIMES;
 
         yield return new WaitForSeconds(slimeSpawnCastTime);
 
-        SpawnSlimes();
+        SpawnSlimes(poolPos, slimesPerCast);
 
         playerState = PlayerState.IDLE;
         state = StoneDudeState.DEFAULT;
     }
 
-    private void SpawnSlimes()
+    private void SpawnSlimes(Vector2 poolPos, int num)
     {
-        for(int i = 0; i < slimesPerCast; i++)
+        for(int i = 0; i < num; i++)
         {
 
-            Vector2 direction = ((Vector2)transform.position - currPoolPos).normalized;
+            Vector2 direction = ((Vector2)transform.position - poolPos).normalized;
 
             Vector2 spawnPos;
 
@@ -74,7 +74,7 @@ public class HeavyStoneDude : Boss {
 
                 direction *= Random.Range(2, 5);
 
-                spawnPos = currPoolPos + direction;
+                spawnPos = poolPos + direction;
 
             } while (!room.IsTileWalkable(room.groundTilemap, spawnPos));
 
@@ -128,7 +128,7 @@ public class HeavyStoneDude : Boss {
         switch (state)
         {
             case StoneDudeState.GOING_TO_POOL:
-                StartCoroutine(SpawningSlimes());
+                StartCoroutine(SpawningSlimes(currPoolPos));
                 break;
 
             case StoneDudeState.GOING_TO_CENTER:
@@ -138,10 +138,24 @@ public class HeavyStoneDude : Boss {
 
     }
 
+    protected void SuperRampage()
+    {
+        speed *= 2;
+        path.maxSpeed = speed;
+
+        foreach(AcidPool pool in room.getRoomHolder().GetComponent<HeavyStoneDudeRoom>().acidPools)
+        {
+            SpawnSlimes(pool.transform.position, 1);
+        }
+    }
+
     private bool StartRampage()
     {
-        if (state == StoneDudeState.RAMPAGE || state == StoneDudeState.GOING_TO_CENTER || state == StoneDudeState.SPAWNING_SLIMES)
-            return false;
+        
+        if(numRampages == 3)
+        {
+            SuperRampage();
+        }
 
         state = StoneDudeState.GOING_TO_CENTER;
 
@@ -159,11 +173,12 @@ public class HeavyStoneDude : Boss {
         {
             if(health / maxHealth <= 1 - (numRampages + 1) * 0.25f)
             {
-
-                if (StartRampage())
+                if (!(state == StoneDudeState.RAMPAGE || state == StoneDudeState.GOING_TO_CENTER || state == StoneDudeState.SPAWNING_SLIMES))
                 {
                     numRampages++;
+                    StartRampage();
                 }
+
             }
         }
 

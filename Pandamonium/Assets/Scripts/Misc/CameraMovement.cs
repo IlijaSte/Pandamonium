@@ -21,7 +21,7 @@ public class CameraMovement : MonoBehaviour {
     float viewportHeight;
 
     //public CinemachineVirtualCamera mainCamera;
-    public CinemachineVirtualCamera eventCam;
+    public CinemachineVirtualCamera zoomedOutCam;
 
     private static readonly int PRIORITY_ACTIVE = 15;
     private static readonly int PRIORITY_INACTIVE = -1;
@@ -29,6 +29,8 @@ public class CameraMovement : MonoBehaviour {
     private Queue<CinemachineVirtualCamera> lookAts;
 
     private CinemachineVirtualCamera currCam;
+
+
 
     // Use this for initialization
     void Start () {
@@ -47,6 +49,8 @@ public class CameraMovement : MonoBehaviour {
             player = GameManager.I.playerInstance.transform;
 
         lookAts = new Queue<CinemachineVirtualCamera>();
+
+        PeekAt(zoomedOutCam, 0.1f);
     }
 	
     public void SetBounds(Vector2 lowerLeft, Vector2 upperRight)
@@ -60,14 +64,14 @@ public class CameraMovement : MonoBehaviour {
         maxVisibleY = stageUpperRight.y - viewportHeight / 2f;
     }
 
-    IEnumerator Peek(CinemachineVirtualCamera at)
+    IEnumerator Peek(CinemachineVirtualCamera at, float duration = 2)
     {
         //eventCam.Follow = at;
         //currCam.Priority = PRIORITY_INACTIVE;
         //currCam = at;
         at.Priority = PRIORITY_ACTIVE;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(duration);
 
         at.Priority = PRIORITY_INACTIVE;
 
@@ -91,12 +95,12 @@ public class CameraMovement : MonoBehaviour {
 
     }
 
-    public void PeekAt(CinemachineVirtualCamera at)
+    public void PeekAt(CinemachineVirtualCamera at, float duration = 2f)
     {
         lookAts.Enqueue(at);
 
         if(lookAts.Count == 1)
-            StartCoroutine(Peek(at));
+            StartCoroutine(Peek(at, duration));
     }
 
 	// Update is called once per frame

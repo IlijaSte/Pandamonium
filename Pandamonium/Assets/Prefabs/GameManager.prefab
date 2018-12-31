@@ -75,6 +75,10 @@ MonoBehaviour:
   coin: {fileID: 1672314928492584, guid: 9054cd14c71cd36499cbbfd3ac98eaef, type: 2}
   key: {fileID: 1584737393562760, guid: 8381205ab95a9b2489eac3ca8af12bce, type: 2}
   blueprint: {fileID: 1597709171064980, guid: 936e67524d0a86645b38d0abbb56d0e6, type: 2}
+  brownChestPrefab: {fileID: 1722286289344758, guid: bab75800351aa8746b6111887108aa1d,
+    type: 2}
+  goldenChestPrefab: {fileID: 1067366940452230, guid: ad228b70d8ad95b42b03cd20841fd4a7,
+    type: 2}
 --- !u!114 &114622438205401858
 MonoBehaviour:
   m_ObjectHideFlags: 1

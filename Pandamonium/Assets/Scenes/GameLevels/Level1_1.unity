@@ -161,7 +161,7 @@ Prefab:
         type: 2}
       propertyPath: energyBar
       value: 
-      objectReference: {fileID: 251504391}
+      objectReference: {fileID: 0}
     - target: {fileID: 114562331877149714, guid: a4a944a6b0dbeac488a74ec4dbd1b5bf,
         type: 2}
       propertyPath: controller
@@ -239,7 +239,7 @@ Prefab:
         type: 2}
       propertyPath: energyBar
       value: 
-      objectReference: {fileID: 251504391}
+      objectReference: {fileID: 1704756279}
     - target: {fileID: 114209893818532370, guid: fd205bd53487bcb48926eda464046561,
         type: 2}
       propertyPath: coinsText
@@ -283,12 +283,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4505154834509626, guid: a4a944a6b0dbeac488a74ec4dbd1b5bf,
     type: 2}
   m_PrefabInternal: {fileID: 10498086}
---- !u!114 &251504391 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114717150677585192, guid: 600ebf9611649fc44ba45c75866d99ff,
-    type: 2}
-  m_PrefabInternal: {fileID: 1704756277}
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &257441336
 Prefab:
   m_ObjectHideFlags: 0
@@ -895,7 +889,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1704756277}
   m_Script: {fileID: 11500000, guid: 7ef2fb4d3c6d729458f415a03ae5d913, type: 3}
---- !u!84 &1255557273
+--- !u!84 &1236062575
 RenderTexture:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -906,8 +900,8 @@ RenderTexture:
     Hash: 00000000000000000000000000000000
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
-  m_Width: 580
-  m_Height: 326
+  m_Width: 491
+  m_Height: 276
   m_AntiAliasing: 1
   m_DepthFormat: 0
   m_ColorFormat: 0
@@ -1352,6 +1346,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1704756277}
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &1704756279 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114054966258426636, guid: 600ebf9611649fc44ba45c75866d99ff,
+    type: 2}
+  m_PrefabInternal: {fileID: 1704756277}
+  m_Script: {fileID: 11500000, guid: 7ef2fb4d3c6d729458f415a03ae5d913, type: 3}
 --- !u!224 &1772816252 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224045791293219484, guid: c41a7d346eef8414b96565b8583e45f4,
@@ -1448,7 +1448,7 @@ Prefab:
         type: 2}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 1255557273}
+      objectReference: {fileID: 1236062575}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 183980faa4eecda4cb2f751ff77af8e4, type: 2}
   m_IsPrefabParent: 0

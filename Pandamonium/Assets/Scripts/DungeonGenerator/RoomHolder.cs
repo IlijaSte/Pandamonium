@@ -107,7 +107,9 @@ public class RoomHolder : MonoBehaviour {
         if (chestSpawnPoint == null)
             return;
 
-        chest = Instantiate(LevelGeneration.I.chestPrefab, chestSpawnPoint.position, Quaternion.identity, transform);
+        GameObject chestPrefab = (context.type == Room.RoomType.ELITE ? GameManager.I.prefabHolder.goldenChestPrefab : GameManager.I.prefabHolder.brownChestPrefab);
+
+        chest = Instantiate(chestPrefab, chestSpawnPoint.position, Quaternion.identity, transform);
         chest.GetComponentInChildren<Chest>().locked = true;
         chest.GetComponentInChildren<InteractableObject>().interactable = false;
         chest.GetComponentInChildren<Chest>().additionalCoins = Random.Range(0, context.distanceFromStart);

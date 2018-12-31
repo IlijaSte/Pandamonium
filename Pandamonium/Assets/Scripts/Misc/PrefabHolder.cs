@@ -8,4 +8,7 @@ public class PrefabHolder : MonoBehaviour {
     public GameObject key;
 
     public GameObject blueprint;
+
+    public GameObject brownChestPrefab;
+    public GameObject goldenChestPrefab;
 }
