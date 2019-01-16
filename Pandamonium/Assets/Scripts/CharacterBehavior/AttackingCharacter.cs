@@ -11,7 +11,7 @@ public abstract class AttackingCharacter : MonoBehaviour, IAttackable {
 
     public float maxHealth = 25;
 
-    public enum CharacterType { PLAYER, ENEMY }
+    public enum CharacterType { PLAYER, ENEMY, BOSS }
     public CharacterType type;
 
     public float normalSpeed = 6;
@@ -84,7 +84,7 @@ public abstract class AttackingCharacter : MonoBehaviour, IAttackable {
             vision = transform.Find("Vision").GetComponent<CharacterVision>();
 
         health = maxHealth;
-        healthBar.BuildHealtBar(maxHealth, !type.Equals(CharacterType.PLAYER));
+        healthBar.BuildHealtBar(maxHealth, !(type.Equals(CharacterType.PLAYER) || type.Equals(CharacterType.BOSS)));
 
         nextAttackBG = nextAttackBar.transform.parent.gameObject;
 
@@ -296,8 +296,10 @@ public abstract class AttackingCharacter : MonoBehaviour, IAttackable {
 
         playerState = PlayerState.IMMOBILE;
 
+        bool prevPath = false;
         if (path)
         {
+            prevPath = path.enabled;
             path.enabled = false;
         }
 
@@ -308,7 +310,7 @@ public abstract class AttackingCharacter : MonoBehaviour, IAttackable {
 
         if (path)
         {
-            path.enabled = true;
+            path.enabled = prevPath;
         }
 
         rb.bodyType = lastType;

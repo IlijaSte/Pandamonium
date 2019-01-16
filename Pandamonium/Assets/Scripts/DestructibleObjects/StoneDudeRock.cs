@@ -7,6 +7,8 @@ public class StoneDudeRock : AttackableObject {
     public float damageRadius = 0.5f;
     public float damage = 10;
 
+    public float despawnTime = 7;
+
     public GameObject indicatorPrefab;
 
     [HideInInspector]
@@ -19,6 +21,8 @@ public class StoneDudeRock : AttackableObject {
 
     private GameObject indicator;
 
+    private float lifetime = 0;
+
     protected override void Start()
     {
 
@@ -30,6 +34,16 @@ public class StoneDudeRock : AttackableObject {
 
         indicator = Instantiate(indicatorPrefab, landPos, Quaternion.identity);
         indicator.transform.localScale = new Vector2(damageRadius, damageRadius);
+    }
+
+    private void Update()
+    {
+        lifetime += Time.deltaTime;
+
+        if(lifetime >= despawnTime)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void FixedUpdate()
@@ -48,6 +62,7 @@ public class StoneDudeRock : AttackableObject {
             if(Vector2.Distance(transform.position, GameManager.I.playerInstance.transform.position) <= damageRadius)
             {
                 GameManager.I.playerInstance.TakeDamage(damage);
+                (GameManager.I.playerInstance as PlayerWithJoystick).Stun(1);
             }
         }
     }

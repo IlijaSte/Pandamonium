@@ -754,7 +754,7 @@ MonoBehaviour:
   - {fileID: 114121749672228834}
   equippedWeaponIndex: 0
   maxHealth: 400
-  type: 1
+  type: 2
   normalSpeed: 1
   healthBar: {fileID: 114586030310269660}
   nextAttackBar: {fileID: 114631011764471838}
@@ -777,6 +777,7 @@ MonoBehaviour:
   selfStunDuration: 4
   selfStunJumps: 3
   selfStunsToEnrage: 3
+  enragedSpeed: 4
   isStunned: 0
   jumpSpeed: 0
   maxJumpRange: 4

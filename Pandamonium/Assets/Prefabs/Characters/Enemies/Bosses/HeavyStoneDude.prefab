@@ -770,7 +770,7 @@ MonoBehaviour:
   - {fileID: 114121749672228834}
   equippedWeaponIndex: 0
   maxHealth: 600
-  type: 1
+  type: 2
   normalSpeed: 3
   healthBar: {fileID: 114830820382727566}
   nextAttackBar: {fileID: 114631011764471838}

@@ -264,8 +264,11 @@ public class Enemy : AttackingCharacter {
 
     public override bool TakeDamage(float damage)
     {
+
+        if (isDead)
+            return false;
+
         bool takenDamage = base.TakeDamage(damage);
-        StartCoroutine(healthBar.FillAmount( health / maxHealth, true));
 
         if(playerState != PlayerState.ATTACKING)
         {
