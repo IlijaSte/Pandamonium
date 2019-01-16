@@ -18,6 +18,24 @@ public class WeaponAnimation : AnimationMama {
         rotation = Quaternion.Euler(rotationVector);
         cursorIndicator.transform.rotation = rotation;
         parentWeapon.transform.rotation = rotation;
+
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+
+        Vector3 pos = parentWeapon.transform.position;
+        if (player.facingDirection.x > 0)
+        {
+            animator.SetBool("FlipX", false);
+            if (pos.x > 0)
+                parentWeapon.transform.position = new Vector3(pos.x * -1, pos.y, pos.z);
+        }
+        else
+        {
+            animator.SetBool("FlipX", true);
+            if (pos.x < 0)
+                parentWeapon.transform.position = new Vector3(pos.x * -1, pos.y, pos.z);
+        }
+            
+
         
     }
 

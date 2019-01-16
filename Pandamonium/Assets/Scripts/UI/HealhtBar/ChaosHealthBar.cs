@@ -160,7 +160,7 @@ public class ChaosHealthBar : Image
 
                 part = 0;
                 while (i >= 0)
-                    halfTriangles[i--].fillAmount = 1;
+                halfTriangles[i--].fillAmount = 1;
                 //}
 
             }
