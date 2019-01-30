@@ -9,7 +9,10 @@ public class Ability : MonoBehaviour {
 
     public float cooldown = 1;
     public float range = 5;
-    public float damage = 1;
+    public float damageMultiplier = 1;
+
+    [HideInInspector]
+    public float damage;
 
     public float manaCost = 5;
 
@@ -31,6 +34,8 @@ public class Ability : MonoBehaviour {
         am = transform.parent.GetComponent<AbilityManager>();
         cdProgress = cooldown;
         audioSource = GetComponent<AudioSource>();
+
+        damage = am.baseDamage * damageMultiplier;
     }
 
     protected virtual void Cast(Vector2 fromPosition, Vector2 direction)

@@ -6,7 +6,9 @@ public class FireOrb : Ability {
 
     public float projectileSpeed;
 
-    public float aoeDamage = 2;
+    public float aoeDamageMultiplier = 0.6f;
+    [HideInInspector]
+    public float aoeDamage;
     public float aoeRadius = 2;
 
     private float realRadius = 2;
@@ -28,6 +30,8 @@ public class FireOrb : Ability {
         // ispaljivanje projektila
 
         Transform facingEnemy = GetFacingEnemy();
+
+        aoeDamage = am.baseDamage * aoeDamageMultiplier;
 
         if (facingEnemy)
             projectile.GetComponent<FireOrbProjectile>().Shoot(this, facingEnemy);
