@@ -484,7 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ff13f6b518d824aa56ebfaf6cde287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 30
   speed: 2
   knockback: 1
   knockbackForce: 12
@@ -753,7 +753,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 114121749672228834}
   equippedWeaponIndex: 0
-  maxHealth: 400
+  maxHealth: 500
   type: 2
   normalSpeed: 1
   healthBar: {fileID: 114586030310269660}

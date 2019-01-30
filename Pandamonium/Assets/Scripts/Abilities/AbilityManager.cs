@@ -13,6 +13,8 @@ public class AbilityManager : MonoBehaviour {
 
     public AutolockTracker autolock;
 
+    public float baseDamage = 10;
+
     public float globalCooldown = 0.5f;
 
     [HideInInspector]

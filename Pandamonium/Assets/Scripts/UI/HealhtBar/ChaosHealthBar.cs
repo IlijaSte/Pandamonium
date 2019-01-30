@@ -8,6 +8,8 @@ public class ChaosHealthBar : Image
 {
     enum BarType { HEALTH, POISIOM, ENERGY}
 
+    public float triangleDivider = 10;
+
     private ChaosHealthBar[] halfTriangles;
     private ChaosHealthBar[] halfTrianglesBG;
     private ChaosHealthBar[] prefabs;
@@ -69,7 +71,7 @@ public class ChaosHealthBar : Image
 
     private int GetNumTriangles(float maxHealth)
     {
-        return 15;// (int) maxHealth / 20;
+        return Mathf.RoundToInt(maxHealth / triangleDivider);
     }
 
     public void BuildHealtBar(float maxHealth, bool isMini)
