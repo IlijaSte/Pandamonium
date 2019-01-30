@@ -241,7 +241,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/Ilija/Desktop/user.keystore
+  AndroidKeystoreName: C:/Games/cHaos/Builds/user.keystore
   AndroidKeyaliasName: pandamonium
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
