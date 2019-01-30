@@ -150,8 +150,9 @@ MonoBehaviour:
   abilityName: fireorb
   cooldown: 1
   range: 7
+  damageMultiplier: 0.5
   damage: 5
-  manaCost: 5
+  manaCost: 25
   knockback: 1
   knockbackForce: 1
   buttonSprite: {fileID: 21300000, guid: 091fbefc82f44374eb9e19a0a79f90f1, type: 3}
@@ -159,6 +160,7 @@ MonoBehaviour:
   cdProgress: 0
   am: {fileID: 0}
   projectileSpeed: 5
+  aoeDamageMultiplier: 0.6
   aoeDamage: 2
   aoeRadius: 1.5
   fireOrbPrefab: {fileID: 1298587802615572, guid: 7f74136cce84b76488c777e92211b422,
