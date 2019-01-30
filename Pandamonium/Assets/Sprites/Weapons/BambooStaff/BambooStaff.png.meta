@@ -138,9 +138,9 @@ TextureImporter:
       tessellationDetail: 0
       bones:
       - name: root
-        position: {x: 113.24134, y: 663.58246, z: 0}
-        rotation: {x: 0, y: 0, z: 0.70710677, w: 0.70710677}
-        length: 841.85626
+        position: {x: 105.71359, y: 417.03412, z: 0}
+        rotation: {x: 0, y: 0, z: 0.70465815, w: 0.709547}
+        length: 1088.4296
         parentId: -1
       spriteID: 69af66576516dd94b84ce310e06c72de
       vertices:

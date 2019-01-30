@@ -123,14 +123,14 @@ TextureImporter:
       length: 55.83891
       parentId: -1
     - name: bone_5
-      position: {x: 65.64676, y: -74.79947, z: 0}
-      rotation: {x: 0, y: 0, z: -0.004541278, w: 0.9999897}
-      length: 55.832
+      position: {x: 77.498245, y: -74.20765, z: 0}
+      rotation: {x: 0, y: 0, z: -0.01250491, w: 0.9999218}
+      length: 43.99277
       parentId: 0
     - name: bone_6
-      position: {x: 66.31102, y: 73.41545, z: 0}
-      rotation: {x: 0, y: 0, z: 0.01674812, w: 0.99985975}
-      length: 58.95365
+      position: {x: 77.86222, y: 75.99735, z: 0}
+      rotation: {x: 0, y: 0, z: -0.0064524296, w: 0.9999792}
+      length: 47.374527
       parentId: 0
     spriteID: 55f05978f78321d4e868e1322773872f
     vertices:
