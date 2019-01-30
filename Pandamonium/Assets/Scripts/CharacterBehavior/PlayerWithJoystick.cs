@@ -96,7 +96,7 @@ public class PlayerWithJoystick : AttackingCharacter {
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.velocity = Vector2.zero;
 
-        path.enabled = true;
+        if(path) path.enabled = true;
 
         path.destination = pos;
 
