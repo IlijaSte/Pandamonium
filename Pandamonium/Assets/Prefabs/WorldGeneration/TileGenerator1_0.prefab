@@ -58,8 +58,8 @@ MonoBehaviour:
   roomNumberRange:
     m_Min: 4
     m_Max: 4
-  roomWidth: 28
-  roomHeight: 28
+  roomWidth: 30
+  roomHeight: 30
   enemyCountMultiplier: 1
   enemyPrefabs:
   - {fileID: 1628753790980070, guid: 75c84e6b6e1cac542a790e6e97eb2d12, type: 2}
@@ -77,6 +77,7 @@ MonoBehaviour:
   bossRoomPrefab: {fileID: 0}
   bossRoomSize: {x: 30, y: 30}
   keyHolderRoom: {fileID: 0}
+  puzzleRoomPool: []
   healthPoolPrefab: {fileID: 1459476336166136, guid: d0391d70682586d4182ba2e26c55987d,
     type: 2}
   corridorHorizPrefab: {fileID: 11400000, guid: ccb467220ec57864b93694e5b9c07034,
@@ -100,8 +101,6 @@ MonoBehaviour:
   acidPrefab: {fileID: 11400000, guid: 069acdcf805605f4191aefbbbb14ede6, type: 2}
   corridorTilemap: {fileID: 0}
   acidTilemap: {fileID: 0}
-  chestPrefab: {fileID: 1722286289344758, guid: bab75800351aa8746b6111887108aa1d,
-    type: 2}
   ground: {fileID: 0}
   bossRoomSpawn: {x: 0, y: 0}
   lanternChoiceRoom: {fileID: 1062512608064458, guid: 6f6cb511ac811894190755bb53b3430d,

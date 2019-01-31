@@ -28,7 +28,7 @@ public class UpgradeScreen : MonoBehaviour {
         UpdateButtons();
     }
 
-    private string[] classNames = { "Pandolina", "Marauder", "Arcanita" };
+    private string[] classNames = { "Arcanita", "Locked", "Locked" };
 
     private void Start()
     {
