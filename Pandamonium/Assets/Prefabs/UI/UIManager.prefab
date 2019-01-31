@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114696526391286408}
   - component: {fileID: 114209893818532370}
   - component: {fileID: 114938798299953126}
+  - component: {fileID: 114998062901089672}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -98,3 +99,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blackRectanglePrefab: {fileID: 1528762417485676, guid: 809c7fe5e76d34e4d89475e57ee72414,
     type: 2}
+--- !u!114 &114998062901089672
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1848565710162406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ab60c8927a17e84e89b33d31c99ca36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
+  deathMenu: {fileID: 0}
+  gameEndMenu: {fileID: 0}

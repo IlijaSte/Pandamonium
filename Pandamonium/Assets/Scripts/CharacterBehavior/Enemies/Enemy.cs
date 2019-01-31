@@ -174,13 +174,12 @@ public class Enemy : AttackingCharacter {
                         CM.MoveToPosition(target.position);
                     }
 
-                    if (transform.GetComponent<AttackingCharacter>().GetRoom() != room)
+                    if (room != null && player.GetComponent<AttackingCharacter>().GetRoom() != room)
                     {
                         MoveToPosition(startPos);
                         detectedPlayer = false;
                     }
-                    
-
+  
                     break;
                 }
 
@@ -202,7 +201,7 @@ public class Enemy : AttackingCharacter {
                         StopAttacking();
                         Attack(tempTarget);
                     }
-                    if (transform.GetComponent<AttackingCharacter>().GetRoom() != room)
+                    if (room != null && player.GetComponent<AttackingCharacter>().GetRoom() != room)
                     {
                         MoveToPosition(startPos);
                         detectedPlayer = false;
