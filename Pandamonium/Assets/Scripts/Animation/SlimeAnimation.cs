@@ -47,14 +47,13 @@ public class SlimeAnimation : CharacterAnimation
                 case AttackingCharacter.PlayerState.DASHING:
                     animator.SetBool("Dashing", true);
                     break;
-                    /*
                 case AttackingCharacter.PlayerState.IMMOBILE:
-                    if (transform.parent.GetComponent<Frogocite>().isDead)
+                    if (transform.parent.GetComponent<Slime>().isDead)
                     {
                         animator.SetBool("Dying", true);
                     }
                     break;
-                    */
+                    
 
             }
         }

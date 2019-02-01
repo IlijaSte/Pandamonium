@@ -283,7 +283,7 @@ public class Enemy : AttackingCharacter {
         GetComponent<Collider2D>().enabled = false;
         healthBar.gameObject.SetActive(false);
         nextAttackBar.transform.parent.gameObject.SetActive(false);
-        sprite.gameObject.SetActive(false);
+       // sprite.gameObject.SetActive(false);
 
         if (path)
             path.enabled = false;

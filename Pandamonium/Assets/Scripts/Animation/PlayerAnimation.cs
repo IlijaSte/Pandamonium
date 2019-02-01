@@ -7,6 +7,24 @@ public class PlayerAnimation : CharacterAnimation
 {
     private PlayerWithJoystick player;
 
+    public GameObject[] objectsToDisable;
+
+    private void DisableObjects()
+    {
+        foreach(GameObject gameObject in objectsToDisable)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    private void EnableObjects()
+    {
+        foreach (GameObject gameObject in objectsToDisable)
+        {
+            gameObject.SetActive(true);
+        }
+    }
+
     protected override void updateVector2()
     {
         if (GameManager.joystick)

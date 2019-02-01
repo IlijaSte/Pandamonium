@@ -10,8 +10,11 @@ public class WeaponAnimation : AnimationMama {
     public Weapon weapon;
     public GameObject parentHands;
 
+
     private void Update()
     {
+        
+
         updateAngleTo360();
       
         Quaternion rotation = parentWeapon.transform.rotation;
@@ -20,6 +23,10 @@ public class WeaponAnimation : AnimationMama {
         cursorIndicator.transform.rotation = rotation;
 
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
+
+        int sortingOrder = player.sprite.sortingOrder;
+        sr.sortingOrder = sortingOrder;
+        parentHands.GetComponent<SpriteRenderer>().sortingOrder = sortingOrder + 1;
 
         Vector3 pos = parentWeapon.transform.localPosition ;
         float weaponAngle = angle;

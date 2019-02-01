@@ -1,7 +1,21 @@
 fileFormatVersion: 2
 guid: fcb0afcc77c9a7c4393a8e5fd4026e04
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: MeleeFrogocidDeath_0
+    21300002: MeleeFrogocidDeath_1
+    21300004: MeleeFrogocidDeath_2
+    21300006: MeleeFrogocidDeath_3
+    21300008: MeleeFrogocidDeath_4
+    21300010: MeleeFrogocidDeath_5
+    21300012: MeleeFrogocidDeath_6
+    21300014: MeleeFrogocidDeath_7
+    21300016: MeleeFrogocidDeath_8
+    21300018: MeleeFrogocidDeath_9
+    21300020: MeleeFrogocidDeath_10
+    21300022: MeleeFrogocidDeath_11
+    21300024: MeleeFrogocidDeath_12
+    21300026: MeleeFrogocidDeath_13
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -43,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 45
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,11 +127,291 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: MeleeFrogocidDeath_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 201
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16fd54b5b20d7a94caf7b4e77ee0af62
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidDeath_1
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 0
+        width: 193
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e51598af87f66a4588a207f42f023e1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidDeath_2
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 0
+        width: 193
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06e3f47aef1cd7e42a3f6bf2313d65e9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidDeath_3
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 0
+        width: 201
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1916db68aeebcbe48b52d66fb950ebcf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidDeath_4
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 0
+        width: 201
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1b057355949c9f4db816f3649667985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidDeath_5
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 0
+        width: 203
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4b4ffab02dce06428299b155ea34c83
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidDeath_6
+      rect:
+        serializedVersion: 2
+        x: 1359
+        y: 0
+        width: 201
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 444e1d860ee27f641ab86d1462b80c5f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidDeath_7
+      rect:
+        serializedVersion: 2
+        x: 1587
+        y: 0
+        width: 201
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43ea0e538b97dde4c9f91e1328f60daf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidDeath_8
+      rect:
+        serializedVersion: 2
+        x: 1813
+        y: 2
+        width: 220
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 099b5556ff89bf44d9ad8e8871b53f3b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidDeath_9
+      rect:
+        serializedVersion: 2
+        x: 2039
+        y: 1
+        width: 221
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb096e4a9b75d1d45b4a89b68931e5ed
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidDeath_10
+      rect:
+        serializedVersion: 2
+        x: 2266
+        y: 7
+        width: 225
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af3e3d7d6b30a8a4c8ef3a568d357d15
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidDeath_11
+      rect:
+        serializedVersion: 2
+        x: 2494
+        y: 7
+        width: 209
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 877e0438b7840514dbf00c8a4ecab0ba
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidDeath_12
+      rect:
+        serializedVersion: 2
+        x: 2720
+        y: 9
+        width: 206
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3789290ec4ebc9146b9062ce613d82a6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeFrogocidDeath_13
+      rect:
+        serializedVersion: 2
+        x: 2948
+        y: 9
+        width: 192
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d065dcc37a871964e9bb2b629283fc22
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5f0b6227c5795ac4184bd9b6ae1fb21f
     vertices: []
     indices: 
     edges: []
