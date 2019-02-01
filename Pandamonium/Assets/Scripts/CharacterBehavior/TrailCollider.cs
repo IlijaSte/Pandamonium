@@ -33,9 +33,11 @@ public class TrailCollider : HazardousArea<PlayerWithJoystick> {
         Vector2 startSize = new Vector2(minSize, minSize);
         Vector2 endSize = new Vector2(maxSize, maxSize);
 
+        collider.size = Vector2.Lerp(startSize, endSize, 0.75f);
+
         for(int i = 0; i < time; i++)
         {
-            collider.size = Vector2.Lerp(startSize, endSize, i / time);
+            //collider.size = Vector2.Lerp(startSize, endSize, i / time);
             yield return new WaitForSeconds(1);
         }
 

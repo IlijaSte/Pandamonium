@@ -34,10 +34,10 @@ MonoBehaviour:
     m_RandomTransform: 0
   - m_Neighbors: 0100000001000000010000000100000001000000000000000200000000000000
     m_Sprites:
-    - {fileID: 21300000, guid: 15229a9c07b696849a7f1863f9b9f96c, type: 3}
+    - {fileID: 21300000, guid: 1ef3beaf9b268ff40a43474c5ec9de41, type: 3}
     m_AnimationSpeed: 1
     m_PerlinScale: 0.5
-    m_RuleTransform: 0
+    m_RuleTransform: 3
     m_Output: 0
     m_ColliderType: 1
     m_RandomTransform: 0
