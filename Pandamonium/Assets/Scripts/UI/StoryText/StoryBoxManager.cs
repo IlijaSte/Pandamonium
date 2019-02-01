@@ -108,7 +108,7 @@ public class StoryBoxManager : MonoBehaviour {
         //Time.timeScale = 0;
         (GameManager.I.playerInstance as PlayerWithJoystick).canMove = false;
         nextButton.interactable = false;
-        nextButton.GetComponentInChildren<Text>().text = "next";
+        //nextButton.GetComponentInChildren<Text>().text = "next";
 
         isShown = true;
 

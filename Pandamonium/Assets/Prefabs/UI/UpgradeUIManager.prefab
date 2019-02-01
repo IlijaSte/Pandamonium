@@ -60,7 +60,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   scrollRect: {fileID: 0}
   upgradeCanvas: {fileID: 0}
 --- !u!114 &114265323198651046

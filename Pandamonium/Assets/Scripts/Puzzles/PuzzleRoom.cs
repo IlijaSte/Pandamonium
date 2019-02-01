@@ -32,6 +32,7 @@ public class PuzzleRoom : MonoBehaviour {
     void Complete()
     {
         InfoText.I.ShowMessage("puzzle complete");
+        Instantiate(GameManager.I.prefabHolder.blueprint, transform.position, Quaternion.identity);
     }
 
     public void TouchIndicator(int id)

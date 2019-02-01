@@ -124,7 +124,7 @@ public abstract class Weapon : MonoBehaviour {
         return false;
     }
 
-    public virtual bool AttackInDirection(Vector2 direction)
+    public virtual bool AttackInDirection(Vector2 direction, bool regenMana = false)
     {
         if (timeToAttack <= 0 && (am == null || am.globalCDProgress >= am.globalCooldown))
         {

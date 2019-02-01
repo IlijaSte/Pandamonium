@@ -543,6 +543,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+  triangleDivider: 10
 --- !u!114 &114098971354420472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -890,7 +891,7 @@ MonoBehaviour:
         m_MethodName: ShowMenu
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1700260222444396, guid: 66971591d1a919a48a5680d93b460688,
+          m_ObjectArgument: {fileID: 1512969826271032, guid: b034a5a52297e974c816ae9d30452dfa,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
@@ -954,6 +955,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+  triangleDivider: 10
 --- !u!114 &114622573939946216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1226,6 +1228,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+  triangleDivider: 10
 --- !u!114 &114910060574840574
 MonoBehaviour:
   m_ObjectHideFlags: 1

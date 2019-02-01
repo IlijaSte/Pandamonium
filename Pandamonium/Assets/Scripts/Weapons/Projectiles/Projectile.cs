@@ -22,6 +22,8 @@ public class Projectile : MonoBehaviour {
     protected bool knockback;
     protected float kbForce;
 
+    protected bool regenMana = false;
+
     public Sprite[] spritePool;
 
     private AudioSource audioSource;
@@ -32,7 +34,7 @@ public class Projectile : MonoBehaviour {
     }
 
 
-    public virtual void Shoot(Transform parent, Transform target, float damage, float range, float speed, bool knockback = false, float kbForce = 0)
+    public virtual void Shoot(Transform parent, Transform target, float damage, float range, float speed, bool knockback = false, float kbForce = 0, bool regenMana = false)
     {
         this.target = target;
         direction = (target.position - transform.position).normalized;
@@ -44,6 +46,8 @@ public class Projectile : MonoBehaviour {
         shot = true;
         this.parent = parent;
 
+        this.regenMana = regenMana;
+
         startPos = transform.position;
         Quaternion rot = Quaternion.LookRotation(Vector3.forward, target.position - transform.position);
         transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
@@ -54,7 +58,7 @@ public class Projectile : MonoBehaviour {
         }
     }
 
-    public virtual void Shoot(Transform parent, Vector2 direction, float damage, float range, float speed, bool knockback = false, float kbForce = 0)
+    public virtual void Shoot(Transform parent, Vector2 direction, float damage, float range, float speed, bool knockback = false, float kbForce = 0, bool regenMana = false)
     {
         this.direction = direction;
         this.speed = speed;
@@ -64,6 +68,8 @@ public class Projectile : MonoBehaviour {
         this.damage = damage;
         this.range = range;
         homing = false;
+
+        this.regenMana = regenMana;
 
         shot = true;
         this.parent = parent;
@@ -137,7 +143,7 @@ public class Projectile : MonoBehaviour {
         }
 
         PlayerWithJoystick player;
-        if (player = parent.GetComponent<PlayerWithJoystick>())
+        if (regenMana && (player = parent.GetComponent<PlayerWithJoystick>()))
         {
             player.IncreaseEnergy(player.realDamage);
         }

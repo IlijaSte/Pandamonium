@@ -284,7 +284,7 @@ public abstract class AttackingCharacter : MonoBehaviour, IAttackable {
         }
         else
         {
-            StartCoroutine(ColorTransition(Color.green));
+            StartCoroutine(ColorTransition(Color.red));
         }
     }
 

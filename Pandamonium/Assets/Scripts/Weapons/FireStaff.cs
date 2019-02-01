@@ -26,7 +26,7 @@ public class FireStaff : RangedWeapon
         return false;
     }
 
-    public override bool AttackInDirection(Vector2 direction)
+    public override bool AttackInDirection(Vector2 direction, bool regenMana = false)
     {
         
         if (timeToAttack <= 0 && (am == null || am.globalCDProgress >= am.globalCooldown))
@@ -43,15 +43,18 @@ public class FireStaff : RangedWeapon
 
             Transform target = autolock.GetClosest();
 
+            PlayerWithJoystick player = parent.GetComponent<PlayerWithJoystick>();
+            int bonusDamage = (player ? player.GetDamage() : 0);
+
             // ispaljivanje projektila
 
             if (target)
             {
-                projectile.GetComponent<FireProjectile>().Shoot(parent.transform, target, damage, range, projectileSpeed, knockback, knockbackForce);
+                projectile.GetComponent<FireProjectile>().Shoot(parent.transform, target, damage + bonusDamage, range, projectileSpeed, knockback, knockbackForce, regenMana);
             }
             else
             {
-                projectile.GetComponent<FireProjectile>().Shoot(parent.transform, direction, damage, range, projectileSpeed, knockback, knockbackForce);
+                projectile.GetComponent<FireProjectile>().Shoot(parent.transform, direction, damage + bonusDamage, range, projectileSpeed, knockback, knockbackForce, regenMana);
             }
             base.AttackInDirection(direction);
 
