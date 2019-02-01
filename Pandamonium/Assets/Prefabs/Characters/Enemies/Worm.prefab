@@ -375,12 +375,15 @@ MonoBehaviour:
   - audioClip: {fileID: 8300000, guid: 2e381b9b16c190d40a4b155fdc533954, type: 3}
     audioSource: {fileID: 0}
     name: Emerging
+    volume: 0
   - audioClip: {fileID: 8300000, guid: 7296a8116d518ce4a9cc2e68cd2b4f40, type: 3}
     audioSource: {fileID: 0}
     name: Submerging
+    volume: 0
   - audioClip: {fileID: 8300000, guid: 4c92347f167f1fa4488cc4d7a60db49a, type: 3}
     audioSource: {fileID: 0}
     name: Attacking
+    volume: 0
 --- !u!114 &114198825388657396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -595,6 +598,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+  triangleDivider: 10
 --- !u!212 &212602623631793378
 SpriteRenderer:
   m_ObjectHideFlags: 1
