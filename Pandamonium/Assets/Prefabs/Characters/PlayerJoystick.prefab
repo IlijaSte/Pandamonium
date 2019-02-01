@@ -275,10 +275,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4852539153574744}
-  - component: {fileID: 114902774531894712}
   - component: {fileID: 58041820546883504}
+  - component: {fileID: 114917315022080956}
   m_Layer: 0
-  m_Name: Sword
+  m_Name: Staff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,7 +396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4017765627769762
 Transform:
   m_ObjectHideFlags: 1
@@ -743,7 +743,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.03685236, y: 0.084611416}
   serializedVersion: 2
-  m_Radius: 1.8
+  m_Radius: 5
 --- !u!58 &58456682295827046
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -843,8 +843,8 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 0.013412565, y: 0.34906876}
       - {x: 0.006931022, y: -0.2808178}
-      - {x: 2.8458705, y: -3.4404173}
-      - {x: 2.86729, y: 4.0085797}
+      - {x: 4.703127, y: -3.9396987}
+      - {x: 4.6554823, y: 4.575301}
 --- !u!95 &95044428507323028
 Animator:
   serializedVersion: 3
@@ -894,10 +894,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityPrefabs:
   - {fileID: 1191792085917580, guid: 3c8c5ccc723a01c41938cea664b642e0, type: 2}
-  - {fileID: 1903469109095692, guid: 7c852484e13400649bb9296a6248e244, type: 2}
+  - {fileID: 1114731285113550, guid: da061df1e586eb34d933b5fdbd6b3e34, type: 2}
   - {fileID: 1657346493881052, guid: ed157ce01ec166c498164ddb861b9cdd, type: 2}
   - {fileID: 1779642358091622, guid: d5e218ab773d86149a1bc724528eee88, type: 2}
-  - {fileID: 1114731285113550, guid: da061df1e586eb34d933b5fdbd6b3e34, type: 2}
+  - {fileID: 1903469109095692, guid: 7c852484e13400649bb9296a6248e244, type: 2}
   parent: {fileID: 114562331877149714}
   autolock: {fileID: 114263618082645028}
   baseDamage: 10
@@ -944,7 +944,7 @@ MonoBehaviour:
   player: {fileID: 114562331877149714}
   parentWeapon: {fileID: 1691184530293762}
   cursorIndicator: {fileID: 1445318196021128}
-  weapon: {fileID: 114902774531894712}
+  weapon: {fileID: 114917315022080956}
   parentHands: {fileID: 1172888336792544}
 --- !u!114 &114139707951712724
 MonoBehaviour:
@@ -1114,7 +1114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons:
-  - {fileID: 114902774531894712}
+  - {fileID: 114917315022080956}
   equippedWeaponIndex: 0
   maxHealth: 100
   type: 0
@@ -1230,27 +1230,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
---- !u!114 &114902774531894712
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1691184530293762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7ff13f6b518d824aa56ebfaf6cde287, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 5
-  speed: 1
-  knockback: 1
-  knockbackForce: 5
-  range: 1.8
-  timeToAttack: 1
-  parent: {fileID: 114562331877149714}
-  autolock: {fileID: 114645111146012328}
-  cleaveAngle: 90
-  animator: {fileID: 114122206196855612}
 --- !u!114 &114905902341502342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1267,6 +1246,28 @@ MonoBehaviour:
   - {fileID: 4845206565062354}
   - {fileID: 4572852506573666}
   - {fileID: 4743334912032850}
+--- !u!114 &114917315022080956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1691184530293762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0451c9bcf310840af5788a196bde3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  speed: 1
+  knockback: 0
+  knockbackForce: 5
+  range: 5
+  timeToAttack: 0
+  parent: {fileID: 114562331877149714}
+  autolock: {fileID: 114645111146012328}
+  projectileSpeed: 5
+  animator: {fileID: 114122206196855612}
+  firePrefab: {fileID: 1236645130428778, guid: f21b03d8107c94c42be901673b45d45a, type: 2}
 --- !u!114 &114930982135448756
 MonoBehaviour:
   m_ObjectHideFlags: 1

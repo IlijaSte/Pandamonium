@@ -22,6 +22,8 @@ public class Projectile : MonoBehaviour {
     protected bool knockback;
     protected float kbForce;
 
+    public Sprite[] spritePool;
+
     private AudioSource audioSource;
 
     private void Start()
@@ -45,6 +47,11 @@ public class Projectile : MonoBehaviour {
         startPos = transform.position;
         Quaternion rot = Quaternion.LookRotation(Vector3.forward, target.position - transform.position);
         transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
+
+        if(spritePool.Length > 0)
+        {
+            GetComponent<SpriteRenderer>().sprite = spritePool[Random.Range(0, spritePool.Length)];
+        }
     }
 
     public virtual void Shoot(Transform parent, Vector2 direction, float damage, float range, float speed, bool knockback = false, float kbForce = 0)
@@ -129,7 +136,11 @@ public class Projectile : MonoBehaviour {
             enemyHit.TakeDamage(damage);
         }
 
-       
+        PlayerWithJoystick player;
+        if (player = parent.GetComponent<PlayerWithJoystick>())
+        {
+            player.IncreaseEnergy(player.realDamage);
+        }
 
     }
 

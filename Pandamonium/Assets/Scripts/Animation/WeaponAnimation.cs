@@ -7,7 +7,7 @@ public class WeaponAnimation : AnimationMama {
     public PlayerWithJoystick player;
     public GameObject parentWeapon;
     public GameObject cursorIndicator;
-    public MeleeWeapon weapon;
+    public Weapon weapon;
     public GameObject parentHands;
 
     private void Update()

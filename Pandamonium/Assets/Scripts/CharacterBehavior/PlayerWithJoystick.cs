@@ -40,6 +40,9 @@ public class PlayerWithJoystick : AttackingCharacter {
     public int[] attributes;
 
     [HideInInspector]
+    public int realDamage;
+
+    [HideInInspector]
     public float speed;
 
     [HideInInspector]
@@ -145,6 +148,16 @@ public class PlayerWithJoystick : AttackingCharacter {
         energyBar.BuildHealtBar(maxEnergy, false);
         StartCoroutine(energyBar.FillAmount(energy / maxEnergy, false));
 
+        bool crit = UnityEngine.Random.value <= GameManager.I.costHolder.GetStatAsMultiplier(AttributeType.CRIT_CHANCE);
+
+        float damage = baseDamage + baseDamage * GameManager.I.costHolder.GetStatAsMultiplier(AttributeType.DAMAGE);
+
+        if (crit)
+        {
+            damage += baseDamage * GameManager.I.costHolder.GetStatAsMultiplier(AttributeType.CRIT_DAMAGE);
+        }
+
+        realDamage = Mathf.RoundToInt(damage);
     }
     public void AddRotation(float angle)
     {
@@ -492,21 +505,16 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     protected void HitWithWeapon()
     {
-        bool crit = UnityEngine.Random.value <= GameManager.I.costHolder.GetStatAsMultiplier(AttributeType.CRIT_CHANCE);
-
-        float damage = baseDamage + baseDamage * GameManager.I.costHolder.GetStatAsMultiplier(AttributeType.DAMAGE);
-
-        if (crit)
-        {
-            damage += baseDamage * GameManager.I.costHolder.GetStatAsMultiplier(AttributeType.CRIT_DAMAGE);
-        }
-
-        int roundDamage = Mathf.RoundToInt(damage);
 
         if (weapons[equippedWeaponIndex] is MeleeWeapon)
         {
-            int numHit = ((MeleeWeapon)weapons[equippedWeaponIndex]).AttackCleave(roundDamage);
-            IncreaseEnergy(numHit * (roundDamage + weapons[equippedWeaponIndex].damage));
+            int numHit = ((MeleeWeapon)weapons[equippedWeaponIndex]).AttackCleave(realDamage);
+            IncreaseEnergy(numHit * (realDamage + weapons[equippedWeaponIndex].damage));
+        }
+        else
+        {
+            weapons[equippedWeaponIndex].AttackInDirection(facingDirection);
+            //IncreaseEnergy(realDamage + weapons[equippedWeaponIndex].damage);
         }
     }
 

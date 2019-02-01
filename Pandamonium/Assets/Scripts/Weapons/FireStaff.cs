@@ -32,14 +32,29 @@ public class FireStaff : RangedWeapon
         if (timeToAttack <= 0 && (am == null || am.globalCDProgress >= am.globalCooldown))
         {
 
+            if (animator)
+            {
+                animator.WeaponStrike();
+            }
+
             // kreiranje projektila na mestu nosioca
             GameObject projectile = Instantiate(firePrefab);
             projectile.transform.position = transform.position;
 
-            // ispaljivanje projektila
-            //projectile.GetComponent<FireProjectile>().Shoot(transform, direction, projectileSpeed);
+            Transform target = autolock.GetClosest();
 
+            // ispaljivanje projektila
+
+            if (target)
+            {
+                projectile.GetComponent<FireProjectile>().Shoot(parent.transform, target, damage, range, projectileSpeed, knockback, knockbackForce);
+            }
+            else
+            {
+                projectile.GetComponent<FireProjectile>().Shoot(parent.transform, direction, damage, range, projectileSpeed, knockback, knockbackForce);
+            }
             base.AttackInDirection(direction);
+
             return true;
         }
 

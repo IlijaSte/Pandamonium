@@ -5,5 +5,6 @@ using UnityEngine;
 public abstract class RangedWeapon : Weapon {
 
     public float projectileSpeed;
+    public WeaponAnimation animator;
 
 }
