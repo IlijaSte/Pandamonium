@@ -123,7 +123,7 @@ TextureImporter:
         width: 113.36364
         height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -138,12 +138,12 @@ TextureImporter:
       name: HeavyFrogocidRight_1
       rect:
         serializedVersion: 2
-        x: 113
+        x: 115
         y: 0
-        width: 113.36364
+        width: 113
         height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -158,12 +158,12 @@ TextureImporter:
       name: HeavyFrogocidRight_2
       rect:
         serializedVersion: 2
-        x: 226
+        x: 228
         y: 0
-        width: 113.36364
+        width: 113
         height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -178,12 +178,12 @@ TextureImporter:
       name: HeavyFrogocidRight_3
       rect:
         serializedVersion: 2
-        x: 339
+        x: 342
         y: 0
-        width: 113.36364
+        width: 113
         height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -198,12 +198,12 @@ TextureImporter:
       name: HeavyFrogocidRight_4
       rect:
         serializedVersion: 2
-        x: 452
+        x: 455
         y: 0
-        width: 113.36364
+        width: 113
         height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -218,12 +218,12 @@ TextureImporter:
       name: HeavyFrogocidRight_5
       rect:
         serializedVersion: 2
-        x: 565
+        x: 568
         y: 0
-        width: 113.36364
+        width: 113
         height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -238,12 +238,12 @@ TextureImporter:
       name: HeavyFrogocidRight_6
       rect:
         serializedVersion: 2
-        x: 678
+        x: 681
         y: 0
-        width: 113.36364
+        width: 113
         height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -258,12 +258,12 @@ TextureImporter:
       name: HeavyFrogocidRight_7
       rect:
         serializedVersion: 2
-        x: 791
+        x: 795
         y: 0
-        width: 113.36364
+        width: 113
         height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -278,12 +278,12 @@ TextureImporter:
       name: HeavyFrogocidRight_8
       rect:
         serializedVersion: 2
-        x: 904
+        x: 908
         y: 0
-        width: 113.36364
+        width: 113
         height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -298,12 +298,12 @@ TextureImporter:
       name: HeavyFrogocidRight_9
       rect:
         serializedVersion: 2
-        x: 1017
+        x: 1021
         y: 0
-        width: 113.36364
+        width: 113
         height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -318,12 +318,12 @@ TextureImporter:
       name: HeavyFrogocidRight_10
       rect:
         serializedVersion: 2
-        x: 1130
+        x: 1134
         y: 0
-        width: 113.36364
+        width: 113
         height: 103
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
