@@ -588,7 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  uniqueID: 2086913451444489022
+  uniqueID: 3315910371268534189
   updateError: 1
   checkTime: 0.2
   objectTag: 2
@@ -755,6 +755,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+  triangleDivider: 10
 --- !u!114 &114914630610244544
 MonoBehaviour:
   m_ObjectHideFlags: 1

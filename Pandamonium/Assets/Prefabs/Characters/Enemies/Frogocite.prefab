@@ -504,6 +504,7 @@ MonoBehaviour:
   parent: {fileID: 0}
   autolock: {fileID: 0}
   projectileSpeed: 2
+  animator: {fileID: 0}
   firePrefab: {fileID: 1714793588657250, guid: 3661731ec6bccf5478d07ac6ec8ba79f, type: 2}
 --- !u!114 &114068334897614330
 MonoBehaviour:
@@ -679,6 +680,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+  triangleDivider: 10
 --- !u!114 &114631011764471838
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -799,12 +801,15 @@ MonoBehaviour:
   - audioClip: {fileID: 8300000, guid: 6436de91041689f4798a7b4052770f31, type: 3}
     audioSource: {fileID: 0}
     name: Dying
+    volume: 0
   - audioClip: {fileID: 8300000, guid: 48c6cfd85dbf41949a9c38ea81d0f9e4, type: 3}
     audioSource: {fileID: 0}
     name: Jumping
+    volume: 0
   - audioClip: {fileID: 8300000, guid: 621be8f587153af4ca26c4a811ffede8, type: 3}
     audioSource: {fileID: 0}
     name: Walking
+    volume: 0
 --- !u!114 &114987825729212746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -911,7 +916,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5, y: 3.48}
+  m_Size: {x: 2.01, y: 1.62}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0

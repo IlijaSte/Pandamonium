@@ -576,6 +576,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+  triangleDivider: 10
 --- !u!114 &114631011764471838
 MonoBehaviour:
   m_ObjectHideFlags: 1

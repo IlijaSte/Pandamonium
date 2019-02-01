@@ -991,9 +991,11 @@ MonoBehaviour:
   - audioClip: {fileID: 8300000, guid: 8dca91d136a850d45bc77392e456eede, type: 3}
     audioSource: {fileID: 0}
     name: Dashing
+    volume: 0
   - audioClip: {fileID: 8300000, guid: e59ec3801eac2304785d642ae39767b7, type: 3}
     audioSource: {fileID: 0}
     name: Walking
+    volume: 0
 --- !u!114 &114987825729212746
 MonoBehaviour:
   m_ObjectHideFlags: 1

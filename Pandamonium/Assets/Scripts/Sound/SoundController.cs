@@ -24,8 +24,8 @@ public class SoundController : MonoBehaviour {
     private void Start()
     {
         if (!PlaySoundByNameOnLoop("Ambient"))
-            Debug.LogError("nema ambijent");
-        
+            Debug.LogWarning("nema ambijent");
+
     }
 
     public bool PlaySoundByNameOnLoop(string name)
@@ -80,9 +80,10 @@ public class SoundController : MonoBehaviour {
         }
 
         if (sound == null)
-            Debug.LogError("Nije nasao zvuk");
+            Debug.LogWarning("Nije nasao zvuk");
 
         return sound;
+
     }
 
 }
