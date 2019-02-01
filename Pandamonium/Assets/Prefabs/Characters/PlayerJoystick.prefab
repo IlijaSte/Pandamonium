@@ -1274,7 +1274,7 @@ MonoBehaviour:
   autolock: {fileID: 114645111146012328}
   projectileSpeed: 10
   animator: {fileID: 114122206196855612}
-  firePrefab: {fileID: 1236645130428778, guid: f21b03d8107c94c42be901673b45d45a, type: 2}
+  firePrefab: {fileID: 1236645130428778, guid: 2880b13f64ac90b4c8cf8fb6bedb2824, type: 2}
 --- !u!114 &114930982135448756
 MonoBehaviour:
   m_ObjectHideFlags: 1
