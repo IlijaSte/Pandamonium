@@ -79,7 +79,7 @@ public class StoryBoxManager : MonoBehaviour {
             activeCoroutine = StartCoroutine(DoWrite(stories[currStory++]));
             if(currStory >= stories.Length)
             {
-                nextButton.GetComponentInChildren<Text>().text = "close";
+                //nextButton.GetComponentInChildren<Text>().text = "close";
             }
         }
         else
