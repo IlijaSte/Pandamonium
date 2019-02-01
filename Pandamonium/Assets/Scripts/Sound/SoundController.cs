@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class SoundController : MonoBehaviour{
+public class SoundController : MonoBehaviour {
 
     public Sound[] sounds;
     //public AudioSource audioSource;
 
     private void Awake()
     {
-        foreach(Sound sound in sounds)
+        foreach (Sound sound in sounds)
         {
             sound.audioSource = gameObject.AddComponent<AudioSource>();
             sound.audioSource.clip = sound.audioClip;
@@ -19,6 +19,36 @@ public class SoundController : MonoBehaviour{
             sound.audioSource.playOnAwake = false;
 
         }
+    }
+
+    private void Start()
+    {
+        if (!PlaySoundByNameOnLoop("Ambient"))
+            Debug.LogError("nema ambijent");
+        
+    }
+
+    public bool PlaySoundByNameOnLoop(string name)
+    {
+        Sound sound = SearchSoundbyName(name);
+        if (sound != null)
+        {
+            sound.audioSource.loop = true;
+            sound.audioSource.Play();
+            return true;
+        }
+        else return false;
+    }
+
+    public bool StopSoundByNameOnLoop(string name)
+    {
+        Sound sound = SearchSoundbyName(name);
+        if (sound != null)
+        {
+            sound.audioSource.loop = false;
+            sound.audioSource.Stop();
+            return true;
+        } else return false;
     }
 
     public void PlaySoundByName(string name)
