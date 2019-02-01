@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114000505782520776}
   - component: {fileID: 95088722069270726}
   - component: {fileID: 114404887239982364}
+  - component: {fileID: 114877810993450768}
   m_Layer: 10
   m_Name: FrogocitRangeProjectile
   m_TagString: Untagged
@@ -132,6 +133,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0, z: 0}
   homing: 0
+  spritePool: []
+--- !u!114 &114877810993450768
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1886280186401388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f345fe921a947da41bb3ca8859e91291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - audioClip: {fileID: 0}
+    audioSource: {fileID: 0}
+    name: Cast
+    volume: 1
+  - audioClip: {fileID: 8300000, guid: 8bbebdfcf57dbed4fb56ecf003f777bf, type: 3}
+    audioSource: {fileID: 0}
+    name: Hit
+    volume: 1
 --- !u!212 &212172335429453064
 SpriteRenderer:
   m_ObjectHideFlags: 1

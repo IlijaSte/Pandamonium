@@ -125,7 +125,7 @@ AnimationClip:
   m_Events:
   - time: 0
     functionName: StopSoundByName
-    data: Walking
+    data: Attacking
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

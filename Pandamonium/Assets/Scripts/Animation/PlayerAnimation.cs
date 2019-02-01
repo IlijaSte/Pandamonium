@@ -98,6 +98,7 @@ public class PlayerAnimation : CharacterAnimation
         else if (vector2.x > 0) sr.flipX = false;
     }
 
+    
 
 }
 

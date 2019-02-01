@@ -1172,18 +1172,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - audioClip: {fileID: 8300000, guid: 0ffcedeafbf83d84d8b9212fadbc59e6, type: 3}
+  - audioClip: {fileID: 8300000, guid: 37817ed982e73f047ae5d5642a6b6d88, type: 3}
     audioSource: {fileID: 0}
     name: TakePoisonDamage
-    volume: 0
-  - audioClip: {fileID: 8300000, guid: ff24f9bfd9c6fc7489865dfa0a63c640, type: 3}
+    volume: 1
+  - audioClip: {fileID: 8300000, guid: aeeb71664b132984faa14daa627325d7, type: 3}
     audioSource: {fileID: 0}
     name: TakeDamage
-    volume: 0
-  - audioClip: {fileID: 8300000, guid: ee18117b20ccec445ba969f4574b8eae, type: 3}
-    audioSource: {fileID: 0}
-    name: Attack
-    volume: 0
+    volume: 1
 --- !u!114 &114645111146012328
 MonoBehaviour:
   m_ObjectHideFlags: 1

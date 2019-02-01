@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 50796921857774904}
   - component: {fileID: 58684727964506916}
   - component: {fileID: 111948310828815408}
+  - component: {fileID: 114177747302965008}
   m_Layer: 0
   m_Name: WormProjectile
   m_TagString: Untagged
@@ -113,6 +114,26 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114177747302965008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620057767749030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f345fe921a947da41bb3ca8859e91291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - audioClip: {fileID: 0}
+    audioSource: {fileID: 0}
+    name: Cast
+    volume: 1
+  - audioClip: {fileID: 8300000, guid: 3c1c1bd8d5c5dd54ab452f0e62c2757c, type: 3}
+    audioSource: {fileID: 0}
+    name: Hit
+    volume: 1
 --- !u!114 &114312762798533572
 MonoBehaviour:
   m_ObjectHideFlags: 1

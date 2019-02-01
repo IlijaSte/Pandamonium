@@ -51,13 +51,15 @@ public class SoundController : MonoBehaviour {
         } else return false;
     }
 
-    public void PlaySoundByName(string name)
+    public AudioSource PlaySoundByName(string name)
     {
         Sound sound = SearchSoundbyName(name);
         if (sound != null)
         {
             sound.audioSource.Play();
+            return sound.audioSource;
         }
+        else return null;
     }
 
     public void StopSoundByName(string name)

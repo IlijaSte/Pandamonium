@@ -151,8 +151,8 @@ AnimationClip:
   m_GenerateMotionCurves: 0
   m_Events:
   - time: 0
-    functionName: StopSoundByName
-    data: Walking
+    functionName: PlaySoundByName
+    data: Attacking
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

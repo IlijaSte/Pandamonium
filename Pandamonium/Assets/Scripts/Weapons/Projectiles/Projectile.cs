@@ -26,16 +26,19 @@ public class Projectile : MonoBehaviour {
 
     public Sprite[] spritePool;
 
-    private AudioSource audioSource;
+    private SoundController soundController;
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
+        soundController = GetComponent<SoundController>();
     }
 
 
     public virtual void Shoot(Transform parent, Transform target, float damage, float range, float speed, bool knockback = false, float kbForce = 0, bool regenMana = false)
     {
+        StartCoroutine(PlaySound("Cast"));
+
         this.target = target;
         direction = (target.position - transform.position).normalized;
         this.knockback = knockback;
@@ -60,6 +63,8 @@ public class Projectile : MonoBehaviour {
 
     public virtual void Shoot(Transform parent, Vector2 direction, float damage, float range, float speed, bool knockback = false, float kbForce = 0, bool regenMana = false)
     {
+        StartCoroutine(PlaySound("Cast"));
+
         this.direction = direction;
         this.speed = speed;
         this.knockback = knockback;
@@ -77,6 +82,10 @@ public class Projectile : MonoBehaviour {
         startPos = transform.position;
         Quaternion rot = Quaternion.LookRotation(Vector3.forward, direction);
         transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
+
+        //soundController = GetComponent<SoundController>();
+        //soundController.PlaySoundByName("Cast");
+        
 
     }
 
@@ -114,24 +123,39 @@ public class Projectile : MonoBehaviour {
         }
     }
 
-    private IEnumerator PlaySound()
+    
+    private IEnumerator PlaySound(string name)
     {
-        if (audioSource)
-        {
-            print("pustaj taj film");
-            if (!audioSource.clip)
-                print("nema zvuk");
-            audioSource.Play();
+        soundController = GetComponent<SoundController>();
+        AudioSource audioSource = null;
 
+
+        if (soundController)
+        {
+            audioSource = soundController.PlaySoundByName(name);
+            
         }
         else print("nije nasao projectile audio");
 
-        yield return new WaitUntil(() => !audioSource.isPlaying);
+        if(audioSource)
+        {
+            //print("usao");
+            if (name.Equals("Hit"))
+            {
+                yield return new WaitUntil(() => !audioSource.isPlaying);
+
+                Destroy(gameObject);
+            }
+        }
+           
+
+
     }
 
     protected virtual void OnHitEnemy(AttackingCharacter enemyHit)
     {
-        StartCoroutine(PlaySound());
+        //StartCoroutine(PlaySound());
+        StartCoroutine(PlaySound("Hit"));
 
         if (knockback)
         {
@@ -147,6 +171,10 @@ public class Projectile : MonoBehaviour {
         {
             player.IncreaseEnergy(player.realDamage);
         }
+
+        
+        //soundController = GetComponent<SoundController>();
+        //soundController.PlaySoundByName("Hit");
 
     }
 
@@ -164,7 +192,7 @@ public class Projectile : MonoBehaviour {
             OnHitEnemy(character);
 
             shot = false;
-            Destroy(gameObject);
+            //Destroy(gameObject);
 
             return;
         }
