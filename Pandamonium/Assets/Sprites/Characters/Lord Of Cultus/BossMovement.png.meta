@@ -1,7 +1,19 @@
 fileFormatVersion: 2
 guid: b889b784516afb6498cdb104418e0630
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: BossMovement_0
+    21300002: BossMovement_1
+    21300004: BossMovement_2
+    21300006: BossMovement_3
+    21300008: BossMovement_4
+    21300010: BossMovement_5
+    21300012: BossMovement_6
+    21300014: BossMovement_7
+    21300016: BossMovement_8
+    21300018: BossMovement_9
+    21300020: BossMovement_10
+    21300022: BossMovement_11
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -38,12 +50,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 160
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,7 +125,247 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: BossMovement_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 306.6667
+        width: 219.25
+        height: 153.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a22ec64b49e6ab443a5d433a71e3bba0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossMovement_1
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 306.6667
+        width: 219.25
+        height: 153.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a26dd0529871344faf5207defb05908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossMovement_2
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 306.6667
+        width: 219.25
+        height: 153.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f23691f3995ba4449f01951e85f4f99
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossMovement_3
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 306.6667
+        width: 219.25
+        height: 153.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49e142178f611f9478da7ed77cb6078a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossMovement_4
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 153.66667
+        width: 219.25
+        height: 153.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5845cdc44707fd0438c48e730a12593f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossMovement_5
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 153.66667
+        width: 219.25
+        height: 153.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ca95af8fc8489448baf7f796f2cbc56
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossMovement_6
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 153.66667
+        width: 219.25
+        height: 153.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1d49499b9736a645af14d135bea78f6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossMovement_7
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 153.66667
+        width: 219.25
+        height: 153.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8b83359f7f4d0c4aba46e0710c37b04
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossMovement_8
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 0.66667175
+        width: 219.25
+        height: 153.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 503cc589b0fc36d4e9dd8fa383474f3f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossMovement_9
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 0.66667175
+        width: 219.25
+        height: 153.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3958e918a75f8814486c430170d7d81f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossMovement_10
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 0.66667175
+        width: 219.25
+        height: 153.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 354e22562fdbf9b4e9ddbb9130224d3e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossMovement_11
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 0.66667175
+        width: 219.25
+        height: 153.33333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f053909ca3c176242a2f3afc6350a032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

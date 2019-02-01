@@ -10,6 +10,8 @@ public class WeaponAnimation : AnimationMama {
     public Weapon weapon;
     public GameObject parentHands;
 
+    private Vector2 facingDirectionOld;
+
 
     private void Update()
     {
@@ -76,13 +78,13 @@ public class WeaponAnimation : AnimationMama {
         Quaternion weaponRotation = Quaternion.Euler(weaponRotationVector);
         parentWeapon.transform.rotation = weaponRotation;
 
-
+        facingDirectionOld = player.facingDirection;
     }
 
     protected void Start()
     {
 
-
+        facingDirectionOld = player.facingDirection;
 
        // path = transform.parent.GetComponent<AIPath>();
         animator = GetComponent<Animator>();
