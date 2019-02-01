@@ -743,7 +743,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.03685236, y: 0.084611416}
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 7.5
 --- !u!58 &58456682295827046
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -843,8 +843,8 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 0.013412565, y: 0.34906876}
       - {x: 0.006931022, y: -0.2808178}
-      - {x: 4.703127, y: -3.9396987}
-      - {x: 4.6554823, y: 4.575301}
+      - {x: 6.873143, y: -4.6104307}
+      - {x: 6.8254976, y: 5.2854877}
 --- !u!95 &95044428507323028
 Animator:
   serializedVersion: 3
@@ -1268,11 +1268,11 @@ MonoBehaviour:
   speed: 1
   knockback: 0
   knockbackForce: 5
-  range: 5
+  range: 7.5
   timeToAttack: 0
   parent: {fileID: 114562331877149714}
   autolock: {fileID: 114645111146012328}
-  projectileSpeed: 5
+  projectileSpeed: 10
   animator: {fileID: 114122206196855612}
   firePrefab: {fileID: 1236645130428778, guid: f21b03d8107c94c42be901673b45d45a, type: 2}
 --- !u!114 &114930982135448756

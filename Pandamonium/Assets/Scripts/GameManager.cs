@@ -242,7 +242,7 @@ public class GameManager : MonoBehaviour {
 
         SaveManager.I.SaveGame();
 
-        string pathToScene = SceneUtility.GetScenePathByBuildIndex(FIRST_LEVEL_BUILD_INDEX + Mathf.Clamp(currentLevel, -1, NUM_OF_LEVELS - 1));
+        string pathToScene = SceneUtility.GetScenePathByBuildIndex(FIRST_LEVEL_BUILD_INDEX + Mathf.Clamp(currentLevel, 0, NUM_OF_LEVELS - 1));
         string sceneName = System.IO.Path.GetFileNameWithoutExtension(pathToScene);
         LoadSceneLong(sceneName);
     }

@@ -148,6 +148,10 @@ public class PlayerWithJoystick : AttackingCharacter {
         energyBar.BuildHealtBar(maxEnergy, false);
         StartCoroutine(energyBar.FillAmount(energy / maxEnergy, false));
 
+    }
+
+    public int GetDamage()
+    {
         bool crit = UnityEngine.Random.value <= GameManager.I.costHolder.GetStatAsMultiplier(AttributeType.CRIT_CHANCE);
 
         float damage = baseDamage + baseDamage * GameManager.I.costHolder.GetStatAsMultiplier(AttributeType.DAMAGE);
@@ -158,7 +162,10 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
 
         realDamage = Mathf.RoundToInt(damage);
+
+        return realDamage;
     }
+
     public void AddRotation(float angle)
     {
         addedRotation += angle;
@@ -508,12 +515,12 @@ public class PlayerWithJoystick : AttackingCharacter {
 
         if (weapons[equippedWeaponIndex] is MeleeWeapon)
         {
-            int numHit = ((MeleeWeapon)weapons[equippedWeaponIndex]).AttackCleave(realDamage);
-            IncreaseEnergy(numHit * (realDamage + weapons[equippedWeaponIndex].damage));
+            int numHit = ((MeleeWeapon)weapons[equippedWeaponIndex]).AttackCleave(GetDamage());
+            IncreaseEnergy(numHit * (GetDamage() + weapons[equippedWeaponIndex].damage));
         }
         else
         {
-            weapons[equippedWeaponIndex].AttackInDirection(facingDirection);
+            weapons[equippedWeaponIndex].AttackInDirection(facingDirection, true);
             //IncreaseEnergy(realDamage + weapons[equippedWeaponIndex].damage);
         }
     }

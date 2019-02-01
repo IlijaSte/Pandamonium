@@ -9,6 +9,8 @@ public class PopupManager : MonoBehaviour {
 
     private static PopupManager instance;
 
+    public Canvas canvas;
+
     public GameObject pauseMenu;
     public GameObject deathMenu;
     public GameObject gameEndMenu;
@@ -28,13 +30,14 @@ public class PopupManager : MonoBehaviour {
     public void ShowMenu(GameObject menu)
     {
 
-        activeMenus.Push(Instantiate(menu));
+        activeMenus.Push(Instantiate(menu, canvas.transform));
 
     }
 
     public void CloseMenu()
     {
-        Destroy(activeMenus.Pop());
+        //Destroy(activeMenus.Pop());
+        activeMenus.Pop().GetComponent<Popup>().Close();
     }
 
     private void Update()

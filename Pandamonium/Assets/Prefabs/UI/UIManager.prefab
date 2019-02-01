@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ab60c8927a17e84e89b33d31c99ca36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
   pauseMenu: {fileID: 0}
   deathMenu: {fileID: 0}
   gameEndMenu: {fileID: 0}

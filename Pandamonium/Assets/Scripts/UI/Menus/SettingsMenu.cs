@@ -31,9 +31,9 @@ namespace LevelManagment
         {
             LoadData();
 
-            joystickToggle = transform.Find("Body/OptionGroup/JoystickCheck").GetComponent<Toggle>();
-            joystickToggle.onValueChanged.AddListener(GameManager.I.SetJoystick);
-            joystickToggle.isOn = GameManager.joystick;
+            //joystickToggle = transform.Find("Body/OptionGroup/JoystickCheck").GetComponent<Toggle>();
+            //joystickToggle.onValueChanged.AddListener(GameManager.I.SetJoystick);
+            //joystickToggle.isOn = GameManager.joystick;
 
         }
 

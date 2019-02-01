@@ -210,6 +210,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 114998062901089672, guid: fd205bd53487bcb48926eda464046561,
+        type: 2}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1908456162}
     - target: {fileID: 114209893818532370, guid: fd205bd53487bcb48926eda464046561,
         type: 2}
       propertyPath: mainCanvas
@@ -643,6 +648,37 @@ Canvas:
   m_PrefabParentObject: {fileID: 223070633048683606, guid: 00711fc208cb88b40a06ba32e47bc6ae,
     type: 2}
   m_PrefabInternal: {fileID: 968437975}
+--- !u!84 &580538614
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SpriteLightKit RT
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 580
+  m_Height: 326
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 0
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!224 &656728766 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224580454021334258, guid: c41a7d346eef8414b96565b8583e45f4,
@@ -802,12 +838,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00711fc208cb88b40a06ba32e47bc6ae, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &996437819 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114696526391286408, guid: fd205bd53487bcb48926eda464046561,
-    type: 2}
-  m_PrefabInternal: {fileID: 60006980}
-  m_Script: {fileID: 11500000, guid: 191a3998705aa6049809f47b12800b65, type: 3}
 --- !u!1 &1056246631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,38 +1796,7 @@ Tilemap:
   m_PrefabParentObject: {fileID: 8195094281207497108, guid: 2f12ed792073b0d42b9b173050dfe60c,
     type: 2}
   m_PrefabInternal: {fileID: 1086419496}
---- !u!84 &1326299000
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: SpriteLightKit RT
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 491
-  m_Height: 276
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 0
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
---- !u!1001 &1381943558
+--- !u!1001 &1391588595
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1897,6 +1896,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04471c4bbbe02c54296763c302e37630, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1411259784 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114998062901089672, guid: fd205bd53487bcb48926eda464046561,
+    type: 2}
+  m_PrefabInternal: {fileID: 60006980}
+  m_Script: {fileID: 11500000, guid: 1ab60c8927a17e84e89b33d31c99ca36, type: 3}
 --- !u!1001 &1463035735
 Prefab:
   m_ObjectHideFlags: 0
@@ -2056,7 +2061,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 996437819}
+      objectReference: {fileID: 1411259784}
     - target: {fileID: 224662990295732022, guid: 600ebf9611649fc44ba45c75866d99ff,
         type: 2}
       propertyPath: m_AnchorMax.x
@@ -2273,7 +2278,7 @@ Prefab:
         type: 2}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 1326299000}
+      objectReference: {fileID: 580538614}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 183980faa4eecda4cb2f751ff77af8e4, type: 2}
   m_IsPrefabParent: 0
