@@ -3,7 +3,7 @@ using UnityEngine;
 
 [System.Serializable]
 public class Sound
-{
+{ 
 
     public AudioClip audioClip;
 
@@ -11,6 +11,8 @@ public class Sound
     public AudioSource audioSource;
 
     public string name;
+
+    public float volume;
 
 
 }

@@ -113,52 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &16484635
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4691295985221720, guid: d3c77ec6a65679a488f797cd427ef080, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 2.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4691295985221720, guid: d3c77ec6a65679a488f797cd427ef080, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 2.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4691295985221720, guid: d3c77ec6a65679a488f797cd427ef080, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -30.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4691295985221720, guid: d3c77ec6a65679a488f797cd427ef080, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4691295985221720, guid: d3c77ec6a65679a488f797cd427ef080, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4691295985221720, guid: d3c77ec6a65679a488f797cd427ef080, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4691295985221720, guid: d3c77ec6a65679a488f797cd427ef080, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4691295985221720, guid: d3c77ec6a65679a488f797cd427ef080, type: 2}
-      propertyPath: m_RootOrder
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 1771469652914894, guid: d3c77ec6a65679a488f797cd427ef080, type: 2}
-      propertyPath: m_Name
-      value: SoundManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: d3c77ec6a65679a488f797cd427ef080, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &60006980
 Prefab:
   m_ObjectHideFlags: 0
@@ -1205,37 +1159,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f12ed792073b0d42b9b173050dfe60c, type: 2}
   m_IsPrefabParent: 0
---- !u!84 &1187404984
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: SpriteLightKit RT
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 811
-  m_Height: 456
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 0
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!114 &1188586372 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114054966258426636, guid: 600ebf9611649fc44ba45c75866d99ff,
@@ -2110,15 +2033,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - audioClip: {fileID: 8300000, guid: 0ffcedeafbf83d84d8b9212fadbc59e6, type: 3}
+  - audioClip: {fileID: 0}
     audioSource: {fileID: 0}
-    name: TakePoisonDamage
-  - audioClip: {fileID: 8300000, guid: ff24f9bfd9c6fc7489865dfa0a63c640, type: 3}
+    name: 
+    volume: 0
+  - audioClip: {fileID: 0}
     audioSource: {fileID: 0}
-    name: TakeDamage
-  - audioClip: {fileID: 8300000, guid: ee18117b20ccec445ba969f4574b8eae, type: 3}
+    name: 
+    volume: 0
+  - audioClip: {fileID: 0}
     audioSource: {fileID: 0}
-    name: Attack
+    name: 
+    volume: 0
 --- !u!58 &1852853174
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2437,79 +2363,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114389799003270524, guid: 183980faa4eecda4cb2f751ff77af8e4,
+    - target: {fileID: 20389851761035148, guid: 183980faa4eecda4cb2f751ff77af8e4,
         type: 2}
-      propertyPath: m_Follow
+      propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 143602737}
+      objectReference: {fileID: 2038280850}
     - target: {fileID: 114519924169131814, guid: 183980faa4eecda4cb2f751ff77af8e4,
         type: 2}
       propertyPath: spriteLightRT
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 20389851761035148, guid: 183980faa4eecda4cb2f751ff77af8e4,
+    - target: {fileID: 114389799003270524, guid: 183980faa4eecda4cb2f751ff77af8e4,
         type: 2}
-      propertyPath: m_TargetTexture
+      propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 1187404984}
-    - target: {fileID: 4783459898434366, guid: 183980faa4eecda4cb2f751ff77af8e4, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20389851761035148, guid: 183980faa4eecda4cb2f751ff77af8e4,
-        type: 2}
-      propertyPath: m_BackGroundColor.r
-      value: 0.19215687
-      objectReference: {fileID: 0}
-    - target: {fileID: 20389851761035148, guid: 183980faa4eecda4cb2f751ff77af8e4,
-        type: 2}
-      propertyPath: m_BackGroundColor.g
-      value: 0.3019608
-      objectReference: {fileID: 0}
-    - target: {fileID: 20389851761035148, guid: 183980faa4eecda4cb2f751ff77af8e4,
-        type: 2}
-      propertyPath: m_BackGroundColor.b
-      value: 0.4745098
-      objectReference: {fileID: 0}
-    - target: {fileID: 20389851761035148, guid: 183980faa4eecda4cb2f751ff77af8e4,
-        type: 2}
-      propertyPath: near clip plane
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 20389851761035148, guid: 183980faa4eecda4cb2f751ff77af8e4,
-        type: 2}
-      propertyPath: far clip plane
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 20389851761035148, guid: 183980faa4eecda4cb2f751ff77af8e4,
-        type: 2}
-      propertyPath: field of view
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 20389851761035148, guid: 183980faa4eecda4cb2f751ff77af8e4,
-        type: 2}
-      propertyPath: m_CullingMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20389851761035148, guid: 183980faa4eecda4cb2f751ff77af8e4,
-        type: 2}
-      propertyPath: orthographic size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 20526466777968328, guid: 183980faa4eecda4cb2f751ff77af8e4,
-        type: 2}
-      propertyPath: field of view
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 20526466777968328, guid: 183980faa4eecda4cb2f751ff77af8e4,
-        type: 2}
-      propertyPath: orthographic size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4783459898434366, guid: 183980faa4eecda4cb2f751ff77af8e4, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 143602737}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 183980faa4eecda4cb2f751ff77af8e4, type: 2}
   m_IsPrefabParent: 0
@@ -2632,6 +2500,37 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ebf552be7bf050e4784b2d885500529b, type: 2}
   m_IsPrefabParent: 0
+--- !u!84 &2038280850
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SpriteLightKit RT
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 740
+  m_Height: 416
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 0
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &2077353094
 GameObject:
   m_ObjectHideFlags: 0
