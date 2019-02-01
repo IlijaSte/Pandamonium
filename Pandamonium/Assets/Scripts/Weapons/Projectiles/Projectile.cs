@@ -142,6 +142,7 @@ public class Projectile : MonoBehaviour {
             //print("usao");
             if (name.Equals("Hit"))
             {
+                GetComponent<SpriteRenderer>().enabled = false;
                 yield return new WaitUntil(() => !audioSource.isPlaying);
 
                 Destroy(gameObject);
