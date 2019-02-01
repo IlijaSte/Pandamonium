@@ -24,7 +24,7 @@ public class CollectQuest : Quest {
         if(progress - lastUIUpdate >= 10)
         {
             lastUIUpdate = progress;
-            QuestText.I.ShowMessage("Collect " + goal.ToString() + " PandaCoins", progress, goal);
+            QuestText.I.ShowMessage("collect " + goal.ToString() + " PandaCoins", progress, goal);
         }
 
         if(progress >= goal)

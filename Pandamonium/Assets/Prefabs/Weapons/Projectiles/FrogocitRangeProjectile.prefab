@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114000505782520776}
   - component: {fileID: 95088722069270726}
   - component: {fileID: 114404887239982364}
-  - component: {fileID: 114877810993450768}
+  - component: {fileID: 114911574494978152}
   m_Layer: 10
   m_Name: FrogocitRangeProjectile
   m_TagString: Untagged
@@ -98,7 +98,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1886280186401388}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: e4ac3df03fde44b4eab59f9656547ad6, type: 2}
   m_CullingMode: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1886280186401388}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfb2509230ca73e4f9373aa472295ec6, type: 3}
   m_Name: 
@@ -133,8 +133,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0, z: 0}
   homing: 0
-  spritePool: []
---- !u!114 &114877810993450768
+  spritePool:
+  - {fileID: 21300012, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300014, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300016, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300018, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300020, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300022, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300024, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300026, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300028, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300030, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300032, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300034, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300036, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300038, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300040, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300042, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300044, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300046, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300048, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300050, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+  - {fileID: 21300052, guid: 4cfda3b8cba1c21449b0800f4b45d498, type: 3}
+--- !u!114 &114911574494978152
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

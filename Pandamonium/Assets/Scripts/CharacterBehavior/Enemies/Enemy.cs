@@ -33,6 +33,48 @@ public class Enemy : AttackingCharacter {
     [HideInInspector]
     public float speed;
 
+    private volatile float freezeDuration = 0;
+
+    private Coroutine freezeCoroutine;
+
+    protected IEnumerator Frozen()
+    {
+        speed /= 2;
+        if (path)
+            path.maxSpeed /= 2;
+
+        float dur = 0;
+
+        while (dur < freezeDuration)
+        {
+            if (isDead)
+                yield break;
+
+            StartCoroutine(ColorTransition(Color.blue));
+            yield return new WaitForSeconds(1f);
+            dur += 1f;
+        }
+
+
+        speed *= 2;
+
+        if (path)
+            path.maxSpeed *= 2;
+
+        freezeDuration = 0;
+    }
+
+    public void Freeze(float duration)
+    {
+
+        freezeDuration += duration;
+
+        if (freezeCoroutine == null)
+        {
+            freezeCoroutine = StartCoroutine(Frozen());
+        }
+    }
+
     public override void Start()
     {
         numEnemies ++;

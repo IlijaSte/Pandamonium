@@ -85,13 +85,13 @@ public class QuestText : MonoBehaviour {
         
         if(slider.value == 1)
         {
-            text.text = "Quest Complete!";
+            text.text = "quest complete!";
             slider.gameObject.SetActive(false);
             progressText.enabled = false;
         }
         else
         {
-            text.text = "Quest:";
+            text.text = "quest:";
             progressText.text = progress.ToString() + " / " + goal.ToString();
         }
 

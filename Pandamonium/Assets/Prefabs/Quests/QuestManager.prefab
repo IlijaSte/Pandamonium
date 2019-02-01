@@ -54,12 +54,12 @@ MonoBehaviour:
   maxNumOfDailies: 3
   questPool:
   - type: 0
-    parameter: Slime
+    parameter: slime
     goal: 12
     progress: 0
     rewardCoins: 100
   - type: 0
-    parameter: RangedFrogocid
+    parameter: ranged frogocid
     goal: 2
     progress: 0
     rewardCoins: 200

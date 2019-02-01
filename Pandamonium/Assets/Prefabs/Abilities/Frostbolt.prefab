@@ -150,7 +150,7 @@ MonoBehaviour:
   abilityName: frostbolt
   cooldown: 0.5
   range: 7
-  damageMultiplier: 0.7
+  damageMultiplier: 1.5
   damage: 5
   manaCost: 25
   knockback: 0
@@ -159,6 +159,6 @@ MonoBehaviour:
   bgSprite: {fileID: 21300000, guid: a68a7fd007120b444b548b557ead46f6, type: 3}
   cdProgress: 0
   am: {fileID: 0}
-  projectileSpeed: 7
+  projectileSpeed: 9
   frostboltPrefab: {fileID: 1754326600118894, guid: f0a059ebe6994f24a8d06b038817f911,
     type: 2}

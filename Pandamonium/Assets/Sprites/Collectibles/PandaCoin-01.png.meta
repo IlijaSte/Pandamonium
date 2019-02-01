@@ -50,7 +50,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 534
+  spritePixelsToUnits: 120
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,8 +116,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 266.7143
-        height: 267
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,7 +125,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4910685acdc065b45813ebc6f1f5b1b8
+      spriteID: bac9dec37e8cee243a1cdab269002b68
       vertices: []
       indices: 
       edges: []
@@ -134,10 +134,10 @@ TextureImporter:
       name: PandaCoin-01_1
       rect:
         serializedVersion: 2
-        x: 266
+        x: 64
         y: 0
-        width: 266.7143
-        height: 267
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,7 +145,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88c4b8b2c090da14b8eeb08a6ca725d6
+      spriteID: 557aea1f6629016409f001155c8d3105
       vertices: []
       indices: 
       edges: []
@@ -154,10 +154,10 @@ TextureImporter:
       name: PandaCoin-01_2
       rect:
         serializedVersion: 2
-        x: 532
+        x: 128
         y: 0
-        width: 266.7143
-        height: 267
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,7 +165,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd06f34febe61e640a10ef1a8d64b237
+      spriteID: acd84d12f468f2b4d85c46b306846826
       vertices: []
       indices: 
       edges: []
@@ -174,10 +174,10 @@ TextureImporter:
       name: PandaCoin-01_3
       rect:
         serializedVersion: 2
-        x: 798
+        x: 192
         y: 0
-        width: 266.7143
-        height: 267
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,7 +185,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7447c3dfac6f8e44ac860b334730766
+      spriteID: 4232ca5c949a0e04ba7de6a3aaa10171
       vertices: []
       indices: 
       edges: []
@@ -194,10 +194,10 @@ TextureImporter:
       name: PandaCoin-01_4
       rect:
         serializedVersion: 2
-        x: 1064
+        x: 256
         y: 0
-        width: 266.7143
-        height: 267
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,7 +205,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e7ff55cbb8d95b4d84c2ce193a4adb6
+      spriteID: 263eeccfa3bd250499235a0a45d19676
       vertices: []
       indices: 
       edges: []
@@ -214,10 +214,10 @@ TextureImporter:
       name: PandaCoin-01_5
       rect:
         serializedVersion: 2
-        x: 1330
+        x: 320
         y: 0
-        width: 266.7143
-        height: 267
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,7 +225,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca4bb5fc5c1f8844f83dc695ecc756db
+      spriteID: 9f3cef28535bd274f8e3f298b870fe64
       vertices: []
       indices: 
       edges: []
@@ -234,10 +234,10 @@ TextureImporter:
       name: PandaCoin-01_6
       rect:
         serializedVersion: 2
-        x: 1596
+        x: 384
         y: 0
-        width: 266.7143
-        height: 267
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,7 +245,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6cf4a668be5ecf4f92c1eb001d0d3df
+      spriteID: 7585ea8fe67b0a1448e9b10472e30411
       vertices: []
       indices: 
       edges: []

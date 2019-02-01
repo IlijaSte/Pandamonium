@@ -170,7 +170,7 @@ public class Projectile : MonoBehaviour {
         PlayerWithJoystick player;
         if (regenMana && (player = parent.GetComponent<PlayerWithJoystick>()))
         {
-            player.IncreaseEnergy(player.realDamage);
+            player.IncreaseEnergy(damage);
         }
 
         
