@@ -27,8 +27,8 @@ public class WeaponAnimation : AnimationMama {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
 
         int sortingOrder = player.sprite.sortingOrder;
-        sr.sortingOrder = sortingOrder + 1;
-        parentHands.GetComponent<SpriteRenderer>().sortingOrder = sortingOrder + 2;
+        sr.sortingOrder = sortingOrder + 10;
+        parentHands.GetComponent<SpriteRenderer>().sortingOrder = sortingOrder + 20;
 
         Vector3 pos = parentWeapon.transform.localPosition ;
         float weaponAngle = angle;
