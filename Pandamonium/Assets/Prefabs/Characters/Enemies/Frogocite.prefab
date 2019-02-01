@@ -798,18 +798,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - audioClip: {fileID: 8300000, guid: 6436de91041689f4798a7b4052770f31, type: 3}
+  - audioClip: {fileID: 8300000, guid: 59b5518c15543d742bcde5bd6ed7656a, type: 3}
     audioSource: {fileID: 0}
     name: Dying
-    volume: 0
-  - audioClip: {fileID: 8300000, guid: 48c6cfd85dbf41949a9c38ea81d0f9e4, type: 3}
+    volume: 1
+  - audioClip: {fileID: 8300000, guid: 81ed6d3c7f5aa574d82660cc1bc71d21, type: 3}
     audioSource: {fileID: 0}
     name: Jumping
-    volume: 0
-  - audioClip: {fileID: 8300000, guid: 621be8f587153af4ca26c4a811ffede8, type: 3}
+    volume: 1
+  - audioClip: {fileID: 8300000, guid: 1d037abb4a16203498aa45e5de6f186d, type: 3}
     audioSource: {fileID: 0}
-    name: Walking
-    volume: 0
+    name: Attacking
+    volume: 1
 --- !u!114 &114987825729212746
 MonoBehaviour:
   m_ObjectHideFlags: 1

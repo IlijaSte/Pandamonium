@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114000505782520776}
   - component: {fileID: 95088722069270726}
   - component: {fileID: 114404887239982364}
+  - component: {fileID: 114877810993450768}
   m_Layer: 10
   m_Name: FrogocitRangeProjectile
   m_TagString: Untagged

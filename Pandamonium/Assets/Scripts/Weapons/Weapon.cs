@@ -61,6 +61,7 @@ public abstract class Weapon : MonoBehaviour {
     {
         GetComponent<CircleCollider2D>().radius = range;
 
+
         if(parent == null)
         {
             parent = transform.parent.parent.GetComponent<AttackingCharacter>();
