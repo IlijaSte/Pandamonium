@@ -560,7 +560,7 @@ MonoBehaviour:
   ignoreMask: 0
   sprite: {fileID: 0}
   isDead: 0
-  enemyName: Worm
+  enemyName: worm
   difficulty: 1
   dropPrefabs: []
   holdsKey: 0

@@ -30,4 +30,11 @@ public class PausePopup : Popup {
         GameManager.I.LoadScene("MainMenu");
     }
 
+    public void OnEndRunPressed()
+    {
+        Time.timeScale = 1;
+
+        GameManager.I.GameOver();
+    }
+
 }

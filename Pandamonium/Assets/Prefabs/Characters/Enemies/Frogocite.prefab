@@ -530,7 +530,7 @@ MonoBehaviour:
   ignoreMask: 0
   sprite: {fileID: 0}
   isDead: 0
-  enemyName: Frogocid
+  enemyName: frogocid
   difficulty: 2
   dropPrefabs: []
   holdsKey: 0

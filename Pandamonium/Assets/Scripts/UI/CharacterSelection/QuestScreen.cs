@@ -26,11 +26,11 @@ public class QuestScreen : MonoBehaviour {
             switch (q.type)
             {
                 case Quest.QuestType.COLLECT:
-                    qText = "Collect " + q.goal.ToString() + " coins";
+                    qText = "collect " + q.goal.ToString() + " coins";
                     break;
 
                 case Quest.QuestType.SLAY:
-                    qText = "Slay " + q.goal.ToString() + " " + q.parameter + "s";
+                    qText = "slay " + q.goal.ToString() + " " + q.parameter + "s";
                     break;
             }
 

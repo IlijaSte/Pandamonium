@@ -64,7 +64,7 @@ MonoBehaviour:
     type: 2}
   attackButton: {fileID: 0}
   weaponSprite: {fileID: 21300000, guid: b929cd0eb211797498516d59d320737e, type: 3}
-  actionButtonSprite: {fileID: 21300000, guid: e97bd408edd26f5459995a8140b974fc, type: 3}
+  actionButtonSprite: {fileID: 21300000, guid: db951c7dc553c4f46bebd6832d05ba85, type: 3}
   abilityButtonHolders:
   - {fileID: 0}
   - {fileID: 0}

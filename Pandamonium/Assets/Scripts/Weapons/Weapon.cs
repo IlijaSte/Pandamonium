@@ -81,16 +81,18 @@ public abstract class Weapon : MonoBehaviour {
         {
             timeToAttack -= speed * Time.deltaTime;
 
-            if(am != null && 1 - timeToAttack > am.globalCDProgress / am.globalCooldown)
+            /*if(am != null && 1 - timeToAttack > am.globalCDProgress / am.globalCooldown)
             {
                 UIManager.I.UpdateAttackCooldown(am.globalCDProgress / am.globalCooldown);
             }
             else
             {
                 UIManager.I.UpdateAttackCooldown(1 - timeToAttack);
-            }
+            }*/
+            UIManager.I.UpdateAttackCooldown(1 - timeToAttack);
 
-        }else if (attacking)
+        }
+        else if (attacking)
         {
             timeToAttack -= speed * Time.deltaTime;
         }

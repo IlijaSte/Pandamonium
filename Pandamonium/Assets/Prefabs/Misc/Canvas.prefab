@@ -1261,7 +1261,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Quest:'
+  m_Text: 'quest:'
 --- !u!114 &114913592191154740
 MonoBehaviour:
   m_ObjectHideFlags: 1

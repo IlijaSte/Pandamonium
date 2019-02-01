@@ -515,8 +515,9 @@ public class PlayerWithJoystick : AttackingCharacter {
 
         if (weapons[equippedWeaponIndex] is MeleeWeapon)
         {
-            int numHit = ((MeleeWeapon)weapons[equippedWeaponIndex]).AttackCleave(GetDamage());
-            IncreaseEnergy(numHit * (GetDamage() + weapons[equippedWeaponIndex].damage));
+            int realDamage = GetDamage();
+            int numHit = ((MeleeWeapon)weapons[equippedWeaponIndex]).AttackCleave(realDamage);
+            IncreaseEnergy(numHit * (realDamage + weapons[equippedWeaponIndex].damage));
         }
         else
         {
