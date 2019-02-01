@@ -27,14 +27,27 @@ public class WeaponAnimation : AnimationMama {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
 
         int sortingOrder = player.sprite.sortingOrder;
-        sr.sortingOrder = sortingOrder;
-        parentHands.GetComponent<SpriteRenderer>().sortingOrder = sortingOrder + 1;
+        sr.sortingOrder = sortingOrder + 1;
+        parentHands.GetComponent<SpriteRenderer>().sortingOrder = sortingOrder + 2;
 
         Vector3 pos = parentWeapon.transform.localPosition ;
         float weaponAngle = angle;
 
-        print(player.facingDirection);
-        if (player.facingDirection.x > 0)
+        
+        if(player.facingDirection.x == 0)
+        {
+            if(!player.sprite.flipX)
+            {
+                if (weaponAngle >= 0 && weaponAngle <= 90)
+                    weaponAngle = Remap(weaponAngle, 0, 90, 0, 45);
+                else weaponAngle = Remap2(weaponAngle, 270, 360, 315, 360);
+            }
+            else
+            {
+                weaponAngle = Remap(weaponAngle, 90.0f, 270.0f, 135.0f, 225.0f);
+            }
+        }
+        else if (player.facingDirection.x > 0)// || (player.facingDirection.x == 0 && facingDirectionOld.x > 0))
         {
             animator.SetBool("FlipX", false);
             if (pos.x > 0)
@@ -45,11 +58,9 @@ public class WeaponAnimation : AnimationMama {
 
           
             }
-            print("angle: " + weaponAngle);
             if (weaponAngle >= 0 && weaponAngle <= 90)
                 weaponAngle = Remap(weaponAngle, 0, 90, 0, 45);
             else weaponAngle = Remap2(weaponAngle, 270, 360, 315, 360);
-            print("angle scaled: " + weaponAngle);
 
         }
         else
@@ -65,9 +76,7 @@ public class WeaponAnimation : AnimationMama {
             }
                 //weaponAngle -= 180f;
 
-                print("angle: " + weaponAngle);
                 weaponAngle = Remap(weaponAngle, 90.0f, 270.0f, 135.0f, 225.0f);
-                print("angle scaled: " + weaponAngle);
           
 
         }
