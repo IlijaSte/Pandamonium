@@ -64,7 +64,7 @@ public abstract class Weapon : MonoBehaviour {
 
         if(parent == null)
         {
-            parent = transform.parent.parent.GetComponent<AttackingCharacter>();
+            parent = transform.parent.GetComponent<AttackingCharacter>();
         }
 
         if(autolock == null)

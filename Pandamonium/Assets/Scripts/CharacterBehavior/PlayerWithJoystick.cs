@@ -56,6 +56,9 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     private SoundController soundController;
 
+    public GameObject weaponSprite;
+    public GameObject handsSprite;
+
     public override void Awake()
     {
         if (!GameManager.joystick)
@@ -190,7 +193,11 @@ public class PlayerWithJoystick : AttackingCharacter {
 
     protected override void Update()
     {
-        sprite.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100);
+        int sortingOrder = -Mathf.RoundToInt(transform.position.y * 100);
+        sprite.sortingOrder = sortingOrder;
+
+        weaponSprite.GetComponent<SpriteRenderer>().sortingOrder = sortingOrder + 1; 
+        handsSprite.GetComponent<SpriteRenderer>().sortingOrder = sortingOrder + 2;// + so
 
         nextAttackBar.fillAmount = 1 - weapons[equippedWeaponIndex].timeToAttack;
 
