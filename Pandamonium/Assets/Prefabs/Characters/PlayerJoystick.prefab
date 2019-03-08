@@ -1139,6 +1139,8 @@ MonoBehaviour:
   realDamage: 0
   speed: 0
   canMove: 1
+  weaponSprite: {fileID: 1776535257708270}
+  handsSprite: {fileID: 1172888336792544}
 --- !u!114 &114566688973802844
 MonoBehaviour:
   m_ObjectHideFlags: 1
