@@ -12,6 +12,13 @@ public class WeaponAnimation : AnimationMama {
 
     private Vector2 facingDirectionOld;
 
+    private void FixedUpdate()
+    {
+        //SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        //int sortingOrder = player.sprite.sortingOrder;
+        //sr.sortingOrder = sortingOrder + 1;
+        //parentHands.GetComponent<SpriteRenderer>().sortingOrder = sortingOrder + 2;
+    }
 
     private void Update()
     {
@@ -26,9 +33,12 @@ public class WeaponAnimation : AnimationMama {
 
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
 
-        int sortingOrder = player.sprite.sortingOrder;
-        sr.sortingOrder = sortingOrder + 10;
-        parentHands.GetComponent<SpriteRenderer>().sortingOrder = sortingOrder + 20;
+        //int sortingOrder = player.sprite.sortingOrder;
+        //int sortingOrderAdd = 1;
+        //sr.sortingOrder = sortingOrder;// + sortingOrderAdd;
+        //parentHands.GetComponent<SpriteRenderer>().sortingOrder = sortingOrder;// + sortingOrderAdd + 1;
+
+       // Debug.Log("Pl: " + sortingOrder + "; hands: " + sr.sortingOrder);
 
         Vector3 pos = parentWeapon.transform.localPosition ;
         float weaponAngle = angle;
@@ -88,6 +98,8 @@ public class WeaponAnimation : AnimationMama {
         parentWeapon.transform.rotation = weaponRotation;
 
         facingDirectionOld = player.facingDirection;
+
+        
     }
 
     protected void Start()
