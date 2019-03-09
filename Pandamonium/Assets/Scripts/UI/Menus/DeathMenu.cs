@@ -15,7 +15,8 @@ public class DeathMenu : Menu<DeathMenu> {
 
     public void OnMainManuPressed()
     {
-        GameManager.I.LoadScene("CharacterSelection");
+        //GameManager.I.LoadScene("CharacterSelection");
+        GameManager.I.GameOver();
         MainMenu.Open();
     }
 }

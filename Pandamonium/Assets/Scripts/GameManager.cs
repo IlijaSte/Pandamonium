@@ -176,6 +176,7 @@ public class GameManager : MonoBehaviour {
     public void GameOver()
     {
         isRunStarted = false;
+        currentLevel = 0;
         tempCoins = 0;
         SaveManager.I.SaveGame();
         LoadScene("CharacterSelection");

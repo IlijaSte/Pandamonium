@@ -73,6 +73,8 @@ public class Worm : StandardEnemy {
 
         bool hitSmth = false;
         Vector2 emergePos;
+        int tries = 0;
+
         do
         {
             emergePos = room.GetRandomPos();
@@ -100,7 +102,10 @@ public class Worm : StandardEnemy {
             if (!hitSmth && !LevelGeneration.I.IsTileFree(emergePos))
                 hitSmth = true;
 
+            if (tries < 80 && Vector3.Distance(emergePos, player.position) > 6)
+                hitSmth = true;
 
+            tries++;
         } while (hitSmth);
 
         return emergePos;
