@@ -32,7 +32,8 @@ public class PlayerWithJoystick : AttackingCharacter {
     public enum ActionChangeType { SWAP_TO_PAW, SWAP_TO_KEY, SWAP_TO_WEAPON }
     public enum ActionType { WEAPON, KEY, PAW }
 
-    protected ActionType action = ActionType.WEAPON;
+    [HideInInspector]
+    public ActionType action = ActionType.WEAPON;
     protected Transform actionObject;
 
     public enum AttributeType { HEALTH, DAMAGE, CRIT_CHANCE, CRIT_DAMAGE, CASH_IN }
@@ -533,7 +534,7 @@ public class PlayerWithJoystick : AttackingCharacter {
         }
     }
 
-    public override void Attack()
+    public void DoAction()
     {
         if (!canMove)
             return;
@@ -566,8 +567,6 @@ public class PlayerWithJoystick : AttackingCharacter {
                 actionObject.GetComponentInChildren<InteractableObject>().StartActivating();
                 break;
         }
-        
-
     }
 
     public void UseAbility(int abilityIndex)

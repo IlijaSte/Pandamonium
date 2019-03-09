@@ -129,6 +129,31 @@ public class UIManager : MonoBehaviour {
         abilityButtonHolders[index].GetComponentInChildren<CanvasGroup>().blocksRaycasts = true;
     }
 
+    public void AttackPointerDown(JoystickController joystick)
+    {
+        PlayerWithJoystick player = GameManager.I.playerInstance as PlayerWithJoystick;
+        if (player.action == PlayerWithJoystick.ActionType.WEAPON)
+        {
+            joystick.transform.parent.GetComponent<CanvasGroup>().alpha = 1;
+            GameManager.I.playerInstance.GetWeapon().StartHitting(joystick.InputDirection);
+        }
+        else
+        {
+            player.DoAction();
+        }
+    }
+
+    public void AttackPointerUp(JoystickController joystick)
+    {
+        joystick.transform.parent.GetComponent<CanvasGroup>().alpha = 0;
+        GameManager.I.playerInstance.GetWeapon().StopHitting();
+    }
+
+    public void AttackPointerHold(JoystickController joystick)
+    {
+        GameManager.I.playerInstance.GetWeapon().UpdateDirection(joystick.InputDirection);
+    }
+
     public void ShowKey()
     {
         keyImage.enabled = true;

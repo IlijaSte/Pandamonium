@@ -24,38 +24,9 @@ public abstract class Weapon : MonoBehaviour {
     public AttackingCharacter parent;
     public AutolockTracker autolock;
 
+    protected Vector3 direction;
+
     protected AbilityManager am;
-
-    virtual public void StartAttacking(Transform target)
-    {
-        if (!attacking)
-        {
-            attacking = true;
-            timeToAttack = 1f;
-            this.target = target;
-        }
-    }
-
-    virtual public void ContinueAttacking(Transform target)
-    {
-        if (!attacking)
-        {
-            attacking = true;
-            //timeToAttack = 1f;
-            this.target = target;
-        }
-    }
-
-    virtual public void Pause()
-    {
-        attacking = false;
-    }
-
-    virtual public void Stop()
-    {
-        attacking = false;
-        timeToAttack = 1;
-    }
 
     private void Start()
     {
@@ -92,6 +63,11 @@ public abstract class Weapon : MonoBehaviour {
             }*/
             UIManager.I.UpdateAttackCooldown(1 - timeToAttack);
 
+            if(attacking && timeToAttack <= 0)
+            {
+                AttackInDirection(direction, true);
+            }
+
         }
         else if (attacking)
         {
@@ -107,6 +83,55 @@ public abstract class Weapon : MonoBehaviour {
             }
         }
         
+    }
+
+    virtual public void StartAttacking(Transform target)
+    {
+        if (!attacking)
+        {
+            attacking = true;
+            timeToAttack = 1f;
+            this.target = target;
+        }
+    }
+
+    virtual public void ContinueAttacking(Transform target)
+    {
+        if (!attacking)
+        {
+            attacking = true;
+            this.target = target;
+        }
+    }
+
+    virtual public void Pause()
+    {
+        attacking = false;
+    }
+
+    virtual public void Stop()
+    {
+        attacking = false;
+        timeToAttack = 1;
+    }
+
+    public void StartHitting(Vector3 direction)
+    {
+        this.direction = direction;
+        autolock.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, direction.normalized));
+        AttackInDirection(direction, true);
+        attacking = true;
+    }
+
+    public void UpdateDirection(Vector3 direction)
+    {
+        this.direction = direction;
+        autolock.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, direction.normalized));
+    }
+
+    public void StopHitting()
+    {
+        attacking = false;
     }
 
     public virtual bool Attack(Transform target)

@@ -100,6 +100,11 @@ public abstract class AttackingCharacter : MonoBehaviour, IAttackable {
         weapons[equippedWeaponIndex].gameObject.SetActive(true);
     }
 
+    public Weapon GetWeapon()
+    {
+        return weapons[equippedWeaponIndex];
+    }
+
     public virtual void OnWeaponAttack()
     {
 
