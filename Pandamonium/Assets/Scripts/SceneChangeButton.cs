@@ -13,6 +13,8 @@ public class SceneChangeButton : MonoBehaviour {
     public string action = "";
     public string parameter = "";
 
+    public static bool tutorial = false;
+
     private void Start()
     {
         thisButton = GetComponent<Button>();
@@ -26,6 +28,12 @@ public class SceneChangeButton : MonoBehaviour {
 
             if (longLoad)
             {
+                if(gotoScene.Equals("TutorialScene"))
+                {
+                    if (tutorial == true)
+                        gotoScene = "Level1_1";
+                    else tutorial = true;
+                }
                 thisButton.onClick.AddListener(delegate { GameManager.I.LoadSceneLong(gotoScene); });
             }
             else
