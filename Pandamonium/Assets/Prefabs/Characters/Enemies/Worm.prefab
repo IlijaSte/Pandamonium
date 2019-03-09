@@ -550,7 +550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons: []
   equippedWeaponIndex: 0
-  maxHealth: 50
+  maxHealth: 30
   type: 1
   normalSpeed: 1
   healthBar: {fileID: 114946352627019972}

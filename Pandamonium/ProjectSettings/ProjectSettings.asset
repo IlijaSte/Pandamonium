@@ -8,7 +8,7 @@ PlayerSettings:
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
-  defaultScreenOrientation: 2
+  defaultScreenOrientation: 4
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
@@ -241,7 +241,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/Ilija/Desktop/user.keystore
+  AndroidKeystoreName: C:/Users/Ilija/Desktop/Unity Projects/PandamoniumRepo/user.keystore
   AndroidKeyaliasName: pandamonium
   AndroidTVCompatibility: 1
   AndroidIsGame: 1

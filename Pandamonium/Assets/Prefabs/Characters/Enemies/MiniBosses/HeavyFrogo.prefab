@@ -484,7 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ff13f6b518d824aa56ebfaf6cde287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
+  damage: 35
   speed: 2
   knockback: 1
   knockbackForce: 12
@@ -756,7 +756,7 @@ MonoBehaviour:
   equippedWeaponIndex: 0
   maxHealth: 500
   type: 2
-  normalSpeed: 1
+  normalSpeed: 2
   healthBar: {fileID: 114586030310269660}
   nextAttackBar: {fileID: 114631011764471838}
   vision: {fileID: 114214034657156396}
@@ -775,7 +775,7 @@ MonoBehaviour:
   secondaryAoeDamage: 25
   primaryStunDuration: 1.5
   secondaryStunDuration: 0.5
-  selfStunDuration: 4
+  selfStunDuration: 3.5
   selfStunJumps: 3
   selfStunsToEnrage: 3
   enragedSpeed: 4

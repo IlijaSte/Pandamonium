@@ -520,7 +520,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 114121749672228834}
   equippedWeaponIndex: 0
-  maxHealth: 150
+  maxHealth: 100
   type: 1
   normalSpeed: 1.5
   healthBar: {fileID: 114586030310269660}
@@ -535,13 +535,13 @@ MonoBehaviour:
   dropPrefabs: []
   holdsKey: 0
   speed: 0
-  jumpSpeed: 0
+  jumpSpeed: 1
   maxJumpRange: 4
   landDamageRadius: 1.5
   indicatorPrefab: {fileID: 1677782040419512, guid: d354f95f8310c1f418e1347aa9aa7874,
     type: 2}
   isJumping: 0
-  jumpCooldown: 3
+  jumpCooldown: 2.5
 --- !u!114 &114079399296506460
 MonoBehaviour:
   m_ObjectHideFlags: 1
