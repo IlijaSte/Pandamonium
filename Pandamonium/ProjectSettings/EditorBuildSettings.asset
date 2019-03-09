@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/CharacterSelection.unity
     guid: 8f60c71968ca75940972f7b0432f4a81
   - enabled: 0
-    path: Assets/Scenes/TutorialScene.unity
+    path: Assets/__DELETED_GUID_Trash/0ea7b68d92be2a64cb8bd148012796df
     guid: 0ea7b68d92be2a64cb8bd148012796df
   - enabled: 1
     path: Assets/Scenes/LoadingScene.unity
@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameLevels/Level1_3.unity
     guid: 09a4cd576bb5a41468d12aad7477dcb1
+  - enabled: 1
+    path: Assets/Scenes/TutorialScene.unity
+    guid: 60285b097580def45bd3da7f909e04c8
   m_configObjects: {}
