@@ -8,6 +8,7 @@ public class Popup : MonoBehaviour //
     public float popupSpeed = 1.5f;
 
     public Vector2 initScale;
+    public bool attachToCanvas = true;
 
     public virtual void Start()
     {
@@ -28,7 +29,7 @@ public class Popup : MonoBehaviour //
         //FindObjectOfType<PopupManager>().CloseMenu();
     }
 
-    private IEnumerator Opening()
+    protected virtual IEnumerator Opening()
     {
 
         float i = 0f;
@@ -51,7 +52,7 @@ public class Popup : MonoBehaviour //
 
     }
 
-    private IEnumerator Closing()
+    protected virtual IEnumerator Closing()
     {
         float i = 0f;
 

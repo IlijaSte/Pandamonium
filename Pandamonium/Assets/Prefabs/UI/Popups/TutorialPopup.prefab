@@ -424,6 +424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupSpeed: 3
   initScale: {x: 0, y: 0}
+  attachToCanvas: 0
 --- !u!114 &114566461198995762
 MonoBehaviour:
   m_ObjectHideFlags: 1

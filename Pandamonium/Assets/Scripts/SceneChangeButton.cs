@@ -31,10 +31,16 @@ public class SceneChangeButton : MonoBehaviour {
                 if(gotoScene.Equals("TutorialScene"))
                 {
                     if (tutorial == true)
+                    {
                         gotoScene = "Level1_1";
-                    else tutorial = true;
-                }
-                thisButton.onClick.AddListener(delegate { GameManager.I.LoadSceneLong(gotoScene); });
+                        thisButton.onClick.AddListener(delegate { GameManager.I.LoadSceneLong(gotoScene); });
+                    }
+                    else
+                    {
+                        thisButton.onClick.AddListener(delegate { PopupManager.I.ShowMenu(PopupManager.I.tutorialPopup); });
+                    }
+                }else
+                    thisButton.onClick.AddListener(delegate { GameManager.I.LoadSceneLong(gotoScene); });
             }
             else
             {

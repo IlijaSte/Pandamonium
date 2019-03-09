@@ -14,6 +14,7 @@ public class PopupManager : MonoBehaviour {
     public GameObject pauseMenu;
     public GameObject deathMenu;
     public GameObject gameEndMenu;
+    public GameObject tutorialPopup;
 
     public static PopupManager I
     {
@@ -29,8 +30,8 @@ public class PopupManager : MonoBehaviour {
 
     public void ShowMenu(GameObject menu)
     {
-
-        activeMenus.Push(Instantiate(menu, canvas.transform));
+        bool attachToCanvas = menu.GetComponent<Popup>().attachToCanvas;
+        activeMenus.Push(Instantiate(menu, attachToCanvas ? canvas.transform : null));
 
     }
 
