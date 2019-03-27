@@ -30,63 +30,46 @@ public class Projectile : MonoBehaviour {
 
     private void Start()
     {
-        //audioSource = GetComponent<AudioSource>();
         soundController = GetComponent<SoundController>();
     }
 
-
-    public virtual void Shoot(Transform parent, Transform target, float damage, float range, float speed, bool knockback = false, float kbForce = 0, bool regenMana = false)
+    private void Init(Transform parent, Vector3 direction, float speed, float damage, float range, bool knockback = false, float kbForce = 0, bool regenMana = false)
     {
         StartCoroutine(PlaySound("Cast"));
 
-        this.target = target;
-        direction = (target.position - transform.position).normalized;
-        this.knockback = knockback;
-        this.kbForce = kbForce;
+        this.parent = parent;
+        this.direction = direction;
         this.speed = speed;
         this.damage = damage;
         this.range = range;
-        shot = true;
-        this.parent = parent;
-
+        this.knockback = knockback;
+        this.kbForce = kbForce;
         this.regenMana = regenMana;
 
+        transform.position += direction * 0.75f;
         startPos = transform.position;
-        Quaternion rot = Quaternion.LookRotation(Vector3.forward, target.position - transform.position);
+
+        Quaternion rot = Quaternion.LookRotation(Vector3.forward, direction);
         transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
 
-        if(spritePool.Length > 0)
+        startPos = transform.position;
+        shot = true;
+
+        if (spritePool.Length > 0)
         {
             GetComponent<SpriteRenderer>().sprite = spritePool[Random.Range(0, spritePool.Length)];
         }
     }
 
+    public virtual void Shoot(Transform parent, Transform target, float damage, float range, float speed, bool knockback = false, float kbForce = 0, bool regenMana = false)
+    {
+        direction = (target.position - transform.position).normalized;
+        Init(parent, direction, speed, damage, range, knockback, kbForce, regenMana);
+    }
+
     public virtual void Shoot(Transform parent, Vector2 direction, float damage, float range, float speed, bool knockback = false, float kbForce = 0, bool regenMana = false)
     {
-        StartCoroutine(PlaySound("Cast"));
-
-        this.direction = direction;
-        this.speed = speed;
-        this.knockback = knockback;
-        this.kbForce = kbForce;
-        this.target = null;
-        this.damage = damage;
-        this.range = range;
-        homing = false;
-
-        this.regenMana = regenMana;
-
-        shot = true;
-        this.parent = parent;
-
-        startPos = transform.position;
-        Quaternion rot = Quaternion.LookRotation(Vector3.forward, direction);
-        transform.rotation = Quaternion.Euler(0, 0, rot.eulerAngles.z + 90);
-
-        //soundController = GetComponent<SoundController>();
-        //soundController.PlaySoundByName("Cast");
-        
-
+        Init(parent, direction, speed, damage, range, knockback, kbForce, regenMana);
     }
 
     protected virtual void OnEndOfRange()
@@ -123,23 +106,19 @@ public class Projectile : MonoBehaviour {
         }
     }
 
-    
     private IEnumerator PlaySound(string name)
     {
         soundController = GetComponent<SoundController>();
         AudioSource audioSource = null;
 
-
         if (soundController)
         {
             audioSource = soundController.PlaySoundByName(name);
-            
         }
         else print("nije nasao projectile audio");
 
         if(audioSource)
         {
-            //print("usao");
             if (name.Equals("Hit"))
             {
                 GetComponent<SpriteRenderer>().enabled = false;
@@ -148,14 +127,10 @@ public class Projectile : MonoBehaviour {
                 Destroy(gameObject);
             }
         }
-           
-
-
     }
 
     protected virtual void OnHitEnemy(AttackingCharacter enemyHit)
     {
-        //StartCoroutine(PlaySound());
         StartCoroutine(PlaySound("Hit"));
 
         if (knockback)
@@ -172,16 +147,10 @@ public class Projectile : MonoBehaviour {
         {
             player.IncreaseEnergy(damage);
         }
-
-        
-        //soundController = GetComponent<SoundController>();
-        //soundController.PlaySoundByName("Hit");
-
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-
         if (parent != null && other.gameObject == parent.gameObject)                   // ako je projektil pogodio pucaca
             return;
 
@@ -189,11 +158,8 @@ public class Projectile : MonoBehaviour {
 
         if (character != null && parent != null && character.type != parent.GetComponent<AttackingCharacter>().type && character.IsAttackable())
         {
-
             OnHitEnemy(character);
-
             shot = false;
-            //Destroy(gameObject);
 
             return;
         }
@@ -202,11 +168,5 @@ public class Projectile : MonoBehaviour {
         {
             return;
         }
-
-        /*if(other.gameObject.layer == LayerMask.NameToLayer("Obstacles"))
-        {
-            Destroy(gameObject);
-        }*/
-
     }
 }

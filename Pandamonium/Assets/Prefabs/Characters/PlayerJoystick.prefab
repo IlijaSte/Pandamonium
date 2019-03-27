@@ -721,7 +721,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 10
+  m_LinearDrag: 1000
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -1118,7 +1118,7 @@ MonoBehaviour:
   equippedWeaponIndex: 0
   maxHealth: 100
   type: 0
-  normalSpeed: 6
+  normalSpeed: 300
   healthBar: {fileID: 0}
   nextAttackBar: {fileID: 114338790452832874}
   vision: {fileID: 114898562783967118}
@@ -1135,6 +1135,7 @@ MonoBehaviour:
   abilityManager: {fileID: 114038679715605228}
   controller: {fileID: 0}
   facingDirection: {x: 0, y: 0}
+  action: 0
   attributes: 
   realDamage: 0
   speed: 0
