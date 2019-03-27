@@ -68,11 +68,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  speed: 1
+  speed: 1.2
   knockback: 1
   knockbackForce: 5
-  iField: {fileID: 0}
   range: 5
   timeToAttack: 1
+  parent: {fileID: 0}
+  autolock: {fileID: 0}
   projectileSpeed: 6
-  firePrefab: {fileID: 1714793588657250, guid: 66803ba921559a94598a106ff2efb6db, type: 2}
+  animator: {fileID: 0}
+  firePrefab: {fileID: 0}
