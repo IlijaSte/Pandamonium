@@ -1128,7 +1128,7 @@ MonoBehaviour:
   isDead: 0
   baseHealth: 100
   maxEnergy: 200
-  baseDamage: 5
+  baseDamage: 2
   energy: 0
   lockAngle: 60
   energyBar: {fileID: 0}
@@ -1264,7 +1264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  speed: 1.75
+  speed: 2.5
   knockback: 0
   knockbackForce: 5
   range: 7.5
